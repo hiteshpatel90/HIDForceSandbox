@@ -7,6 +7,7 @@ public class mapPageExtension{
         for(Schema.FieldSetMember f : this.getFields()) {
             strSOQL += ', ' + f.getFieldPath();
         }
+        // This is extension
         strSOQL += ' FROM Account LIMIT 10';
         matches = database.query(strSOQL);
         for(Account acc: matches){

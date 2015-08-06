@@ -4,7 +4,6 @@
             <apex:mapMarker title="{!match.Provider__r.Name}"
              position="{latitude:{!match.Provider__r.Latitude_Display__c},longitude:{!match.Provider__r.Longitude_Display__c}}">
                 <apex:mapInfoWindow >
-                	<!--  test -->
                     <apex:outputPanel layout="block" style="font-weight: bold;">
                         <apex:outputText escape="false" value="{!mapProviderDetailPin[match.id]}"/>
                     </apex:outputPanel>

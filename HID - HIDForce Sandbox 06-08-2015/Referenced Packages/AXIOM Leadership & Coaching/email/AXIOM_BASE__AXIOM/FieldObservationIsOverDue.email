@@ -1,0 +1,8 @@
+<messaging:emailTemplate subject="Field Observation is over-due" recipientType="User" relatedToType="AXIOM_BASE__FieldObservation__c">
+<messaging:htmlEmailBody >
+<p>Hello, {!recipient.FirstName} {!recipient.LastName}!<br/>
+Field observation overdue for the following Sellers. Please take an immediate action to address this.
+</p>
+<c:FieldObservationOverDue ManagerId="{!relatedTo.AXIOM_BASE__ObservedBy__c}" />
+</messaging:htmlEmailBody>
+</messaging:emailTemplate>

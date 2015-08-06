@@ -1,0 +1,25 @@
+<apex:page showheader="false" sidebar="false" >
+<style>
+    .myFormStyle{
+      background-color: blue;
+    }
+    .button1
+{
+background-color:#00FF00;
+font-weight:bold;
+color:#E56717;
+}
+</style>
+ <div id="InnternalDiv" style="width:100%;">
+ 
+           <apex:pageMessages /> 
+    <apex:form styleClass="myFormStyle">
+              <br> </br> <br></br> <br></br> <br></br> <br></br> <br></br> <br></br>
+                    <h1>
+                        <div align="center">        
+                            <apex:commandButton styleclass="button1" value="Verify"/> 
+                        </div> 
+                     </h1>
+           </apex:form> 
+    </div>
+</apex:page>

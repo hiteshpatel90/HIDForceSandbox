@@ -1,0 +1,864 @@
+<!-- Page to display existing standard and custom product on Opportunity. -->
+<!-- Also add new standard or custom product to opportunity.              -->
+<!-- Author: JadeGlobal Date: 1/5/2015                                    -->
+
+<apex:page id="myPage" standardController="Opportunity" extensions="addCPOItemsExtension" sidebar="false" showHeader="false">
+    <style>
+        body .pbBody table.list tr.headerRow td, body .pbBody table.list tr.headerRow th
+        {
+            white-space: normal;
+        }
+
+    </style>
+    <style>
+        /* This is for the full screen DIV */
+        .popupBackground {
+              /* Background color */
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 100);
+    
+        /* Dimensions */
+        width: 100%;
+        height: 160%;
+        top:50px;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        
+        /* Mouse */
+        cursor:wait;
+        }
+     
+        /* This is for the message DIV */
+        .PopupPanel {
+            /* Background color */
+            border: solid 2px blue;
+            background-color: white;
+     
+            /* Dimensions */
+            left: 50%;
+            width: 200px;
+            margin-left: -100px;
+            top: 50%;
+            height: 50px;
+            margin-top: -25px;
+            z-index: 999;
+            position: fixed;
+            
+            /* Mouse */
+            cursor:pointer;
+        }
+    </style>
+    
+   <script type="text/javascript">
+        function isNumber(evt) {
+ 
+            var key;
+            if(window.event){
+                key = window.event.keyCode; //IE
+            }else{
+                key = evt.which; //firefox
+            }
+     
+            if (key == 13 || (key > 31 && (key < 48 || key > 57))) {
+                return false;
+            }
+            return true;
+        }
+
+        function isNumberandPeriod(evt) {
+ 
+            var key;
+            if(window.event){
+                key = window.event.keyCode; //IE
+            }else{
+                key = evt.which; //firefox
+            }
+           
+            if (key == 13 || (key > 31 && (key < 48 || key > 57))) {
+                if ({!isEuroCurrency} == false && key == 46){
+                    
+                    return true;
+                }else if({!isEuroCurrency} == true && key == 44){
+                    return true;
+                }else{
+                    return false;
+                }
+            }
+            return true;
+        }
+      function disableEnterKey(e)
+        {
+           
+            var key;     
+            if(window.event){
+                key = window.event.keyCode; //IE
+            }else{
+                key = e.which; //firefox
+            }   
+            return (key != 13);
+        }
+      
+      var existingVal = '';
+      var i =0;
+      
+      function disableValue(e,nextField){
+          var TABKEY = 9;
+          
+          if(e.keyCode == TABKEY) {   
+       
+              existingVal =  document.getElementById(nextField).value;          
+              document.getElementById(nextField).value='';   
+              i=1;           
+          }
+      
+      }     
+
+      function disableValuedisplay(e,nextField){
+          if(nextField.value=='' && i==1){
+              nextField.value=existingVal ;
+              i=0;
+          }
+          
+      }
+      
+      function disableValuedisplaycomp(e,nextFieldcmp){
+            var nextField = document.getElementById(nextFieldcmp);
+            if(nextField.value==''){
+                nextField.value=existingVal ;
+            }
+          
+      }
+      
+        function lostFocusevent(e,nextField){            
+            var TABKEY = 0;                 
+            if(e.keyCode == TABKEY) {                
+                if(e.srcElement.id.indexOf("_lkwgt") > -1){                                    
+                    existingVal =  document.getElementById(nextField).value;                    
+                    document.getElementById(nextField).value='';
+                    i=1;
+                }
+            }
+        } 
+        
+       
+        function displayPreviousvalue(nextField){         
+             if(nextField.value==''){            
+                  nextField.value=existingVal;             
+              }
+              return false;          
+          }
+       
+    </script>
+        
+    <script>
+
+        function switchMenu(recordIndex, objHeader, obj,obj1,obj2) {
+            var elements = document.getElementsByName(obj);
+            for(var i=0; i<elements.length; i++) {   
+                var el = elements[i];                          
+                if ( el.style.display != 'none' ) {
+                    el.style.display = 'none';
+                }
+                else {
+                    el.style.display = '';
+                }
+            }
+            var e2 = document.getElementById(obj1);                                              
+            if ( e2.style.display != 'none' ) {               
+                e2.style.display = 'none';
+            }
+            else {
+                e2.style.display = '';
+                
+            }
+            
+            
+            var e3 = document.getElementById(obj2);                                       
+            if ( e2.style.display != 'none' ) {
+                e3.style.display = 'none';
+            }
+            else {
+                e3.style.display = '';
+            }
+            
+            var isdisplay = '';    
+            var e4 = document.getElementById(objHeader);                                     
+            if ( e4.style.display != 'none' ) {
+                e4.style.display = 'none';
+                isdisplay = 'none';
+            }
+            else {
+                e4.style.display = '';
+            }
+            
+            displayRowVariableFun(recordIndex, isdisplay);
+            
+        }
+        
+    </script>
+
+    
+    <apex:actionStatus id="statusSaveTrip" stopText="">
+        <apex:facet name="start">
+            <div>
+                <div class="popupBackground" />
+                <div class="PopupPanel">
+                    <table border="0" width="100%" height="100%">
+                        <tr>
+                            <td align="center"><b>Please Wait</b></td>
+                        </tr>
+                        <tr>
+                            <td align="center">
+                                <img src="{!$Resource.ProgressBar}"/>                
+                                <!--<apex:image url="{!URLFOR($Resource.CPOResources, '/CPOResources/ProgressBar.gif')}"/>  -->    
+                                          
+                            </td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>
+    
+    
+    <apex:form id="pgForm">
+        <apex:inputHidden value="{!opportunity.CPO_Status__c}"/>
+        <apex:inputHidden value="{!opportunity.Pricebook2Id}"/>
+        <apex:inputHidden value="{!opportunity.Business_Segment__c}"/>
+        <apex:actionFunction action="{!displayRowVariable}"   reRender="opMain" status="statusSaveTrip" name="displayRowVariableFun">
+            <apex:param value="recordIndex" name="cpoRecordIdIndex"/>
+            <apex:param value="isdisplay" name="displayVal"/>
+        </apex:actionFunction>
+
+                                    
+        <apex:pageBlock id="pgBlock" title="CPO Products">
+     
+              
+            <apex:outputPanel id="opMain">
+                <apex:pageMessages id="msgId" />
+                <div style=" overflow:auto; padding: 20px; font-family:Helvetica, sans-serif; font-size:10pt; line-height: 1.5em; " >
+                    <apex:outputPanel rendered="{!If(lstCPOStandardProductWrapper.size > 0, false, true)}">
+                        <apex:outputLabel value="No Product has been added."></apex:outputLabel>
+                        <table class="list">
+                            <tr style="background-color:#c1add6;">
+                                <th class="headerRow" style="background-color:white;">Del  
+                                </th>
+                                <th class="headerRow" style="background-color:white;">  
+                                    <!--<apex:image width="20px" style="cursor:pointer;" title="Add Standard Product" value="{!$Resource.Add_Image}" >-->
+                                    <apex:image width="20px" style="cursor:pointer;" title="Add Standard Product"  url="{!URLFOR($Resource.CPOResources, '/CPOResources/add_image.png')}">
+                                        <apex:actionSupport action="{!addStandardProduct}" immediate="true" event="onclick" reRender="opMain" status="statusSaveTrip">
+                                        </apex:actionSupport>
+                                    </apex:image>                        
+                                    <!--<apex:commandLink style="color:blue;text-decoration: underline;" title="Add Standard Product" value="Add" action="{!addStandardProduct}"/>-->
+                                </th>    
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Product"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Product Description"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Total&nbsp;Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Total&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q1 Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q1 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Y1Q1&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q2 Volume"></apex:outputLabel>
+                                </th>                          
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q2 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Y1Q2&nbsp;Revenue"></apex:outputLabel>
+                                </th> 
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q3 Volume"></apex:outputLabel>
+                                </th>                           
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q3 Price"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Y1Q3&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q4 Volume"></apex:outputLabel>
+                                </th>                           
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q4 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Y1Q4&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year1&nbsp;Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year1&nbsp;Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year1&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year2 Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year2&nbsp;Price"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year2&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year3 Volume"></apex:outputLabel>
+                                </th>                           
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year3 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year3&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                            </tr>
+                        </table>
+                    </apex:outputPanel>
+                    <apex:outputPanel rendered="{!If(lstCPOStandardProductWrapper.size > 0, true, false)}">                        
+                        <table class="list">                        
+                            
+                        <apex:variable value="{!0}" var="rowNum"/>
+                        <apex:repeat id="rptSCPO" value="{!lstCPOStandardProductWrapper}" var="itemSCPO">                         
+                            <tr style="background-color:#c1add6;">
+                                <th class="headerRow" style="background-color:white;">
+                                    <apex:outputLabel rendered="{!If(rowNum == 0, true, false)}" value="Del"></apex:outputLabel>
+                                    
+                                    
+                                </th>
+                                <th class="headerRow" style="background-color:white;">  
+                                    <!--<apex:image width="20px" style="cursor:pointer;" title="Add Standard Product" value="{!$Resource.Add_Image}" >-->
+                                    <apex:image rendered="{!If(rowNum == 0, true, false)}" width="20px" style="cursor:pointer;" title="Add Standard Product"  url="{!URLFOR($Resource.CPOResources, '/CPOResources/add_image.png')}">
+                                  
+                                        <apex:actionSupport action="{!addStandardProduct}" immediate="true" event="onclick" reRender="opMain" status="statusSaveTrip">
+                                        </apex:actionSupport>
+                                    </apex:image>                            
+                                    <!--<apex:commandLink style="color:blue;text-decoration: underline;" title="Add Standard Product" value="Add" action="{!addStandardProduct}"/>-->
+                                </th>    
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Product"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Product Description"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Total&nbsp;Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Total&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q1 Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q1 Price"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Y1Q1&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q2 Volume"></apex:outputLabel>
+                                </th>                           
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q2 Price"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Y1Q2&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q3 Volume"></apex:outputLabel>
+                                </th>                           
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q3 Price"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Y1Q3&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q4 Volume"></apex:outputLabel>
+                                </th>                           
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q4 Price"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Y1Q4&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year1&nbsp;Volume"></apex:outputLabel>
+                                </th> 
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year1&nbsp;Price"></apex:outputLabel>
+                                </th>                         
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year1&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year2 Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year2&nbsp;Price"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year2&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year3 Volume"></apex:outputLabel>
+                                </th>                            
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year3 Price"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow">
+                                    <apex:outputLabel escape="false" value="Year3&nbsp;Revenue"></apex:outputLabel>
+                                </th>
+                            </tr>
+                            
+                            <tr class="dataRow">
+                                <td class="dataCell">
+                                <apex:variable var="rowNum" value="{!rowNum+1}"/>
+                                <apex:outputpanel id="DeleteImage" >
+                                        <!--<apex:image url="{!$Resource.DeleteImage}" width="25px" style="cursor:pointer;hight=20px,width:20px"  title="Delete - Standard Products"> -->
+                                        <apex:image width="25px" style="cursor:pointer;height=20px,width:20px" title="Delete - Standard Product"  url="{!URLFOR($Resource.CPOResources, '/CPOResources/deleteImage.png')}"> 
+                                            <apex:actionsupport focus="opMain" action="{!deleteCPOStandardProduct}" immediate="true"  event="onclick" reRender="opMain" status="statusSaveTrip" onsubmit="if(!confirm('Are you sure?')){return};">
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                            </apex:actionsupport>
+                                        </apex:image>
+                                    </apex:outputpanel>
+                                </td>
+                                <td class="dataCell"> 
+                                <apex:actionregion immediate="true">
+                                    <apex:outputpanel id="plusimage" style="display:{!IF(itemSCPO.isDisplayRow == false,'','none;')}" >
+                                        <apex:image url="{!URLFOR($Resource.CPOResources, '/CPOResources/Plus_Image.gif')}"  onclick="switchMenu('{!rowNum}', 'inlinetablesecHeader{!rowNum}' , 'inlinetablesec{!rowNum}','{!$Component.minusimage}','{!$Component.plusimage}')" title="Expand - Custom Products"/>     
+                                        
+                                    </apex:outputpanel>
+                                    <apex:outputpanel id="minusimage" style="display:{!IF(itemSCPO.isDisplayRow == false,'none;','')}">
+                                        <apex:image url="{!URLFOR($Resource.CPOResources, '/CPOResources/Minus_image.gif')}"  onclick="switchMenu('{!rowNum}', 'inlinetablesecHeader{!rowNum}', 'inlinetablesec{!rowNum}','{!$Component.plusimage}','{!$Component.minusimage}')" title="Collapse - Custom Products"/>      
+                                       
+                                    </apex:outputpanel>
+                                </apex:actionregion>
+                                </td>
+                                <td class="dataCell"> 
+                                <apex:actionRegion immediate="true">
+                                    <apex:inputField id="txtProduct" style="width:140px;" value="{!itemSCPO.objCPOStandard.Product__c}" required="true"   onkeypress="return disableEnterKey(event)" onblur="lostFocusevent(event, '{!$Component.txtY1Q1Volume}');">
+                                        <apex:actionsupport focus="txtY1Q1Volume" action="{!updateStandardProduct}" status="statusSaveTrip"  event="onchange" reRender="opMain,pgBlock" >
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>                                            
+                                        </apex:actionsupport>
+                                    </apex:inputField>
+                                </apex:actionRegion>
+                                </td>
+                                <td class="dataCell">
+                                    <apex:outputLabel value="{!itemSCPO.strProductDescription}"/>
+                                </td>
+                                <td class="dataCell">
+                                    <apex:outputText value="{0, number, ###,##0.00}" rendered="{!if(itemSCPO.decTotalVolume !=null,true,false)}">
+                                        <apex:param value="{!itemSCPO.decTotalVolume}" />
+                                    </apex:outputText>
+                                </td>
+                                <td class="dataCell">
+                                    <apex:outputlabel id="lblTotalRevenue" value="{!Opportunity.CurrencyISOCode}" />
+                                    <apex:outputText value="{0, number, ###,##0.00}" rendered="{!if(itemSCPO.decTotalRevenue !=null,true,false)}">
+                                        <apex:param value="{!itemSCPO.decTotalRevenue}" />
+                                    </apex:outputText>
+                                </td>
+                                
+                                <!------------------->
+                                
+                                
+                                
+                                <td class="dataCell"> 
+                                    <apex:inputField style="width:90px;" id="txtY1Q1Volume" value="{!itemSCPO.objCPOStandard.Y1Q1_Volume__c}"  onkeypress="return isNumber(event);" onkeydown=" return disableValue(event,'{!$Component.txtY1Q2Volume}')" onfocus="return displayPreviousvalue(this);" onkeyup=" return disableValuedisplay(event,this)">
+                                       <apex:actionsupport focus="txtY1Q1Price" status="statusSaveTrip" action="{!updateStandardProduct}"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtY1Q2Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField>  
+                                </td>
+                                
+                                <td class="dataCell">  
+                                    <apex:inputField style="width:70px;"  id="txtY1Q1Price" value="{!itemSCPO.objCPOStandard.Y1Q1_Price__c}" onkeypress="return isNumberandPeriod(event)" onkeydown=" return disableValue(event,'{!$Component.txtY1Q2Volume}')" onfocus="return displayPreviousvalue(this);" onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtY1Q2Volume"  status="statusSaveTrip" action="{!updateStandardProduct}"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtY1Q2Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                        <apex:actionStatus startText="Calculating..." id="calRevenue" />
+                                    </apex:inputField>
+                                </td>
+                            
+                            
+                                <!----------------->
+                                
+                                <td class="dataCell">
+                                    <apex:outputlabel id="lblY1Q1Revenue" value="{!Opportunity.CurrencyISOCode}"/>
+                                        <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q1_Price__c !=null && itemSCPO.objCPOStandard.Y1Q1_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q1_Price__c*itemSCPO.objCPOStandard.Y1Q1_Volume__c >0,true,false)}" value="{0, number, ###,###.00}">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.Y1Q1_Price__c*itemSCPO.objCPOStandard.Y1Q1_Volume__c}"/>
+                                        </apex:outputText>
+                                    <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q1_Price__c !=null && itemSCPO.objCPOStandard.Y1Q1_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q1_Price__c*itemSCPO.objCPOStandard.Y1Q1_Volume__c >0,false,true)}" value=" 0.00" />
+                                </td> 
+                                <td class="dataCell"> 
+                                    <apex:inputField style="width:90px;" id="txtY1Q2Volume" value="{!itemSCPO.objCPOStandard.Y1Q2_Volume__c}" onkeypress="return isNumber(event)"  onkeydown=" return disableValue(event,'{!$Component.txtY1Q3Volume}')" onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtY1Q2Price" status="statusSaveTrip" action="{!updateStandardProduct}"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtY1Q3Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField> 
+                                </td>                          
+                                <td class="dataCell">
+                                    <apex:inputField style="width:70px;" id="txtY1Q2Price" value="{!itemSCPO.objCPOStandard.Y1Q2_Price__c}"  onkeypress="return isNumberandPeriod(event)"  onkeydown=" return disableValue(event,'{!$Component.txtY1Q3Volume}')" onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtY1Q3Volume" status="statusSaveTrip" action="{!updateStandardProduct}"  reRender="opMain" event="onchange"  onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtY1Q3Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField>   
+                                </td>
+                                
+                                <td class="dataCell">
+                                    <apex:outputlabel id="lblY1Q2Revenue" value="{!Opportunity.CurrencyISOCode}"/>
+                                        <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q2_Price__c !=null && itemSCPO.objCPOStandard.Y1Q2_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q2_Price__c*itemSCPO.objCPOStandard.Y1Q2_Volume__c>0,true,false)}" value="{0, number, ###,###.00}">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.Y1Q2_Price__c*itemSCPO.objCPOStandard.Y1Q2_Volume__c}"/>
+                                        </apex:outputText>
+                                    <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q2_Price__c !=null && itemSCPO.objCPOStandard.Y1Q2_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q2_Price__c*itemSCPO.objCPOStandard.Y1Q2_Volume__c >0,false,true)}" value=" 0.00" />
+                                </td>
+                                <td class="dataCell"> 
+                                    <apex:inputField style="width:90px;" id="txtY1Q3Volume" value="{!itemSCPO.objCPOStandard.Y1Q3_Volume__c}" onkeypress="return isNumber(event)" onkeydown=" return disableValue(event,'{!$Component.txtY1Q4Volume}')" onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtY1Q3Price" status="statusSaveTrip" action="{!updateStandardProduct}" reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtY1Q4Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField>
+                                </td>                          
+                                <td class="dataCell"> 
+                                    <apex:inputField style="width:70px;" id="txtY1Q3Price" value="{!itemSCPO.objCPOStandard.Y1Q3_Price__c}" onkeypress="return isNumberandPeriod(event)" onkeydown=" return disableValue(event,'{!$Component.txtY1Q4Volume}')" onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtY1Q4Volume" status="statusSaveTrip" action="{!updateStandardProduct}" reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtY1Q4Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField>
+                                </td>
+                                
+                                <td class="dataCell">
+                                    <apex:outputlabel id="lblY1Q3Revenue" value="{!Opportunity.CurrencyISOCode}"/>
+                                        <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q3_Price__c !=null && itemSCPO.objCPOStandard.Y1Q3_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q3_Price__c*itemSCPO.objCPOStandard.Y1Q3_Volume__c>0,true,false)}" value="{0, number, ###,###.00}">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.Y1Q3_Price__c*itemSCPO.objCPOStandard.Y1Q3_Volume__c}"/>
+                                        </apex:outputText>
+                                    <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q3_Price__c !=null && itemSCPO.objCPOStandard.Y1Q3_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q3_Price__c*itemSCPO.objCPOStandard.Y1Q3_Volume__c >0,false,true)}" value=" 0.00" />
+                                </td>
+                                <td class="dataCell"> 
+                                    <apex:inputField style="width:90px;" id="txtY1Q4Volume" value="{!itemSCPO.objCPOStandard.Y1Q4_Volume__c}" onkeypress="return isNumber(event)" onkeydown=" return disableValue(event,'{!$Component.txtYear2Volume}')" onkeyup=" return disableValuedisplay(event,this)" >
+                                        <apex:actionsupport focus="txtY1Q4Price" status="statusSaveTrip" action="{!updateStandardProduct}" reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtYear2Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField> 
+                                </td>                           
+                                <td class="dataCell"> 
+                                    <apex:inputField style="width:70px;" id="txtY1Q4Price" value="{!itemSCPO.objCPOStandard.Y1Q4_Price__c}" onkeypress="return isNumberandPeriod(event)" onkeydown=" return disableValue(event,'{!$Component.txtYear2Volume}')" onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtYear2Volume" status="statusSaveTrip" action="{!updateStandardProduct}" reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtYear2Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField> 
+                                </td>
+                                
+                                <td class="dataCell">                                
+                                    <apex:outputlabel id="lblY1Q4Revenue" value="{!Opportunity.CurrencyISOCode}"/>
+                                        <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q4_Price__c !=null && itemSCPO.objCPOStandard.Y1Q4_Volume__c !=null &&itemSCPO.objCPOStandard.Y1Q4_Price__c*itemSCPO.objCPOStandard.Y1Q4_Volume__c>0,true,false)}" value="{0, number, ###,###.00}">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.Y1Q4_Price__c*itemSCPO.objCPOStandard.Y1Q4_Volume__c}"/>
+                                        </apex:outputText>
+                                    <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q4_Price__c !=null && itemSCPO.objCPOStandard.Y1Q4_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q4_Price__c*itemSCPO.objCPOStandard.Y1Q4_Volume__c>0,false,true)}" value=" 0.00" />
+                                </td>
+                                <td class="dataCell">                            
+                                    <apex:outputlabel id="lblYear1volume"/>
+                                        <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q1_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q2_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q3_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q4_Volume__c !=null  && itemSCPO.objCPOStandard.Y1Q1_Volume__c+itemSCPO.objCPOStandard.Y1Q2_Volume__c+itemSCPO.objCPOStandard.Y1Q3_Volume__c+itemSCPO.objCPOStandard.Y1Q4_Volume__c>0,true,false)}" value="{0, number, ###,###.00}">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.Y1Q1_Volume__c+itemSCPO.objCPOStandard.Y1Q2_Volume__c+itemSCPO.objCPOStandard.Y1Q3_Volume__c+itemSCPO.objCPOStandard.Y1Q4_Volume__c}"/>
+                                        </apex:outputText>
+                                    <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q1_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q2_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q3_Volume__c !=null && itemSCPO.objCPOStandard.Y1Q4_Volume__c !=null  && itemSCPO.objCPOStandard.Y1Q1_Volume__c+itemSCPO.objCPOStandard.Y1Q2_Volume__c+itemSCPO.objCPOStandard.Y1Q3_Volume__c+itemSCPO.objCPOStandard.Y1Q4_Volume__c>0,false,true)}" value=" 0.00" />
+                                </td>
+                                <td class="dataCell">                            
+                                    <apex:outputlabel id="lblYear1price" value="{!Opportunity.CurrencyISOCode}"/>
+                                        <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q1_Price__c!=null && itemSCPO.objCPOStandard.Y1Q2_Price__c!=null && itemSCPO.objCPOStandard.Y1Q3_Price__c!=null && itemSCPO.objCPOStandard.Y1Q4_Price__c!=null  && itemSCPO.objCPOStandard.Y1Q1_Price__c+itemSCPO.objCPOStandard.Y1Q2_Price__c+itemSCPO.objCPOStandard.Y1Q3_Price__c+itemSCPO.objCPOStandard.Y1Q4_Price__c>0,true,false)}" value="{0, number, ###,###.00}">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.Y1Q1_Price__c+itemSCPO.objCPOStandard.Y1Q2_Price__c+itemSCPO.objCPOStandard.Y1Q3_Price__c+itemSCPO.objCPOStandard.Y1Q4_Price__c}"/>
+                                        </apex:outputText>
+                                    <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Y1Q1_Price__c!=null && itemSCPO.objCPOStandard.Y1Q2_Price__c!=null && itemSCPO.objCPOStandard.Y1Q3_Price__c!=null && itemSCPO.objCPOStandard.Y1Q4_Price__c!=null  && itemSCPO.objCPOStandard.Y1Q1_Price__c+itemSCPO.objCPOStandard.Y1Q2_Price__c+itemSCPO.objCPOStandard.Y1Q3_Price__c+itemSCPO.objCPOStandard.Y1Q4_Price__c>0,false,true)}" value=" 0.00" />
+                                </td>                           
+                                
+                                <td class="dataCell">                                
+                                    <apex:outputlabel id="lblYear1Revenue" value="{!Opportunity.CurrencyISOCode}"/>
+                                        <apex:outputText value="{0, number, ###,##0.00}">
+                                            <apex:param value="{!itemSCPO.decYear1Revenue}"/>
+                                        </apex:outputText>                                                                                                          
+                                </td>
+                                <td class="dataCell">
+                                    <apex:inputField style="width:90px;" id="txtYear2Volume" value="{!itemSCPO.objCPOStandard.Year2_Volume__c}" onkeypress="return isNumber(event)" onkeydown=" return disableValue(event,'{!$Component.txtYear3Volume}')" onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtYear2Price" status="statusSaveTrip" action="{!updateStandardProduct}"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtYear3Volume}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField>                                
+                                </td>
+                                <td class="dataCell">
+                                    <apex:inputField id="txtYear2Price" style="width:70px;" value="{!itemSCPO.objCPOStandard.Year2_Price__c}" onkeypress="return isNumberandPeriod(event)" onkeydown=" return disableValue(event,'{!$Component.txtYear3Volume}')" onkeyup=" return disableValuedisplay(event,this)" > 
+                                         <apex:actionsupport focus="txtYear3Volume" status="statusSaveTrip" action="{!updateStandardProduct}" reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtYear3Volume}')">
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                         </apex:actionsupport>  
+                                    </apex:inputField>                        
+                                </td>
+                                
+                                <td class="dataCell">                            
+                                    <apex:outputlabel id="lblYear2Revenue" value="{!Opportunity.CurrencyISOCode}"/>
+                                        <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Year2_Price__c !=null && itemSCPO.objCPOStandard.Year2_Volume__c!=null && itemSCPO.objCPOStandard.Year2_Price__c *itemSCPO.objCPOStandard.Year2_Volume__c>0,true,false)}" value="{0, number, ###,###.00}">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.Year2_Price__c *itemSCPO.objCPOStandard.Year2_Volume__c}"/>
+                                        </apex:outputText>
+                                    <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Year2_Price__c !=null && itemSCPO.objCPOStandard.Year2_Volume__c!=null && itemSCPO.objCPOStandard.Year2_Price__c *itemSCPO.objCPOStandard.Year2_Volume__c>0,false,true)}" value=" 0.00" />
+                                </td>
+                                <td class="dataCell">
+                                    <apex:inputField style="width:90px;" id="txtYear3Volume" value="{!itemSCPO.objCPOStandard.Year3_Volume__c}" onkeypress="return isNumber(event)" onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtYear3Price"  action="{!updateStandardProduct}" status="statusSaveTrip"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtYear3Price}')">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField>
+                                </td>                            
+                                <td class="dataCell">
+                                    <apex:inputField style="width:70px;" id="txtYear3Price" value="{!itemSCPO.objCPOStandard.Year3_Price__c}" onkeypress="return isNumberandPeriod(event)"  onkeyup=" return disableValuedisplay(event,this)">
+                                        <apex:actionsupport focus="txtProduct" status="statusSaveTrip" action="{!updateStandardProduct}"  reRender="opMain" event="onchange">
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionsupport>
+                                    </apex:inputField>                               
+                                </td>                                
+                                <td class="dataCell">                                
+                                    <apex:outputlabel id="lblYear3Revenue" value="{!Opportunity.CurrencyISOCode}"/>
+                                        <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Year3_Price__c !=null && itemSCPO.objCPOStandard.Year3_Volume__c!=null && itemSCPO.objCPOStandard.Year3_Price__c *itemSCPO.objCPOStandard.Year3_Volume__c>0,true,false)}" value="{0, number, ###,###.00}">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.Year3_Price__c *itemSCPO.objCPOStandard.Year3_Volume__c}"/>
+                                        </apex:outputText>
+                                    <apex:outputText rendered="{!if(itemSCPO.objCPOStandard.Year3_Price__c !=null && itemSCPO.objCPOStandard.Year3_Volume__c!=null && itemSCPO.objCPOStandard.Year3_Price__c *itemSCPO.objCPOStandard.Year3_Volume__c>0,false,true)}" value=" 0.00" />
+                                </td>
+                            </tr>                                                
+                            <tr id="inlinetablesecHeader{!rowNum}" style="background-color:#FFDAB9;display:{!IF(itemSCPO.isDisplayRow == false,'none;','')}">
+                                <th style="background-color:white;">
+                               
+                                </th>                                
+                                <th style="background-color:white;">
+                                    <apex:outputLabel escape="false" value="&nbsp;&nbsp;&nbsp;&nbsp;"></apex:outputLabel>
+                                    <!--<apex:image width="15px" style="cursor:pointer;" title="Add Custom Product" value="{!$Resource.Add_Image}" >-->
+                                    <apex:image width="15px" style="cursor:pointer;" title="Add Custom Product"  url="{!URLFOR($Resource.CPOResources, '/CPOResources/add_image.png')}">
+                                        <apex:actionSupport action="{!addCustomProduct}" event="onclick" immediate="true" reRender="opMain" status="statusSaveTrip">
+                                            <apex:param value="{!itemSCPO.objCPOStandard.id}" name="stdProd"/>
+                                            <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                        </apex:actionSupport>
+                                    </apex:image> 
+                                    
+                                    <!--<apex:commandLink style="color:blue;text-decoration: underline;" title="Add Custom Product" value="Add" action="{!addCustomProduct}" reRender="opMain" >
+                                        <apex:param value="{!itemSCPO.objCPOStandard.id}" name="stdProd"/>
+                                        <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                    </apex:commandLink>-->                                 
+                                </th>                                
+                                <th class="headerRow"> 
+                                    <apex:outputLabel value="Customization Item"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow" colspan="5"> 
+                                    <apex:outputLabel value="Description"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow"> 
+                                    <apex:outputLabel value="NRE Estimate"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow"> 
+                                    <apex:outputLabel value="Effort (Days)"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow" style="display:{!If(isBOMCostVisible == true, 'block;', 'none;')}"> 
+                                    <apex:outputLabel value="BOM Cost"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow" style="display:{!If(isBOMCostReadOnly == true, 'block;', 'none;')}">
+                                    <apex:outputLabel value="BOM Cost"></apex:outputLabel>
+                                </th>
+                                
+                                <th class="headerRow"> 
+                                    <apex:outputLabel value="Est Days to Implement"></apex:outputLabel>
+                                </th>
+                                <!--<th class="headerRow"> 
+                                    <apex:outputLabel value="Item Frequency"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Total Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Total Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q1 Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q1 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q1 Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q2 Volume"></apex:outputLabel>
+                                </th>                          
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q2 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q2 Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q3 Volume"></apex:outputLabel>
+                                </th>                            
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q3 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q3 Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q4 Volume"></apex:outputLabel>
+                                </th>                            
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q4 Price"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Y1Q4 Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year1 Volume"></apex:outputLabel>
+                                </th>  
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year1 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year1 Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year2 Volume"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year2 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year2 Revenue"></apex:outputLabel>
+                                </th>
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year3 Volume"></apex:outputLabel>
+                                </th>                            
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year3 Price"></apex:outputLabel>
+                                </th>                                
+                                <th class="headerRow">
+                                    <apex:outputLabel value="Year3 Revenue"></apex:outputLabel>
+                                </th>-->                                 
+                            </tr>
+                            <apex:variable value="{!0}" var="rowNumCust"/>                         
+                            <apex:repeat value="{!itemSCPO.lstCPOCustomItemWrapper}" var="itemCustomCPO">
+                                <tr class="dataRow" name="inlinetablesec{!rowNum}" style="display:{!IF(itemSCPO.isDisplayRow == false,'none;','')}">
+                                    <td class="dataCell" align="right" >
+                                        <!--<apex:image width="15px" style="cursor:pointer;" title="Delete Custom Product"  value="{!$Resource.DeleteImage}" >-->
+                                        <apex:image width="15px" style="cursor:pointer;" title="Delete Custom Product"  url="{!URLFOR($Resource.CPOResources, '/CPOResources/deleteImage.png')}">
+                                            <apex:actionSupport action="{!deleteCPOcustomProduct}" immediate="true"  event="onclick" reRender="opMain" status="statusSaveTrip" onsubmit="if(!confirm('Are you sure?')){return};">
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                                <apex:param value="{!rowNumCust}" name="cpoRecordCustIndex"/>
+                                            </apex:actionSupport>
+                                        </apex:image> 
+                                    </td>
+                                    <td class="dataCell" align="right">
+                                        <apex:image value="/img/tree/node.gif" rendered="{!if(itemSCPO.objCPOStandard.CPO_Customization_Items__r.size != rowNumCust + 1, true, false)}" alt="node" styleclass="node" title="node"/>
+                                        <apex:image value="/img/tree/nodeEnd.gif" rendered="{!if(itemSCPO.objCPOStandard.CPO_Customization_Items__r.size != rowNumCust + 1, false, true)}" alt="node" styleclass="node" title="node"/>
+                                    </td>
+                                    <td class="dataCell" >  
+                                    <apex:actionRegion immediate="true">
+                                        <apex:selectList size="1" style="width:140px;" id="selCustomItem" value="{!itemCustomCPO.objCPOCustom.Customization_Item__c}" onkeypress="return disableEnterKey(event)" onkeydown=" return disableValue(event,'{!$Component.txtItemDescription}')">
+                                            <apex:selectOptions value="{!itemSCPO.lstCustomizationItem}"/>
+                                        
+                                        <!--<apex:inputField style="width:90px;" id="selCustomItem" value="{!itemCustomCPO.objCPOCustom.Customization_Item__c}" required="true" onkeypress="return disableEnterKey(event)" onkeydown=" return disableValue(event,'{!$Component.txtItemDescription}')">-->
+                                            <apex:actionsupport focus="txtItemDescription" action="{!updateCustomProduct}" status="statusSaveTrip"  reRender="opMain" event="onchange" >
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                                <apex:param value="{!rowNumCust}" name="cpoRecordCustIndex"/>
+                                            </apex:actionsupport>                                             
+                                        <!--</apex:inputField>-->
+                                        </apex:selectList>
+                                    </apex:actionRegion>
+                                    </td>
+                                    <td class="dataCell" colspan="5">
+                                        <apex:inputField style="width:500px;" id="txtItemDescription" value="{!itemCustomCPO.objCPOCustom.Description__c}" onkeypress="return disableEnterKey(event)" onkeydown=" return disableValue(event,'{!$Component.txtNREEstimate}')" onkeyup=" return disableValuedisplay(event,this)">
+                                            <apex:actionsupport focus="txtNREEstimate" action="{!updateCustomProduct}" status="statusSaveTrip"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtNREEstimate}')">
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                                <apex:param value="{!rowNumCust}" name="cpoRecordCustIndex"/>
+                                            </apex:actionsupport>                                            
+                                        </apex:inputField>                                        
+                                    </td>
+                                    <td class="dataCell">
+                                        <apex:inputField style="width:90px;" id="txtNREEstimate" value="{!itemCustomCPO.objCPOCustom.NRE_Estimate__c}" onkeypress="return isNumber(event)" onkeydown=" return disableValue(event,'{!$Component.txtEffortDays}')" onkeyup=" return disableValuedisplay(event,this)">
+                                            <apex:actionsupport focus="txtEffortDays" action="{!updateCustomProduct}" status="statusSaveTrip"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtEffortDays}')">
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                                <apex:param value="{!rowNumCust}" name="cpoRecordCustIndex"/>
+                                            </apex:actionsupport>                                            
+                                        </apex:inputField>                                        
+                                    </td>
+                                    
+                                    <td class="dataCell">
+                                        <apex:inputField style="width:90px;" id="txtEffortDays" value="{!itemCustomCPO.objCPOCustom.Effort_Days__c}" onkeypress="return isNumber(event)" onkeydown=" return disableValue(event,'{!$Component.txtBOMCost}')" onkeyup=" return disableValuedisplay(event,this)">
+                                            <apex:actionsupport focus="{!If(isBOMCostVisible == false, 'txtEsttoImplement', 'txtBOMCost')}" action="{!updateCustomProduct}" status="statusSaveTrip"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtBOMCost}')">
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                                <apex:param value="{!rowNumCust}" name="cpoRecordCustIndex"/>
+                                            </apex:actionsupport>                                            
+                                        </apex:inputField>                                        
+                                    </td>
+                                    
+                                    <td class="dataCell" style="display:{!If(isBOMCostVisible == true, 'block;', 'none;')}"> 
+                                        <apex:inputField style="width:90px;" id="txtBOMCost" value="{!itemCustomCPO.objCPOCustom.BOM_Cost__c}" onkeypress="return isNumberandPeriod(event)" onkeydown=" return disableValue(event,'{!$Component.txtEsttoImplement}')" onkeyup=" return disableValuedisplay(event,this)">
+                                            <apex:actionsupport focus="txtEsttoImplement" action="{!updateCustomProduct}" status="statusSaveTrip"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.txtEsttoImplement}')">
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                                <apex:param value="{!rowNumCust}" name="cpoRecordCustIndex"/>
+                                            </apex:actionsupport>                                            
+                                        </apex:inputField>                                        
+                                    </td>
+                                    
+                                   <td class="dataCell" style="display:{!If(isBOMCostReadOnly== true, 'block;', 'none;')}">
+                                        <apex:outputField style="width:90px;" value="{!itemCustomCPO.objCPOCustom.BOM_Cost__c}"/>
+                                                                       
+                                    </td>   
+                          
+                                    <td class="dataCell">
+                                        <apex:inputField style="width:90px;" id="txtEsttoImplement" value="{!itemCustomCPO.objCPOCustom.Est_Days_to_Implement__c}" onkeypress="return isNumber(event)"  onkeyup=" return disableValuedisplay(event,this)">
+                                            <apex:actionsupport focus="selCustomItem" action="{!updateCustomProduct}" status="statusSaveTrip"  reRender="opMain" event="onchange" onComplete=" return disableValuedisplaycomp(event,'{!$Component.selCustomItem}')">
+                                                <apex:param value="{!rowNum}" name="cpoRecordIndex"/>
+                                                <apex:param value="{!rowNumCust}" name="cpoRecordCustIndex"/>
+                                            </apex:actionsupport>                                            
+                                        </apex:inputField>  
+                                        <apex:variable var="rowNumCust" value="{!rowNumCust+1}"/>                                             
+                                    </td>
+                                    
+                                </tr>                                
+                            </apex:repeat>                                            
+                        </apex:repeat> 
+                        </table>
+                    </apex:outputPanel>
+                </div>
+                </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:inputField value="{!Opportunity.Name}" rendered="false"/>
+        <apex:inputhidden id="hdnElement"/>
+        <apex:actionFunction action="{!callonPageLoad}" name="callonPageLoadFun" immediate="true"/>
+
+    </apex:form>
+    <script>
+        if('{!isPageLoadFirst}' == 'true'){
+            callonPageLoadFun();
+        }
+    </script>
+</apex:page>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <fields>
+        <label>만료 날짜</label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label>라이센스 CyberU ID</label>
+        <name>License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>라이센스 기간</label>
+        <name>License_Period__c</name>
+        <picklistValues>
+            <masterLabel>Days</masterLabel>
+            <translation><!-- Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hours</masterLabel>
+            <translation><!-- Hours --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indefinite</masterLabel>
+            <translation><!-- Indefinite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weeks</masterLabel>
+            <translation><!-- Weeks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Years</masterLabel>
+            <translation><!-- Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>라이센스 조건</label>
+        <name>License_Term__c</name>
+    </fields>
+    <fields>
+        <label>구매 날짜</label>
+        <name>Purchase_Date__c</name>
+    </fields>
+    <fields>
+        <label>구매된 사용자 수</label>
+        <name>Purchased_Seats__c</name>
+    </fields>
+    <fields>
+        <label>구매 완료</label>
+        <name>Purchased__c</name>
+    </fields>
+    <fields>
+        <label>남은 사용자 수</label>
+        <name>Remaining_Seats__c</name>
+    </fields>
+    <fields>
+        <label>CyberU ID 가격</label>
+        <name>Sale_Item_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>판매 가격</label>
+        <name>Sale_Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of seats included in this license. Leave blank for unlimited. --></help>
+        <label>사용자 수</label>
+        <name>Seats__c</name>
+    </fields>
+    <fields>
+        <label>상태</label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label>대상 라이센스 CyberU ID</label>
+        <name>Target_License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>교육 컨텐츠</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>모듈 라이센스</relationshipLabel>
+    </fields>
+    <fields>
+        <label>사용된 사용자 수</label>
+        <name>Used_Seats__c</name>
+    </fields>
+    <layouts>
+        <layout>Content License Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- License Details --></label>
+            <section>License Details</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- License ID --></nameFieldLabel>
+    <webLinks>
+        <label>라이센스 구매</label>
+        <name>Purchase_Licenses</name>
+    </webLinks>
+</CustomObjectTranslation>

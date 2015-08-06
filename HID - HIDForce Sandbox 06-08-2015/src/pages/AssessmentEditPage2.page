@@ -1,0 +1,622 @@
+<apex:page standardController="Assessment__c" extensions="assessmentEditController" tabStyle="Assessment__c">
+    <script>
+        var asmtStatus = "{!Assessment__c.Approval_Status__c}";
+        var profileName = "{!$Profile.Name}";
+        if(profileName != "System Administrator"){
+            if(asmtStatus != 'Draft' && asmtStatus != 'Rejected' && asmtStatus != ''){
+                alert("The Record is Locked, Please Contact Your System Administrator for Assistance");
+                window.location = "https://{!serverURL}{!returnURL}";
+            }
+        }
+        
+        var accountId = "{!Assessment__c.Account__c}";
+        var accountClusterId = "{!Assessment__c.Account_Cluster__c}";
+        var bolAccountClusterOwnerEditorMatch = {!bolAccountClusterOwnerEditorMatch};
+        if(accountId == '' && accountClusterId == ''){
+            alert("No Account/Account Cluster selected. Please open an Account/Account Cluster and create the Assessment there.");
+            window.location = "https://{!serverURL}{!returnURL}";
+        }else if(accountClusterId != '' && bolAccountClusterOwnerEditorMatch == false){
+            alert("Only Account Cluster Owner can create/edit Account Cluster Assessments.");
+            window.location = "https://{!serverURL}{!returnURL}";
+        }
+    </script>
+    <c:assessmentHeader assessmentName="{!objAssessment.Name}" mode="Edit"/>
+    <apex:form >
+        <apex:pageMessages />
+        <apex:pageBlock title="Assessment" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!updateAssessment}" value="Update Assessment"/>
+                <apex:commandButton action="{!step1}" value="Back"/>
+                <apex:commandButton action="{!customCancel}" value="Cancel"/>
+                <apex:commandButton action="{!customSave}" value="Save"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Information" columns="2">
+                <apex:outputField value="{!objAssessment.Account__c}" rendered="{!bolAccount}"/>
+                <apex:outputField value="{!objAssessment.Account_Cluster__c}" rendered="{!IF(bolAccount,false,true)}"/>
+                <apex:outputField value="{!objAssessment.Business_Segment__c}"/>
+                <apex:outputField value="{!objAssessment.Market_Size__c}"/>
+                <apex:outputField value="{!objAssessment.Partner_Type__c}"/>
+                <apex:outputText value="{!strRegion}" label="Region"/>
+                <apex:inputField value="{!objAssessment.Approval_Status__c}"/>
+                <apex:pageBlockSectionItem helptext="{!$ObjectType.Assessment__c.fields.Partner_Tier_Notification_Contact__c.inlineHelpText}">
+                	<apex:outputLabel value="{!$ObjectType.Assessment__c.fields.Partner_Tier_Notification_Contact__c.label}" for="lblPartnerTierNotificationContact"/>
+	                <apex:outputPanel layout="block" styleClass="requiredInput">
+	                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+	                		<apex:inputField value="{!Assessment__c.Partner_Tier_Notification_Contact__c}" id="lblPartnerTierNotificationContact"/>
+	                </apex:outputPanel>
+	            </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Assessment Criteria" columns="1"/>
+            <apex:outputPanel id="frmScoring">
+            <table id="scGrid">
+                <tr>
+                    <th/>
+                    <th colspan="2">Current Values</th>
+                    <th colspan="2">Approved Values</th>
+                </tr>
+                <tr>
+                    <th/>
+                    <th class="scValue">Value</th>
+                    <th class="scScore">Assessment</th>
+                    <th class="scValue">Value</th>
+                    <th class="scScore">Assessment</th>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Spend (Previous 12 Months)</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel">SI Spend USD</td>
+                    <td>
+                        <apex:actionStatus id="imgSISpend">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.SI_Spend__c}" styleClass="inputText">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgSISpend" focus="SI_Software_Spend__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.SI_Spend_Asmt__c}</td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Spend__c}"/></td>
+                    <td>{!objAssessmentApproved.SI_Spend_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel">IA Spend USD</td>
+                    <td>
+                        <apex:actionStatus id="imgIASpend">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.IA_Spend__c}" styleClass="inputText">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgIASpend" focus="IA_Revenue_from_Strong_Authentication__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.IA_Spend_Asmt__c}</td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Spend__c}"/></td>
+                    <td>{!objAssessmentApproved.IA_Spend_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel">PACS Spend USD</td>
+                    <td>
+                        <apex:actionStatus id="imgPACSSpend">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.PACS_Spend__c}" styleClass="inputText">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgPACSSpend" focus="iCLASS_Spend__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.PACS_Spend_Asmt__c}</td>
+                    <td><apex:outputField value="{!objAssessmentApproved.PACS_Spend__c}"/></td>
+                    <td>{!objAssessmentApproved.PACS_Spend_Asmt__c}</td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Product Mix (Previous 12 Months)</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel">SI Software Spend USD</td>
+                    <td>
+                        <apex:actionStatus id="imgSISoftwareSpend">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.SI_Software_Spend__c}" styleClass="inputText" id="SI_Software_Spend__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgSISoftwareSpend" focus="SI_Hardware_Spend__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.SI_Software_Spend_Asmt__c}</td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Software_Spend__c}"/></td>
+                    <td>{!objAssessmentApproved.SI_Software_Spend_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel">SI Hardware Spend USD</td>
+                    <td>
+                        <apex:actionStatus id="imgSIHardwareSpend">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.SI_Hardware_Spend__c}" styleClass="inputText" id="SI_Hardware_Spend__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgSIHardwareSpend" focus="{!IF(bolSIDistributor,'Stocks_All_SKUs_Certified_Product_Lines__c','HID_Solutions_Integrated_Using_HID_API__c')}"/>
+                        </apex:inputField>
+                    </td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.SI_Hardware_Spend__c}"/></td>
+                    <td/>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel">SI Hardware Spend as % of SI Spend</td>
+                    <td><apex:outputField value="{!objAssessment.SI_Hardware_Spend_as_Percent_of_SI_Spend__c}"/></td>
+                    <td>{!objAssessment.SI_Hardware_Spend_Asmt__c}</td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Hardware_Spend_as_Percent_of_SI_Spend__c}"/></td>
+                    <td>{!objAssessmentApproved.SI_Hardware_Spend_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel">IA Revenue from Strong Authentication USD</td>
+                    <td>
+                        <apex:actionStatus id="imgIARevenuefromStrongAuthentication">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.IA_Revenue_from_Strong_Authentication__c}" styleClass="inputText" id="IA_Revenue_from_Strong_Authentication__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgIARevenuefromStrongAuthentication" focus="IA_Revenue_from_Software_Hardware__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_Strong_Authentication__c}"/></td>
+                    <td/>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel">IA Rev from Strong Authentication as % of IA Spend</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Revenue_from_Strong_Auth_Perc__c}"/></td>
+                    <td>{!objAssessment.IA_Rev_from_Strong_Authentication_Asmt__c}</td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_Strong_Auth_Perc__c}"/></td>
+                    <td>{!objAssessmentApproved.IA_Rev_from_Strong_Authentication_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel">iCLASS Spend</td>
+                    <td>
+                        <apex:actionStatus id="imgiCLASSSpend">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.iCLASS_Spend__c}" styleClass="inputText" id="iCLASS_Spend__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgiCLASSSpend" focus="{!IF(bolOEM,'HID_Solutions_Integrated_Using_HID_API__c','HID_Academy_Courses_Completed__c')}"/>
+                        </apex:inputField>
+                    </td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.iCLASS_Spend__c}"/></td>
+                    <td/>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel">iCLASS Spend as % of PACS Spend</td>
+                    <td><apex:outputField value="{!objAssessment.iCLASS_Spend_as_Percent_of_PACS_Spend__c}"/></td>
+                    <td>{!objAssessment.iCLASS_Spend_Asmt__c}</td>
+                    <td><apex:outputField value="{!objAssessmentApproved.iCLASS_Spend_as_Percent_of_PACS_Spend__c}"/></td>
+                    <td>{!objAssessmentApproved.iCLASS_Spend_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolIADistributorIntegrator,'table-row','none')}">
+                    <td class="tdLabel">IA Revenue from Software + Hardware</td>
+                    <td>
+                        <apex:actionStatus id="imgIARevenuefromSoftwareHardware">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.IA_Revenue_from_Software_Hardware__c}" styleClass="inputText" id="IA_Revenue_from_Software_Hardware__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgIARevenuefromSoftwareHardware" focus="IA_Revenue_from_Software_Hardware__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_Software_Hardware__c}"/></td>
+                    <td/>
+                </tr>
+                <tr style="display:{!IF(bolIADistributorIntegrator,'table-row','none')}">
+                    <td class="tdLabel">IA Rev from Software + Hardware as % of IA Spend</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Revenue_from_SW_HW_Percent__c}"/></td>
+                    <td>{!objAssessment.IA_Revenue_from_Software_Hardware_Asmt__c}</td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_SW_HW_Percent__c}"/></td>
+                    <td>{!objAssessmentApproved.IA_Revenue_from_Software_Hardware_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolSIDistributor,'table-row','none')};">
+                    <td class="tdLabel">Stocks All SKUs Within Certified Product Lines</td>
+                    <td>
+                        <apex:actionStatus id="imgStocksAllSKU">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Stocks_All_SKUs_Certified_Product_Lines__c}" id="Stocks_All_SKUs_Certified_Product_Lines__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgStocksAllSKU" focus="{!IF(bolSIPACSOEM,'HID_Solutions_Integrated_Using_HID_API__c','SI_Product_Certifications__c')}"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Stocks_All_SKUs_Cert_Prod_Lines_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Stocks_All_SKUs_Certified_Product_Lines__c}</td>
+                    <td>{!objAssessmentApproved.Stocks_All_SKUs_Cert_Prod_Lines_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolOEM,'table-row','none')}">
+                    <td class="tdLabel"># of HID Solutions Integrated Using HID APIs</td>
+                    <td>
+                        <apex:actionStatus id="imgHIDAPISolutions">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.HID_Solutions_Integrated_Using_HID_API__c}" size="1" id="HID_Solutions_Integrated_Using_HID_API__c">
+                            <apex:selectOptions value="{!lstHIDAPISolutions}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgHIDAPISolutions" focus="{!strTE1}"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.HID_Solutions_Integr_U_HID_API_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.HID_Solutions_Integrated_Using_HID_API__c}</td>
+                    <td>{!objAssessmentApproved.HID_Solutions_Integr_U_HID_API_Asmt__c}</td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Technical Expertise</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel"># of SI Products for which Certifications are Held</td>
+                    <td>
+                        <apex:actionStatus id="imgSIProductCertifications">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.SI_Product_Certifications__c}" size="1" id="SI_Product_Certifications__c">
+                            <apex:selectOptions value="{!lstSIProductCertifications}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgSIProductCertifications" focus="SI_Certified_Employees__c"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.SI_Product_Certifications_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.SI_Product_Certifications__c}</td>
+                    <td>{!objAssessmentApproved.SI_Product_Certifications_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel"># of IA Products for which Certifications are Held</td>
+                    <td>
+                        <apex:actionStatus id="imgIAProductCertifications">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.IA_Product_Certifications__c}" size="1" id="IA_Product_Certifications__c">
+                            <apex:selectOptions value="{!lstIAProductCertifications}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgIAProductCertifications" focus="IA_Certified_Employees__c"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.IA_Product_Certifications_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.IA_Product_Certifications__c}</td>
+                    <td>{!objAssessmentApproved.IA_Product_Certifications_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolPACSIntegrator,'table-row','none')}">
+                    <td class="tdLabel"># of HID Academy courses completed</td>
+                    <td>
+                        <apex:actionStatus id="imgHIDAcademyCoursesCompleted">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.HID_Academy_Courses_Completed__c}" size="1" id="HID_Academy_Courses_Completed__c">
+                            <apex:selectOptions value="{!lstHIDAcademyCoursesCompleted}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgHIDAcademyCoursesCompleted" focus="Employees_w_pivCLASS_Cert_Asmt__c"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.HID_Academy_Courses_Completed_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.HID_Academy_Courses_Completed__c}</td>
+                    <td>{!objAssessmentApproved.HID_Academy_Courses_Completed_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel"># of Employees Who Hold 1 or More SI Certification</td>
+                    <td>
+                        <apex:actionStatus id="imgSICertifiedEmployees">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.SI_Certified_Employees__c}" size="1" id="SI_Certified_Employees__c">
+                            <apex:selectOptions value="{!lstSICertifiedEmployees}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgSICertifiedEmployees" focus="{!IF(bolDistributorOEM,'Days_of_Inventory_on_Hand__c','HID_Logo_and_Link_on_Homepage__c')}"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.SI_Certified_Employees_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.SI_Certified_Employees__c}</td>
+                    <td>{!objAssessmentApproved.SI_Certified_Employees_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel"># of Employees Who Hold 1 or More IA Certification</td>
+                    <td>
+                        <apex:actionStatus id="imgIACertifiedEmployees">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.IA_Certified_Employees__c}" size="1" id="IA_Certified_Employees__c">
+                            <apex:selectOptions value="{!lstIACertifiedEmployees}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgIACertifiedEmployees" focus="{!IF(bolDistributorOEM,'Days_of_Inventory_on_Hand__c','HID_Logo_and_Link_on_Homepage__c')}"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.IA_Certified_Employees_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.IA_Certified_Employees__c}</td>
+                    <td>{!objAssessmentApproved.IA_Certified_Employees_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel"># of Employees Who hold pivCLASS Certification [Estimate]</td>
+                    <td>
+                        <apex:actionStatus id="imgEmployeesWpivClassCert">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.Employees_w_pivCLASS_Certification__c}" size="1" id="Employees_w_pivCLASS_Certification__c">
+                            <apex:selectOptions value="{!lstEmployeesWpivCLASSCert}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgEmployeesWpivClassCert" focus="{!IF(bolDistributorOEM,'Days_of_Inventory_on_Hand__c','HID_Logo_and_Link_on_Homepage__c')}"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.Employees_w_pivCLASS_Cert_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Employees_w_pivCLASS_Certification__c}</td>
+                    <td>{!objAssessmentApproved.Employees_w_pivCLASS_Cert_Asmt__c}</td>
+                </tr>
+                <tr class="trBg" style="display:{!IF(bolDistributorOEM,'table-row','none')}">
+                    <th class="taRight">Inventory</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolDistributorOEM,'table-row','none')}">
+                    <td class="tdLabel">Days of Inventory on Hand</td>
+                    <td>
+                        <apex:actionStatus id="imgDaysInventory">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.Days_of_Inventory_on_Hand__c}" size="1" id="Days_of_Inventory_on_Hand__c">
+                            <apex:selectOptions value="{!lstDaysInventory}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgDaysInventory" focus="HID_Logo_and_Link_on_Homepage__c"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.Days_of_Inventory_on_Hand_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Days_of_Inventory_on_Hand__c}</td>
+                    <td>{!objAssessmentApproved.Days_of_Inventory_on_Hand_Asmt__c}</td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Brand Promotion</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">HID Logo &amp; Link on Website Homepage</td>
+                    <td>
+                        <apex:actionStatus id="imgHIDWebsiteLink">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.HID_Logo_and_Link_on_Homepage__c}" id="HID_Logo_and_Link_on_Homepage__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgHIDWebsiteLink" focus="HID_Brand_Featured_in_Promotions__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.HID_Logo_and_Link_on_Homepage_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.HID_Logo_and_Link_on_Homepage__c}</td>
+                    <td>{!objAssessmentApproved.HID_Logo_and_Link_on_Homepage_Asmt__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">HID Brand Featured in Marketing Promotions</td>
+                    <td>
+                        <apex:actionStatus id="imgHIDBrandPromoted">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.HID_Brand_Featured_in_Promotions__c}" id="HID_Brand_Featured_in_Promotions__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgHIDBrandPromoted" focus="{!IF(bolOEM,'HID_Products_Included_in_OEM_Spec_Doc__c','Customer_Service_Quality__c')}"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.HID_Brand_Featured_in_Promotions_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.HID_Brand_Featured_in_Promotions__c}</td>
+                    <td>{!objAssessmentApproved.HID_Brand_Featured_in_Promotions_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolOEM,'table-row','none')}">
+                    <td class="tdLabel"># of HID Products Included in OEM Specification Document</td>
+                    <td>
+                        <apex:actionStatus id="imgOEMSpecDoc">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.HID_Products_Included_in_OEM_Spec_Doc__c}" size="1" id="HID_Products_Included_in_OEM_Spec_Doc__c">
+                            <apex:selectOptions value="{!lstOEMSpecDoc}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgOEMSpecDoc" focus="HID_Products_Included_in_OEM_Spec_Doc__c"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.HID_Prod_Inc_in_OEM_Spec_Doc_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.HID_Products_Included_in_OEM_Spec_Doc__c}</td>
+                    <td>{!objAssessmentApproved.HID_Prod_Inc_in_OEM_Spec_Doc_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolSIPACSOEM,'table-row','none')}">
+                    <td class="tdLabel">HID Products Included in Standard OEM Price Book</td>
+                    <td>
+                        <apex:actionStatus id="imgOEMPriceBook">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.HID_Products_in_Standard_OEM_Price_Book__c}" id="HID_Products_in_Standard_OEM_Price_Book__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgOEMPriceBook" focus="Customer_Service_Quality__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.HID_Products_in_St_OEM_Price_Book_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.HID_Products_in_Standard_OEM_Price_Book__c}</td>
+                    <td>{!objAssessmentApproved.HID_Products_in_St_OEM_Price_Book_Asmt__c}</td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Customer Service</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Customer Service Quality</td>
+                    <td>
+                        <apex:actionStatus id="imgCustomerServiceQuality">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Customer_Service_Quality__c}" id="Customer_Service_Quality__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgCustomerServiceQuality" focus="Monthly_POS_Report_Provided_to_HID__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Customer_Service_Quality_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Customer_Service_Quality__c}</td>
+                    <td>{!objAssessmentApproved.Customer_Service_Quality_Asmt__c}</td>
+                </tr>
+                <tr class="trBg" style="display:{!IF(bolSIPACSIntegrator,'table-row','none')}">
+                    <th class="taRight">Sales Effectiveness</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolSIPACSIntegrator,'table-row','none')}">
+                    <td class="tdLabel">Sales Effectiveness</td>
+                    <td>
+                        <apex:actionStatus id="imgSalesEffectiveness">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Sales_Effectiveness__c}" id="Sales_Effectiveness__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgSalesEffectiveness" focus="Customer_Service_Quality__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Sales_Effectiveness_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Sales_Effectiveness__c}</td>
+                    <td>{!objAssessmentApproved.Sales_Effectiveness_Asmt__c}</td>
+                </tr>
+                <tr class="trBg" style="display:{!IF(bolIADistributorIntegrator,'table-row','none')}">
+                    <th class="taRight">Sales Effectiveness</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolIADistributorIntegrator,'table-row','none')}">
+                    <td class="tdLabel"># of New IA Customers Brought On By Partner</td>
+                    <td>
+                        <apex:actionStatus id="imgNewIACustomers">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:selectList value="{!objAssessment.New_IA_Customers_Brought_on_by_Partner__c}" size="1" id="New_IA_Customers_Brought_on_by_Partner__c">
+                            <apex:selectOptions value="{!lstIANewCustomers}"/>
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgNewIACustomers" focus="Customer_Service_Quality__c"/>
+                        </apex:selectList>
+                    </td>
+                    <td>{!objAssessment.New_IA_Cust_Brought_on_by_Partner_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.New_IA_Customers_Brought_on_by_Partner__c}</td>
+                    <td>{!objAssessmentApproved.New_IA_Cust_Brought_on_by_Partner_Asmt__c}</td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Plan &amp; Coordinate</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Monthly POS Report Provided to HID</td>
+                    <td>
+                        <apex:actionStatus id="imgPOSReport">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Monthly_POS_Report_Provided_to_HID__c}" id="Monthly_POS_Report_Provided_to_HID__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgPOSReport" focus="Business_Plan_Provided_to_HID__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Monthly_POS_Report_Provided_to_HID_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Monthly_POS_Report_Provided_to_HID__c}</td>
+                    <td>{!objAssessmentApproved.Monthly_POS_Report_Provided_to_HID_Asmt__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Business Plan Provided to HID</td>
+                    <td>
+                        <apex:actionStatus id="imgBusinessPlan">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Business_Plan_Provided_to_HID__c}" id="Business_Plan_Provided_to_HID__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgBusinessPlan" focus="Joint_Integrator_Training__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Business_Plan_Provided_to_HID_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Business_Plan_Provided_to_HID__c}</td>
+                    <td>{!objAssessmentApproved.Business_Plan_Provided_to_HID_Asmt__c}</td>
+                </tr>
+                <tr style="display:{!IF(bolJointIntegratorTraining,'table-row','none')}">
+                    <td class="tdLabel">Joint Integrator Training Conducted with HID</td>
+                    <td>
+                        <apex:actionStatus id="imgJointIntegratorTraining">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Joint_Integrator_Training__c}" id="Joint_Integrator_Training__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgJointIntegratorTraining" focus="Monthly_Forecast_Accuracy__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Joint_Integrator_Training_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Joint_Integrator_Training__c}</td>
+                    <td>{!objAssessmentApproved.Joint_Integrator_Training_Asmt__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Average Monthly Sales Forecast Accuracy +/- 20 %</td>
+                    <td>
+                        <apex:actionStatus id="imgForecastAccuracy">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Monthly_Forecast_Accuracy__c}" id="Monthly_Forecast_Accuracy__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgForecastAccuracy" focus="EDI_Implemented_with_HID__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Monthly_Forecast_Accuracy_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Monthly_Forecast_Accuracy__c}</td>
+                    <td>{!objAssessmentApproved.Monthly_Forecast_Accuracy_Asmt__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">EDI Implemented with HID</td>
+                    <td>
+                        <apex:actionStatus id="imgEDIImplemented">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.EDI_Implemented_with_HID__c}" id="EDI_Implemented_with_HID__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgEDIImplemented" focus="Blanket_Ordering_Frequently_Used__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.EDI_Implemented_with_HID_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.EDI_Implemented_with_HID__c}</td>
+                    <td>{!objAssessmentApproved.EDI_Implemented_with_HID_Asmt__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Blanket Ordering Frequently Used</td>
+                    <td>
+                        <apex:actionStatus id="imgBlanketOrder">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Blanket_Ordering_Frequently_Used__c}" id="Blanket_Ordering_Frequently_Used__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgBlanketOrder" focus="Bulk_Ordering_Frequently_Used__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Blanket_Ordering_Frequently_Used_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Blanket_Ordering_Frequently_Used__c}</td>
+                    <td>{!objAssessmentApproved.Blanket_Ordering_Frequently_Used_Asmt__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Bulk Ordering Frequently Used</td>
+                    <td>
+                        <apex:actionStatus id="imgBulkOrder">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                        <apex:inputField value="{!objAssessment.Bulk_Ordering_Frequently_Used__c}" id="Bulk_Ordering_Frequently_Used__c">
+                            <apex:actionSupport action="{!updateAssessment}" event="onchange" reRender="frmScoring" status="imgBulkOrder" focus="Requested_Tier__c"/>
+                        </apex:inputField>
+                    </td>
+                    <td>{!objAssessment.Bulk_Ordering_Frequently_Used_Asmt__c}</td>
+                    <td>{!objAssessmentApproved.Bulk_Ordering_Frequently_Used__c}</td>
+                    <td>{!objAssessmentApproved.Bulk_Ordering_Frequently_Used_Asmt__c}</td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Total Assessment, Tiers and Effective Dates</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Total Assessment</td>
+                    <td colspan="2"><apex:outputField value="{!objAssessment.Total_Asmt__c}"/></td>
+                    <td colspan="2">{!objAssessmentApproved.Total_Asmt__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Recommended Tier</td>
+                    <td colspan="2">{!objAssessment.Recommended_Tier__c}</td>
+                    <td colspan="2">{!objAssessmentApproved.Recommended_Tier__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Requested Tier</td>
+                    <td></td>
+                    <td>
+                        <apex:outputPanel layout="block" styleClass="requiredInput">
+                            <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                            <apex:inputField value="{!objAssessment.Requested_Tier__c}" id="Requested_Tier__c" style="width:100%;"/>
+                        </apex:outputPanel>
+                    </td>
+                    <td colspan="2">{!objAssessmentApproved.Requested_Tier__c}</td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Effective Date for Benefits</td>
+                    <td colspan="2"><apex:inputField value="{!objAssessment.Effective_Date_for_Benefits__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.Effective_Date_for_Benefits__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Requested Effective Date for Pricing</td>
+                    <td></td>
+                    <td>
+                        <apex:outputPanel layout="block" styleClass="requiredInput">
+                            <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                            <apex:inputField value="{!objAssessment.Requested_Effective_Date_for_Pricing__c}"/>
+                        </apex:outputPanel>
+                    </td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.Requested_Effective_Date_for_Pricing__c}"/></td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Comments</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Please Provide Comments</td>
+                    <td colspan="2"><apex:inputField value="{!objAssessment.Comments__c}" styleClass="Comments__c"/></td>
+                    <td colspan="2" class="taLeft">{!objAssessmentApproved.Comments__c}</td>
+                </tr>
+            </table>
+            </apex:outputPanel>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

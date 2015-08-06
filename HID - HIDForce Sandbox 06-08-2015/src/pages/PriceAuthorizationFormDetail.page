@@ -1,0 +1,678 @@
+<apex:page id="mypg" standardController="Price_Authorization_Form__c" extensions="PAFDetailPageController">
+
+    <apex:pageMessages ></apex:pageMessages>
+    <a name="skiplink">
+        <img src="/s.gif" height='1' width='1' alt="Content Starts Here" class="skiplink skipLinkTargetInner zen-skipLinkTarget" title="Content Starts Here"/>
+    </a>
+<div class="bPageTitle">
+<div class="ptBody">
+<div class="content"><img src="/s.gif" alt="Price Authorization Form"  class="pageTitleIcon" title="Price Authorization Form"/>
+<h1 class="pageType">Price Authorization Form<span  class="titleSeparatingColon">:</span></h1>
+<h2 class="pageDescription"> {!Price_Authorization_Form__c.Name}</h2>
+<div class="blank">&nbsp;</div></div><div class="links">
+<a href="javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&amp;target=co_edit.htm&amp;section=CustomObjects&amp;language=en_US&amp;release=184.20.11&amp;instance=CS1%27, %27Help%27, 1024, 768, %27width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no%27, false, false);" title="Help for this Page (New Window)">
+ <span  class="helpLink">Help for this Page</span>
+ <img src="/s.gif" alt=""  class="helpIcon"/></a></div>
+ </div>
+ <a href="/a0O/o">&lt;&lt;&nbsp;Back to List: Pages</a>
+ </div>
+
+
+  <apex:form id="frm">
+  <apex:actionFunction name="DeletePAF" action="{!DeletePriceAuthorizationForm}"/>
+  <apex:actionFunction name="CancelPAF" action="{!CancelPAFApproveStatus}"/>
+  <apex:actionFunction name="RecallPAF" action="{!PAFStatustoRecall}"/>
+    <apex:variable value="{!Price_Authorization_Form__c}" var="paf"/>     
+    <apex:pageBlock title="Price Authorization Form Detail" id="thePageBlock" mode="maindetail">
+       <apex:pageBlockButtons id="pbButtons">
+                <apex:commandButton id="btnEdit" rendered="{!IsshowEdit}" value="Edit" action="{!EditPriceAuthorizationForm}"/>
+                <apex:commandButton id="btnDelete" onclick="deletePriceAuthorizationForm();return false;" value="Delete" rendered="{!(($Label.SysAdminProfileId == $User.ProfileId) || (HIDBusAdmin == $User.ProfileId) || ( HIDBusAdminModAll == $User.ProfileId))}"/>
+            <!--    <apex:outputPanel onclick="deletePriceAuthorizationForm();return false;" styleClass="btn" style="height: 350px;">Delete</apex:outputPanel>-->
+                <apex:commandButton id="btnClone" value="Clone" rendered="{!(($Label.SysAdminProfileId == $User.ProfileId) || (HIDBusAdmin == $User.ProfileId) || ( HIDBusAdminModAll == $User.ProfileId))}" action="{!ClonePriceAuthorizationForm}"/>
+                <apex:commandButton id="btnApprove" value="Go to Approval" onclick="gotoApprovalSection();return false;" rendered="{!paf.recordTypeId != vPAFRecordTypeId}"/>
+              <!--  <apex:commandButton id="btnCanPAF" rendered="{!IsshowCancel }" value="Cancel PAF" onclick="cancelPAF();"/> -->
+                <apex:commandButton id="btnCanPAF" rendered="{!(IsshowCancel && (($Label.SysAdminProfileId == $User.ProfileId)||($User.Id == paf.OwnerId) || (HIDBusAdmin == $User.ProfileId) || ( HIDBusAdminModAll == $User.ProfileId)))}" value="Cancel PAF" action="{!CancelPAFApproveStatus}"/>
+              <!--  <apex:commandButton id="btnRecPAF"  rendered="{!IsshowRecall}" value="Recall PAF" onclick="recallPAF();"/>    -->
+                <apex:commandButton id="btnRecPAF"  rendered="{!(IsshowRecall && (($Label.SysAdminProfileId == $User.ProfileId)||($User.Id == paf.OwnerId) || (HIDBusAdmin == $User.ProfileId) || ( HIDBusAdminModAll == $User.ProfileId)))}" value="Recall PAF" action="{!PAFStatustoRecall}"/>                            
+       </apex:pageBlockButtons> 
+  <apex:pageBlockSection columns="2">
+      <apex:outputField value="{!paf.Customer_Group_Number__c}"/>
+      <apex:outputField value="{!paf.OwnerID}"/>
+      <apex:outputField value="{!paf.Customer_Sub_Group_Number__c}"/>
+      <apex:outputField value="{!paf.e_21_Account__c}"/>
+      <apex:outputField value="{!paf.Owner_Email_Address__c}"/>
+      <apex:outputField value="{!paf.Update_Existing_Customer_Customer_Number__c}"/>
+      <apex:outputField value="{!paf.Assessment__c}"/>     
+  </apex:pageBlockSection>
+  
+  <apex:pageblockSection title="Customer Details" columns="2">
+       <apex:outputField value="{!paf.Account__c}"/>
+       <apex:outputField value="{!paf.Key_Contact__c}"/>
+       <apex:outputField value="{!paf.Account_Street_Address__c}"/>
+       <apex:outputField value="{!paf.Contact_Title__c}"/>
+       <apex:outputField value="{!paf.Account_City__c}"/>
+       <apex:outputField value="{!paf.Contact_Phone_Number__c}"/>
+       <apex:outputField value="{!paf.Account_State__c}"/>
+       <apex:outputField value="{!paf.Contact_Fax_Number__c}"/>
+       <apex:outputField value="{!paf.Account_Postal_Code__c}"/> 
+       <apex:outputField value="{!paf.Contact_E_mail_Address__c}"/>
+       <apex:outputField value="{!paf.Country__c}"/> 
+       <apex:outputField value="{!paf.Account_Web_Address__c}"/>      
+       <apex:outputField value="{!paf.Comments__c}"/>
+       <apex:outputField value="{!paf.Account_CRM_Autonumber__c}"/>
+       
+       <apex:pageBlockSectionItem ><apex:outputLabel value="Partner Program Status"></apex:outputLabel> {!PartnerProgramStatus} </apex:pageBlockSectionItem>
+       
+       <apex:pageBlockSectionItem ><apex:outputLabel value="Partner Program Status Modifier"></apex:outputLabel> {!PartnerProgramStatusModifier}</apex:pageBlockSectionItem>
+       <apex:outputField value="{!paf.Account_Region__c}"/>    <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+  </apex:pageblockSection>
+  
+          <apex:pageBlockSection title="Account Profile Details" columns="1">
+            <apex:include pageName="AccountProfileDetails"/>
+         </apex:pageBlockSection> 
+  
+   <apex:pageBlockSection title="PACS Products Pricing Information" columns="2" >
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iR__c.inlineHelpText}" >iR: iCLASS Readers  <label style="color: blue"> {!IF(paf.Account__r.iR__c==null,' ', Left(paf.Account__r.iR__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIR();" onmouseout="LabelleaveIR();"> {!tierValueIR}</label> <apex:outputText value="{!paf.iR__c}"> 
+               <div id = "labelTextIR" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.MS__c.inlineHelpText}" >MS: Magnetic Stripe <label style="color: blue"> {!IF(paf.Account__r.MS__C==null,' ', Left(paf.Account__r.MS__c,5))}</label> <label style="color: red" onmouseover="LabelHoverMS();" onmouseout="LabelleaveMS();">{!tierValueMS}</label> <apex:outputText value="{!paf.MS__c}"> 
+               <div id = "labelTextMS" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iC__c.inlineHelpText}" >iC: iCLASS Credentials <label style="color: blue"> {!IF(paf.Account__r.iC__c==null,' ', Left(paf.Account__r.iC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIC();" onmouseout="LabelleaveIC();">{!tierValueIC}</label> <apex:outputText value="{!paf.iC__c}"> 
+               <div id = "labelTextIC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>   
+        <!--<apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.SL__c.inlineHelpText}" >SL: Proxima/MultiProx <label style="color: blue"> {!IF(paf.Account__r.SL__c==null,' ', Left(paf.Account__r.SL__c,5))}</label> <label style="color: red" onmouseover="LabelHoverSL();" onmouseout="LabelleaveSL();">{!tierValueSL}</label> <apex:outputText value="{!paf.SL__c}"> 
+               <div id = "labelTextSL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>-->
+        <apex:pageBlockSectionItem >
+        </apex:pageBlockSectionItem>       
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iD__c.inlineHelpText}" >iD: iCLASS Clamshell <label style="color: blue"> {!IF(paf.Account__r.iD__c==null,' ', Left(paf.Account__r.iD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverID();" onmouseout="LabelleaveID();">{!tierValueID}</label> <apex:outputText value="{!paf.iD__c}"> 
+               <div id = "labelTextID" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VS__c.inlineHelpText}" >VS: Edge Solo <label style="color: blue"> {!IF(paf.Account__r.VS__c==null,' ', Left(paf.Account__r.VS__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVS();" onmouseout="LabelleaveVS();">{!tierValueVS}</label> <apex:outputText value="{!paf.VS__c}"> 
+               <div id = "labelTextVS" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iM_HID_Mobile_Access__c.inlineHelpText}" >iM: HID Mobile Access <label style="color: blue"> {!IF(paf.Account__r.iM_HID_Mobile_Access__c==null,' ', Left(paf.Account__r.iM_HID_Mobile_Access__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIM();" onmouseout="LabelleaveIM();"> {!tierValueIM}</label> <apex:outputText value="{!paf.iM_HID_Mobile_Access__c}"> 
+               <div id = "labelTextIM" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iP__c.inlineHelpText}" >iP: Credential Programmers <label style="color: blue"> {!IF(paf.Account__r.iP__c==null,' ', Left(paf.Account__r.iP__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIP();" onmouseout="LabelleaveIP();"> {!tierValueIP}</label> <apex:outputText value="{!paf.iP__c}"> 
+               <div id = "labelTextIP" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LV__c.inlineHelpText}" >LV: Indala Readers <label style="color: blue"> {!IF(paf.Account__r.LV__c==null,' ', Left(paf.Account__r.LV__c,5))} </label> <label style="color: red" onmouseover="LabelHoverLV();" onmouseout="LabelleaveLV();"> {!tierValueLV}</label> <apex:outputText value="{!paf.LV__c}"> 
+               <div id = "labelTextLV" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.MC__c.inlineHelpText}" >MC: FlexSmart <label style="color: blue"> {!IF(paf.Account__r.MC__c==null,' ', Left(paf.Account__r.MC__c,5))} </label> <label style="color: red" onmouseover="LabelHoverMC();" onmouseout="LabelleaveMC();">{!tierValueMC}</label> <apex:outputText value="{!paf.MC__c}"> 
+               <div id = "labelTextMC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LW_Indala_Credentials__c.inlineHelpText}" >LW: Indala Credentials <label style="color: blue"> {!IF(paf.Account__r.LW_Indala_Credenitals__c==null,' ', Left(paf.Account__r.LW_Indala_Credenitals__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLW();" onmouseout="LabelleaveLW();">{!tierValueLW}</label> <apex:outputText value="{!paf.LW_Indala_Credentials__c}"> 
+               <div id = "labelTextLW" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.MD__c.inlineHelpText}" >MD: MIFARE/DESFire  <label style="color: blue"> {!IF(paf.Account__r.MD__c==null,' ', Left(paf.Account__r.MD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverMD();" onmouseout="LabelleaveMD();">{!tierValueMD}</label> <apex:outputText value="{!paf.MD__c}"> 
+               <div id = "labelTextMD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <!--<apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.IB__c.inlineHelpText}" >IB: idBank Product <label style="color: blue"> {!IF(paf.Account__r.IB__c==null,' ', Left(paf.Account__r.IB__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIB();" onmouseout="LabelleaveIB();">{!tierValueIB}</label> <apex:outputText value="{!paf.IB__c}"> 
+               <div id = "labelTextIB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>-->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.ME__c.inlineHelpText}" >ME: SmartID Readers <label style="color: blue"> {!IF(paf.Account__r.ME__c==null,' ', Left(paf.Account__r.ME__c,5))}</label> <label style="color: red" onmouseover="LabelHoverME();" onmouseout="LabelleaveME();">{!tierValueME}</label> <apex:outputText value="{!paf.ME__c}"> 
+               <div id = "labelTextME" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <!--<apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.PI__c.inlineHelpText}" >PI: plusID Products <label style="color: blue"> {!IF(paf.Account__r.PI__c==null,' ', Left(paf.Account__r.PI__c,5))}</label> <label style="color: red" onmouseover="LabelHoverPI();" onmouseout="LabelleavePI();">{!tierValuePI}</label> <apex:outputText value="{!paf.PI__c}"> 
+               <div id = "labelTextPI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>-->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.MF__c.inlineHelpText}" >MF: SmartID Keypad <label style="color: blue"> {!IF(paf.Account__r.MF__c==null,' ', Left(paf.Account__r.MF__c,5))}</label> <label style="color: red" onmouseover="LabelHoverMF();" onmouseout="LabelleaveMF();">{!tierValueMF}</label> <apex:outputText value="{!paf.MF__c}"> 
+               <div id = "labelTextMF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iE_pivCLASS_Modules_Software__c.inlineHelpText}" >iE: pivCLASS Modules-Software  <label style="color: blue"> {!IF(paf.Account__r.iE_pivCLASS_Modules_Software__c==null,' ', Left(paf.Account__r.iE_pivCLASS_Modules_Software__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIE();" onmouseout="LabelleaveIE();"> {!tierValueiE}</label> <apex:outputText value="{!paf.iE_pivCLASS_Modules_Software__c}"> 
+               <div id = "labelTextIE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RA__c.inlineHelpText}" >RA: Prox Readers <label style="color: blue"> {!IF(paf.Account__r.RA__c==null,' ', Left(paf.Account__r.RA__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRA();" onmouseout="LabelleaveRA();"> {!tierValueRA}</label> <apex:outputText value="{!paf.RA__c}"> 
+               <div id = "labelTextRA" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iJ_pivCLASS_Modules_Software__c.inlineHelpText}" >iJ: pivCLASS Modules-Software <label style="color: blue"> {!IF(paf.Account__r.iJ_pivCLASS_Modules_Software__c==null,' ', Left(paf.Account__r.iJ_pivCLASS_Modules_Software__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIJ();" onmouseout="LabelleaveIJ();">{!tierValueiJ}</label> <apex:outputText value="{!paf.iJ_pivCLASS_Modules_Software__c}"> 
+               <div id = "labelTextIJ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RB__c.inlineHelpText}" >RB: Prox Readers <label style="color: blue">{!IF(paf.Account__r.RB__c==null,' ',Left(paf.Account__r.RB__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRB();" onmouseout="LabelleaveRB();"> {!tierValueRB}</label> <apex:outputText value="{!paf.RB__c}"> 
+               <div id = "labelTextRB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iH_pivCLASS_Bundles__c.inlineHelpText}" >iH: pivCLASS Bundles <label style="color: blue">{!IF(paf.Account__r.iH_pivCLASS_Bundles__c==null,' ',Left(paf.Account__r.iH_pivCLASS_Bundles__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIH();" onmouseout="LabelleaveIH();"> {!tierValueIH}</label> <apex:outputText value="{!paf.iH_pivCLASS_Bundles__c}"> 
+               <div id = "labelTextIH" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RC__c.inlineHelpText}" >RC: Prox Readers <label style="color: blue"> {!IF(paf.Account__r.RC__c==null,' ',Left(paf.Account__r.RC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRC();" onmouseout="LabelleaveRC();">{!tierValueRC}</label> <apex:outputText value="{!paf.RC__c}"> 
+               <div id = "labelTextRC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iK_pivCLASS_Mobile_Handheld_Readers__c.inlineHelpText}" >iK: pivCLASS Mobile Handheld Readers <label style="color: blue"> {!IF(paf.Account__r.iK_pivCLASS_Mobile_Handheld_Readers__c==null,' ',Left(paf.Account__r.iK_pivCLASS_Mobile_Handheld_Readers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIK();" onmouseout="LabelleaveIK();"> {!tierValueiK}</label> <apex:outputText value="{!paf.iK_pivCLASS_Mobile_Handheld_Readers__c}"> 
+               <div id = "labelTextIK" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RD__c.inlineHelpText}" >RD: ProxPoint Readers <label style="color: blue"> {!IF(paf.Account__r.RD__c==null,' ',Left(paf.Account__r.RD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRD();" onmouseout="LabelleaveRD();">{!tierValueRD}</label> <apex:outputText value="{!paf.RD__c}"> 
+               <div id = "labelTextRD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+        </apex:pageBlockSectionItem>                  
+        
+        
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iF_pivCLASS_Kits__c.inlineHelpText}" >iF: pivCLASS Kits <label style="color: blue"> {!IF(paf.Account__r.iF_pivCLASS_Kits__c==null,' ',Left(paf.Account__r.iF_pivCLASS_Kits__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIF();" onmouseout="LabelleaveIF();"> {!tierValueIF}</label> <apex:outputText value="{!paf.iF_pivCLASS_Kits__c}"> 
+               <div id = "labelTextIF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div> </apex:outputText>
+        </apex:pageBlockSectionItem>
+
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RE__c.inlineHelpText}" >RE: EntryProx Readers <label style="color: blue"> {!IF(paf.Account__r.RE__c==null,' ',Left(paf.Account__r.RE__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRE();" onmouseout="LabelleaveRE();">{!tierValueRE}</label> <apex:outputText value="{!paf.RE__c}"> 
+               <div id = "labelTextRE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+        </apex:pageBlockSectionItem>
+        
+         <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EZ_EasyLobby__c.inlineHelpText}" >EZ: EasyLobby <label style="color: blue">{!IF(paf.Account__r.EZ_EasyLobby__c==null,' ',paf.Account__r.EZ_EasyLobby__c)}</label> <label style="color: red" onmouseover="LabelHoverEZ();" onmouseout="LabelleaveEZ();"> {!tierValueEZ}</label> <apex:outputText value="{!paf.EZ_EasyLobby__c}"> 
+               <div id = "labelTextEZ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+        </apex:pageBlockSectionItem>
+
+         <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.PC__c.inlineHelpText}" >PC: Prox Credentials <label style="color: blue"> {!IF(paf.Account__r.PC__c==null,' ',Left(paf.Account__r.PC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverPC();" onmouseout="LabelleavePC();"> {!tierValuePC}</label> <apex:outputText value="{!paf.PC__c}">
+               <div id = "labelTextPC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+        </apex:pageBlockSectionItem> 
+
+
+  </apex:pageblockSection>
+  
+  <apex:pageBlockSection title="ID Assurance Products Pricing Information" columns="2">            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.OL__c.inlineHelpText}" >OL: OMNIKEY Std. <label style="color: blue">{!IF(paf.Account__r.OL__c==null,' ', Left(paf.Account__r.OL__c,5))}</label> <label style="color: red" onmouseover="LabelHoverOL();" onmouseout="LabelleaveOL();"> {!tierValueOL}</label> <apex:outputText value="{!paf.OL__c}"> 
+               <div id = "labelTextOL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LC__c.inlineHelpText}" >LC: Crescendo <label style="color: blue"> {!IF(paf.Account__r.LC__c==null,' ', Left(paf.Account__r.LC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLC();" onmouseout="LabelleaveLC();"> {!tierValueLC}</label> <apex:outputText value="{!paf.LC__c}"> 
+               <div id = "labelTextLC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+           <!-- <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LR__c.inlineHelpText}" >LR: Omnikey (HOTD) <label style="color: blue"> {!IF(paf.Account__r.LR__c==null,' ', Left(paf.Account__r.LR__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLR();" onmouseout="LabelleaveLR();"> {!tierValueLR}</label> <apex:outputText value="{!paf.LR__c}"> 
+               <div id = "labelTextLR" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem> -->
+            <apex:pageBlockSectionItem >
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EB_Embeddable_Credentials__c.inlineHelpText}" >EB: Embed. Credentials (HOTD) <label style="color: blue"> {!IF(paf.Account__r.EB_Embeddable_Credentials__c==null,' ', Left(paf.Account__r.EB_Embeddable_Credentials__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEB();" onmouseout="LabelleaveEB();"> {!tierValueEB}</label> <apex:outputText value="{!paf.EB_Embeddable_Credentials__c}"> 
+               <div id = "labelTextEB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AA__c.inlineHelpText}" >AA: IA Software <label style="color: blue">{!IF(paf.Account__r.AA__c==null,' ', Left(paf.Account__r.AA__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAA();" onmouseout="LabelleaveAA();"> {!tierValueAA}</label> <apex:outputText value="{!paf.AA__c}"> 
+               <div id = "labelTextAA" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AF__c.inlineHelpText}" >AF: IA Training <label style="color: blue">{!IF(paf.Account__r.AF__c==null,' ', Left(paf.Account__r.AF__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAF();" onmouseout="LabelleaveAF();"> {!tierValueAF}</label> <apex:outputText value="{!paf.AF__c}"> 
+               <div id = "labelTextAF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+             <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AD__c.inlineHelpText}" >AD: IA Software-Restricted <label style="color: blue">{!IF(paf.Account__r.AD__c==null,' ', Left(paf.Account__r.AD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAD();" onmouseout="LabelleaveAD();"> {!tierValueAD}</label> <apex:outputText value="{!paf.AD__c}"> 
+               <div id = "labelTextAD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AB__c.inlineHelpText}" >AB: IA Appliances &amp; Auth. Devices <label style="color: blue">{!IF(paf.Account__r.AB__c==null,' ', Left(paf.Account__r.AB__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAB();" onmouseout="LabelleaveAB();"> {!tierValueAB}</label> <apex:outputText value="{!paf.AB__c}"> 
+               <div id = "labelTextAB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+           <!-- <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AL__c.inlineHelpText}" >AL: PS Implementation Services - Appliance<label style="color: blue">{!IF(paf.Account__r.AL__c==null,' ', Left(paf.Account__r.AL__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAL();" onmouseout="LabelleaveAL();"> {!tierValueAL}</label> <apex:outputText value="{!paf.AL__c}"> 
+               <div id = "labelTextAL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem> -->
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AK__c.inlineHelpText}" >AK: IA Software-Valid CMS &amp; CMS App. <label style="color: blue">{!IF(paf.Account__r.AK__c==null,' ', Left(paf.Account__r.AK__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAK();" onmouseout="LabelleaveAK();"> {!tierValueAK}</label> <apex:outputText value="{!paf.AK__c}"> 
+               <div id = "labelTextAK" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            
+           
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AG__c.inlineHelpText}" >AG: IA Appl. &amp; Auth. Devices-Restricted <label style="color: blue">{!IF(paf.Account__r.AG__c==null,' ', Left(paf.Account__r.AG__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAG();" onmouseout="LabelleaveAG();"> {!tierValueAG}</label> <apex:outputText value="{!paf.AG__c}"> 
+               <div id = "labelTextAG" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AM__c.inlineHelpText}" >AM: IA Software-Valid VA Cert. <label style="color: blue">{!IF(paf.Account__r.AM__c==null,' ', Left(paf.Account__r.AM__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAM();" onmouseout="LabelleaveAM();"> {!tierValueAM}</label> <apex:outputText value="{!paf.AM__c}"> 
+               <div id = "labelTextAM" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AE__c.inlineHelpText}" >AE: IA Maintenance &amp; Support<label style="color: blue">{!IF(paf.Account__r.AE__c==null,' ', Left(paf.Account__r.AE__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAE();" onmouseout="LabelleaveAE();"> {!tierValueAE}</label> <apex:outputText value="{!paf.AE__c}"> 
+               <div id = "labelTextAE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AH__c.inlineHelpText}" >AH: IA Special Class Product <label style="color: blue">{!IF(paf.Account__r.AH__c==null,' ', Left(paf.Account__r.AH__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAH();" onmouseout="LabelleaveAH);"> {!tierValueAH}</label> <apex:outputText value="{!paf.AH__c}"> 
+               <div id = "labelTextAH" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AI__c.inlineHelpText}" >AI: IA Maint. &amp; Support -Restricted <label style="color: blue">{!IF(paf.Account__r.AI__c==null,' ', Left(paf.Account__r.AI__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAI();" onmouseout="LabelleaveAI();"> {!tierValueAI}</label> <apex:outputText value="{!paf.AI__c}"> 
+               <div id = "labelTextAI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AZ__c.inlineHelpText}" >AZ: IA Professional Services <label style="color: blue">{!IF(paf.Account__r.AZ__c==null,' ', Left(paf.Account__r.AZ__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAZ();" onmouseout="LabelleaveAZ();"> {!tierValueAZ}</label> <apex:outputText value="{!paf.AZ__c}"> 
+               <div id = "labelTextAZ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AL__c.inlineHelpText}" >AL: IA M&amp;S-Valid CMS &amp; CMS App Cert. <label style="color: blue">{!IF(paf.Account__r.AL__c==null,' ', Left(paf.Account__r.AL__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAL();" onmouseout="LabelleaveAL();"> {!tierValueAL}</label> <apex:outputText value="{!paf.AL__c}"> 
+               <div id = "labelTextAL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AJ__c.inlineHelpText}" >AJ: IA Professional Services-Restricted <label style="color: blue">{!IF(paf.Account__r.AJ__c==null,' ', Left(paf.Account__r.AJ__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAJ();" onmouseout="LabelleaveAJ();"> {!tierValueAJ}</label> <apex:outputText value="{!paf.AJ__c}"> 
+               <div id = "labelTextAJ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AN__c.inlineHelpText}" >AN: IA M&amp;S-Valid VA Cert. <label style="color: blue">{!IF(paf.Account__r.AN__c==null,' ', Left(paf.Account__r.AN__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAN();" onmouseout="LabelleaveAN();"> {!tierValueAN}</label> <apex:outputText value="{!paf.AN__c}"> 
+               <div id = "labelTextAN" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+                        
+  </apex:pageBlockSection>
+  
+   <apex:pageBlockSection title="Managed Services Products Pricing Information" columns="2">
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.IoD__c.inlineHelpText}" >IY: Credential Services <label style="color: blue"> {!IF(paf.Account__r.IoD__c==null,' ', Left(paf.Account__r.IoD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIoD();" onmouseout="LabelleaveIoD();"> {!tierValueIoD}</label> <apex:outputText value="{!paf.IoD__c}"> 
+               <div id = "labelTextIoD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+   </apex:pageBlockSection>
+   
+   <apex:pageBlockSection title="NAS Products Pricing Information" columns="2">
+       <!--     <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VX__c.inlineHelpText}" >VX: VertX CS <label style="color: blue"> {!IF(paf.Account__r.VX__c==null,' ', Left(paf.Account__r.VX__c,5))}</label>  <label style="color: red" onmouseover="LabelHoverVX();" onmouseout="LabelleaveVX();"> {!tierValueVX}</label> <apex:outputText value="{!paf.VX__c}"> 
+               <div id = "labelTextVX" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>        -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VC__c.inlineHelpText}" >VC: VertX Controller <label style="color: blue"> {!IF(paf.Account__r.VC__c==null,' ', Left(paf.Account__r.VC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVC();" onmouseout="LabelleaveVC();"> {!tierValueVC}</label> <apex:outputText value="{!paf.VC__c}"> 
+               <div id = "labelTextVC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VI__c.inlineHelpText}" >VI: VertX Interface <label style="color: blue"> {!IF(paf.Account__r.VI__c==null,' ', Left(paf.Account__r.VI__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVI();" onmouseout="LabelleaveVI();"> {!tierValueVI}</label> <apex:outputText value="{!paf.VI__c}"> 
+               <div id = "labelTextVI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VE__c.inlineHelpText}" >VE: Edge Host <label style="color: blue"> {!IF(paf.Account__r.VE__c==null,' ', Left(paf.Account__r.VE__c,5))}</label>  <label style="color: red" onmouseover="LabelHoverVE();" onmouseout="LabelleaveVE();"> {!tierValueVE}</label> <apex:outputText value="{!paf.VE__c}"> 
+               <div id = "labelTextVE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageblockSectionItem ></apex:pageblockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VD__c.inlineHelpText}" >VD: VertX/EDGE EVO Dev. Kit <label style="color: blue"> {!IF(paf.Account__r.VD__c==null,' ', Left(paf.Account__r.VD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVD();" onmouseout="LabelleaveVD();"> {!tierValueVD}</label> <apex:outputText value="{!paf.VD__c}"> 
+               <div id = "labelTextVD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+   </apex:pageBlockSection>
+   
+    <apex:pageBlockSection title="Embedded Products Pricing Information" columns="2">        
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EC__c.inlineHelpText}" >EC: Embed. Credentials <label style="color: blue"> {!IF(paf.Account__r.EC__c==null,' ', Left(paf.Account__r.EC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEC();" onmouseout="LabelleaveEC();"> {!tierValueEC}</label> <apex:outputText value="{!paf.EC__c}"> 
+               <div id = "labelTextEC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EJ_SIO_Processor__c.inlineHelpText}" >EJ: iCLASS SE Processor <label style="color: blue"> {!IF(paf.Account__r.EJ_SIO_Processor__c==null,' ', Left(paf.Account__r.EJ_SIO_Processor__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEJ();" onmouseout="LabelleaveEJ();"> {!tierValueEJ}</label> <apex:outputText value="{!paf.EJ_SIO_Processor__c}"> 
+               <div id = "labelTextEJ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iO__c.inlineHelpText}" >iO: iCLASS OEM <label style="color: blue"> {!IF(paf.Account__r.iO__c==null,' ', Left(paf.Account__r.iO__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIO();" onmouseout="LabelleaveIO();"> {!tierValueiO}</label> <apex:outputText value="{!paf.iO__c}"> 
+               <div id = "labelTextIO" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.ED_veriCLASS_Readers__c.inlineHelpText}" >ED: veriCLASS Readers <label style="color: blue"> {!IF(paf.Account__r.ED_veriCLASS_Readers__c==null,' ', Left(paf.Account__r.ED_veriCLASS_Readers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverED();" onmouseout="LabelleaveED();"> {!tierValueED}</label> <apex:outputText value="{!paf.ED_veriCLASS_Readers__c}"> 
+               <div id = "labelTextED" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EP__c.inlineHelpText}" >EP: Embed. Prox <label style="color: blue"> {!IF(paf.Account__r.EP__c==null,' ', Left(paf.Account__r.EP__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEP();" onmouseout="LabelleaveEP();"> {!tierValueEP}</label> <apex:outputText value="{!paf.EP__c}"> 
+               <div id = "labelTextEP" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EE_OMNIKEY_Reader_Board__c.inlineHelpText}" >EE: OMNIKEY Reader Board <label style="color: blue"> {!IF(paf.Account__r.EE_OMNIKEY_Reader_Board__c==null,' ', Left(paf.Account__r.EE_OMNIKEY_Reader_Board__c,5))}</label>  <label style="color: red" onmouseover="LabelHoverEE();" onmouseout="LabelleaveEE();"> {!tierValueEE}</label> <apex:outputText value="{!paf.EE_OMNIKEY_Reader_Board__c}"> 
+               <div id = "labelTextEE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>         
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LO__c.inlineHelpText}" >LO: Indala OEM <label style="color: blue"> {!IF(paf.Account__r.LO__c==null,' ', Left(paf.Account__r.LO__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLO();" onmouseout="LabelleaveLO();"> {!tierValueLO}</label> <apex:outputText value="{!paf.LO__c}"> 
+               <div id = "labelTextLO" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EI_Developer_Services_Plus__c.inlineHelpText}" >EI: Omnikey Embedded Reader Modules <label style="color: blue"> {!IF(paf.Account__r.EI_Developer_Services_Plus__c==null,' ', Left(paf.Account__r.EI_Developer_Services_Plus__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEI();" onmouseout="LabelleaveEI();"> {!tierValueEI}</label> <apex:outputText value="{!paf.EI_Developer_Services_Plus__c}"> 
+               <div id = "labelTextEI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EL_Embedded_Accessories__c.inlineHelpText}" >EL: Embed. Accessories <label style="color: blue"> {!IF(paf.Account__r.EL_Embedded_Accessories__c==null,' ', Left(paf.Account__r.EL_Embedded_Accessories__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEL();" onmouseout="LabelleaveEL();"> {!tierValueEL}</label> <apex:outputText value="{!paf.EL_Embedded_Accessories__c}"> 
+               <div id = "labelTextEL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EF_OMNIKEY_Chipsets__c.inlineHelpText}" >EF: OMNIKEY Chipsets <label style="color: blue"> {!IF(paf.Account__r.EF_OMNIKEY_Chipsets__c==null,' ', Left(paf.Account__r.EF_OMNIKEY_Chipsets__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEF();" onmouseout="LabelleaveEF();"> {!tierValueEF}</label> <apex:outputText value="{!paf.EF_OMNIKEY_Chipsets__c}"> 
+               <div id = "labelTextEF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+           
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EK_iCLASS_SE_Reader_Modules__c.inlineHelpText}" >EK: iCLASS SE Reader Modules <label style="color: blue"> {!IF(paf.Account__r.EK_iCLASS_SE_Reader_Modules__c==null,' ', Left(paf.Account__r.EK_iCLASS_SE_Reader_Modules__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEK();" onmouseout="LabelleaveEK();"> {!tierValueEK}</label> <apex:outputText value="{!paf.EK_iCLASS_SE_Reader_Modules__c}"> 
+               <div id = "labelTextEK" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+             <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EG_SmartID_Reader_Boards__c.inlineHelpText}" >EG: SmartID Reader Boards <label style="color: blue"> {!IF(paf.Account__r.EG_SmartID_Reader_Boards__c==null,' ', Left(paf.Account__r.EG_SmartID_Reader_Boards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEG();" onmouseout="LabelleaveEG();"> {!tierValueEG}</label> <apex:outputText value="{!paf.EG_SmartID_Reader_Boards__c}"> 
+               <div id = "labelTextEG" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EA_ISO_Reader_Boards__c.inlineHelpText}" >EA: ISO Reader Boards <label style="color: blue"> {!IF(paf.Account__r.EA_ISO_Reader_Boards__c==null,' ', Left(paf.Account__r.EA_ISO_Reader_Boards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEA();" onmouseout="LabelleaveEA();"> {!tierValueEA}</label> <apex:outputText value="{!paf.EA_ISO_Reader_Boards__c}"> 
+               <div id = "labelTextEA" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EH_identiCLASS_Readers__c.inlineHelpText}" >EH: identiCLASS Readers <label style="color: blue"> {!IF(paf.Account__r.EH_identiCLASS_Readers__c==null,' ', Left(paf.Account__r.EH_identiCLASS_Readers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEH();" onmouseout="LabelleaveEH();"> {!tierValueEH}</label> <apex:outputText value="{!paf.EH_identiCLASS_Readers__c}"> 
+               <div id = "labelTextEH" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>
+            <!--<apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EI_Developer_Services_Plus__c.inlineHelpText}" >EI: Dev. Services Plus <label style="color: blue"> {!IF(paf.Account__r.EI_Developer_Services_Plus__c==null,' ', Left(paf.Account__r.EI_Developer_Services_Plus__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEI();" onmouseout="LabelleaveEI();"> {!tierValueEI}</label> <apex:outputText value="{!paf.EI_Developer_Services_Plus__c}"> 
+               <div id = "labelTextEI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+            </apex:pageBlockSectionItem>-->
+  </apex:pageBlockSection>
+  
+  
+   <apex:pageBlockSection title="Secure Issuance Products Pricing" columns="2">          
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FA_Prof_Printers__c.inlineHelpText}" >FA: Prof. Printers <label style="color: blue"> {!IF(paf.Account__r.FA_Prof_Printers__c==null,' ', Left(paf.Account__r.FA_Prof_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFA();" onmouseout="LabelleaveFA();"> {!tierValueFA}</label> <apex:outputText value="{!paf.FA_Prof_Printers__c}"> 
+               <div id = "labelTextFA" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+           </apex:pageBlockSectionItem>
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FL_Asure_ID_Software__c.inlineHelpText}" >FL: Asure ID Software <label style="color: blue"> {!IF(paf.Account__r.FL_Asure_ID_Software__c==null,' ', Left(paf.Account__r.FL_Asure_ID_Software__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFL();" onmouseout="LabelleaveFL();"> {!tierValueFL}</label> <apex:outputText value="{!paf.FL_Asure_ID_Software__c}"> 
+               <div id = "labelTextFL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:outputText>
+           </apex:pageBlockSectionItem>
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FB_Entry_Level_Printers__c.inlineHelpText}">FB: Std. Ser. Printers <label style="color: blue"> {!IF(paf.Account__r.FB_Entry_Level_Printers__c==null,' ', Left(paf.Account__r.FB_Entry_Level_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFB();" onmouseout="LabelleaveFB();">{!tierValueFB} </label>  <apex:outputText value="{!paf.FB_Entry_Level_Printers__c}">
+               <div id = "labelTextFB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div>  </apex:outputText>
+           </apex:pageBlockSectionItem>
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FM_SDK_S_W_Support__c.inlineHelpText}">FM: SDK &amp; S/W Support <label style="color: blue"> {!IF(paf.Account__r.FM_SDK_S_W_Support__c==null,' ', Left(paf.Account__r.FM_SDK_S_W_Support__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFM();" onmouseout="LabelleaveFM();"> {!tierValueFM} </label>  <apex:outputText value="{!paf.FM_SDK_S_W_Support__c}">
+               <div id = "labelTextFM" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div>  </apex:outputText>
+           </apex:pageBlockSectionItem>
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FZ_Standard_Series_DTC1250e_Printers__c.inlineHelpText}">FZ: Std. Ser. DTC1250e Printers <label style="color: blue"> {!IF(paf.Account__r.FZ_Standard_Series_DTC1250e_Printers__c==null,' ', Left(paf.Account__r.FZ_Standard_Series_DTC1250e_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFZ();" onmouseout="LabelleaveFZ();"> {!tierValueFZ} </label>  <apex:outputText value="{!paf.FZ_Standard_Series_DTC1250e_Printers__c}">
+               <div id = "labelTextFZ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div>  </apex:outputText>
+           </apex:pageBlockSectionItem>
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FN_Extended_Warranties__c.inlineHelpText}">FN: Extended Warranties <label style="color: blue"> {!IF(paf.Account__r.FN_Extended_Warranties__c==null,' ', Left(paf.Account__r.FN_Extended_Warranties__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFN();" onmouseout="LabelleaveFN();"> {!tierValueFN} </label>  <apex:outputText value="{!paf.FN_Extended_Warranties__c}">
+               <div id = "labelTextFN" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div>  </apex:outputText>
+           </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FX_Standard_Series_C50_Printers__c.inlineHelpText}">FX: Std. Ser. C50 Printers <label style="color: blue"> {!IF(paf.Account__r.FX_Standard_Series_C50_Printers__c==null,' ', Left(paf.Account__r.FX_Standard_Series_C50_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFX();" onmouseout="LabelleaveFX();"> {!tierValueFX} </label>  <apex:outputText value="{!paf.FX_Standard_Series_C50_Printers__c}">
+               <div id = "labelTextFX" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div>  </apex:outputText>
+           </apex:pageBlockSectionItem>
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FO_Cameras_Camera_S_W__c.inlineHelpText}">FO: Cameras &amp; Cam. S/W <label style="color: blue"> {!IF(paf.Account__r.FO_Cameras_Camera_S_W__c==null,' ', Left(paf.Account__r.FO_Cameras_Camera_S_W__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFO();" onmouseout="LabelleaveFO();"> {!tierValueFO} </label>  <apex:outputText value="{!paf.FO_Cameras_Camera_S_W__c}">
+               <div id = "labelTextFO" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div>  </apex:outputText>
+           </apex:pageBlockSectionItem>
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FC_Print_Heads__c.inlineHelpText}">FC: Print Heads  <label style="color: blue"> {!IF(paf.Account__r.FC_Print_Heads__c==null,' ', Left(paf.Account__r.FC_Print_Heads__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFC();" onmouseout="LabelleaveFC();">{!tierValueFC} </label>  <apex:outputText value="{!paf.FC_Print_Heads__c}">
+               <div id = "labelTextFC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div>  </apex:outputText>
+           </apex:pageBlockSectionItem>                     
+           <!-- <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FP_Photo_ID_Accessories__c.inlineHelpText}">FP: Photo ID Accessories <label style="color: blue"> {!IF(paf.Account__r.FP_Photo_ID_Accessories__c==null,' ', Left(paf.Account__r.FP_Photo_ID_Accessories__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFP();" onmouseout="LabelleaveFP();"> {!tierValueFP} </label>  <apex:outputText value="{!paf.FP_Photo_ID_Accessories__c}">
+               <div id = "labelTextFP" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div>  </apex:outputText>
+           </apex:pageBlockSectionItem> -->
+           
+           <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                   
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FD_Ribbons_Clear_Film__c.inlineHelpText}"> FD: Ribbons &amp; Clear Film <label style="color: blue">{!IF(paf.Account__r.FD_Ribbons_Clear_Film__c==null,' ', Left(paf.Account__r.FD_Ribbons_Clear_Film__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFD();" onmouseout="LabelleaveFD();">{!tierValueFD} </label> <apex:outputText value="{!paf.FD_Ribbons_Clear_Film__c}">
+               <div id = "labelTextFD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>
+           </apex:pageBlockSectionItem>
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FQ_Spare_Parts_Packages__c.inlineHelpText}"> FQ: Spare Parts Packages <label style="color: blue"> {!IF(paf.Account__r.FQ_Spare_Parts_Packages__c==null,' ', Left(paf.Account__r.FQ_Spare_Parts_Packages__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFQ();" onmouseout="LabelleaveFQ();">{!tierValueFQ} </label> <apex:outputText value="{!paf.FQ_Spare_Parts_Packages__c}">
+               <div id = "labelTextFQ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>
+           </apex:pageBlockSectionItem>     
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FE_Entry_Level_Ribbons__c.inlineHelpText}"> FE: Std. Ser. Ribbons <label style="color: blue"> {!IF(paf.Account__r.FE_Entry_Level_Ribbons__c==null,' ', Left(paf.Account__r.FE_Entry_Level_Ribbons__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFE();" onmouseout="LabelleaveFE();">{!tierValueFE} </label> <apex:outputText value="{!paf.FE_Entry_Level_Ribbons__c}">
+                 <div id = "labelTextFE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FR_Spare_Parts_Kits__c.inlineHelpText}">FR: Spare Parts &amp; Kits <label style="color: blue"> {!IF(paf.Account__r.FR_Spare_Parts_Kits__c==null,' ', Left(paf.Account__r.FR_Spare_Parts_Kits__c,5))}</label>  <label style="color: red" onmouseover="LabelHoverFR();" onmouseout="LabelleaveFR();">{!tierValueFR} </label> <apex:outputText value="{!paf.FR_Spare_Parts_Kits__c}">
+                 <div id = "labelTextFR" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FY_Standard_C50_Regional_Ribbons_Only__c.inlineHelpText}">FY: Std. C50 Regional Ribbons<label style="color: blue"> {!IF(paf.Account__r.FY_Standard_C50_Regional_Ribbons_Only__c==null,' ', Left(paf.Account__r.FY_Standard_C50_Regional_Ribbons_Only__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFY();" onmouseout="LabelleaveFY();">{!tierValueFY} </label> <apex:outputText value="{!paf.FY_Standard_C50_Regional_Ribbons_Only__c}">
+                 <div id = "labelTextFY" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FS_Rewriteable_Cards__c.inlineHelpText}">FS: Rewriteable Cards <label style="color: blue"> {!IF(paf.Account__r.FS_Rewriteable_Cards__c==null,' ', Left(paf.Account__r.FS_Rewriteable_Cards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFS();" onmouseout="LabelleaveFS();">{!tierValueFS} </label> <apex:outputText value="{!paf.FS_Rewriteable_Cards__c}">
+                 <div id = "labelTextFS" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FF_Holo_Film_Overlams__c.inlineHelpText}">FF: Holo. Film &amp; Overlams <label style="color: blue"> {!IF(paf.Account__r.FF_Holo_Film_Overlams__c==null,' ', Left(paf.Account__r.FF_Holo_Film_Overlams__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFF();" onmouseout="LabelleaveFF();">{!tierValueFF} </label> <apex:outputText value="{!paf.FF_Holo_Film_Overlams__c}">
+                 <div id = "labelTextFF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FT_HDP8500_Printers__c.inlineHelpText}">FT: Ind. Ser. Printers <label style="color: blue"> {!IF(paf.Account__r.FT_HDP8500_Printers__c==null,' ', Left(paf.Account__r.FT_HDP8500_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFT();" onmouseout="LabelleaveFT();">{!tierValueFT} </label> <apex:outputText value="{!paf.FT_HDP8500_Printers__c}">
+                 <div id = "labelTextFT" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>        
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FG_Veri_Holo_OVD_Cards__c.inlineHelpText}">FG: Veri/Holo, &amp; OVD Cards &amp; Custom Lam<label style="color: blue"> {!IF(paf.Account__r.FG_Veri_Holo_OVD_Cards__c==null,' ', Left(paf.Account__r.FG_Veri_Holo_OVD_Cards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFG();" onmouseout="LabelleaveFG();">{!tierValueFG} </label> <apex:outputText value="{!paf.FG_Veri_Holo_OVD_Cards__c}">
+                 <div id = "labelTextFG" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem> 
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FU_Industrial_Series_Ribbons_HDP_Film__c.inlineHelpText}">FU: Ind. Ser. Ribbons &amp; HDP Film <label style="color: blue"> {!IF(paf.Account__r.FU_Industrial_Series_Ribbons_HDP_Film__c==null,' ', Left(paf.Account__r.FU_Industrial_Series_Ribbons_HDP_Film__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFU();" onmouseout="LabelleaveFU();">{!tierValueFU} </label> <apex:outputText value="{!paf.FU_Industrial_Series_Ribbons_HDP_Film__c}">
+                 <div id = "labelTextFU" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FH_UltraCards__c.inlineHelpText}">FH: UltraCards <label style="color: blue"> {!IF(paf.Account__r.FH_UltraCards__c==null,' ', Left(paf.Account__r.FH_UltraCards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFH();" onmouseout="LabelleaveFH();">{!tierValueFH} </label> <apex:outputText value="{!paf.FH_UltraCards__c}">
+                 <div id = "labelTextFH" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FV_Laser_Engravers__c.inlineHelpText}">FV: Laser Engravers <label style="color: blue">{!IF(paf.Account__r.FV_Laser_Engravers__c==null,' ', Left(paf.Account__r.FV_Laser_Engravers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFV();" onmouseout="LabelleaveFV();">{!tierValueFV} </label> <apex:outputText value="{!paf.FV_Laser_Engravers__c}">
+                 <div id = "labelTextFV" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FK_HDPii_Printers__c.inlineHelpText}">FK: HDPii Printers <label style="color: blue">{!IF(paf.Account__r.FK_HDPii_Printers__c==null,' ', Left(paf.Account__r.FK_HDPii_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFK();" onmouseout="LabelleaveFK();">{!tierValueFV} </label> <apex:outputText value="{!paf.FK_HDPii_Printers__c}">
+                 <div id = "labelTextFK" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>
+            <apex:PageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FW_Financial_Series_Ribbons_HDP_Film__c.inlineHelpText}">FW: Fin. Ser. Ribbons &amp; HDP Film <label style="color: blue"> {!IF(paf.Account__r.FW_Financial_Series_Ribbons_HDP_Film__c==null,' ', Left(paf.Account__r.FW_Financial_Series_Ribbons_HDP_Film__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFW();" onmouseout="LabelleaveFW();">{!tierValueFW} </label> <apex:outputText value="{!paf.FW_Financial_Series_Ribbons_HDP_Film__c}">
+                 <div id = "labelTextFW" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect </div></apex:outputText>           
+            </apex:PageBlockSectionItem>       
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Other Products Pricing Information" columns="2" Id="otherPricing">
+               <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.PS_Professional_Services__c.inlineHelpText}" >PS: Professional Services <label style="color: blue"> {!IF(paf.Account__r.PS_Professional_Services__c==null,' ',Left(paf.Account__r.PS_Professional_Services__c,5))}</label> <label style="color: red" onmouseover="LabelHoverPS();" onmouseout="LabelleavePS();"> {!tierValuePS}</label> <apex:outputText value="{!paf.PS_Professional_Services__c}">
+                   <div id = "labelTextPS" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+               </apex:pageBlockSectionItem>
+        
+              <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AC__c.inlineHelpText}" >AC: Accessories <label style="color: blue"> {!IF(paf.Account__r.AC__c==null,' ',Left(paf.Account__r.AC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAC();" onmouseout="LabelleaveAC();"> {!tierValueAC}</label> <apex:outputText value="{!paf.AC__c}"> 
+                <div id = "labelTextAC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+              </apex:pageBlockSectionItem>
+              
+              <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.CP_Custom_Special_Products_w_o_Discount__c.inlineHelpText}" >CP: Custom/Special Products w/o Discount <label style="color: blue"> {!IF(paf.Account__r.CP_Custom_Special_Products_w_o_Discount__c==null,' ',Left(paf.Account__r.CP_Custom_Special_Products_w_o_Discount__c,5))}</label> <label style="color: red" onmouseover="LabelHoverCP();" onmouseout="LabelleaveCP();"> {!tierValueCP}</label> <apex:outputText value="{!paf.CP_Custom_Special_Products_w_o_Discount__c}"> 
+                <div id = "labelTextCP" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:outputText>
+              </apex:pageBlockSectionItem>
+            
+                 
+               <apex:outputField value="{!paf.Other__c}"/>
+            
+</apex:pageBlockSection>
+        
+         <apex:pageBlockSection title="Request Details" columns="2">
+            <apex:outputField value="{!paf.Pricing_Effective_Date__c}"/>
+      <!--  <apex:outputField value="{!paf.Channel__c}"/>   -->
+      <!--  <apex:outputField value="{!paf.Business_Segment__c}"/>  -->
+      <!--  <apex:outputField value="{!paf.Channel_Classification__c}"/>  -->
+      <!--  <apex:outputField value="{!paf.Use_Application__c}"/>   -->
+        </apex:pageBlockSection>      
+        
+        <apex:pageBlockSection title="Approval Information" columns="2">
+     <!--     <apex:outputField value="{!paf.Account_Channel_Manager__c}"/>  -->    
+              <apex:outputField value="{!paf.Status__c}" rendered="true"/>
+     <!--     <apex:outputField value="{!paf.IDS_Channel_Manager__c}"/>    -->
+              <apex:outputField value="{!paf.ERP_Update__c}"/>
+              <apex:outputField value="{!paf.ERP_Update_Error__c}"/>
+              <apex:outputField value="{!paf.ERP_Update_Date__c}"/>            
+        </apex:pageBlockSection> 
+        
+        <apex:pageBlockSection title="System Information" columns="2">
+            <apex:pageblockSectionItem >Created By<apex:pageBlockSectionItem ><apex:outputField value="{!paf.CreatedById}"/><apex:outputField value="{!paf.CreatedDate}"/></apex:pageBlockSectionItem></apex:pageblockSectionItem>
+            <apex:pageblockSectionItem >Last Modified By<apex:pageBlockSectionItem ><apex:outputField value="{!paf.LastModifiedById}"/><apex:outputField value="{!paf.LastModifiedDate}"/></apex:pageBlockSectionItem></apex:pageblockSectionItem>
+            <apex:outputField value="{!paf.Name}"/>
+          </apex:pageBlockSection>          
+
+          <apex:pageBlockSection title="Approval History" columns="1" id="ApprovalSection" rendered="{!paf.recordTypeId != vPAFRecordTypeId}">
+           <apex:iframe src="/apex/PAFApprovalHistory?Id={!paf.id}" scrolling="true" id="ApprovalIframe" height="300"/>
+         </apex:pageBlockSection>
+    </apex:pageBlock>
+  </apex:form>  
+  <apex:pageBlock mode="maindetail">
+      <apex:include pageName="PriceAuthorizationHistory"/>
+  </apex:pageBlock>
+
+  <apex:relatedList list="OpenActivities" subject="{!Price_Authorization_Form__c}"></apex:relatedList>
+  <apex:relatedList list="ActivityHistories" subject="{!Price_Authorization_Form__c}"></apex:relatedList>   
+ 
+  <script>
+  function gotoApprovalSection(){
+          var approvalSectionName = document.getElementsByName("Approval History");
+          approvalSectionName[0].style.visibility = "visible"; 
+          approvalSectionName[0].style.display = "block";
+          approvalSectionName[0].scrollIntoView(true);         
+          }
+          
+   function deletePriceAuthorizationForm(){
+       var confirmDelete = confirm("Are you sure?");
+       if (confirmDelete == true){
+           DeletePAF();       
+       }
+   }
+
+            
+  function LabelHoverIR() {document.getElementById('labelTextIR').style.display = 'inline'; }
+  function LabelleaveIR() {document.getElementById('labelTextIR').style.display  = 'none'; }
+  function LabelHoverMS() {document.getElementById('labelTextMS').style.display = 'inline'; }
+  function LabelleaveMS() {document.getElementById('labelTextMS').style.display  = 'none'; }
+  function LabelHoverIC() {document.getElementById('labelTextIC').style.display = 'inline'; }
+  function LabelleaveIC() {document.getElementById('labelTextIC').style.display  = 'none'; }
+  function LabelHoverSL() {document.getElementById('labelTextSL').style.display = 'inline'; }
+  function LabelleaveSL() {document.getElementById('labelTextSL').style.display  = 'none'; }
+  function LabelHoverID() {document.getElementById('labelTextID').style.display = 'inline'; }
+  function LabelleaveID() {document.getElementById('labelTextID').style.display  = 'none'; }
+  function LabelHoverVS() {document.getElementById('labelTextVS').style.display = 'inline'; }
+  function LabelleaveVS() {document.getElementById('labelTextVS').style.display  = 'none'; }
+  function LabelHoverIP() {document.getElementById('labelTextIP').style.display = 'inline'; }
+  function LabelleaveIP() {document.getElementById('labelTextIP').style.display  = 'none'; }
+  function LabelHoverLV() {document.getElementById('labelTextLV').style.display = 'inline'; }
+  function LabelleaveLV() {document.getElementById('labelTextLV').style.display  = 'none'; }
+  function LabelHoverMC() {document.getElementById('labelTextMC').style.display = 'inline'; }
+  function LabelleaveMC() {document.getElementById('labelTextMC').style.display  = 'none'; }
+  function LabelHoverLW() {document.getElementById('labelTextLW').style.display = 'inline'; }
+  function LabelleaveLW() {document.getElementById('labelTextLW').style.display  = 'none'; }
+  function LabelHoverMD() {document.getElementById('labelTextMD').style.display = 'inline'; }
+  function LabelleaveMD() {document.getElementById('labelTextMD').style.display  = 'none'; }
+  function LabelHoverIB() {document.getElementById('labelTextIB').style.display = 'inline'; }
+  function LabelleaveIB() {document.getElementById('labelTextIB').style.display  = 'none'; }
+  function LabelHoverME() {document.getElementById('labelTextME').style.display = 'inline'; }
+  function LabelleaveME() {document.getElementById('labelTextME').style.display  = 'none'; }
+  function LabelHoverPI() {document.getElementById('labelTextPI').style.display = 'inline'; }
+  function LabelleavePI() {document.getElementById('labelTextPI').style.display  = 'none'; }
+  function LabelHoverMF() {document.getElementById('labelTextMF').style.display = 'inline'; }
+  function LabelleaveMF() {document.getElementById('labelTextMF').style.display  = 'none'; }
+  function LabelHoverIE() {document.getElementById('labelTextIE').style.display = 'inline'; }
+  function LabelleaveIE() {document.getElementById('labelTextIE').style.display  = 'none'; }
+  function LabelHoverRA() {document.getElementById('labelTextRA').style.display = 'inline'; }
+  function LabelleaveRA() {document.getElementById('labelTextRA').style.display  = 'none'; }
+  function LabelHoverIJ() {document.getElementById('labelTextIJ').style.display = 'inline'; }
+  function LabelleaveIJ() {document.getElementById('labelTextIJ').style.display  = 'none'; }
+  function LabelHoverRB() {document.getElementById('labelTextRB').style.display = 'inline'; }
+  function LabelleaveRB() {document.getElementById('labelTextRB').style.display  = 'none'; }
+  function LabelHoverIF() {document.getElementById('labelTextIF').style.display = 'inline'; }
+  function LabelleaveIF() {document.getElementById('labelTextIF').style.display  = 'none'; }
+  function LabelHoverRC() {document.getElementById('labelTextRC').style.display = 'inline'; }
+  function LabelleaveRC() {document.getElementById('labelTextRC').style.display  = 'none'; }
+  function LabelHoverIH() {document.getElementById('labelTextIH').style.display = 'inline'; }
+  function LabelleaveIH() {document.getElementById('labelTextIH').style.display  = 'none'; }
+  function LabelHoverIK() {document.getElementById('labelTextIK').style.display = 'inline'; }
+  function LabelleaveIK() {document.getElementById('labelTextIK').style.display  = 'none'; }  
+  function LabelHoverRD() {document.getElementById('labelTextRD').style.display = 'inline'; }
+  function LabelleaveRD() {document.getElementById('labelTextRD').style.display  = 'none'; }
+  function LabelHoverEZ() {document.getElementById('labelTextEZ').style.display = 'inline'; }
+  function LabelleaveEZ() {document.getElementById('labelTextEZ').style.display  = 'none'; }
+  function LabelHoverRE() {document.getElementById('labelTextRE').style.display = 'inline'; }
+  function LabelleaveRE() {document.getElementById('labelTextRE').style.display  = 'none'; }
+  function LabelHoverAC() {document.getElementById('labelTextAC').style.display = 'inline'; }
+  function LabelleaveAC() {document.getElementById('labelTextAC').style.display  = 'none'; }
+  function LabelHoverPC() {document.getElementById('labelTextPC').style.display = 'inline'; }
+  function LabelleavePC() {document.getElementById('labelTextPC').style.display  = 'none'; }
+  function LabelHoverOL() {document.getElementById('labelTextOL').style.display = 'inline'; }
+  function LabelleaveOL() {document.getElementById('labelTextOL').style.display  = 'none'; }
+  function LabelHoverLC() {document.getElementById('labelTextLC').style.display = 'inline'; }
+  function LabelleaveLC() {document.getElementById('labelTextLC').style.display  = 'none'; }
+  function LabelHoverLR() {document.getElementById('labelTextLR').style.display = 'inline'; }
+  function LabelleaveLR() {document.getElementById('labelTextLR').style.display  = 'none'; }
+  function LabelHoverEB() {document.getElementById('labelTextEB').style.display = 'inline'; }
+  function LabelleaveEB() {document.getElementById('labelTextEB').style.display  = 'none'; }
+  function LabelHoverIoD() {document.getElementById('labelTextIoD').style.display = 'inline'; }
+  function LabelleaveIoD() {document.getElementById('labelTextIoD').style.display  = 'none'; }
+  function LabelHoverVC() {document.getElementById('labelTextVC').style.display = 'inline'; }
+  function LabelleaveVC() {document.getElementById('labelTextVC').style.display  = 'none'; }
+  function LabelHoverVI() {document.getElementById('labelTextVI').style.display = 'inline'; }
+  function LabelleaveVI() {document.getElementById('labelTextVI').style.display  = 'none'; }
+  function LabelHoverVD() {document.getElementById('labelTextVD').style.display = 'inline'; }
+  function LabelleaveVD() {document.getElementById('labelTextVD').style.display  = 'none'; }
+  function LabelHoverVX() {document.getElementById('labelTextVX').style.display = 'inline'; }
+  function LabelleaveVX() {document.getElementById('labelTextVX').style.display  = 'none'; }
+  function LabelHoverVE() {document.getElementById('labelTextVE').style.display = 'inline'; }
+  function LabelleaveVE() {document.getElementById('labelTextVE').style.display  = 'none'; }
+  function LabelHoverEC() {document.getElementById('labelTextEC').style.display = 'inline'; }
+  function LabelleaveEC() {document.getElementById('labelTextEC').style.display  = 'none'; }
+  function LabelHoverEJ() {document.getElementById('labelTextEJ').style.display = 'inline'; }
+  function LabelleaveEJ() {document.getElementById('labelTextEJ').style.display  = 'none'; }
+  function LabelHoverIO() {document.getElementById('labelTextIO').style.display = 'inline'; }
+  function LabelleaveIO() {document.getElementById('labelTextIO').style.display  = 'none'; }
+  function LabelleaveIO() {document.getElementById('labelTextIO').style.display  = 'none'; }
+  function LabelHoverED() {document.getElementById('labelTextED').style.display = 'inline'; }
+  function LabelleaveED() {document.getElementById('labelTextED').style.display  = 'none'; }
+  function LabelHoverEP() {document.getElementById('labelTextEP').style.display = 'inline'; }
+  function LabelleaveEP() {document.getElementById('labelTextEP').style.display  = 'none'; }
+  function LabelHoverEE() {document.getElementById('labelTextEE').style.display = 'inline'; }
+  function LabelleaveEE() {document.getElementById('labelTextEE').style.display  = 'none'; }
+  function LabelHoverLO() {document.getElementById('labelTextLO').style.display = 'inline'; }
+  function LabelleaveLO() {document.getElementById('labelTextLO').style.display = 'none'; }
+  function LabelHoverEI() {document.getElementById('labelTextEI').style.display  = 'inline'; }
+  function LabelleaveEI() {document.getElementById('labelTextEI').style.display  = 'none'; }
+  function LabelHoverEF() {document.getElementById('labelTextEF').style.display = 'inline'; }
+  function LabelleaveEF() {document.getElementById('labelTextEF').style.display  = 'none'; }
+  function LabelHoverEL() {document.getElementById('labelTextEL').style.display = 'inline'; }
+  function LabelleaveEL() {document.getElementById('labelTextEL').style.display  = 'none'; }
+  function LabelHoverEG() {document.getElementById('labelTextEG').style.display = 'inline'; }
+  function LabelleaveEG() {document.getElementById('labelTextEG').style.display  = 'none'; }
+  function LabelHoverEK() {document.getElementById('labelTextEK').style.display = 'inline'; }
+  function LabelleaveEK() {document.getElementById('labelTextEK').style.display  = 'none'; }
+  function LabelHoverEH() {document.getElementById('labelTextEH').style.display = 'inline'; }
+  function LabelleaveEH() {document.getElementById('labelTextEH').style.display  = 'none'; }
+  function LabelHoverEA() {document.getElementById('labelTextEA').style.display = 'inline'; }
+  function LabelleaveEA() {document.getElementById('labelTextEA').style.display  = 'none'; } 
+  function LabelHoverFA() {document.getElementById('labelTextFA').style.display = 'inline'; }
+  function LabelleaveFA() {document.getElementById('labelTextFA').style.display  = 'none'; }
+  function LabelHoverFL() {document.getElementById('labelTextFL').style.display = 'inline'; }
+  function LabelleaveFL() {document.getElementById('labelTextFL').style.display  = 'none'; }  
+  function LabelHoverFB() {document.getElementById('labelTextFB').style.display = 'inline'; }
+  function LabelleaveFB() {document.getElementById('labelTextFB').style.display  = 'none'; }
+  function LabelHoverFM() {document.getElementById('labelTextFM').style.display = 'inline'; }
+  function LabelleaveFM() {document.getElementById('labelTextFM').style.display  = 'none'; }
+  function LabelHoverFZ() {document.getElementById('labelTextFZ').style.display = 'inline'; }
+  function LabelleaveFZ() {document.getElementById('labelTextFZ').style.display  = 'none'; }
+  function LabelHoverFQ() {document.getElementById('labelTextFQ').style.display = 'inline'; }
+  function LabelleaveFQ() {document.getElementById('labelTextFQ').style.display  = 'none'; }
+  function LabelHoverFN() {document.getElementById('labelTextFN').style.display = 'inline'; }
+  function LabelleaveFN() {document.getElementById('labelTextFN').style.display  = 'none'; }
+  function LabelHoverFX() {document.getElementById('labelTextFX').style.display = 'inline'; }
+  function LabelleaveFX() {document.getElementById('labelTextFX').style.display  = 'none'; }
+  function LabelHoverFO() {document.getElementById('labelTextFO').style.display = 'inline'; }
+  function LabelleaveFO() {document.getElementById('labelTextFO').style.display  = 'none'; }
+  function LabelHoverFC() {document.getElementById('labelTextFC').style.display = 'inline'; }
+  function LabelleaveFC() {document.getElementById('labelTextFC').style.display  = 'none'; }
+  function LabelHoverFP() {document.getElementById('labelTextFP').style.display = 'inline'; }
+  function LabelleaveFP() {document.getElementById('labelTextFP').style.display  = 'none'; }  
+  function LabelHoverFD() {document.getElementById('labelTextFD').style.display = 'inline'; }
+  function LabelleaveFD() {document.getElementById('labelTextFD').style.display  = 'none'; }  
+  function LabelHoverFE() {document.getElementById('labelTextFE').style.display = 'inline'; }
+  function LabelleaveFE() {document.getElementById('labelTextFE').style.display  = 'none'; }
+  function LabelHoverFR() {document.getElementById('labelTextFR').style.display = 'inline'; }
+  function LabelleaveFR() {document.getElementById('labelTextFR').style.display  = 'none'; }
+  function LabelHoverFY() {document.getElementById('labelTextFY').style.display = 'inline'; }
+  function LabelleaveFY() {document.getElementById('labelTextFY').style.display  = 'none'; }
+  function LabelHoverFS() {document.getElementById('labelTextFS').style.display = 'inline'; }
+  function LabelleaveFS() {document.getElementById('labelTextFS').style.display  = 'none'; }
+  function LabelHoverFF() {document.getElementById('labelTextFF').style.display = 'inline'; }
+  function LabelleaveFF() {document.getElementById('labelTextFF').style.display  = 'none'; }
+  function LabelHoverFT() {document.getElementById('labelTextFT').style.display = 'inline'; }
+  function LabelleaveFT() {document.getElementById('labelTextFT').style.display  = 'none'; }
+  function LabelHoverFG() {document.getElementById('labelTextFG').style.display = 'inline'; }
+  function LabelleaveFG() {document.getElementById('labelTextFG').style.display  = 'none'; }
+  function LabelHoverFU() {document.getElementById('labelTextFU').style.display = 'inline'; }
+  function LabelleaveFU() {document.getElementById('labelTextFU').style.display  = 'none'; }
+  function LabelHoverFH() {document.getElementById('labelTextFH').style.display = 'inline'; }
+  function LabelleaveFH() {document.getElementById('labelTextFH').style.display  = 'none'; }
+  function LabelHoverFV() {document.getElementById('labelTextFV').style.display = 'inline'; }
+  function LabelleaveFV() {document.getElementById('labelTextFV').style.display  = 'none'; }
+  function LabelHoverFK() {document.getElementById('labelTextFK').style.display = 'inline'; }
+  function LabelleaveFK() {document.getElementById('labelTextFK').style.display  = 'none'; }
+  function LabelHoverFW() {document.getElementById('labelTextFW').style.display = 'inline'; }
+  function LabelleaveFW() {document.getElementById('labelTextFW').style.display  = 'none'; }
+  function LabelHoverPS() {document.getElementById('labelTextPS').style.display = 'inline'; }
+  function LabelleavePS() {document.getElementById('labelTextPS').style.display  = 'none'; }
+  function LabelHoverAA() {document.getElementById('labelTextAA').style.display = 'inline'; }
+  function LabelleaveAA() {document.getElementById('labelTextAA').style.display  = 'none'; }
+  
+  function LabelHoverAD() {document.getElementById('labelTextAD').style.display = 'inline'; }
+  function LabelleaveAD() {document.getElementById('labelTextAD').style.display  = 'none'; }
+  function LabelHoverAG() {document.getElementById('labelTextAG').style.display = 'inline'; }
+  function LabelleaveAG() {document.getElementById('labelTextAG').style.display  = 'none'; }
+  function LabelHoverAI() {document.getElementById('labelTextAI').style.display = 'inline'; }
+  function LabelleaveAI() {document.getElementById('labelTextAI').style.display  = 'none'; }
+  function LabelHoverAJ() {document.getElementById('labelTextAJ').style.display = 'inline'; }
+  function LabelleaveAJ() {document.getElementById('labelTextAJ').style.display  = 'none'; }
+  
+  
+  function LabelHoverAF() {document.getElementById('labelTextAF').style.display = 'inline'; }
+  function LabelleaveAF() {document.getElementById('labelTextAF').style.display  = 'none'; }
+  function LabelHoverAB() {document.getElementById('labelTextAB').style.display = 'inline'; }
+  function LabelleaveAB() {document.getElementById('labelTextAB').style.display  = 'none'; }
+  function LabelHoverAL() {document.getElementById('labelTextAL').style.display = 'inline'; }
+  function LabelleaveAL() {document.getElementById('labelTextAL').style.display  = 'none'; }
+  function LabelHoverAZ() {document.getElementById('labelTextAZ').style.display = 'inline'; }
+  function LabelleaveAZ() {document.getElementById('labelTextAZ').style.display  = 'none'; }
+  function LabelHoverAE() {document.getElementById('labelTextAE').style.display = 'inline'; }
+  function LabelleaveAE() {document.getElementById('labelTextAE').style.display  = 'none'; }
+  function LabelHoverIM() {document.getElementById('labelTextIM').style.display = 'inline'; }
+  function LabelleaveIM() {document.getElementById('labelTextIM').style.display  = 'none'; }
+  function LabelHoverCP() {document.getElementById('labelTextCP').style.display = 'inline'; }
+  function LabelleaveCP() {document.getElementById('labelTextCP').style.display  = 'none'; }
+  
+  <!-- ADDED @ Hitesh Patel - Jade Global 2015/07/13 -->
+  function LabelHoverAK() {document.getElementById('labelTextAK').style.display = 'inline'; }
+  function LabelleaveAK() {document.getElementById('labelTextAK').style.display  = 'none'; }
+  
+  function LabelHoverAM() {document.getElementById('labelTextAM').style.display = 'inline'; }
+  function LabelleaveAM() {document.getElementById('labelTextAM').style.display  = 'none'; }
+  
+  function LabelHoverAN() {document.getElementById('labelTextAN').style.display = 'inline'; }
+  function LabelleaveAN() {document.getElementById('labelTextAN').style.display  = 'none'; }
+  
+  </script>
+  
+</apex:page>

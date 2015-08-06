@@ -1,0 +1,246 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Curriculum --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Curriculum --></value>
+    </caseValues>
+    <fields>
+        <help><!-- By default, user must complete all components. To customize this criteria, please set values to one or both options. --></help>
+        <label>Componentes para la finalización</label>
+        <name>Components_For_Completion__c</name>
+    </fields>
+    <fields>
+        <label>Versión anterior</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Planes de estudios</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Tipo de entrega</label>
+        <name>Delivery_Type__c</name>
+        <picklistValues>
+            <masterLabel>Online</masterLabel>
+            <translation><!-- Online --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Descripción</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- You can specify a time unit after a time value &apos;X&apos;, such as Xd, Xh or Xm, to represent days (d), hours (h) and minutes (m), respectively.
+If you do not specify a time unit, minute will be assumed. --></help>
+        <label>Duración</label>
+        <name>DurationTime__c</name>
+    </fields>
+    <fields>
+        <label>Duración (minutos)</label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label>Habilitar certificado</label>
+        <name>Enable_Certificate__c</name>
+    </fields>
+    <fields>
+        <label>Forzar el uso de la secuencia</label>
+        <name>Enforce_Sequence__c</name>
+    </fields>
+    <fields>
+        <label>Roles de trabajo</label>
+        <name>Job_Roles__c</name>
+        <picklistValues>
+            <masterLabel>Administrator</masterLabel>
+            <translation><!-- Administrator --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Developer</masterLabel>
+            <translation><!-- Developer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IT Professional</masterLabel>
+            <translation><!-- IT Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Professional</masterLabel>
+            <translation><!-- Sales Professional --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Idioma</label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>Deutsch</masterLabel>
+            <translation><!-- Deutsch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English</masterLabel>
+            <translation><!-- English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>da</masterLabel>
+            <translation><!-- da --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>de</masterLabel>
+            <translation><!-- de --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>en_US</masterLabel>
+            <translation><!-- en_US --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>es</masterLabel>
+            <translation><!-- es --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fi</masterLabel>
+            <translation><!-- fi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fr</masterLabel>
+            <translation><!-- fr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>it</masterLabel>
+            <translation><!-- it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ja</masterLabel>
+            <translation><!-- ja --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ko</masterLabel>
+            <translation><!-- ko --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>nl_NL</masterLabel>
+            <translation><!-- nl_NL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>pt_BR</masterLabel>
+            <translation><!-- pt_BR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ru</masterLabel>
+            <translation><!-- ru --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>sv</masterLabel>
+            <translation><!-- sv --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>th</masterLabel>
+            <translation><!-- th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_CN</masterLabel>
+            <translation><!-- zh_CN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_TW</masterLabel>
+            <translation><!-- zh_TW --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- By default, user must complete all components. To customize this criteria, please set values to one or both options. --></help>
+        <label>Minutos para la finalización</label>
+        <name>Minutes_For_Completion__c</name>
+    </fields>
+    <fields>
+        <label>Producto primario</label>
+        <name>Primary_Product__c</name>
+        <picklistValues>
+            <masterLabel>CFS Learning</masterLabel>
+            <translation><!-- CFS Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Connect</masterLabel>
+            <translation><!-- Force.com Connect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Mobile</masterLabel>
+            <translation><!-- Force.com Mobile --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Categoría de producto</label>
+        <name>Product_Category__c</name>
+        <picklistValues>
+            <masterLabel>CFS Learning</masterLabel>
+            <translation><!-- CFS Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com</masterLabel>
+            <translation><!-- Force.com --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Cloud</masterLabel>
+            <translation><!-- Sales Cloud --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Productos</label>
+        <name>Products__c</name>
+        <picklistValues>
+            <masterLabel>CFS Learning</masterLabel>
+            <translation><!-- CFS Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Connect</masterLabel>
+            <translation><!-- Force.com Connect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Mobile</masterLabel>
+            <translation><!-- Force.com Mobile --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Total de elementos</label>
+        <name>Total_Items__c</name>
+    </fields>
+    <fields>
+        <label>Unidad de formación</label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel>Planes de estudios</relationshipLabel>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Curriculum Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Curriculum Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>DURACIÓN NO VÁLIDA</errorMessage>
+        <name>Not_Valid_Duration_Value</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Error --></errorMessage>
+        <name>Not_Valid_Minutes_For_Completion</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>este campo no puede contener un valor negativo</errorMessage>
+        <name>Not_Valid_Minutes_For_Completion_Rule</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>el campo no puede tener un valor negativo</errorMessage>
+        <name>Validate_Duration</name>
+    </validationRules>
+    <webLinks>
+        <label>Añadir a mi formación</label>
+        <name>Add_to_My_Training</name>
+    </webLinks>
+    <webLinks>
+        <label>Asignar plan de estudios</label>
+        <name>Assign_Curriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Actualizar asignaciones</label>
+        <name>Update_Data_Assignments</name>
+    </webLinks>
+</CustomObjectTranslation>

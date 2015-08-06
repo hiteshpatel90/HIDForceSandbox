@@ -1,0 +1,613 @@
+<apex:page standardController="AXIOM_BASE__FieldObservation__c" extensions="AXIOM_LC.FieldObservationController" showHeader="false" sideBar="false">
+	<apex:outputPanel id="pageMessages">
+		<apex:pageMessages />
+	</apex:outputPanel>
+
+	<!-- SCRIPTS -->
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/js/jquery-1.9.1.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/js/jquery-ui-1.10.3.custom.min.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/js/jquery-ui-timepicker.min.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_BASE__bootstrap,'js/bootstrap.min.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component, 'lc_boot_chosen.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_BASE__underscoreJS)}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'backbone.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_BASE__backboneViewKit)}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'ALCTemplates.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'OpportunityAccounts.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'LC_App.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component, 'js/custom.js')}" />
+	<apex:outputPanel rendered="{!hasConnector && isShowCoachButton}" >
+		<script>
+			$(document).ready(function(){
+				$('#start-wizard-field-observation').bind("click", function(){ startObservationWizard(); });
+			});
+			function startObservationWizard()
+			{
+				var config = {
+					obsId:'{!FieldObservation.Id}',
+					cModel: cModel,
+					seller: null,
+					opportynityId: null,
+					accountPlanId: null
+				};
+				if({!IsManagerType}) {
+					var sellerId = $(".chzn-select").val();
+					if(!sellerId){
+						sellerId = defaultSeller;
+					}
+					config.seller=sellerId;
+				}
+				if({!IsOpportunityType}) {
+					var opp = $(".chzn-select").val();
+					config.opportynityId=opp;
+					config.seller=defaultSeller;
+				}
+				if({!IsAccountType}) {
+					var acc = $(".chzn-select").val();
+					config.accountPlanId=acc;
+					config.seller=defaultSeller;
+				}
+				window.parent.startObservationWizard(config);
+			}
+		</script>
+	</apex:outputPanel>
+	<script type="text/javascript">
+		Opportunity.Routes.Static_Routes.GoToList_URL = '{!URLFOR($Page.RelatedList, null, [sid=FieldObservation.Success_Plan__r.Seller__c])}';
+		var assignmentCollection = null;
+		var chngs = false;
+		function closeSection(){
+			if('{!$CurrentPage.parameters.closesection}'=='true'){
+				window.parent.rerenderObservation(); ///closeparentiframe
+				window.parent.closeObservationIframe(); ///closeparentiframe
+			}
+		}
+		$(document).ready(function(){
+			closeSection();
+			$('.hidden').removeClass('hidden');
+
+			$('#field-observation-section, .notes').children('a, td div, input').bind('click',function(e){
+				window.parent.resizeIframe('observation-iframe',$('#field-observation-section').height()+10);
+			});
+
+			$('.chzn-select').chosen().change(function(event){if({!isManager}) chngs = true;});
+
+			$('.field-observation-body #competencymodeltable td div').bind('click',function(){
+				var $this = $(this);
+				if(!$this.parent().hasClass('table-row-name'))
+				{
+					if(!$this.hasClass('field-active'))
+					{
+						$this.closest('tr').find(".field-active").removeClass('field-active');
+						$this.addClass('field-active');
+						$this.closest('tr').find("input").val($this.attr('data-score'));
+						if({!isManager}) chngs = true;
+					} else{
+						$this.closest('tr').find(".field-active").removeClass('field-active');
+						$this.closest('tr').find("input").val(null);
+						if({!isManager}) chngs = true;
+					}
+				}
+			});
+
+			$('#save-button').bind('click',saveFieldObservationDialog);
+			$('#cancel-button').bind('click',resetChangesDialog);
+			bindJQDatepicker();
+
+		});
+		function createCookie(name, value, days) {if (days) {var date = new Date();date.setTime(date.getTime() + (days * 24 * 60 * 60 * 1000));var expires = "; expires=" + date.toGMTString();} else var expires = "";document.cookie = escape(name) + "=" + escape(value) + expires + "; path=/";}
+		function readCookie(name) {var nameEQ = escape(name) + "=";var ca = document.cookie.split(';');for (var i = 0; i < ca.length; i++) {var c = ca[i];while (c.charAt(0) == ' ') c = c.substring(1, c.length);if (c.indexOf(nameEQ) == 0) return unescape(c.substring(nameEQ.length, c.length));}return null;}
+		function eraseCookie(name) {createCookie(name, "", -1);}
+		function saveFieldObservationDialog(evt) {
+			if({!isEditable}) {
+					var _cnfrm = $('#field-observation-save-dialog').css({display: 'block'});
+					$('<div></div>').dialog({
+						modal:true,
+						draggable:false,
+						title: 'Confirm',
+						close: function(){}
+					}).append(_cnfrm);
+			}
+		}
+		function resetChangesDialog(evt) {//COAC-507
+			if({! NOT(IsNewObservation) && isEditable && isManager} && chngs) {//RelatedList != NULL && RelatedList.size > 0 &&
+				var _cnfrm = $('#field-observation-cancel-dialog').css({display: 'block'});
+				$('<div></div>').dialog({
+					modal:true,
+					draggable:false,
+					title: 'Confirm',
+					close: function(){}
+				}).append(_cnfrm);
+			} else {
+				window.parent.rerenderObservation(); ///closeparentiframe
+				window.parent.closeObservationIframe(); ///closeparentiframe
+			};
+		}
+
+		function wizardBindings(){
+			var hiddenList = $('input[name="optionsCheckboxes"]');
+			for(var i=0;i<hiddenList.length;i++)
+			{
+				for(var j=0;j<cModel.length;j++)
+				{
+					var c = $(hiddenList[i]).parent().text().replace(/^\s\s*/, '').replace(/\s\s*$/, '');
+					if(cModel[j][c]==5) $(hiddenList[i]).parent().remove();
+				}
+
+			}
+		}
+		var defaultSeller = '{!FieldObservation.Success_Plan__r.Seller__c}';
+
+		function bindJQDatepicker(){
+			$("#observationDate").datepicker({
+				dateFormat: 'M dd, yy',
+				showOn: "button",
+				buttonImage: "{!URLFOR($Resource.AXIOM_BASE__images, 'calendar.png')}",
+				buttonImageOnly: true,
+				onSelect: function() {
+					var dateText = $.datepicker.formatDate("yy-mm-dd", $(this).datepicker("getDate"));
+					$('input[id$=observationDate_hidden]').val(dateText);
+					if({!isManager}) chngs = true;
+				}
+			});
+		}
+	</script>
+	<apex:outputPanel layout="none">
+		<script>
+			var cModel = new Array();
+			<apex:repeat value="{!ObservationDetails}" var="cm">
+				cModel.push({
+					"{!cm.Competency_Model__r.Behavior__c}": "{!cm.AXIOM_LC__Score__c}"
+				});
+			</apex:repeat>
+		</script>
+	</apex:outputPanel>
+
+	<!-- CSS -->
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/css/ui-lightness/jquery-ui-timepicker.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_BASE__bootstrap,'css/bootstrap.min.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_BASE__chosenCSS, 'chosen.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_css_component, 'lc_css_base.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_css_component, 'lc_css_component.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_css_component, 'lc_css_opportunity.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component, 'css/axiom-coaching.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_css_component, 'ls_css_sprites/lc_css_sprites.css')}" />
+	<style>
+		.component-header .component-button .button.help-button {
+			background: url("{!URLFOR($Resource.AXIOM_BASE__images, 'help_gray.png')}") no-repeat scroll 6px 6px transparent;
+			border: medium none;
+			box-shadow: none;
+			height: 26px;
+			margin: 0;
+			padding: 0;
+			text-shadow: none;
+			width: 24px;
+		}
+		.component-header .component-button .button.help-button:hover {
+			background: url("{!URLFOR($Resource.AXIOM_BASE__images, 'help_black.png')}") no-repeat scroll 6px 6px transparent;
+		}
+		.btn.coac-btn {
+			background: url("{!URLFOR($Resource.AXIOM_BASE__images, 'evaluators.png')}") no-repeat scroll 32px 32px transparent;
+		}
+		.component-title span{
+			padding-right: 30px;
+		}
+		.chzn-select{
+			top:-2px;
+			width:200px;
+		}
+		.table-title{
+			text-align:center;
+			font-size:24px;
+			padding:12px;
+		}
+		.table-column-name{
+			padding-bottom:25px;
+		}
+		.table-column-name div{
+			font-size:16px;
+			border-top:  #AFAFAF  solid 1px;
+			border-bottom: #464646  solid 2px;
+			background-color:#D8D8D8;
+		}
+		.table-row-name{
+			width:15%;
+			font-size:16px;
+			font-weight:bold;
+		}
+		.table-row-name div{
+			/*min-height:200px;
+			background-color:#D8D8D8;*/
+		}
+		.field-observation-body {
+			text-align:left;
+		}
+		.field-observation-body table{
+			width: 90%;
+			margin: 0 auto;
+		}
+		.field-observation-body td{
+			border-top: 2px solid #97A4B8;
+			padding-bottom:25px;
+			vertical-align:top;
+		}
+		.field-observation-body tbody td {
+			width:15%;
+		}
+		.field-observation-body tbody td + td {
+			width:14%;
+		}
+		.field-observation-body tbody td + td + td {
+			width:18%;
+		}
+		.field-observation-body tbody td + td + td + td + td {
+			width:17%;
+		}
+		.field-observation-body tbody td + td + td + td + td + td {
+			width:18%;
+		}
+		.field-observation-body .notes table td {
+			border:none;
+			padding:0;
+		}
+		.field-observation-body td div,.field-observation-body th div{
+			padding:6px;
+		}
+		.field-observation-body td div {
+			cursor: pointer;
+			border-left:1px solid #FFF;
+			border-bottom:1px solid #FFF;
+			border-right:1px solid #FFF;
+		}
+		.field-active{
+			border-left:1px solid #97A4B8 !important;
+			border-bottom:1px solid #97A4B8 !important;
+			border-right:1px solid #97A4B8 !important;
+			background-color:#D8D8D8 !important;
+			font-weight:bold !important;
+		}
+		.notes {
+			width:90%;
+			margin: 0 auto;
+		}
+		td.component-body-item-field {
+			height:20px;
+			vertical-align: middle !important;
+		}
+		input[id$=observationDate]{
+			background: none repeat scroll 0 0 transparent;
+			border: 0 none;
+			box-shadow: none;
+			color: #1FABF3;
+			font-size: 13px;
+			font-weight: bold;
+			height: 20px !important;
+			line-height: 23px;
+			padding: 0;
+			text-shadow: 0 1px 0 #FFFFFF;
+			width: 105px;
+		}
+		img.ui-datepicker-trigger{
+			position: absolute;
+			top: 8px;
+		}
+		span.dateInput.dateOnlyInput {display:none;}
+	</style>
+
+	<!-- HTML -->
+	<!-- <c:SuccessPlanHeader SuccessPlanIds="{!AXIOM_BASE__FieldObservation__c.Success_Plan__r.Id}" /> -->
+
+
+	<table id="field-observation-section">
+		<tbody>
+			<tr>
+				<td>
+					<div class="field component round-corners">
+						<apex:form id="form">
+							<div class="component-header">
+								<div class="component-logo field-logo left"></div>
+								<div class="component-title left" style="width:80%">
+									<span>
+										<label>Composite score</label>
+										<span>- {!IF(FieldObservation.Composite_Score__c == NULL, 0.0, FieldObservation.Composite_Score__c)}</span>
+									</span>
+									<apex:outputPanel layout="none" rendered="{!IsNewObservation}">
+										<span class="m-nwp">Observation by - {!$User.FirstName} {!$User.LastName}</span>
+									</apex:outputPanel>
+									<apex:outputPanel layout="none" rendered="{!NOT(IsNewObservation)}">
+										<span class="m-nwp">Observation by - {!FieldObservation.AXIOM_BASE__ObservedBy__r.FirstName} {!FieldObservation.AXIOM_BASE__ObservedBy__r.LastName}</span>
+									</apex:outputPanel>
+									<span class="m-nwp" style="float:left; position:relative;">Observation date -&nbsp;
+										<apex:outputPanel layout="none" rendered="{!NOT(IsManager)}">
+											<apex:outputText value="{!ObservationDateFormatted}"></apex:outputText>
+											<!-- <apex:outputText value="{0,date,MMM dd', 'yyyy}">
+												<apex:param value="{!AXIOM_BASE__FieldObservation__c.AXIOM_BASE__ObservationDate__c}" />
+											</apex:outputText>-->
+										</apex:outputPanel>
+										<apex:outputPanel layout="none" rendered="{!IsManager}">
+											<input id="observationDate" value="{!ObservationDateFormatted}" readonly="readonly" style="width:88px;" />
+											<apex:inputText id="observationDate_hidden" value="{!ObservationDateHidden}" style="display: none;" />
+										</apex:outputPanel>
+									</span>
+									<apex:outputPanel layout="none" rendered="{!FieldObservation.AXIOM_BASE__RelatedSeller__c!=NULL}">
+											<span class="m-nwp" style="padding-right:0">Related seller - {!FieldObservation.AXIOM_BASE__RelatedSeller__r.FirstName}&nbsp;{!FieldObservation.AXIOM_BASE__RelatedSeller__r.LastName}</span>
+									</apex:outputPanel>
+									<apex:outputPanel style="float:left;" layout="none" rendered="{!FieldObservation.AXIOM_BASE__RelatedSeller__c==NULL && RelatedList.size>0}">
+										<apex:outputPanel layout="none" rendered="{!IsManagerType && (IsManager)}">
+											<span class="m-nwp">
+												<span style="padding-right:0;">Related seller - </span>
+												<apex:selectList id="relatedSeller" value="{!SellerId}" size="1" styleClass="chzn-select" style="">
+													<apex:selectOptions value="{!RelatedList}" />
+												</apex:selectList>
+											</span>
+										</apex:outputPanel>
+									</apex:outputPanel>
+									<apex:outputPanel layout="none" style="float:left;" rendered="{!FieldObservation.AXIOM_BASE__Opportunity__c!=NULL}">
+										<span class="m-nwp" style="padding-right:0;">Related opportunity - {!FieldObservation.AXIOM_BASE__Opportunity__r.Name}</span>
+									</apex:outputPanel>
+									<apex:outputPanel layout="none" style="float:left;" rendered="{!FieldObservation.AXIOM_BASE__Opportunity__c==NULL && RelatedList.size>0}">
+										<apex:outputPanel layout="none"  rendered="{!IsOpportunityType && (IsManager) && RelatedList != NULL }">
+											<span class="m-nwp">
+											<span style="padding-right:0;">Related opportunity - </span>
+											<apex:selectList id="relatedOpportunity" value="{!OpptyId}" size="1" styleClass="chzn-select">
+												<apex:selectOptions value="{!RelatedList}" />
+											</apex:selectList>
+											</span>
+										</apex:outputPanel>
+									</apex:outputPanel>
+									<apex:outputPanel layout="none" style="float:left;" rendered="{!AccountPlanName != NULL}">
+										<span style="padding-right:0;">Related Account Plan - {!AccountPlanName}</span>
+									</apex:outputPanel>
+									<apex:outputPanel style="float:left;" layout="none" rendered="{!IsAccountType && (IsManager) && RelatedList.size>0}">
+										<span style="padding-right:0;">Related Account Plans - </span>
+										<apex:selectList id="relatedAccount" value="{!AccountId}" size="1" styleClass="chzn-select">
+											<apex:selectOptions value="{!RelatedList}" />
+										</apex:selectList>
+									</apex:outputPanel>
+
+								</div>
+								<div class="component-button right">
+									<apex:outputPanel layout="" rendered="{!IsManager && NOT(IsNewObservation)}">
+										<div class="component-button left" style="position: relative; top: 4px;">
+											<apex:outputPanel rendered="{!hasConnector && isShowCoachButton}" layout="none"><a href="javascript:void(0)" style="color:#fff;"  id="start-wizard-field-observation" class="m-coach-but">Coach</a></apex:outputPanel>
+										</div>
+									</apex:outputPanel>
+								</div>
+								<div class="clear"></div>
+							</div>
+							<div class="field-observation-body">
+								<div id="field-observation-save-dialog"  style="display: none;">
+									<p>Are you sure to update the Current values with your
+										changes?</p>
+									<apex:inputHidden value="{!FieldObservation.AXIOM_BASE__RelatedSeller__c}" id="sellectedsellersinput"/>
+									<apex:commandLink rendered="{!isManager}" styleClass="button primary right" style="text-decoration:none; " action="{!Save}" value="Ok" id="saveButton"/>
+								</div>
+								<div id="field-observation-cancel-dialog"  style="display: none;">
+									<p>Do you really want reset all the changes?</p>
+									<apex:outputPanel rendered="{!NOT(IsNewObservation)}" layout="none">
+										<apex:commandLink styleClass="button primary right" style="text-decoration:none; " action="{!Cancel}" value="Ok" id="cancelButton"/>
+									</apex:outputPanel>
+									<apex:outputPanel rendered="{!IsNewObservation}" layout="none">
+										<apex:commandLink styleClass="button primary right" style="text-decoration:none; " onclick="window.parent.closeObservationIframe()" value="Ok" id="cancelButton2"/>
+									</apex:outputPanel>
+								</div>
+								<script type="text/javascript">
+										$(document).ready(function(){
+											$('.plus').bind('click', function(){
+												var $this = $(this);
+												if($this.hasClass('m-ico-minus')) {
+													$this.closest('tr').find('td').css('padding-bottom','0');
+													$this.removeClass('m-ico-minus').addClass('m-ico-plus');
+												}else {
+													$this.closest('tr').find('td').css('padding-bottom','');
+													$this.removeClass('m-ico-plus').addClass('m-ico-minus');
+												}
+												var innerObjects = $this.closest('tr').find('td:not(.table-row-name) div').toggle();
+												window.parent.resizeIframe('observation-iframe',$('#field-observation-section').height()+10);
+											});
+										});
+									</script>
+								<apex:outputPanel rendered="{!ObservationDetails.size > 0}" layout="none">
+
+									<table cellspacing="0" cellpadding="0" id="competencymodeltable">
+										<thead>
+											<tr>
+												<th colspan="6"><div class="table-title">Competency Rating</div></th>
+											</tr>
+											<tr>
+												<th>&nbsp;</th>
+												<th class="table-column-name"><div>1 - Ineffective</div></th>
+												<th class="table-column-name"><div>2 - Somewhat Effective</div></th>
+												<th class="table-column-name"><div>3 - Effective</div></th>
+												<th class="table-column-name"><div>4 - Excels</div></th>
+												<th class="table-column-name"><div>5 - Role Model</div></th>
+											</tr>
+										</thead>
+										<tbody>
+											<apex:repeat value="{!ObservationDetails}" var="cm">
+												<tr data-id="{!cm.Id}">
+													<td class="table-row-name">
+														<div>
+															<a href="javascript:void(0)" class="plus m-ico-minus" style="text-decoration:none;"></a>
+															{!cm.Competency_Model__r.Behavior__c}
+															<apex:inputHidden value="{!cm.AXIOM_LC__Score__c}" id="score"/>
+														</div>
+													</td>
+													<td>
+														<div class="{!IF(cm.AXIOM_LC__Score__c==1,'field-active','')}" data-score="1">
+															{!cm.Competency_Model__r.AXIOM_LC__Ineffective__c}
+														</div>
+													</td>
+													<td>
+														<div class="{!IF(cm.AXIOM_LC__Score__c==2,'field-active','')}" data-score="2">
+															{!cm.Competency_Model__r.AXIOM_LC__SomewhatEffective__c}
+														</div>
+													</td>
+													<td>
+														<div class="{!IF(cm.AXIOM_LC__Score__c==3,'field-active','')}" data-score="3">
+															{!cm.Competency_Model__r.AXIOM_LC__Effective__c}
+														</div>
+													</td>
+													<td>
+														<div class="{!IF(cm.AXIOM_LC__Score__c==4,'field-active','')}" data-score="4">
+															{!cm.Competency_Model__r.AXIOM_LC__Excels__c}
+														</div>
+													</td>
+													<td>
+														<div class="{!IF(cm.AXIOM_LC__Score__c==5,'field-active','')}" data-score="5">
+															{!cm.Competency_Model__r.AXIOM_LC__RoleModel__c}
+														</div>
+													</td>
+												</tr>
+											</apex:repeat>
+										</tbody>
+									</table>
+								</apex:outputPanel>
+								<apex:outputPanel rendered="{!ListOfCompetencyModels.size > 0}" layout="none">
+									<table cellspacing="0" cellpadding="0" id="competencymodeltable">
+										<thead>
+											<tr>
+												<th colspan="6"><div class="table-title">Competency Rating</div></th>
+											</tr>
+											<tr>
+												<th>&nbsp;</th>
+												<th class="table-column-name"><div>1 - Ineffective</div></th>
+												<th class="table-column-name"><div>2 - Somewhat Effective</div></th>
+												<th class="table-column-name"><div>3 - Effective</div></th>
+												<th class="table-column-name"><div>4 - Excels</div></th>
+												<th class="table-column-name"><div>5 - Role Model</div></th>
+											</tr>
+										</thead>
+										<tbody>
+											<apex:repeat value="{!ListOfCompetencyModels}" var="cm">
+												<tr data-id="{!cm.Id}">
+													<td class="table-row-name">
+														<div>
+															<a href="javascript:void(0)" class="plus m-ico-minus" style="text-decoration:none;"></a>
+															{!cm.AXIOM_LC__Behavior__c}
+															<apex:inputHidden value="{!cm.AXIOM_LC__Behavior__c}" id="score"/>
+														</div>
+													</td>
+													<td>
+														<div data-score="1">
+															{!cm.AXIOM_LC__Ineffective__c}
+														</div>
+													</td>
+													<td>
+														<div data-score="2">
+															{!cm.AXIOM_LC__SomewhatEffective__c}
+														</div>
+													</td>
+													<td>
+														<div data-score="3">
+															{!cm.AXIOM_LC__Effective__c}
+														</div>
+													</td>
+													<td>
+														<div data-score="4">
+															{!cm.AXIOM_LC__Excels__c}
+														</div>
+													</td>
+													<td>
+														<div data-score="5">
+															{!cm.AXIOM_LC__RoleModel__c}
+														</div>
+													</td>
+												</tr>
+											</apex:repeat>
+										</tbody>
+									</table>
+								</apex:outputPanel>
+								<div class="notes">
+									<div class="page-header">
+										<apex:outputPanel rendered="{!NOT(IsNewObservation) && (isManager || isSeller)}" layout="none">
+											<div class="page-heading left">
+												Notes
+											</div>
+										</apex:outputPanel>
+										<apex:outputPanel rendered="{!isManager || isSeller}" layout="none">
+											<div class="btn-container right">
+												<input type="button" id="cancel-button" value="{!$Label.Btn_Cancel}" class="button left"/>
+												<apex:outputPanel layout="none" rendered="{!isManager && IF(IsNewObservation && (RelatedList == NULL || RelatedList.size==0),false,true)}">
+													<input type="button" id="save-button" class="button primary left {!IF(isEditable,'','disabled')}" value="{!$Label.Btn_Save}" />
+												</apex:outputPanel>
+											</div>
+										</apex:outputPanel>
+										<div class="clear"></div>
+									</div>
+									<apex:outputPanel rendered="{!isManager || isSeller}" layout="none">
+										<apex:outputPanel rendered="{!isSeller}" layout="none">
+											<style>
+												.chattertextareacontainer,.feeditemfooter,.feedSearch,.feeditemtimestamp,#save-button{display:none !important;}
+											</style>
+											<script type="text/javascript">
+												$('.chattertextareacontainer,.feeditemfooter,.feedSearch,.feeditemtimestamp,#save-button').remove();
+											</script>
+										</apex:outputPanel>
+									</apex:outputPanel>
+								</div>
+							</div>
+						</apex:form>
+						<div class="notes">
+							<div id="chatter">
+								<apex:outputPanel layout="none" rendered="{!NOT(IsNewObservation)}">
+									<chatter:feed entityId="{!FieldObservation.Id}"/>
+								</apex:outputPanel>
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+
+
+	<!--<table>
+		<tbody>
+			<tr>
+				<td>
+					<div class="assignments component round-corners">
+						<div class="component-header">
+							<div class="component-logo assignments-logo left"></div>
+							<div class="component-title left"><a href="javascript:void(0);" class="a-title">Assignments</a></div>
+							<div class="component-button right">
+								<ul class="nav nav-pills left">
+									<li class="button-wrapper">
+										<a href="javascript:void(0);" target="_blank" onclick="javascript:window.open('/', '_blank', 'height:800;width:400');return false;" class="help-button button">
+											<span class="button-name"></span>
+										</a>
+									</li>
+								</ul>
+							</div>
+							<div class="clear"></div>
+						</div>
+						<div class="component-body">
+							<div  id="assignment-body">
+								<table>
+									<thead class="component-body-header"  id="assignment-header">
+										<tr>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Description</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Due Date</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Created</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Type</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Account Plan</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Opportunity</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Assignee</a><span></span></th>
+										</tr>
+									</thead>
+									<tbody id="assignment-view"></tbody>
+								</table>
+							</div>
+							<div id="assignment-form-view" style="display:none"></div>
+							<div class="small-loader" style="display:none">
+								<img class="loader-image" src="{!URLFOR($Resource.AXIOM_BASE__images, 'loadingSmall.gif')}" />
+							</div>
+						</div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>-->
+	<!-- <script type="text/javascript" src="https://axiomsfd.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e/en_USwe6n0c-1988229788/6139/26/1.4.0-m6/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=0b622f03"></script>
+	-->
+</apex:page>

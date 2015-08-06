@@ -1,0 +1,5 @@
+<apex:page controller="PortalLoginReroute" showheader="false" sidebar="false" action="{!Authenticate}">
+<apex:pageblock >
+<apex:messages />
+</apex:pageblock>
+</apex:page>

@@ -1,0 +1,49 @@
+<apex:page controller="visitSurveyController" title="{!$Label.VisitSurveyTitle}" showHeader="false" language="{!strLanguage}">
+	<apex:stylesheet value="{!$Resource.TechSupportSurveyStyle}"/>
+	<div id="outer">
+		<c:visitSurveyHeader />
+		<apex:form >
+			<apex:inputHidden value="{!strRenderFairPoorAreas}"/>
+			<apex:pageBlock >
+				<apex:outputPanel layout="block" styleClass="pagenr">
+					<apex:outputText value="Page {!intCurrentPage}/3"/>
+				</apex:outputPanel>
+				<apex:pageBlockSection title="* {!$Label.VisitMatrix}" columns="1" collapsible="false">
+					<apex:pageBlockSectionItem >
+						<apex:outputLabel value=""/>
+						<apex:panelGrid columns="6" styleClass="matrix">
+							<apex:outputText value="{!$Label.SurveyExcellent}"/>
+							<apex:outputText value="{!$Label.SurveyGood}"/>
+							<apex:outputText value="{!$Label.SurveyAverage}"/>
+							<apex:outputText value="{!$Label.SurveyFair}"/>
+							<apex:outputText value="{!$Label.SurveyPoor}"/>
+							<apex:outputText value="{!$Label.SurveyNotApplicable}"/>
+						</apex:panelGrid>
+					</apex:pageBlockSectionItem>
+					<apex:selectRadio value="{!strUnderstandableDelivery}" label="{!$Label.VisitUnderstandableDelivery}" styleClass="matrix">
+						<apex:selectOptions value="{!sixValues}"/>
+					</apex:selectRadio>
+					<apex:selectRadio value="{!strUnderstandingBusiness}" label="{!$Label.VisitUnderstandingBusiness}" styleClass="matrix">
+						<apex:selectOptions value="{!sixValues}"/>
+					</apex:selectRadio>
+					<apex:selectRadio value="{!strPresentedSolution}" label="{!$Label.VisitPresentedSolution}" styleClass="matrix">
+						<apex:selectOptions value="{!sixValues}"/>
+					</apex:selectradio>
+					<apex:selectRadio value="{!strProfessionalism}" label="{!$Label.VisitProfessionalism}" styleClass="matrix">
+						<apex:selectOptions value="{!sixValues}"/>
+					</apex:selectRadio>
+					<apex:selectRadio value="{!strCompareOther}" label="{!$Label.VisitCompareOther}" styleClass="matrix">
+						<apex:selectOptions value="{!sixValues}"/>
+					</apex:selectRadio>
+				</apex:pageBlockSection>
+				<apex:pageBlockSection title="{!$Label.VisitFairPoorAreas}" columns="1" collapsible="false" rendered="{!strRenderFairPoorAreas}">
+					<apex:inputTextarea value="{!strFairPoorHowBetter}" label="{!$Label.VisitFairPoorHowBetter}" cols="80" rows="8"/>
+				</apex:pageBlockSection>
+				<apex:pageBlockButtons location="bottom">
+					<apex:commandButton action="{!page1}" value="{!$Label.SurveyBack}"/>
+					<apex:commandButton action="{!page3}" value="{!$Label.SurveyNext}"/>
+				</apex:pageBlockButtons>
+			</apex:pageBlock>
+		</apex:form>
+	</div>
+</apex:page>

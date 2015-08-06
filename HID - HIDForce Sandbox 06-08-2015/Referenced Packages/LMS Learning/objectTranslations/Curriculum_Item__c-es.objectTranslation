@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <fields>
+        <label>Curso</label>
+        <name>Course__c</name>
+        <relationshipLabel>Elementos del plan de estudios</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Plan de estudios</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Elementos del plan de estudios</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Ruta de formación</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>Elementos del plan de estudios</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Módulo</label>
+        <name>Module__c</name>
+        <relationshipLabel>Elementos del plan de estudios</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Cuestionario</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Elementos del plan de estudios</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Secuencia</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>Título</label>
+        <name>Title__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Add Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>Curso</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Ruta de formación</label>
+        <name>Learning_Path2</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Módulo</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Cuestionario</label>
+        <name>Quiz</name>
+    </recordTypes>
+    <webLinks>
+        <label>Añadir curso al plan de estudios</label>
+        <name>AddCourseToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Añadir ruta de aprendizaje al plan de estudios</label>
+        <name>AddLPToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Añadir módulo al plan de estudios</label>
+        <name>AddModuleToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Añadir cuestionario al plan de estudios</label>
+        <name>Add_Quiz_to_Curriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Editar secuencia</label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

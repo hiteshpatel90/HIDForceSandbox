@@ -1,0 +1,3 @@
+<apex:page controller="AXIOM_LC.PeopleStorageRetrieve" standardStylesheets="false" sidebar="false" showheader="false" readonly="true" contentType="application/json">
+	<apex:outputText value="{!AxiomJSON}" escape="false" />
+</apex:page>

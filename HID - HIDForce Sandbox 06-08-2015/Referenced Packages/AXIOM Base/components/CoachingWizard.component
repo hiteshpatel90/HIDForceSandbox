@@ -1,0 +1,57 @@
+<apex:component access="global">
+	<apex:attribute access="global" name="seller" description="User Id." type="String"/>
+	<apex:attribute access="global" name="tab" description="Page Tab." type="String"/>
+	<apex:attribute access="global" name="obsId" description="Observation Id." type="String"/>
+	<apex:attribute access="global" name="successPlanId" description="Success Plan Id." type="String"/>
+	<apex:attribute access="global" name="accountPlanId" description="Account Plan Id." type="String"/>
+	<apex:attribute access="global" name="opportynityId" description="Opportunity Id." type="String"/>
+	<apex:attribute access="global" name="strategicId" description="Strategic Initiative Id." type="String"/>
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_BASE__coachingWizard, './css/wizard.css')}"/>
+	<script type='text/javascript' src="/soap/ajax/27.0/connection.js"/>
+	<script type='text/javascript' src="/soap/ajax/27.0/apex.js"/>
+	<script type="text/javascript">
+			sforce.connection.sessionId = '{!GETSESSIONID()}';
+			var SELLER_ID = "{!seller}";
+			var WIZARD_CONFIG = {
+							seller: "{!seller}",
+							tab: "{!tab}",
+							obsId: "{!obsId}",
+							successPlanId: "{!successPlanId}",
+							accountPlanId: "{!accountPlanId}",
+							opportynityId: "{!opportynityId}",
+							strategicId: "{!strategicId}",
+							callback: ""
+						};
+	</script>
+	<script src="{!URLFOR($Resource.backboneViewKit)}"></script>
+	<script data-main="{!URLFOR($Resource.coachingWizard,'config.js')}" src="{!URLFOR($Resource.coachingWizard,'require.js')}"></script>
+	<script type="text/javascript">
+			function startWizard(show){
+				require(["{!URLFOR($Resource.coachingWizard, 'wizard.js')}"], function(wizard){
+						wizard.wizard({
+							seller: "{!seller}",
+							tab: "{!tab}::{!seller}",
+							obsId: "{!obsId}",
+							successPlanId: "{!successPlanId}",
+							accountPlanId: "{!accountPlanId}",
+							opportynityId: "{!opportynityId}",
+							strategicId: "{!strategicId}",
+							close: "{!URLFOR($Resource.coachingWizard, './images/icon-x_.png')}",
+							next: "{!URLFOR($Resource.coachingWizard, './images/icon-next_.png')}",
+							finish: "{!URLFOR($Resource.coachingWizard, './images/icon-finish_.png')}"
+						});
+						if(show == true){
+							$('#wizard-container').modal().show();
+						}
+				});
+			}
+			function changeSeller(userId){
+				SELLER_ID = userId;
+				$('#wizard-container').trigger('changeSeller');
+			}
+			function changeWizardConfig(config){
+				WIZARD_CONFIG = config;
+				$('#wizard-container').trigger('changeWizardConfig');
+			}
+	</script>
+</apex:component>

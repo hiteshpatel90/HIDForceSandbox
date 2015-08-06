@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <fields>
+        <label>Assegnazioni completate</label>
+        <name>Completed_Assignments__c</name>
+    </fields>
+    <fields>
+        <label>Assegnazioni in corso</label>
+        <name>In_Progress_Assignments__c</name>
+    </fields>
+    <fields>
+        <label>Assegnazioni non avviate</label>
+        <name>Not_Started_Assignments__c</name>
+    </fields>
+    <fields>
+        <label>Assegnazioni scadute</label>
+        <name>Past_Due_Assignments__c</name>
+    </fields>
+    <fields>
+        <label>Riepilogo formativo</label>
+        <name>Transcript__c</name>
+        <relationshipLabel>Risultati assegnazioni</relationshipLabel>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <nameFieldLabel><!-- Assignments results Name --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+</CustomObjectTranslation>

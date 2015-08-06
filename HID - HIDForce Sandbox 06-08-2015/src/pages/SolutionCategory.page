@@ -1,0 +1,20 @@
+<apex:page controller="SolutionCategoryController" showHeader="false" sidebar="false">
+
+	<apex:styleSheet value="{!$Resource.solutionsStyles}" />
+	<apex:styleSheet value="{!HID_CSS_URL}" />
+
+	<div id="pageWrapper">
+
+		<div id="mainBody">
+			<h1>Solution Categories</h1>
+			<ul class="solution">
+				<apex:repeat value="{!categories}" var="category" id="theRepeat">
+					<li>
+						<apex:outputLink value="HIDSolutions/AllSolutions?id={!category.Id}&lang={!lang}" id="theLink">{!category.MasterLabel}</apex:outputLink>
+					</li>
+			  	</apex:repeat>
+			</ul>
+		</div>
+	</div>
+
+</apex:page>

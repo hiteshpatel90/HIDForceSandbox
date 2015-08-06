@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Versioning History</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Versioning Histories</value>
+    </caseValues>
+    <fields>
+        <label><!-- ACQUIRED ON --></label>
+        <name>ACQUIRED_ON__c</name>
+    </fields>
+    <fields>
+        <label><!-- Action --></label>
+        <name>ADDR1__c</name>
+    </fields>
+    <fields>
+        <label>Parent type</label>
+        <name>ADDR2__c</name>
+    </fields>
+    <fields>
+        <label>Object ID</label>
+        <name>ADDR3__c</name>
+    </fields>
+    <fields>
+        <label>Item ID</label>
+        <name>ASSIGNED_ON__c</name>
+    </fields>
+    <fields>
+        <label><!-- CERT_NAME --></label>
+        <name>CERT_NAME__c</name>
+    </fields>
+    <fields>
+        <label><!-- CERT_STATUS --></label>
+        <name>CERT_STATUS__c</name>
+    </fields>
+    <fields>
+        <label>TOWN/CITY</label>
+        <name>CITY__c</name>
+    </fields>
+    <fields>
+        <label><!-- COMPANY_NAME --></label>
+        <name>COMPANY_NAME__c</name>
+    </fields>
+    <fields>
+        <label><!-- COUNTRY --></label>
+        <name>COUNTRY__c</name>
+    </fields>
+    <fields>
+        <label>E-MAIL</label>
+        <name>EMAIL__c</name>
+    </fields>
+    <fields>
+        <label><!-- Type --></label>
+        <name>FNAME__c</name>
+    </fields>
+    <fields>
+        <label><!-- HELD_CERT_NO --></label>
+        <name>HELD_CERT_NO__c</name>
+    </fields>
+    <fields>
+        <label><!-- LNAME --></label>
+        <name>LNAME__c</name>
+    </fields>
+    <fields>
+        <label>Parent ID</label>
+        <name>PATH_NAME__c</name>
+    </fields>
+    <fields>
+        <label><!-- Modified Date --></label>
+        <name>STARTED_ON__c</name>
+    </fields>
+    <fields>
+        <label>COUNTY</label>
+        <name>STATE__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>STATUS_DESC__c</name>
+    </fields>
+    <fields>
+        <label><!-- TARGET_DATE --></label>
+        <name>TARGET_DATE__c</name>
+    </fields>
+    <fields>
+        <label><!-- VERSION --></label>
+        <name>VERSION__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

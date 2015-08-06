@@ -1,0 +1,297 @@
+<apex:page showHeader="false" sideBar="false" standardStylesheets="false" standardController="AXIOM_LC__Success_Plan__c" extensions="AXIOM_LC.Units_RelatedListController" >
+	<link href="{!URLFOR($Resource.lc_css_component, 'lc_css_base.css')}" rel="stylesheet" />
+	<link href="{!URLFOR($Resource.lc_css_component, 'lc_css_component.css')}" rel="stylesheet" />
+	<link href="{!URLFOR($Resource.lc_boot_component, 'css/axiom-coaching.css')}" rel="stylesheet" />
+
+	<style>
+a {
+	color: #1FABF3;
+	text-decoration: none;
+}
+
+.loader {
+	height: 100%;
+	width: 100%;
+}
+
+.loader-image {
+	display: block;
+	margin: 30px auto 20px;
+}
+
+.loader-text {
+	font-size: 16px;
+	text-align: center;
+	width: 100%;
+}
+
+#opportunity-header a, #assignment-header a {
+	color: black;
+	text-decoration: none;
+}
+.component-body-item-field {
+	height:20px;
+}
+.a-title {
+	color: #000 !important;
+}
+</style>
+<div id="loadercontent" style="display:none">
+	<tr>
+		<td  align="center" colspan="20">
+			<div class="loader">
+				<img class="loader-image" src="{!URLFOR($Resource.AXIOM_BASE__images, 'loading.gif')}" />
+				<div class="loader-text">Loading</div>
+			</div>
+		</td>
+	</tr>
+</div>
+
+	<div class="bodyDiv brdPalette brandPrimaryBrd">
+
+		<div class="oppreview round-corners">
+			<div class="opplist component round-corners">
+				<div class="component-header">
+					<div class="component-logo opplist-logo left"></div>
+					<div class="component-title left">
+						<a href="javascript:void(0);" class="a-title">{!ShowSection}
+							List</a>
+					</div>
+					<div id="pagination" class="left"></div>
+					<div id="search-box" class="right" style="display:none">
+						<form name="search-form">
+							<input class="component-body-item-field" style="width:auto" name="field-one" type="text"/>
+							<input class="component-body-item-field" style="width:auto" name="field-two" type="text"/>
+							<a class="button" id="go-search" style="font-weight:bold;" href="javascript:void(0)">Search</a>
+						</form>
+					</div>
+					<div class="clear"></div>
+				</div>
+				<div class="component-body">
+						<table style="text-align: left;">
+								<apex:outputPanel rendered="{!ShowSection == 'Opportunities'}"
+									layout="block">
+									<thead id="opportunity-header" class="component-body-header">
+												<tr>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Name</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Owner</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Account</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Quantity</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Stage</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Days in Stage</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Opportunity Age</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Changes to
+															Close Date</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Close Date</a><span></span></th>
+													<th class="component-body-item-field"><a
+														href="javascript:void(0)" data-sort="asc">Win Probability</a><span></span></th>
+												</tr>
+								</thead>
+									<tbody id="opportunity-List">
+										<tr>
+											<td  align="center" colspan="20">
+												<div class="loader">
+													<img class="loader-image" src="{!URLFOR($Resource.AXIOM_BASE__images, 'loading.gif')}" />
+													<div class="loader-text">Loading</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</apex:outputPanel>
+
+								<apex:outputPanel rendered="{!ShowSection == 'Assignments'}"
+									layout="block">
+									<thead id="assignments-header" class="component-body-header">
+									<tr>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Description</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Type</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Status</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Created</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Due Date</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Account Plan</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Opportunity</a><span></span></th>
+											<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Assignee</a><span></span></th>
+									</tr>
+									</thead>
+									<tbody id="assignments-list">
+										<tr>
+											<td  align="center" colspan="20">
+												<div class="loader">
+													<img class="loader-image" src="{!URLFOR($Resource.AXIOM_BASE__images, 'loading.gif')}" />
+													<div class="loader-text">Loading</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</apex:outputPanel>
+
+								<apex:outputPanel rendered="{!ShowSection == 'Accounts'}"
+									layout="block">
+									<thead id="accounts-header" class="component-body-header">
+									<tr>
+										<th class="component-body-item-field apm-package"><a href="javascript:void(0)" data-sort="asc">Account Plan Name</a><span></span></th>
+										<th class="component-body-item-field apm-package"><a href="javascript:void(0)" data-sort="asc">Account Name</a><span></span></th>
+										<th class="component-body-item-field apm-package"><a href="javascript:void(0)" data-sort="asc">Account Health Score</a><span></span></th>
+										<th class="component-body-item-field"><a href="javascript:void(0)" data-sort="asc">Account Plan Owner</a><span></span></th>
+										<th class="component-body-item-field apm-package"><a href="javascript:void(0)" data-sort="asc">Last Review Date</a><span></span></th>
+									</tr>
+									</thead>
+									<tbody id="accounts-list">
+										<tr>
+											<td  align="center" colspan="20">
+												<div class="loader">
+													<img class="loader-image" src="{!URLFOR($Resource.AXIOM_BASE__images, 'loading.gif')}" />
+													<div class="loader-text">Loading</div>
+												</div>
+											</td>
+										</tr>
+									</tbody>
+								</apex:outputPanel>
+						</table>
+			</div>
+			</div>
+		</div>
+
+	</div>
+
+
+	<script src="{!URLFOR($Resource.lc_boot_component_templates, 'jquery/js/jquery-1.9.1.js')}"/>
+	<script src="{!URLFOR($Resource.lc_boot_component_templates, 'date.format.js')}"></script>
+	<script src="{!URLFOR($Resource.AXIOM_BASE__underscoreJS)}"></script>
+	<script src="{!URLFOR($Resource.lc_boot_component_templates, 'backbone.js')}"></script>
+	<script src="{!URLFOR($Resource.lc_boot_component_templates, 'units/ALCTemplates.js')}"></script>
+	<script src="{!URLFOR($Resource.lc_boot_component_templates, 'OpportunityAccounts.js')}"></script>
+	<script src="{!URLFOR($Resource.lc_boot_component_templates, 'jquery/jquery-migrate-1.2.1.js')}"></script>
+	<script type="text/javascript" >
+		var inp1val_d;
+		var inp2val_d;
+		function placeholders(val1, val2) {
+			inp1val_d = val1;
+			inp2val_d = val2;
+			if ( $.browser.msie ) {
+				var onfocus1 = "if(this.value=='"+val1+"')this.value='';";
+				var onblur1 = "if(this.value=='') this.value='"+val1+"';";
+
+				var onfocus2 = "if(this.value=='"+val2+"')this.value='';";
+				var onblur2 = "if(this.value=='') this.value='"+val2+"';";
+
+				var d1 = document.forms["search-form"]["field-one"];
+				var d2 = document.forms["search-form"]["field-two"];
+				d1.setAttribute('onfocus', onfocus1);
+				d1.setAttribute('onblur', onblur1);
+
+				d2.setAttribute('onfocus', onfocus2);
+				d2.setAttribute('onblur', onblur2);
+				$(d1).val(val1);
+				$(d2).val(val2);
+			}
+			document.forms["search-form"]["field-one"].setAttribute('placeholder', val1);
+			document.forms["search-form"]["field-two"].setAttribute('placeholder', val2);
+		}
+	</script>
+	<script type="text/javascript">
+		new Opportunity.Routes.OpportunityRoutes();
+		Backbone.history.start();
+		var section = '{!ShowSection}';
+		var perPage = 50;
+
+		function getRelatedList(pageNum, sort, f1, f2) {
+			var cFilter = '{!filter}';
+			if(cFilter !=null)
+			sort =cFilter+'::'+sort;
+			return Visualforce.remoting.Manager.invokeAction(
+				'{!$RemoteAction.Units_RelatedListController.getRelatedList}',
+				section, '{!sellerID}', pageNum, perPage, sort, f1, f2,'{!ProductFamily}','{!showCompleted}',
+				function(result, event) {
+					//console.log(result);
+					if(result) {
+						var form = document.forms["search-form"];
+						var plhF, plhL, idsection;
+						var collection = null;
+						if (result.Records) {
+							if (section == 'Accounts') {
+								collection = new Opportunity.Collections.AccountReview(result.Records);
+								plhF = 'Account Plan Manager'; plhL = 'Account Name';
+								idsection = '#accounts-list';
+							} else if (section ==  'Assignments') {
+								collection = new Assignment.Collections.AssignCollection(result.Records);
+								plhF = 'Assignee'; plhL = 'Assignment Type';
+								idsection = '#assignments-list';
+							} else if (section ==  'Opportunities') {
+								collection = new Opportunity.Collections.OppReview(result.Records);
+								plhF = 'Opportunity Owner'; plhL = 'Account Name';
+								idsection = '#opportunity-List';
+							}
+							if(collection) {
+								$('input[name=field-one],input[name=field-two]').bind('keypress', function(evt){ if(evt.keyCode === 13) { $('#go-search').trigger('click'); } });
+								placeholders(plhF,plhL);
+								$('#search-box').fadeIn('slow');
+
+								var pageModel = new Opportunity.Models.PageChange(
+									{
+										per_page: perPage,
+										page_size: result.PageSize,
+										total_records: result.TotalRecords,
+										current_page: result.PageNum,
+										sort_filter: result.SortFilter,
+										search_1:f1,
+										search_2:f2
+									}
+								);
+								var view = new Opportunity.Views.Pagination({ collection: collection, model: pageModel, el: idsection });
+								var paginator = new Opportunity.Views.PageChange({model: pageModel});
+								$("#pagination").html(paginator.render().el);
+							}
+						}
+					}
+				}
+			);
+		}
+		$(document).ready(function(){
+			getRelatedList(1, "Name::asc", null, null);
+
+			iterator(sortingColumns);
+			$('#go-search').bind("click", function(){
+				fI = document.forms["search-form"]["field-one"].value;
+				fII = document.forms["search-form"]["field-two"].value;
+				if (fI == inp1val_d && fII == inp2val_d ) {
+					getRelatedList(1, "Name::asc", null, null);
+					return;
+				}
+				getRelatedList(1, "Name::asc", fI, fII);
+			});
+		});
+
+		function iterator(callback) {
+			$.each($("#opportunity-header th > a,#accounts-header th > a,#assignments-header th > a"), callback);
+		}
+		function sortingColumns(number, sortField) {
+			$(sortField).bind("click", function(vent){
+				var target = $(vent.currentTarget);
+				var sort = target.attr("data-sort");
+				var filter = $('#opportunityFilter').val();
+				var query = target.text() + '::' + sort;
+				if(target.attr("data-sort") == "asc") {
+					target.attr("data-sort", "desc");
+					target.parent().find('span').html("&nbsp; &#8595;");
+				} else {
+					target.attr("data-sort", "asc");
+					target.parent().find('span').html("&nbsp; &#8593;");
+				}
+				getRelatedList(1, query, document.forms["search-form"]["field-one"].value, document.forms["search-form"]["field-two"].value);
+				iterator(function(n, s){
+					if(target.text() != $(s).text()) $(s).next().text("");
+				});
+			});
+		}
+	</script>
+</apex:page>

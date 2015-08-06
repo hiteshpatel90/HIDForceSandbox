@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>Btn_Cancel</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Cancel</shortDescription>
+        <value>Cancel</value>
+    </labels>
+    <labels>
+        <fullName>Btn_Save</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Save</shortDescription>
+        <value>Save</value>
+    </labels>
+    <labels>
+        <fullName>Period_Review</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Period Review</shortDescription>
+        <value>Period Review</value>
+    </labels>
+    <labels>
+        <fullName>Pin</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Pin</shortDescription>
+        <value>Pin</value>
+    </labels>
+    <labels>
+        <fullName>SP_Actual</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Actual</shortDescription>
+        <value>Actual</value>
+    </labels>
+    <labels>
+        <fullName>SP_Adjusted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Adjusted</shortDescription>
+        <value>Adjusted</value>
+    </labels>
+    <labels>
+        <fullName>SP_AnnualSales</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Annual Sales Objective</shortDescription>
+        <value>Annual Sales</value>
+    </labels>
+    <labels>
+        <fullName>SP_AverageValue</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Average Value</shortDescription>
+        <value>Average Value</value>
+    </labels>
+    <labels>
+        <fullName>SP_ClosesPerPeriod</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Closes per Period</shortDescription>
+        <value>Closes per Period</value>
+    </labels>
+    <labels>
+        <fullName>SP_ClosingRatio</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Closing Ratio</shortDescription>
+        <value>Closing Ratio</value>
+    </labels>
+    <labels>
+        <fullName>SP_Goal</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Goal</shortDescription>
+        <value>Goal</value>
+    </labels>
+    <labels>
+        <fullName>SP_Item</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Item</shortDescription>
+        <value>Item</value>
+    </labels>
+    <labels>
+        <fullName>SP_Monthly</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Monthly</shortDescription>
+        <value>Monthly</value>
+    </labels>
+    <labels>
+        <fullName>SP_NewOpportunitiesPerPeriod</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>New Opportunities per Period</shortDescription>
+        <value>New Opportunities per Period</value>
+    </labels>
+    <labels>
+        <fullName>SP_PeerAverage</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Peer Average</shortDescription>
+        <value>Peer Average</value>
+    </labels>
+    <labels>
+        <fullName>SP_Periods</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Periods</shortDescription>
+        <value>Periods</value>
+    </labels>
+    <labels>
+        <fullName>SP_Plan</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Plan</shortDescription>
+        <value>Plan</value>
+    </labels>
+    <labels>
+        <fullName>SP_Predicted</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Predicted</shortDescription>
+        <value>Predicted</value>
+    </labels>
+    <labels>
+        <fullName>SP_ProposalRatio</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Proposal Ratio</shortDescription>
+        <value>Proposal Ratio</value>
+    </labels>
+    <labels>
+        <fullName>SP_ProposalsPerPeriod</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Proposals per Period</shortDescription>
+        <value>Proposals per Period</value>
+    </labels>
+    <labels>
+        <fullName>SP_Quarterly</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Quarterly</shortDescription>
+        <value>Quarterly</value>
+    </labels>
+    <labels>
+        <fullName>SP_SumPerPeriod</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>$ per Period</shortDescription>
+        <value>$ per Period</value>
+    </labels>
+    <labels>
+        <fullName>SP_Weekly</fullName>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Weekly</shortDescription>
+        <value>Weekly</value>
+    </labels>
+    <labels>
+        <fullName>View_Current_Period</fullName>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>View Current Period</shortDescription>
+        <value>View Current Period</value>
+    </labels>
+</CustomLabels>

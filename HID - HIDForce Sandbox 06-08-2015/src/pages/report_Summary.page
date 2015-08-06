@@ -1,0 +1,283 @@
+<apex:page controller="ReportSummaryController" sidebar="false" renderas="pdf">
+ <style type="text/css">
+        body
+        {
+            height:100%;
+        }
+        
+        h1
+        {
+            text-align: center;
+            font-size: 24pt;
+        }
+        
+        #wrapper
+        {
+            width:960px;
+            height:100%;
+            margin:0px auto;
+            font-family:'Trebuchet MS','Verdana','Helvetica';
+        }
+        
+        .tableWrapper
+        {
+            margin-bottom:20px;
+            margin-top:20px;
+            padding:10px;
+        }
+        
+        .list
+        {
+            margin-top:15px;
+        }
+        
+        .dataCell 
+        {
+            font-weight:bold;
+        }
+        
+        
+   </style>
+   
+    <div id="wrapper">
+        <apex:image value="{!$Resource.HIDLogo}" width="110" height="49"/>
+        <br>
+        <br>
+        <center>
+            <h1>Visit Report Summary</h1>
+        </center>
+        <br>
+        <br>
+        <!-- *************** Report Details ************** -->
+        <div class="tableWrapper">
+            <apex:pageBlock title="Visit Report Detail">
+                <table  cellspacing="0" cellpadding="0" border="0" class="list" width="100%">
+                    <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                        <td  class="dataCell"><apex:outputLabel value="Visit Report Name"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Name}" /></td>
+                        <td  class="dataCell"><apex:outputLabel value="Visit Date"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Visit_Date__c}" /></td>
+                    </tr>
+                    <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                        <td  class="dataCell"><apex:outputLabel value="Related Account"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Related_Account__c}" /></td>
+                        <td  class="dataCell"><apex:outputLabel value="Visit Location"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Visit_Location__c}" /></td>
+                    </tr>
+                    <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                        <td  class="dataCell"><apex:outputLabel value="Report Distribution"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Report_Distribution__c}" /></td>
+                        <td  class="dataCell"><apex:outputLabel value="Meeting Purpose"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Meeting_Purpose__c}" /></td>
+                    </tr>
+                    <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                        <td  class="dataCell"><apex:outputLabel value="Internal Use Only?"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Internal_Use_Only__c}" /></td>
+                        <td  class="dataCell"><apex:outputLabel value="Confidential?"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Confidential__c}" /></td>
+                    </tr>
+                    <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                        <td  class="dataCell" valign="top"><apex:outputLabel value="Key Meeting Notes"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.Key_Meeting_Notes__c}" /></td>
+                    </tr>
+                    <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                        <td  class="dataCell"><apex:outputLabel value="Created By"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.CreatedById}" /></td>
+                        <td  class="dataCell"><apex:outputLabel value="Last Modified By"/></td>
+                        <td  class="dataCell"><apex:outputField value="{!report.LastModifiedById}" /></td>
+                    </tr>
+                    <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                        <td  class="dataCell"></td>
+                        <td  class="dataCell"></td>
+                        <td  class="dataCell">Owner</td>
+                        <td  class="dataCell"><apex:outputField value="{!report.OwnerId}" /></td>
+                    </tr>
+                </table>
+            </apex:pageBlock>
+        </div>
+        
+        <br/>
+        <br/>
+        
+        <!-- *************** Activities Related List ************** -->   
+        <div class="tableWrapper">
+            <apex:pageBlock title="Open Activities">
+                <table  cellspacing="0" cellpadding="0" border="0" class="list" width="100%">
+                    <tr  class="headerRow">
+                        <th  width="20%" scope="col">Subject</th>
+                        <th  width="10%" scope="col">Name</th>
+                        <th  width="10%" scope="col">Task</th>
+                        <th  width="20%" scope="col">Due Date</th>
+                        <th  width="20%" scope="col">Status</th>
+                        <th  width="10%" scope="col">Priority</th>
+                        <th  width="10%" scope="col">Assigned To</th>
+                    </tr>
+        
+                    <tbody>
+                        <apex:repeat value="{!openActivities}" var="a" >
+                            <apex:repeat value="{!a.OpenActivities}" var="openA" >
+                                <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                            
+                                    <td  class="dataCell"><apex:outputField value="{!openA.Subject}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!openA.WhoId}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!openA.IsTask}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!openA.ActivityDate}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!openA.Status}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!openA.Priority}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!openA.OwnerId}"/></td>
+                               </tr>
+                            </apex:repeat>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+        </div>
+        
+        <br/>
+        <br/>
+
+        <!-- *************** Notes & Attachments Related List ************** -->        
+        <div class="tableWrapper">
+            <apex:pageBlock title="Notes & Attachments">
+                <table  cellspacing="0" cellpadding="0" border="0" class="list" width="100%">
+                    <tr  class="headerRow">
+                        <th  width="10%" scope="col">Type</th>
+                        <th  width="20%" scope="col">Title</th>
+                        <th  width="20%" scope="col">Body</th>
+                        <th  width="10%" scope="col">Last Modified</th>
+                        <th  width="10%" scope="col">Created By</th>
+                    </tr>
+                    <tbody>
+                        <apex:repeat value="{!notesAndAttachmentsWrapperList}" var="wrapper" >
+                            <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                        
+                                <td  class="dataCell">{!wrapper.types}</td>
+                                <td  class="dataCell">{!wrapper.title}</td>
+                                <td  class="dataCell">{!wrapper.body}</td>
+                                <td  class="dataCell">{!wrapper.lastModified}</td>
+                                <td  class="dataCell">{!wrapper.createdBy}</td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+        </div>
+            
+        <br/>
+        <br/>
+
+        <!-- *************** Activity Related List ************** -->        
+        <div class="tableWrapper">
+            <apex:pageBlock title="Activity History">
+                <table  cellspacing="0" cellpadding="0" border="0" class="list" width="100%">
+                    <tr  class="headerRow">
+                        <th  width="20%" scope="col">Subject</th>
+                        <th  width="10%" scope="col">Name</th>
+                        <th  width="10%" scope="col">Task</th>
+                        <th  width="10%" scope="col">Due Date</th>
+                        <th  width="10%" scope="col">Assigned To</th>
+                        <th  width="20%" scope="col">Last Modify Date/Time</th>
+                    </tr>
+                    <tbody>
+                        <apex:repeat value="{!activityHistory}" var="ah" >
+                            <apex:repeat value="{!ah.ActivityHistories}" var="aHistory" >
+                                <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                            
+                                    <td  class="dataCell"><apex:outputField value="{!aHistory.Subject}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!aHistory.WhoId}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!aHistory.IsTask}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!aHistory.ActivityDate}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!aHistory.OwnerId}"/></td>
+                                    <td  class="dataCell"><apex:outputField value="{!aHistory.LastModifiedDate}"/></td>
+                                </tr>
+                            </apex:repeat>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+        </div>
+    
+        <br/>
+        <br/>   
+
+        <!-- *************** HID Employees Related List ************** -->        
+        <div class="tableWrapper">
+            <apex:pageBlock title="HID Employees Related To Visit">
+                <table  cellspacing="0" cellpadding="0" border="0" class="list" width="100%">
+                    <tr  class="headerRow">
+                        <th  width="25%" scope="col">User</th>
+                        <th  width="25%" scope="col">Department</th>
+                        <th  width="25%" scope="col">Email</th>
+                        <th  width="25%" scope="col">Job Title</th>
+                    </tr>
+                    <tbody>
+                        <apex:repeat value="{!employees}" var="employee" >
+                            <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                                <td  class="dataCell"><apex:outputField value="{!employee.User__r.Name}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!employee.Department__c}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!employee.Email__c}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!employee.Job_Title__c}"/></td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+        </div>
+        
+        <br/>
+        <br/>
+
+        <!-- *************** Opportunities Related List ************** -->        
+        <div class="tableWrapper">
+            <apex:pageBlock title="Opportunities Related to Visit">
+                <table  cellspacing="0" cellpadding="0" border="0" class="list" width="100%">
+                    <tr  class="headerRow">
+                        <th  width="20%" scope="col">Opportunity</th>
+                        <th  width="15%" scope="col">Probability</th>
+                        <th  width="20%" scope="col">Opportunity Amount</th>
+                        <th  width="15%" scope="col">Location City</th>
+                        <th  width="15%" scope="col">Location Country</th>
+                    </tr>
+                    <tbody>
+                        <apex:repeat value="{!opportunities}" var="opp" >
+                            <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                                <td  class="dataCell"><apex:outputField value="{!opp.Opportunity__r.Name}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!opp.Probability__c}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!opp.Opportunity_Amount__c}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!opp.Location_City__c}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!opp.Location_Country__c}"/></td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+        </div>
+        
+        <br/>
+        <br/>
+        
+        <!-- *************** Contacts Related List ************** -->
+        <div class="tableWrapper">
+            <apex:pageBlock title="Contacts Related to Visit">
+                <table  cellspacing="0" cellpadding="0" border="0" class="list" width="100%">
+                    <tr>
+                        <th  width="25%" scope="col">Contact</th>
+                        <th  width="25%" scope="col">Contact Account</th>
+                        <th  width="25%" scope="col">Email</th>
+                        <th  width="25%" scope="col">Phone Number</th>
+                    </tr>
+                    <tbody>
+                        <apex:repeat value="{!contacts}" var="contact" >
+                            <tr onmouseover="if (window.hiOn){hiOn(this);}" onmouseout="if (window.hiOff){hiOff(this);}" onfocus="if (window.hiOn){hiOn(this);}" onblur="if (window.hiOff){hiOff(this);}" class="dataRow">
+                                <td  class="dataCell"><apex:outputField value="{!contact.contact__r.Name}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!contact.Contact_Account__c}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!contact.Email__c}"/></td>
+                                <td  class="dataCell"><apex:outputField value="{!contact.Phone_Number__c}"/></td>
+                            </tr>
+                        </apex:repeat>
+                    </tbody>
+                </table>
+            </apex:pageBlock>
+        </div>
+    </div>
+</apex:page>

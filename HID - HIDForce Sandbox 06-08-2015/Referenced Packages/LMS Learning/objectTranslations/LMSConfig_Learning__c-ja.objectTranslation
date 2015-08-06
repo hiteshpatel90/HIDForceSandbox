@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <fields>
+        <label>記録解除を許可する</label>
+        <name>Allow_Unenrollment__c</name>
+    </fields>
+    <fields>
+        <label>有効なユーザー タイプ</label>
+        <name>Available_user_types__c</name>
+    </fields>
+    <fields>
+        <label>認証ページ</label>
+        <name>Certificate_Page_Name__c</name>
+    </fields>
+    <fields>
+        <label>CyberU ID</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>CyberU 秘密鍵</label>
+        <name>CyberU_Secret_Key__c</name>
+    </fields>
+    <fields>
+        <label>カタログ検索を有効化</label>
+        <name>Enable_Catalog_Search__c</name>
+    </fields>
+    <fields>
+        <label>マイ研修自動更新を有効化</label>
+        <name>Enable_My_Training_auto_refresh__c</name>
+    </fields>
+    <fields>
+        <label>認証を有効化</label>
+        <name>Enable_certificate__c</name>
+    </fields>
+    <fields>
+        <label>グループ参照 ID</label>
+        <name>Group_Ref_ID__c</name>
+    </fields>
+    <fields>
+        <label>公開リンクは利用可能か</label>
+        <name>Is_Public_Link_Available__c</name>
+    </fields>
+    <fields>
+        <label>公開カタログ ID</label>
+        <name>Public_Catalog__c</name>
+    </fields>
+    <fields>
+        <label>安全な開始リンク</label>
+        <name>Secure_Launch_Link__c</name>
+    </fields>
+    <fields>
+        <label>詳細を表示</label>
+        <name>Show_Description__c</name>
+    </fields>
+    <fields>
+        <label>期日を表示</label>
+        <name>Show_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>期間を表示</label>
+        <name>Show_Duration__c</name>
+    </fields>
+    <fields>
+        <label>スコアの表示</label>
+        <name>Show_Score__c</name>
+    </fields>
+    <fields>
+        <label>研修タイプを表示</label>
+        <name>Show_Type__c</name>
+    </fields>
+    <fields>
+        <label>モジュールを新しいウィンドウで表示</label>
+        <name>Show_module_in_new_window__c</name>
+    </fields>
+    <fields>
+        <label>進渉状況バーを表示</label>
+        <name>Show_progress_bar__c</name>
+    </fields>
+    <fields>
+        <label>ステータスの表示</label>
+        <name>Show_status__c</name>
+    </fields>
+    <fields>
+        <label>ソーシャル ラーニング</label>
+        <name>Social_Learning__c</name>
+    </fields>
+    <fields>
+        <label>マイ チームの階層にマネージャー フィールドを使用する</label>
+        <name>Use_Manager_field_for_My_Team_hierarchy__c</name>
+    </fields>
+    <fields>
+        <label><!-- UserTypes --></label>
+        <name>UserTypes__c</name>
+    </fields>
+    <fields>
+        <label>ユーザー Cornerstone グループ管理者</label>
+        <name>User_Cornerstone_Group_Admin__c</name>
+    </fields>
+    <fields>
+        <label>ユーザー Cornerstone ID</label>
+        <name>User_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>ユーザー作成の学習</label>
+        <name>User_Generated_Learning__c</name>
+    </fields>
+    <fields>
+        <label>共有可能な開始リンク</label>
+        <name>shareable_launch_link__c</name>
+    </fields>
+</CustomObjectTranslation>

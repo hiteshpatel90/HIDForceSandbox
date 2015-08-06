@@ -1,0 +1,94 @@
+<apex:page controller="techSupportSurveyController" title="{!$Label.SurveyTitle}" showHeader="false" language="{!strLanguage}">
+    <apex:stylesheet value="{!$Resource.TechSupportSurveyStyle}"/>
+    <div id="outer">
+        <c:techSupportSurveyHeader />
+        <apex:form >
+            <apex:pageBlock >
+                <apex:outputPanel layout="block" styleClass="pagenr">
+                    <apex:outputText value="Page {!intCurrentPage}/3"/>
+                </apex:outputPanel>
+                <apex:pageBlockSection title="* {!$Label.SurveyOverallImpression}" collapsible="false">
+                    <apex:selectRadio value="{!strOverallImpression}" label=" " layout="pageDirection" styleClass="vamiddle">
+                        <apex:selectOptions value="{!fourValues}"/>
+                    </apex:selectRadio>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="* {!$Label.SurveyMatrix}" columns="1" collapsible="false">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value=""/>
+                        <apex:panelGrid columns="6" styleClass="matrix">
+                            <apex:outputText value="{!$Label.SurveyExcellent}"/>
+                            <apex:outputText value="{!$Label.SurveyGood}"/>
+                            <apex:outputText value="{!$Label.SurveyAverage}"/>
+                            <apex:outputText value="{!$Label.SurveyFair}"/>
+                            <apex:outputText value="{!$Label.SurveyPoor}"/>
+                            <apex:outputText value="{!$Label.SurveyNotApplicable}"/>
+                        </apex:panelGrid>
+                    </apex:pageBlockSectionItem>
+                    <apex:selectRadio value="{!strEaseContacting}" label="{!$Label.SurveyEaseContacting}" styleClass="matrix">
+                        <apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                    <apex:selectRadio value="{!strQualityAdvice}" label="{!$Label.SurveyQualityAdvice}" styleClass="matrix">
+                        <apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectradio>
+                    <apex:selectRadio value="{!strProfessionalism}" label="{!$Label.SurveyProfessionalism}" styleClass="matrix">
+                        <apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                    <apex:selectRadio value="{!strPriority}" label="{!$Label.SurveySupportAccessedPriorityCorrectly}" styleClass="matrix">
+                        <apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                    <apex:selectRadio value="{!strKeptUpdated}" label="{!$Label.SurveySupportEngineerKeptMeUpdated}" styleClass="matrix">
+                        <apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                    <apex:selectRadio value="{!strProductQuality}" label="{!$Label.SurveyProductQuality}" styleClass="matrix">
+                        <apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                    <apex:selectRadio value="{!strDocumentationQuality}" label="{!$Label.SurveyProductDocumentation}" styleClass="matrix">
+                        <apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="* {!$Label.SurveyWebsiteMatrix}" columns="1" collapsible="false">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel value=""/>
+                        <apex:panelGrid columns="6" styleClass="matrix">
+                            <apex:outputText value="{!$Label.SurveyExcellent}"/>
+                            <apex:outputText value="{!$Label.SurveyGood}"/>
+                            <apex:outputText value="{!$Label.SurveyAverage}"/>
+                            <apex:outputText value="{!$Label.SurveyFair}"/>
+                            <apex:outputText value="{!$Label.SurveyPoor}"/>
+                            <apex:outputText value="{!$Label.SurveyNotApplicable}"/>
+                        </apex:panelGrid>
+                    </apex:pageBlockSectionItem>
+                    <apex:selectRadio value="{!strOpeningCase}" label="{!$Label.SurveyOpeningCase}" styleClass="matrix">
+                    	<apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                    <apex:selectRadio value="{!strSearchingKnowledgeBaseSolutions}" label="{!$Label.SurveySearchingKnowledgeBaseSolutions}" styleClass="matrix">
+                    	<apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                    <apex:selectRadio value="{!strDownloads}" label="{!$Label.SurveyDownloads}" styleClass="matrix">
+                    	<apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                    <apex:selectRadio value="{!strFindingPhoneNumber}" label="{!$Label.SurveyFindingPhoneNumber}" styleClass="matrix">
+                    	<apex:selectOptions value="{!sixValues}"/>
+                    </apex:selectRadio>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="{!$Label.SurveySuggestionsImprovementHIDWebsite}" columns="1" collapsible="false">
+                	<apex:inputTextarea value="{!strSuggestionsImprovementHIDWebsite}" label="{!$Label.SurveySuggestionsImprovementHIDWebsiteComments}" cols="80" rows="8"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="* {!$Label.SurveyDocumentationAccurateAndUseful}" columns="1" collapsible="false">
+                    <apex:selectRadio value="{!strDocumentationAccurate}" label=" " layout="PageDirection" styleClass="vamiddle">
+                        <apex:selectOptions value="{!twoValues}"/>
+                    </apex:selectRadio>
+                    <apex:inputTextarea value="{!strDocumentationNotAccurate}" label="{!$Label.SurveyDocumentationAccurateAndUsefulComments}" cols="80" rows="8"/>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="* {!$Label.SurveySatisfied}" collapsible="false">
+                    <apex:selectRadio value="{!strSatisfied}" label=" " layout="PageDirection" styleClass="vamiddle">
+                        <apex:selectOptions value="{!twoValues}"/>
+                    </apex:selectRadio>
+                </apex:pageBlockSection>
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton action="{!page2}" value="{!$Label.SurveyNext}"/>
+                </apex:pageBlockButtons>
+            </apex:pageBlock>
+        </apex:form>
+    </div>
+</apex:page>

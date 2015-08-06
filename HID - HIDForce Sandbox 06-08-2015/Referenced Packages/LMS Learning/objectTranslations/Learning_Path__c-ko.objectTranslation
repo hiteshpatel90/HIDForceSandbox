@@ -1,0 +1,241 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Learning Path --></value>
+    </caseValues>
+    <fields>
+        <help><!-- By default, user must complete all components. To customize this criteria, please set values to one or both options. --></help>
+        <label><!-- Components For Completion --></label>
+        <name>Components_For_Completion__c</name>
+    </fields>
+    <fields>
+        <label>게재 유형</label>
+        <name>Delivery_Type__c</name>
+        <picklistValues>
+            <masterLabel>Online</masterLabel>
+            <translation><!-- Online --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>설명</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- You can specify a time unit after a time value &apos;X&apos;, such as Xd, Xh or Xm, to represent days (d), hours (h) and minutes (m), respectively.
+If you do not specify a time unit, minute will be assumed. --></help>
+        <label><!-- Duration --></label>
+        <name>DurationTime__c</name>
+    </fields>
+    <fields>
+        <label>소요 시간 ( 분)</label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label><!-- Enable Сertificate --></label>
+        <name>Enable_Certificate__c</name>
+    </fields>
+    <fields>
+        <label>순서 를 시행</label>
+        <name>Enforce_Sequence__c</name>
+    </fields>
+    <fields>
+        <label>직업 역할</label>
+        <name>Job_Roles__c</name>
+        <picklistValues>
+            <masterLabel>Administrator</masterLabel>
+            <translation><!-- Administrator --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Developer</masterLabel>
+            <translation><!-- Developer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IT Professional</masterLabel>
+            <translation><!-- IT Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Professional</masterLabel>
+            <translation><!-- Sales Professional --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>언어</label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>Deutsch</masterLabel>
+            <translation><!-- Deutsch --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>English</masterLabel>
+            <translation><!-- English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>da</masterLabel>
+            <translation><!-- da --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>de</masterLabel>
+            <translation><!-- de --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>en_US</masterLabel>
+            <translation><!-- en_US --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>es</masterLabel>
+            <translation><!-- es --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fi</masterLabel>
+            <translation><!-- fi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fr</masterLabel>
+            <translation><!-- fr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>it</masterLabel>
+            <translation><!-- it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ja</masterLabel>
+            <translation><!-- ja --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ko</masterLabel>
+            <translation><!-- ko --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>nl_NL</masterLabel>
+            <translation><!-- nl_NL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>pt_BR</masterLabel>
+            <translation><!-- pt_BR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ru</masterLabel>
+            <translation><!-- ru --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>sv</masterLabel>
+            <translation><!-- sv --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>th</masterLabel>
+            <translation><!-- th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_CN</masterLabel>
+            <translation><!-- zh_CN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_TW</masterLabel>
+            <translation><!-- zh_TW --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>이전 버전</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>학습 경로</relationshipLabel>
+    </fields>
+    <fields>
+        <help><!-- By default, user must complete all components. To customize this criteria, please set values to one or both options. --></help>
+        <label><!-- Minutes For Completion --></label>
+        <name>Minutes_For_Completion__c</name>
+    </fields>
+    <fields>
+        <label>주요 제품</label>
+        <name>Primary_Product__c</name>
+        <picklistValues>
+            <masterLabel>CFS Learning</masterLabel>
+            <translation><!-- CFS Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Connect</masterLabel>
+            <translation><!-- Force.com Connect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Mobile</masterLabel>
+            <translation><!-- Force.com Mobile --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>제품 카테고리</label>
+        <name>Product_Category__c</name>
+        <picklistValues>
+            <masterLabel>CFS Learning</masterLabel>
+            <translation><!-- CFS Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com</masterLabel>
+            <translation><!-- Force.com --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Cloud</masterLabel>
+            <translation><!-- Sales Cloud --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>제품</label>
+        <name>Products__c</name>
+        <picklistValues>
+            <masterLabel>CFS Learning</masterLabel>
+            <translation><!-- CFS Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Connect</masterLabel>
+            <translation><!-- Force.com Connect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Mobile</masterLabel>
+            <translation><!-- Force.com Mobile --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>총 항목</label>
+        <name>Total_Items__c</name>
+    </fields>
+    <fields>
+        <label><!-- Training Unit --></label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel><!-- Learning Paths --></relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Learning Path Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Learning Path Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- NOT VALID DURATION --></errorMessage>
+        <name>Not_Valid_Duration_Value</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Error --></errorMessage>
+        <name>Not_Valid_Minutes_For_Completion</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- this field cannot have a negative value --></errorMessage>
+        <name>Not_Valid_Minutes_For_Completion_Rule</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- field cannot have a negative value --></errorMessage>
+        <name>Validate_Duration</name>
+    </validationRules>
+    <webLinks>
+        <label>내 교육 에 추가</label>
+        <name>Add_to_My_Training</name>
+    </webLinks>
+    <webLinks>
+        <label>학습 경로를 지정</label>
+        <name>Assign_Learning_Path</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Update_Data_Assignments --></label>
+        <name>Update_Data_Assignments</name>
+    </webLinks>
+</CustomObjectTranslation>

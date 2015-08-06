@@ -1,0 +1,82 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <fields>
+        <label>Reihenfolge</label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label>Frage</label>
+        <name>Question__c</name>
+        <relationshipLabel>Quizfragen</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quiz --></label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Quizfragen</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Quiz Question Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Quiz Question Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>Das Feld kann keinen negativen Wert haben</errorMessage>
+        <name>Negative_Order_Value</name>
+    </validationRules>
+    <webLinks>
+        <label>Frage hinzufugen</label>
+        <name>Add_Question</name>
+    </webLinks>
+    <webLinks>
+        <label>Seitenumbruch hinzufugen</label>
+        <name>Add_page_break</name>
+    </webLinks>
+    <webLinks>
+        <label>Neue Frage</label>
+        <name>New_Question</name>
+    </webLinks>
+</CustomObjectTranslation>

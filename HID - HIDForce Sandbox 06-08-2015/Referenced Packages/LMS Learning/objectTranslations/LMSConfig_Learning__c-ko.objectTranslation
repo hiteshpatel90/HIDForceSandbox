@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Allow Unenrollment --></label>
+        <name>Allow_Unenrollment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Available user types --></label>
+        <name>Available_user_types__c</name>
+    </fields>
+    <fields>
+        <label>인증서 페이지</label>
+        <name>Certificate_Page_Name__c</name>
+    </fields>
+    <fields>
+        <label>CyberU ID</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>CyberU 보안 키</label>
+        <name>CyberU_Secret_Key__c</name>
+    </fields>
+    <fields>
+        <label>카탈로그 검색을 활성화</label>
+        <name>Enable_Catalog_Search__c</name>
+    </fields>
+    <fields>
+        <label><!-- Enable My Training auto-refresh --></label>
+        <name>Enable_My_Training_auto_refresh__c</name>
+    </fields>
+    <fields>
+        <label>Сertificate 사용</label>
+        <name>Enable_certificate__c</name>
+    </fields>
+    <fields>
+        <label>그룹 참조 ID</label>
+        <name>Group_Ref_ID__c</name>
+    </fields>
+    <fields>
+        <label>공개 링크 가 가능합니다</label>
+        <name>Is_Public_Link_Available__c</name>
+    </fields>
+    <fields>
+        <label>공공 카탈로그 이드</label>
+        <name>Public_Catalog__c</name>
+    </fields>
+    <fields>
+        <label><!-- Secure Launch Link --></label>
+        <name>Secure_Launch_Link__c</name>
+    </fields>
+    <fields>
+        <label>설명 표시</label>
+        <name>Show_Description__c</name>
+    </fields>
+    <fields>
+        <label>마감일 보기</label>
+        <name>Show_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>표시 기간</label>
+        <name>Show_Duration__c</name>
+    </fields>
+    <fields>
+        <label>점수 보기</label>
+        <name>Show_Score__c</name>
+    </fields>
+    <fields>
+        <label>교육 유형을 표시</label>
+        <name>Show_Type__c</name>
+    </fields>
+    <fields>
+        <label>새 창에서 모듈을 표시</label>
+        <name>Show_module_in_new_window__c</name>
+    </fields>
+    <fields>
+        <label>표시 진행률 표시줄</label>
+        <name>Show_progress_bar__c</name>
+    </fields>
+    <fields>
+        <label>상태 표시</label>
+        <name>Show_status__c</name>
+    </fields>
+    <fields>
+        <label>사회 학습</label>
+        <name>Social_Learning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Manager field for My Team hierarchy --></label>
+        <name>Use_Manager_field_for_My_Team_hierarchy__c</name>
+    </fields>
+    <fields>
+        <label><!-- UserTypes --></label>
+        <name>UserTypes__c</name>
+    </fields>
+    <fields>
+        <label>사용자 Cornerstone 그룹 관리</label>
+        <name>User_Cornerstone_Group_Admin__c</name>
+    </fields>
+    <fields>
+        <label>사용자 Cornerstone ID</label>
+        <name>User_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>사용자가 학습 생성</label>
+        <name>User_Generated_Learning__c</name>
+    </fields>
+    <fields>
+        <label>공유 가능한 실행 링크</label>
+        <name>shareable_launch_link__c</name>
+    </fields>
+</CustomObjectTranslation>

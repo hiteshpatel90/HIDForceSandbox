@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <fields>
+        <label>코스</label>
+        <name>Course__c</name>
+        <relationshipLabel>커리큘럼 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>교과 과정</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>커리큘럼 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>학습 경로</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>커리큘럼 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>모듈</label>
+        <name>Module__c</name>
+        <relationshipLabel>커리큘럼 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>놀리다</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>교육 과정 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>순서</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>제목</label>
+        <name>Title__c</name>
+    </fields>
+    <layouts>
+        <layout>Add Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>코스</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>학습 경로</label>
+        <name>Learning_Path2</name>
+    </recordTypes>
+    <recordTypes>
+        <label>모듈</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>놀리다</label>
+        <name>Quiz</name>
+    </recordTypes>
+    <webLinks>
+        <label>과정 에 과정 을 추가</label>
+        <name>AddCourseToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>교육 과정 에 학습 경로 를 추가합니다</label>
+        <name>AddLPToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>과정 에 모듈 을 추가</label>
+        <name>AddModuleToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Add_Quiz_to_Curriculum --></label>
+        <name>Add_Quiz_to_Curriculum</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Edit_Sequence --></label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

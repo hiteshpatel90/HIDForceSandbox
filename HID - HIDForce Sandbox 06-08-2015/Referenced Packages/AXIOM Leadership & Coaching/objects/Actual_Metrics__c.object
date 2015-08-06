@@ -1,0 +1,554 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>false</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Actual_Sales__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  Actual Sales out of the Closed Won Opportunities owned by the Rep.
+
+For Sales Manager:
+   SUM of Actual Sales of all the Subordinates in the hierarchy + Actual Sales  out of the Opportunities owned by the Manager directly</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  Actual Sales out of the Closed Won Opportunities owned by the Rep.
+
+For Sales Manager:
+   SUM of Actual Sales of all the Subordinates in the hierarchy + Actual Sales  out of the Opportunities owned by the Manager directly</inlineHelpText>
+        <label>Actual Sales</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Actual_Units__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Actual Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Average_Deal_Close_Length__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  Average Deal Length out of the Closed Won Opportunities owned by the Rep.
+
+For Sales Manager:
+   Average of ADCL of all the Subordinates in the hierarchy, including Manager&apos;s ADCL (If manager owns Oppts).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  Average Deal Length out of the Closed Won Opportunities owned by the Rep.
+
+For Sales Manager:
+   Average of ADCL of all the Subordinates in the hierarchy, including Manager&apos;s ADCL (If manager owns Oppts)</inlineHelpText>
+        <label>Average Deal Close Length (In Days)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Avg_Num_Of_Units__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Avg. Num Of Units(Closed/Won)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Avg_Sale_Value_Closed_Won__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep: 
+Average Sale Value out of the Closed Won Opportunities owned by the Rep. 
+
+For Sales Manager: 
+Average of Avg Sale Value of all the Subordinates in the hierarchy, including Manager&apos;s Avg Sale value (if Manager owns Oppts)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep: 
+Average Sale Value out of the Closed Won Opportunities owned by the Rep. 
+
+For Sales Manager: 
+Average of Avg Sale Value of all the Subordinates in the hierarchy, including Manager&apos;s Avg Sale value  (if Manager owns Oppts).</inlineHelpText>
+        <label>Avg. Sale Value (Closed/Won)</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Closing_Ratio__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  Closing Ratio out of Opportunities owned by the Rep.
+
+For Sales Manager:
+   Average Closed Ratio of all the Subordinates in the hierarchy, including Manager&apos;s Closing Ratio (if Manager owns Oppts).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  Closing Ratio out of Opportunities owned by the Rep.
+
+For Sales Manager:
+   Average Closed Ratio of all the Subordinates in the hierarchy, including Manager&apos;s Closing Ratio (if Manager owns Oppts)</inlineHelpText>
+        <label>Closing Ratio</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Coach__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Coach</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Actual_Metrics</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Metric_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <description>We need this field because in some cases this date will be different from the Creation Date.
+Ex: Yesterday&apos;s Batch Job failed or ran out of the quota for the number of batch jobs for the day.
+So metrics for yesterday will be evaluated today. In this case Metric date will be yesterday and Create date will be Today.
+
+Also note that the if there is external BI solution, data will be populated into this Object from external source. In this case create date and Metric date might NOT be the same all the time.</description>
+        <externalId>false</externalId>
+        <label>Metric Date</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>New_Opportunities_per_Period__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  &apos;New Opportunities per period&apos; out of the Opportunities owned by the Rep.
+
+For Sales Manager:
+   SUM of New Opportunities per period of all the Subordinates in the hierarchy + New Opportunities per period of the Manger.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  &apos;New Opportunities per period&apos; out of the Opportunities owned by the Rep.
+
+For Sales Manager:
+   SUM of &apos;New Opportunities per period&apos; of all the Subordinates in the hierarchy + New Opportunities per period of the Manger.</inlineHelpText>
+        <label>New Opportunities per Period</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>New_Proposals_per_Period__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  &apos;New Proposals per period&apos; out of the Opportunities owned by the Rep.
+
+For Sales Manager:
+   SUM of New Proposals per period of all the Subordinates in the hierarchy + New Proposals per period of the Manager.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  &apos;New Proposals per period&apos; out of the Opportunities owned by the Rep.
+
+For Sales Manager:
+   SUM of &apos;New Proposals per period&apos; of all the Subordinates in the hierarchy + New Proposals per period of the Manager.</inlineHelpText>
+        <label>New Proposals per Period</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Number_of_Periods_YTD__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Number of Periods YTD</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of Periods YTD</inlineHelpText>
+        <label>Number of Periods YTD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Period_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Period Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Weekly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Quarterly</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Pipeline_Sales__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  Based on OPEN Opportunities with Close Date within the current Fiscal year owned by Sales Rep.
+
+For Sales Manager:
+   SUM of Pipeline Sales of all the Subordinates in the hierarchy + Amount of OPEN Opportunities with Close Date within the current Fiscal year owned by the Manager directly</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  Based on OPEN Oppts with Close Date within the current Fiscal year owned by Sales Rep.
+
+For Sales Manager:
+   SUM of Pipeline Sales of all the Subordinates in the hierarchy + Amt of mgr&apos;s OPEN Oppts with Close Date in the current year</inlineHelpText>
+        <label>Pipeline Sales</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Predicted_Sales__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+Actual Sales Devided by a Number of Periods YTD and Multiplyed by Total number of periods</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+Actual Sales Devided by a Number of Periods YTD and Multiplyed by Total number of periods</inlineHelpText>
+        <label>Predicted Sales</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Predicted_Units__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Predicted Units</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Proposal_Ratio__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  Proposal Ratio out of Opportunities owned by the Rep.
+
+For Sales Manager:
+   Average Proposal Ratio of all the Subordinates in the hierarchy, including Manager&apos;s Proposal ratio  (if Manager owns Oppts).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  Proposal Ratio out of Opportunities owned by the Rep.
+
+For Sales Manager:
+   Average Proposal Ratio of all the Subordinates in the hierarchy, including Manager&apos;s Proposal ratio  (if Manager owns Oppts).</inlineHelpText>
+        <label>Proposal Ratio</label>
+        <precision>5</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Seller_Role__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Seller__r.UserRole.Name</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Seller Role</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Seller__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Seller</label>
+        <referenceTo>User</referenceTo>
+        <relationshipName>Plan_Metrics</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>SuccessPlanType__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Success Plan Type</label>
+        <length>100</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_ClosedWon_Opportunities_YTD__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep: 
+Total ClosedWon Opportunities created YTD owned by the Rep. 
+
+For Sales Manager: 
+SUM of Total ClosedWon Oppts YTD of all the Subordinates in the hierarchy + Closed Won Opportunities YTD of the manager.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep: 
+Total ClosedWon Opportunities created YTD owned by the Rep. 
+
+For Sales Manager: 
+SUM of Total ClosedWon Oppts YTD of all the Subordinates in the hierarchy + Closed Won Opportunities YTD of the manager.</inlineHelpText>
+        <label>Total ClosedWon Opportunities YTD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_New_Opportunities_Current_Period__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  Total New Opportunities created in the Current Period owned by the Rep.
+
+For Sales Manager:
+   SUM of New Opportunities in the Current period of all the Subordinates in the hierarchy + New Oppts of the manager in the current period.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  Total New Opportunities created in the Current Period owned by the Rep.
+
+For Sales Manager:
+   SUM of New Opportunities in the Current period of all the Subordinates in the hierarchy + New Oppts of the manager in the current period.</inlineHelpText>
+        <label>Total New Opportunities Current Period</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_New_Opportunities_YTD__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+Total New Opportunities created YTD owned by the Rep.
+
+For Sales Manager:
+SUM of New Opportunities YTD of all the Subordinates in the hierarchy + New Oppts YTD of the manager.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+Total New Opportunities created YTD owned by the Rep.
+
+For Sales Manager:
+SUM of New Opportunities YTD of all the Subordinates in the hierarchy + New Oppts YTD of the manager.</inlineHelpText>
+        <label>Total New Opportunities YTD</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Total_New_Proposals_Current_Period__c</fullName>
+        <deprecated>false</deprecated>
+        <description>For Sales Rep:
+  Total New proposals created in the Current Period owned by the Rep.
+
+For Sales Manager:
+   SUM of New Proposals in the Current period of all the Subordinates in the hierarchy + New Proposals of the manager in the current period.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>For Sales Rep:
+  Total New proposals created in the Current Period owned by the Rep.
+
+For Sales Manager:
+   SUM of New Proposals in the Current period of all the Subordinates in the hierarchy + New Proposals of the manager in the current period.</inlineHelpText>
+        <label>Total New Proposals Current Period</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Actual Metrics</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Average_Deal_Close_Length__c</columns>
+        <columns>Proposal_Ratio__c</columns>
+        <columns>Closing_Ratio__c</columns>
+        <columns>Avg_Sale_Value_Closed_Won__c</columns>
+        <columns>Actual_Sales__c</columns>
+        <columns>Seller__c</columns>
+        <columns>Coach__c</columns>
+        <columns>Metric_Date__c</columns>
+        <columns>New_Opportunities_per_Period__c</columns>
+        <columns>New_Proposals_per_Period__c</columns>
+        <columns>Number_of_Periods_YTD__c</columns>
+        <columns>Period_Type__c</columns>
+        <columns>Pipeline_Sales__c</columns>
+        <columns>Predicted_Sales__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>All2</fullName>
+        <columns>NAME</columns>
+        <columns>SuccessPlanType__c</columns>
+        <columns>Proposal_Ratio__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>Closing_Ratio__c</columns>
+        <columns>Seller__c</columns>
+        <columns>Metric_Date__c</columns>
+        <columns>New_Opportunities_per_Period__c</columns>
+        <columns>New_Proposals_per_Period__c</columns>
+        <columns>Number_of_Periods_YTD__c</columns>
+        <columns>Period_Type__c</columns>
+        <columns>Actual_Units__c</columns>
+        <columns>Actual_Sales__c</columns>
+        <columns>Avg_Num_Of_Units__c</columns>
+        <columns>Predicted_Units__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>AM-{00000000}</displayFormat>
+        <label>Actual Metrics Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Actual Metrics</pluralLabel>
+    <recordTypes>
+        <fullName>AmountMetrics</fullName>
+        <active>true</active>
+        <label>Amount Metrics</label>
+        <picklistValues>
+            <picklist>Period_Type__c</picklist>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quarterly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>QuantityMetrics</fullName>
+        <active>true</active>
+        <label>Quantity Metrics</label>
+        <picklistValues>
+            <picklist>Period_Type__c</picklist>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Quarterly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

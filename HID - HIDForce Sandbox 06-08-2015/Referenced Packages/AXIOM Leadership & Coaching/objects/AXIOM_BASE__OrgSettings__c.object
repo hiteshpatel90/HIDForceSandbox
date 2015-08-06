@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>AccountPlanObsrvOdFollowup__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Account Plan Field Observation Overdue Followup (In Days)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Account Plan Field Observation Overdue Followup (In Days)</inlineHelpText>
+        <label>Account Plan Observation OverdueFollowup</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FieldObserLowCompScoreFollowup__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field Observation Composite Score For Followup</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field Observation Composite Score For Followup</inlineHelpText>
+        <label>Field Observ Low Comp Score Followup</label>
+        <precision>4</precision>
+        <required>false</required>
+        <scale>1</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>FieldObsrvLowScoreCoaching__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Field Observation Low Score For Coaching</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Field Observation Low Score For Coaching</inlineHelpText>
+        <label>Field Observation Low Score For Coaching</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MangerObsrvOdFollowup__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Manger Observation Overdue Followup (In Days)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Manger Observation Overdue Followup (In Days)</inlineHelpText>
+        <label>Manger Observation Overdue Followup</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ObservationOverdueOrgEmailAddr__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Observation Overdue Org Email Address</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>OpportunityObsrvOdFollowup__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Opportunity Observation Overdue Followup (In Days)</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Opportunity Observation Overdue Followup (In Days)</inlineHelpText>
+        <label>Opportunity Observation Overdue Followup</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog Curriculum --></value>
+    </caseValues>
+    <fields>
+        <label>목록</label>
+        <name>Catalog__c</name>
+        <relationshipLabel>카탈로그 커리큘럼</relationshipLabel>
+    </fields>
+    <fields>
+        <label>교과 과정</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>카탈로그 커리큘럼</relationshipLabel>
+    </fields>
+    <nameFieldLabel><!-- Catalog Curriculum Name --></nameFieldLabel>
+</CustomObjectTranslation>

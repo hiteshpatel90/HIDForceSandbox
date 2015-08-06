@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Catalog --></value>
+    </caseValues>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Catalog Layout</layout>
+        <sections>
+            <label><!-- Accounts --></label>
+            <section>Accounts</section>
+        </sections>
+        <sections>
+            <label><!-- Courses --></label>
+            <section>Courses</section>
+        </sections>
+        <sections>
+            <label><!-- Curriculums --></label>
+            <section>Curriculums</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Groups --></label>
+            <section>Groups</section>
+        </sections>
+        <sections>
+            <label><!-- Learning Paths --></label>
+            <section>Learning Paths</section>
+        </sections>
+        <sections>
+            <label><!-- Modules --></label>
+            <section>Modules</section>
+        </sections>
+        <sections>
+            <label><!-- Profiles --></label>
+            <section>Profiles</section>
+        </sections>
+        <sections>
+            <label><!-- Quizzes --></label>
+            <section>Quizzes</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Catalog Name --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+    <webLinks>
+        <label>Enregistrer</label>
+        <name>Save</name>
+    </webLinks>
+</CustomObjectTranslation>

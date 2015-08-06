@@ -1,0 +1,125 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <fields>
+        <label>ERWORBEN AM</label>
+        <name>ACQUIRED_ON__c</name>
+    </fields>
+    <fields>
+        <label>Aktion</label>
+        <name>ADDR1__c</name>
+    </fields>
+    <fields>
+        <label>Ubergeordneter Typ</label>
+        <name>ADDR2__c</name>
+    </fields>
+    <fields>
+        <label>Objekt-ID</label>
+        <name>ADDR3__c</name>
+    </fields>
+    <fields>
+        <label>Element-ID</label>
+        <name>ASSIGNED_ON__c</name>
+    </fields>
+    <fields>
+        <label>ZERT_NAME</label>
+        <name>CERT_NAME__c</name>
+    </fields>
+    <fields>
+        <label>ZERT_STATUS</label>
+        <name>CERT_STATUS__c</name>
+    </fields>
+    <fields>
+        <label>ORT</label>
+        <name>CITY__c</name>
+    </fields>
+    <fields>
+        <label>UNTERNEHMENSNAME</label>
+        <name>COMPANY_NAME__c</name>
+    </fields>
+    <fields>
+        <label>LAND</label>
+        <name>COUNTRY__c</name>
+    </fields>
+    <fields>
+        <label>E-MAIL</label>
+        <name>EMAIL__c</name>
+    </fields>
+    <fields>
+        <label>Typ</label>
+        <name>FNAME__c</name>
+    </fields>
+    <fields>
+        <label>ZERTIF_NR</label>
+        <name>HELD_CERT_NO__c</name>
+    </fields>
+    <fields>
+        <label><!-- LNAME --></label>
+        <name>LNAME__c</name>
+    </fields>
+    <fields>
+        <label>Ubergeordnete ID</label>
+        <name>PATH_NAME__c</name>
+    </fields>
+    <fields>
+        <label>Anderungsdatum</label>
+        <name>STARTED_ON__c</name>
+    </fields>
+    <fields>
+        <label>BUNDESLAND</label>
+        <name>STATE__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>STATUS_DESC__c</name>
+    </fields>
+    <fields>
+        <label>ZIELDATUM</label>
+        <name>TARGET_DATE__c</name>
+    </fields>
+    <fields>
+        <label>VERSION</label>
+        <name>VERSION__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

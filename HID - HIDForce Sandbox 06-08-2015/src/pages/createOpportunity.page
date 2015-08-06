@@ -1,0 +1,6 @@
+<apex:page standardController="Opportunity" extensions="createOpportunityExtension"
+action="{!if($CurrentPage.parameters.RecordType=$Label.CPO_rec_type,
+'/006/e?retURL=/006/o&ent=Opportunity&opp11=Discovery&nooverride=1&accid=' + $CurrentPage.parameters.accid + '&RecordType=' + $CurrentPage.parameters.RecordType + strAccRegion,
+'/006/e?retURL=/006/o&ent=Opportunity&nooverride=1&accid=' + $CurrentPage.parameters.accid + '&RecordType=' + $CurrentPage.parameters.RecordType)}">
+
+</apex:page>

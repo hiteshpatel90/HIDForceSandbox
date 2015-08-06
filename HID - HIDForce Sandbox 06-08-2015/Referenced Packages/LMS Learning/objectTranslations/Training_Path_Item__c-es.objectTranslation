@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Course Item --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Course Item --></value>
+    </caseValues>
+    <fields>
+        <label>Cuestionario</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Elementos del curso</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Secuencia</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>Módulo</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>Elementos del curso</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Curso</label>
+        <name>Training_Path__c</name>
+        <relationshipLabel>Elementos del curso</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Ver</label>
+        <name>View__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Training Path Item Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Item Number --></nameFieldLabel>
+    <recordTypes>
+        <label>Módulo</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Cuestionario</label>
+        <name>Quiz</name>
+    </recordTypes>
+    <webLinks>
+        <label>Añadir al curso</label>
+        <name>AddToCourse</name>
+    </webLinks>
+    <webLinks>
+        <label>Añadir módulo al curso</label>
+        <name>Add_Module_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label>Añadir cuestionario al curso</label>
+        <name>Add_Quiz_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label>Añadir cuestionarios al curso</label>
+        <name>Add_Quize_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label>Editar secuencia</label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

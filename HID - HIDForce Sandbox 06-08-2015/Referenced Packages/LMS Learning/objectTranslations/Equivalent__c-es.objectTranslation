@@ -1,0 +1,204 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Equivalency --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Equivalency --></value>
+    </caseValues>
+    <fields>
+        <label>Curso</label>
+        <name>Course__c</name>
+        <relationshipLabel>Equivalencias (Curso)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Plan de estudios</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Equivalencias (Plan de estudios)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Curso equivalente</label>
+        <name>Equivalent_Course__c</name>
+        <relationshipLabel>Equivalencias (Curso equivalente)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Plan de estudios equivalente</label>
+        <name>Equivalent_Curriculum__c</name>
+        <relationshipLabel>Equivalencias (Plan de estudios equivalente)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Ruta de aprendizaje equivalente</label>
+        <name>Equivalent_Learning_Path__c</name>
+        <relationshipLabel>Equivalencias (Ruta de aprendizaje equivalente)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Módulo predeterminado equivalente</label>
+        <name>Equivalent_Module_Default__c</name>
+        <relationshipLabel>Equivalencias (Módulo predeterminado equivalente)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Módulo equivalente</label>
+        <name>Equivalent_Module__c</name>
+        <relationshipLabel>Equivalencias (Módulo equivalente)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Cuestionario equivalente</label>
+        <name>Equivalent_Quiz__c</name>
+        <relationshipLabel>Equivalencias (Cuestionario equivalente)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Título equivalente</label>
+        <name>Equivalent_Title__c</name>
+    </fields>
+    <fields>
+        <label>Ruta de formación</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>Equivalencias (Ruta de aprendizaje)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Módulo predeterminado</label>
+        <name>Module_Default__c</name>
+        <relationshipLabel>Equivalencias (Módulo predeterminado)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Módulo</label>
+        <name>Module__c</name>
+        <relationshipLabel>Equivalencias (Módulo)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Cuestionario</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Equivalencias (Cuestionario)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Equivalencia</label>
+        <name>Related_Equivalency__c</name>
+        <relationshipLabel>Equivalencias</relationshipLabel>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Course</layout>
+        <sections>
+            <label><!-- Course --></label>
+            <section>Course</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Curriculum</layout>
+        <sections>
+            <label><!-- Curriculum --></label>
+            <section>Curriculum</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Equivalent Layout</layout>
+        <sections>
+            <label><!-- Course --></label>
+            <section>Course</section>
+        </sections>
+        <sections>
+            <label><!-- Curriculum --></label>
+            <section>Curriculum</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Learning Path --></label>
+            <section>Learning Path</section>
+        </sections>
+        <sections>
+            <label><!-- Module --></label>
+            <section>Module</section>
+        </sections>
+        <sections>
+            <label><!-- Quiz --></label>
+            <section>Quiz</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+        <sections>
+            <label><!-- Learning Path --></label>
+            <section>Learning Path</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+        <sections>
+            <label><!-- Module --></label>
+            <section>Module</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Quiz</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+        <sections>
+            <label><!-- Quiz --></label>
+            <section>Quiz</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- equivalent Name --></nameFieldLabel>
+    <recordTypes>
+        <label>Curso</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Plan de estudios</label>
+        <name>Curriculum</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Ruta de formación</label>
+        <name>Learning_Path</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Módulo</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Cuestionario</label>
+        <name>Quiz</name>
+    </recordTypes>
+</CustomObjectTranslation>

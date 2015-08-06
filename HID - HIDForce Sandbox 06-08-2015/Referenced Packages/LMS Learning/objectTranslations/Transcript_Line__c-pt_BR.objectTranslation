@@ -1,0 +1,202 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Assignment --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Assignment --></value>
+    </caseValues>
+    <fields>
+        <label><!-- ASSIGNED_ON --></label>
+        <name>ASSIGNED_ON__c</name>
+    </fields>
+    <fields>
+        <label>Tentativas</label>
+        <name>Attempts__c</name>
+    </fields>
+    <fields>
+        <label>Data de conclusão</label>
+        <name>Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label>Data de Conclusão</label>
+        <name>Completion_Date__c</name>
+    </fields>
+    <fields>
+        <label>Tipo de Treinamento</label>
+        <name>Content_Catalog__c</name>
+    </fields>
+    <fields>
+        <label>Título do Módulo</label>
+        <name>Content_Title__c</name>
+    </fields>
+    <fields>
+        <label>ID CyberU</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Atribuição do Curso</label>
+        <name>Course_Assignment__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Atribuição de Currículo</label>
+        <name>Curriculum_Assignment__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Item do Currículo</label>
+        <name>Curriculum_Item__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Data de Vencimento</label>
+        <name>Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>Email</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label>É Histórico</label>
+        <name>Is_Historical__c</name>
+    </fields>
+    <fields>
+        <label>Última Data de Lançamento</label>
+        <name>Last_Launched_Date__c</name>
+    </fields>
+    <fields>
+        <label>Atribuição do Caminho de Aprendizado</label>
+        <name>Learning_Path_Assignment__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Item do Caminho de Aprendizado</label>
+        <name>Learning_Path_Item__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Porcentagem Concluída</label>
+        <name>Percent_Complete__c</name>
+    </fields>
+    <fields>
+        <label>Progresso</label>
+        <name>Progress__c</name>
+    </fields>
+    <fields>
+        <label>Teste</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Status do Registro</label>
+        <name>Registration_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- STARTED_ON --></label>
+        <name>STARTED_ON__c</name>
+    </fields>
+    <fields>
+        <label>Pontuação</label>
+        <name>Score__c</name>
+    </fields>
+    <fields>
+        <label>Pontuação</label>
+        <name>Score_int__c</name>
+    </fields>
+    <fields>
+        <label>Status da Atribuição</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Failed</masterLabel>
+            <translation><!-- Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Passed</masterLabel>
+            <translation><!-- Passed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retired</masterLabel>
+            <translation><!-- Retired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unenrolled</masterLabel>
+            <translation><!-- Unenrolled --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>DATA_ALVO</label>
+        <name>TARGET_DATE__c</name>
+    </fields>
+    <fields>
+        <label>Estagiário</label>
+        <name>Trainee__c</name>
+    </fields>
+    <fields>
+        <label>Módulo</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Item do Curso</label>
+        <name>Training_Path_Item__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Nome do Curso</label>
+        <name>Training_Path_Name__c</name>
+    </fields>
+    <fields>
+        <label>Licença de Usuário do Treinamento</label>
+        <name>Training_User_License__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Transcrição</label>
+        <name>Transcript__c</name>
+        <relationshipLabel>Atribuições</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Visualizar</label>
+        <name>View__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Transcript Line Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Launch Link --></label>
+            <section>Launch Link</section>
+        </sections>
+        <sections>
+            <label><!-- Progress Information --></label>
+            <section>Progress Information</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Assignment No. --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>A data de vencimento inserida não deve ser anterior à data atual.</errorMessage>
+        <name>validate_Due_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>A porcentagem concluída deve ser entre 0 e 100%.</errorMessage>
+        <name>validate_percent_complete</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>A pontuação deve ser um número positivo.</errorMessage>
+        <name>validate_score</name>
+    </validationRules>
+</CustomObjectTranslation>

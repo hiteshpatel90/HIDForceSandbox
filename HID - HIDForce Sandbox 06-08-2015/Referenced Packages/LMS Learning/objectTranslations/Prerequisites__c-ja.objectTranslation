@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <fields>
+        <label>コース</label>
+        <name>Course_Child__c</name>
+        <relationshipLabel>前提条件 (コースの子)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>コース</label>
+        <name>Course__c</name>
+        <relationshipLabel>前提条件 (コース)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>カリキュラム</label>
+        <name>Curriculum_Child__c</name>
+        <relationshipLabel>前提条件 (カリキュラムの子)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>カリキュラム</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>前提条件 (カリキュラム)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>学習管理パス</label>
+        <name>Learning_Path_Child__c</name>
+        <relationshipLabel>前提条件 (学習パスの子)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>学習管理パス</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>前提条件 (学習パス)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>モジュール</label>
+        <name>Module_Child__c</name>
+        <relationshipLabel>前提条件 (モジュールの子)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>モジュール</label>
+        <name>Module__c</name>
+        <relationshipLabel>前提条件 (モジュール)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>クイズ</label>
+        <name>Quiz_Child__c</name>
+        <relationshipLabel>前提条件 (クイズの子)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>クイズ</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>前提条件 (クイズ)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>タイトル</label>
+        <name>Title__c</name>
+    </fields>
+    <layouts>
+        <layout>Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Curriculum</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Quiz</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Prerequisites Name --></nameFieldLabel>
+    <recordTypes>
+        <label>コース</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>カリキュラム</label>
+        <name>Curriculum</name>
+    </recordTypes>
+    <recordTypes>
+        <label>学習管理パス</label>
+        <name>Learning_Path</name>
+    </recordTypes>
+    <recordTypes>
+        <label>モジュール</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>クイズ</label>
+        <name>Quiz</name>
+    </recordTypes>
+</CustomObjectTranslation>

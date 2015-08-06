@@ -1,0 +1,344 @@
+<apex:page standardController="Lead" extensions="LeadDisplayPageController" action="{!Authenticate}"  showHeader="false" cache="false" expires="0"> 
+    <head>
+    <style type="text/css">
+    body{width:900px!IMPORTANT;margin:auto!IMPORTANT}
+    </style>
+    <script src="http://code.jquery.com/jquery-1.9.1.js"></script>
+    <script src="http://code.jquery.com/ui/1.10.2/jquery-ui.js"></script>
+    <script>
+        $function() {
+            $(document).tooltip();
+        });
+    </script>
+    
+    <style>
+        label {
+            display: inline-block;
+            width: 8em;
+        }
+        .bPageBlock .detailList .labelCol{width:17% !important;}
+        .multiSelectPicklistRow  td  {width:40%}
+        .multiSelectPicklistRow  td select {width:90% !important;}
+        .multiSelectPicklistRow  td select option{width:85% !important;}        
+        .multiSelectPicklistTable .multiSelectPicklistRow .multiSelectPicklistCell {width:20%;}
+    </style>
+    </head>
+  
+    
+  <h1>Salesforce Partner Portal for Lead Conversion  
+  </h1>
+  <apex:pagemessages />
+  <apex:form >
+      <apex:pageblock >
+          <apex:pageBlockButtons >
+              <apex:commandButton action="{!GoBack}" immediate="true" value="Return to List Page"/>
+              <!-- apex:commandButton action="{!convert}" immediate="true" value="Convert Lead"
+                  onclick="return confirm('This lead will be converted into an account, an opportunity, and a contact. Are you sure you want to do this?');"
+                  rendered="{!Authenticated}" / -->
+              <apex:commandButton action="{!save}" value="Save Lead" />
+          </apex:pageBlockButtons>
+          
+          <script type="text/javascript" class="tooltip"></script>
+          
+          <apex:pageBlockSection title="Lead Detail" columns="2" collapsible="false" rendered="{!Authenticated}">
+                    
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel title="{!$ObjectType.Lead.fields.Company.inlineHelpText}" >{!$ObjectType.Lead.fields.company.Label}</apex:outputLabel>
+                    <apex:inputfield required="true" value="{!lead.company}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.salutation.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.salutation}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.firstname.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.firstname}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.lastname.Label}</apex:outputLabel>
+                    <apex:inputfield required="true" value="{!lead.lastname}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.title.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.title}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.Also_Known_As__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Also_Known_As__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.Gender__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Gender__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.Language__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Language__c}"/>  
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.phone.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.phone}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.mobilephone.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.mobilephone}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.fax.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.fax}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.email.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.email}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.website.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.website}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageblocksectionitem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.HasOptedOutOfEmail.Label}</apex:outputLabel>
+                    
+                    <!-- Changes by Gaurav to make this field read only -->
+                    
+                    <apex:outputfield value="{!Lead.HasOptedOutOfEmail}" id="fieldId" />  
+                </apex:pageblocksectionitem>
+          </apex:pageBlockSection>
+          <apex:pageBlockSection title="Lead Information" columns="2" collapsible="false" rendered="{!Authenticated}">
+                    <!-- apex:outputfield value="{!Lead.ownerid}"/ -->
+                    <apex:outputText value="{!Lead.Partner_Name__c}" />
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.status.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.status}">
+                        <apex:actionSupport action="{!refresh}" reRender="unqualified" event="onchange" />
+                    </apex:inputfield>
+                </apex:pageBlockSectionItem>
+                <apex:outputfield value="{!Lead.Qualified_Date__c}" />
+                    <apex:pageblocksectionitem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Unqualified_Reason__c.Label}</apex:outputLabel> 
+                    <apex:outputPanel id="unqualified"> 
+                         <apex:inputfield value="{!lead.Unqualified_Reason__c}"/>   
+                    </apex:outPutPanel>
+                    </apex:pageblocksectionitem>
+                    <apex:outputfield value="{!Lead.leadsource}" />
+                    
+                <!-- apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Lead_Scale__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Lead_Scale__c}"/>
+                </apex:pageBlockSectionItem -->
+                
+                <apex:pageBlockSectionItem >        
+                    <apex:outputLabel >
+                        <apex:outputLink title="{!$ObjectType.Lead.fields.Lead_Scale__c.inlineHelpText}">
+                            <apex:image value="/resource/1395834881000/HelpIcon"/>
+                        </apex:outputLink>
+                        {!$ObjectType.Lead.fields.Lead_Scale__c.Label}
+                    </apex:outputLabel>
+                    <apex:inputfield value="{!lead.Lead_Scale__c}" />
+            
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Areas_of_Interest__c.Label}</apex:outputLabel>
+                    <apex:inputfield required="true" value="{!Lead.Areas_of_Interest__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.CurrentAssignmentDate__c.Label}</apex:outputLabel>
+                    <apex:outputfield value="{!Lead.CurrentAssignmentDate__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem > <!-- Addition By Gaurav to show Last Modifird date on Lead Detail Page -->
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.lastModifiedDate.Label}</apex:outputLabel>
+                    <apex:outputfield value="{!Lead.lastModifiedDate}"/>
+                </apex:pageBlockSectionItem>
+                
+          </apex:pageBlockSection>
+          <apex:pageBlockSection title="Lead Profile" columns="2" collapsible="false" rendered="{!Authenticated}">
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel >{!$ObjectType.Lead.Fields.Industry.Label}</apex:outputLabel>
+                  <apex:inputfield value="{!lead.Industry}"/>
+              </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.NumberOfEmployees.Label}</apex:outputLabel>
+                    <apex:inputField value="{!lead.NumberOfEmployees}" />
+                </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                  <apex:outputLabel >{!$ObjectType.Lead.Fields.Industry_Sub_Type__c.Label}</apex:outputLabel>
+                  <apex:inputfield value="{!lead.Industry_Sub_Type__c}"/>
+              </apex:pageBlockSectionItem>
+              <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.AnnualRevenue.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.AnnualRevenue}" />
+                </apex:pageBlockSectionItem>                               
+              <!--<apex:pageBlockSectionItem >
+                 
+                  <apex:outputLabel >
+                   <apex:outputLink title="{!$ObjectType.Lead.fields.Vertical_Markets__c.inlineHelpText}">
+                      <apex:image value="/resource/1395834881000/HelpIcon"/>
+                  </apex:outputLink>
+                  {!$ObjectType.Lead.fields.Vertical_Markets__c.Label} 
+                  </apex:outputLabel>
+                 
+                  <apex:inputfield required="true" value="{!lead.Vertical_Markets__c}" /> 
+              </apex:pageBlockSectionItem>-->
+                    
+            
+        
+                <!--<apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Vertical_Markets__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Vertical_Markets__c}"/>
+                </apex:pageBlockSectionItem> -->
+          </apex:pageBlockSection>
+          <apex:pageBlockSection title="Address Information" columns="2" collapsible="false" rendered="{!Authenticated}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Street.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Street}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.City.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.City}" />
+                </apex:pageBlockSectionItem>
+                <!--<apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Address_2__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Address_2__c}" />
+                </apex:pageBlockSectionItem>-->
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Country.Label}</apex:outputLabel>
+                    <apex:inputfield required="true" value="{!lead.CountryCode}" />
+                </apex:pageBlockSectionItem>
+                <!--<apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Address_3__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Address_3__c}" />
+                </apex:pageBlockSectionItem>-->
+                <apex:pageBlockSectionItem >               
+                    <apex:outputLabel >
+                        <apex:outputLink title="{!$ObjectType.Lead.fields.State.inlineHelpText}">
+                            <apex:image value="/resource/1395834881000/HelpIcon"/>
+                        </apex:outputLink>
+                        {!$ObjectType.Lead.fields.State.Label}
+                    </apex:outputLabel>
+                    <apex:inputfield value="{!lead.StateCode}" />
+               
+                </apex:pageBlockSectionItem>
+                <!-- apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Address_State__c.Label}</apex:outputLabel>
+                    <apex:inputField required="true" value="{!lead.Address_State__c}" />
+                </apex:pageBlockSectionItem -->
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.postalcode.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.PostalCode}" /> 
+                </apex:pageBlockSectionItem>
+                <!--<apex:pageBlockSectionItem >             
+                    <apex:outputLabel >
+                        <apex:outputLink title="{!$ObjectType.Lead.fields.State.inlineHelpText}">
+                            <apex:image value="/resource/1395834881000/HelpIcon"/>
+                        </apex:outputLink>
+                        {!$ObjectType.Lead.fields.State.Label}
+                    </apex:outputLabel>
+                    <apex:inputfield value="{!lead.State}" />
+             
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Province__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Province__c}" />
+                </apex:pageBlockSectionItem -->
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Region__c.Label}</apex:outputLabel>
+                    <apex:outputfield value="{!lead.Region__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Business_Segment__c.Label}</apex:outputLabel>
+                    <apex:outputText value="{!Lead.Business_Segment__c}" />
+                    <!-- <apex:inputfield required="true" value="{!lead.Business_Segment__c}" /> -->
+                </apex:pageBlockSectionItem>
+                
+                
+                
+          </apex:pageBlockSection>
+          <apex:pageBlockSection title="Description" columns="1" collapsible="false" rendered="{!Authenticated}">
+                <!--<apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Organization_Size__c.Label}</apex:outputLabel>
+                    <apex:inputField value="{!lead.Organization_Size__c}" />                        
+                </apex:pageBlockSectionItem>-->                
+                <!--<apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Strong_Authentication_Used_Today__c.Label}</apex:outputLabel>
+                    <apex:inputField value="{!lead.Strong_Authentication_Used_Today__c}"/>
+                </apex:pageBlockSectionItem>-->
+                <!--<apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.HID_Solution_Used_Today__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.HID_Solution_Used_Today__c}" />
+                </apex:pageBlockSectionItem>-->
+                <apex:pageBlockSectionItem >
+                
+                    
+                    <apex:outputLabel >{!$ObjectType.Lead.Fields.Description.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Description}" style="width: 450px; height: 100px" />
+                </apex:pageBlockSectionItem>
+                <!--<apex:pageBlockSectionItem dataStyle="text-align:center; width: 50%; max-width: 55%;">-->
+                
+                
+                <apex:pageBlockSectionItem >
+                    <!--<apex:outputLabel >{!$ObjectType.Lead.Fields.HID_Products_Used_Today__c.Label}</apex:outputLabel>
+                    <apex:outputPanel id="products_used_today">
+                        <apex:inputField value="{!lead.HID_Products_Used_Today__c}"/>
+                    </apex:outputPanel>-->
+                </apex:pageBlockSectionItem>
+                
+                <!-- apex:pageBlockSectionItem >
+                <apex:outputLink title="{!$ObjectType.Lead.fields.Export_Status__c.inlineHelpText}">
+                        <apex:image value="/resource/1395834881000/HelpIcon"/>
+                    </apex:outputLink>
+                <apex:panelGrid columns="3">
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.Export_Status__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Export_Status__c}" />
+                </apex:panelGrid>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                <apex:outputLink title="{!$ObjectType.Lead.fields.Requested_by_Lead__c.inlineHelpText}">
+                        <apex:image value="/resource/1395834881000/HelpIcon"/>
+                    </apex:outputLink>
+                <apex:panelGrid columns="3">
+                    <apex:outputLabel >{!$ObjectType.Lead.fields.Requested_by_Lead__c.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!lead.Requested_by_Lead__c}" />
+                </apex:panelGrid>
+                </apex:pageBlockSectionItem -->
+          </apex:pageBlockSection>
+          <apex:pageBlockSection title="Campaign Information" columns="1" collapsible="false" rendered="{!Authenticated}">
+                <apex:pageBlockSectionItem rendered="{!IF(cms.size == 0, true, false)}">
+                       <div style="border: 1px solid #E0E3E5; width:97%; padding:1%;">No records to display</div>
+                   </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockTable value="{!cms}" var="camp" rendered="{!IF(cms.size > 0, true, false)}">
+                   <apex:column value="{!camp.campaign.name}"/>
+                  <apex:column value="{!camp.campaign.Description}"/>
+                   <apex:column value="{!camp.campaign.Type}"/>                   
+                   <apex:column value="{!camp.campaign.Region__c}"/>
+                   
+                   <!-- Addition By gaurav To add Member Status Update Date on Campaign Information -->
+                   <apex:column > 
+                       <apex:facet name="header">First Responded Date</apex:facet>
+                       <apex:outputText value="{0,date,M/d/yyyy hh:mm a}">
+                        <apex:param value="{!camp.FirstRespondedDate}"/>
+                          </apex:outputText>
+                   
+                   </apex:column>                 
+                </apex:pageBlockTable>
+                
+                <!--
+                <apex:inputfield value="{!Lead.Campaign.name}"/>
+                <apex:outputfield value="{!Lead.Campaign.startdate}"/>
+                <apex:outputfield value="{!Lead.Campaign.type}"/>
+                <apex:outputfield value="{!Lead.Campaign.status}"/>
+                <apex:outputfield value="{!Lead.Campaign.region__c}"/>
+                <apex:outputfield value="{!Lead.Campaign.Business_Segment__c}"/>
+                <apex:outputfield value="{!Lead.Campaign.description}"/>
+                -->
+          </apex:pageBlockSection>
+          
+          
+           
+      </apex:pageblock>
+  </apex:form>
+</apex:page>

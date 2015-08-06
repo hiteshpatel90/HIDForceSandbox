@@ -1,0 +1,177 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Object --></value>
+    </caseValues>
+    <fields>
+        <label>저자</label>
+        <name>Author__c</name>
+        <relationshipLabel>사물</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- CyberU ID --></label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>설명</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label>기간 ( 분)</label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label>키워드</label>
+        <name>Keywords__c</name>
+    </fields>
+    <fields>
+        <label>언어</label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>English</masterLabel>
+            <translation><!-- English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French</masterLabel>
+            <translation><!-- French --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>정통 점수</label>
+        <name>Mastery_Score__c</name>
+    </fields>
+    <fields>
+        <label>최대 허용 시간 ( 분)</label>
+        <name>Max_Minutes_Allowed__c</name>
+    </fields>
+    <fields>
+        <label>최대 점수</label>
+        <name>Maximum_Score__c</name>
+    </fields>
+    <fields>
+        <label>객체 링크</label>
+        <name>Object_Link__c</name>
+    </fields>
+    <fields>
+        <label>완료 비율</label>
+        <name>Percent_Complete__c</name>
+    </fields>
+    <fields>
+        <label>진행</label>
+        <name>Progress__c</name>
+    </fields>
+    <fields>
+        <label>링크를 업로드</label>
+        <name>Publication_Titlef__c</name>
+    </fields>
+    <fields>
+        <label>게시자 ID 변경됨</label>
+        <name>Publisher_Course_Id__c</name>
+    </fields>
+    <fields>
+        <label>점수</label>
+        <name>Score__c</name>
+    </fields>
+    <fields>
+        <label>지위</label>
+        <name>Status_Progress__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Failed</masterLabel>
+            <translation><!-- Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Passed</masterLabel>
+            <translation><!-- Passed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retired</masterLabel>
+            <translation><!-- Retired --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>지위</label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label>테스트 코스</label>
+        <name>Test_Course__c</name>
+    </fields>
+    <fields>
+        <label>시간 제한 액션</label>
+        <name>Time_Limit_Action__c</name>
+        <picklistValues>
+            <masterLabel>Exit</masterLabel>
+            <translation><!-- Exit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Message</masterLabel>
+            <translation><!-- Message --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>제목</label>
+        <name>Title__c</name>
+    </fields>
+    <fields>
+        <label>일반적인 학습 시간 ( 분)</label>
+        <name>Typical_Learning_Time__c</name>
+    </fields>
+    <fields>
+        <label>제목 업로드</label>
+        <name>Upload_Title__c</name>
+    </fields>
+    <fields>
+        <label>업로드 ID</label>
+        <name>Upload__c</name>
+        <relationshipLabel>사물</relationshipLabel>
+    </fields>
+    <fields>
+        <label>사용된</label>
+        <name>isUsed__c</name>
+    </fields>
+    <fields>
+        <label>검증</label>
+        <name>verified__c</name>
+    </fields>
+    <layouts>
+        <layout>Object Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- CyberU Details --></label>
+            <section>CyberU Details</section>
+        </sections>
+        <sections>
+            <label><!-- Details --></label>
+            <section>Details</section>
+        </sections>
+        <sections>
+            <label><!-- Test and Verify Your Training Content --></label>
+            <section>Test and Verify Your Training Content</section>
+        </sections>
+        <sections>
+            <label><!-- Tracking Information --></label>
+            <section>Tracking Information</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Object ID --></nameFieldLabel>
+    <webLinks>
+        <label>게시</label>
+        <name>Publish</name>
+    </webLinks>
+    <webLinks>
+        <label>객체 를 업로드</label>
+        <name>Upload_Object</name>
+    </webLinks>
+</CustomObjectTranslation>

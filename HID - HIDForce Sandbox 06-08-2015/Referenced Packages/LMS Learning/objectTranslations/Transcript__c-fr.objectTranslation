@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Transcript --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Transcript --></value>
+    </caseValues>
+    <fields>
+        <label>Fonction du participant</label>
+        <name>TraineeUserRole__c</name>
+    </fields>
+    <fields>
+        <label>Profil du participant</label>
+        <name>Trainee_User_Profile__c</name>
+    </fields>
+    <fields>
+        <label>Type de participant</label>
+        <name>Trainee_User_Type__c</name>
+    </fields>
+    <fields>
+        <label>Participant</label>
+        <name>Trainee__c</name>
+        <relationshipLabel>Formations</relationshipLabel>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Transcript Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Transcript No. --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+</CustomObjectTranslation>

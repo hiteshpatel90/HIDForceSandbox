@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <fields>
+        <label>Ordine</label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label>Domanda</label>
+        <name>Question__c</name>
+        <relationshipLabel>Domande del quiz</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Quiz</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Domande del quiz</relationshipLabel>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Quiz Question Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Quiz Question Name --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+    <validationRules>
+        <errorMessage>il campo non può avere un valore negativo</errorMessage>
+        <name>Negative_Order_Value</name>
+    </validationRules>
+    <webLinks>
+        <label>Aggiungi domanda</label>
+        <name>Add_Question</name>
+    </webLinks>
+    <webLinks>
+        <label>Aggiungi interruzione pagina</label>
+        <name>Add_page_break</name>
+    </webLinks>
+    <webLinks>
+        <label>Nuova domanda</label>
+        <name>New_Question</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <fields>
+        <label>코스</label>
+        <name>Course_Child__c</name>
+        <relationshipLabel>전제 조건 ( 코스 어린이)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>코스</label>
+        <name>Course__c</name>
+        <relationshipLabel>전제 조건 ( 코스)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>교육 과정</label>
+        <name>Curriculum_Child__c</name>
+        <relationshipLabel>전제 조건 ( 커리큘럼 어린이)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>교육 과정</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>전제 조건 ( 교육 과정 )</relationshipLabel>
+    </fields>
+    <fields>
+        <label>경로를 학습</label>
+        <name>Learning_Path_Child__c</name>
+        <relationshipLabel><!-- Prerequisites (Learning Path) --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>경로를 학습</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>전제 조건 ( 경로 학습 )</relationshipLabel>
+    </fields>
+    <fields>
+        <label>모듈</label>
+        <name>Module_Child__c</name>
+        <relationshipLabel>전제 조건 ( 모듈 어린이)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>모듈</label>
+        <name>Module__c</name>
+        <relationshipLabel>전제 조건 ( 모듈 )</relationshipLabel>
+    </fields>
+    <fields>
+        <label>놀리다</label>
+        <name>Quiz_Child__c</name>
+        <relationshipLabel>전제 조건 ( 퀴즈 어린이)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>놀리다</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>전제 조건 ( 퀴즈 )</relationshipLabel>
+    </fields>
+    <fields>
+        <label>이름</label>
+        <name>Title__c</name>
+    </fields>
+    <layouts>
+        <layout>Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Curriculum</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Quiz</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Prerequisites Name --></nameFieldLabel>
+    <recordTypes>
+        <label>코스</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>교육 과정</label>
+        <name>Curriculum</name>
+    </recordTypes>
+    <recordTypes>
+        <label>경로를 학습</label>
+        <name>Learning_Path</name>
+    </recordTypes>
+    <recordTypes>
+        <label>모듈</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>놀리다</label>
+        <name>Quiz</name>
+    </recordTypes>
+</CustomObjectTranslation>

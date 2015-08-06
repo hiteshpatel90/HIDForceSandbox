@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <fields>
+        <label>Kurs</label>
+        <name>Course_Child__c</name>
+        <relationshipLabel>Voraussetzungen (untergeordneter Kurs)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Kurs</label>
+        <name>Course__c</name>
+        <relationshipLabel>Voraussetzungen (Kurs)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Lehrplan</label>
+        <name>Curriculum_Child__c</name>
+        <relationshipLabel>Voraussetzungen (untergeordneter Lehrplan)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Lehrplan</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Voraussetzungen (Lehrplan)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Lernpfad</label>
+        <name>Learning_Path_Child__c</name>
+        <relationshipLabel>Voraussetzungen (untergeordneter Lernpfad)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Lernpfad</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>Voraussetzungen (Lernpfad)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Modul</label>
+        <name>Module_Child__c</name>
+        <relationshipLabel>Voraussetzungen (untergeordnetes Modul)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Modul</label>
+        <name>Module__c</name>
+        <relationshipLabel>Voraussetzungen (Modul)</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quiz --></label>
+        <name>Quiz_Child__c</name>
+        <relationshipLabel>Voraussetzungen (untergeordnetes Quiz)</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quiz --></label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Voraussetzungen (Quiz)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Titel</label>
+        <name>Title__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Curriculum</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Quiz</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Prerequisites Name --></nameFieldLabel>
+    <recordTypes>
+        <label>Kurs</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Lehrplan</label>
+        <name>Curriculum</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Lernpfad</label>
+        <name>Learning_Path</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Modul</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Quiz --></label>
+        <name>Quiz</name>
+    </recordTypes>
+</CustomObjectTranslation>

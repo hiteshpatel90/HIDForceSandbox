@@ -1,0 +1,115 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <fields>
+        <label>Kurs</label>
+        <name>Course__c</name>
+        <relationshipLabel>Lernpfad-Elemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Lernpfad</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>Lernpfad-Elemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Modul</label>
+        <name>Module__c</name>
+        <relationshipLabel>Lernpfad-Elemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quiz --></label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Lernpfad-Elemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Reihenfolge</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>Titel</label>
+        <name>Title__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Add Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>Kurs</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Modul</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Quiz --></label>
+        <name>Quiz</name>
+    </recordTypes>
+    <webLinks>
+        <label>Kurs zum Lernpfad hinzufugen</label>
+        <name>AddCourseToLearningPath</name>
+    </webLinks>
+    <webLinks>
+        <label>Modul zum Lernpfad hinzufugen</label>
+        <name>AddModuleToLearningPath</name>
+    </webLinks>
+    <webLinks>
+        <label>Quiz zum Lernpfad hinzufugen</label>
+        <name>Add_Quiz_to_Learning_Path</name>
+    </webLinks>
+    <webLinks>
+        <label>Sequenz bearbeiten</label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

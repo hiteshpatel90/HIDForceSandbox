@@ -1,0 +1,1159 @@
+<apex:page standardController="Case" language="{!strLanguageCode}" extensions="TicketSubmissionController" showHeader="false" sidebar="false" id="ticketPage">
+    <apex:form id="tktForm">
+    <head>   
+        <apex:includeScript value="{!URLFOR($Resource.HIDResources, '/HIDResource/JS/jquery.min.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.HIDResources, '/HIDResource/JS/jquery-ui.js')}"/>           
+        <apex:includeScript value="{!URLFOR($Resource.HIDResources, '/HIDResource/JS/jquery.json-2.2.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.HIDResources, '/HIDResource/JS/jquery.pngFix.js')}"/>
+        <apex:includeScript value="{!URLFOR($Resource.HIDResources, '/HIDResource/JS/jquery.colorbox-min.js')}"/>                       
+        <apex:stylesheet value="{!URLFOR($Resource.HIDResources, '/HIDResource/CSS/supportIframe_styles.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.HIDResources, '/HIDResource/CSS/tech-support_iframe.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.HIDResources, '/HIDResource/CSS/colorbox.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.HIDResources, '/HIDResource/CSS/colorbox1.css')}"/>
+        <apex:stylesheet value="{!URLFOR($Resource.HIDResources, '/HIDResource/CSS/colorbox2.css')}"/>                  
+       <script type='text/javascript'>
+            $(document).ready(function() {
+                $('html').css('background-color','#ffffff');
+                $('html').css('background-image','none');
+                $('body').css('background-color','#ffffff');
+                $('body').css('background-image','none');
+                $('.techSupportLeftRailDiv').css('border','none');
+            });            
+        </script>       
+        <apex:stylesheet value="{!URLFOR($Resource.HIDResources, '/HIDResource/CSS/colorbox.css')}"/>
+    </head>
+    <body>
+      <apex:actionFunction name="rerenderStates" rerender="stateList">
+          <apex:param name="firstParam" assignTo="{!country}" value="" />
+      </apex:actionFunction>
+       <!-- <p style="text-align:center; margin-bottom:2px; padding:0;">(Note: For ActivID products, please visit the ActivID Knowledge Base at <a href="https://support.actividentity.com" target="_blank">https://support.actividentity.com</a>)</p> -->
+        <div id="submitHelpTicketDiv" class="techSupportLeftRailDiv tab_content">
+        <div id='techFilterDatDiv'>
+            <p class="ts_blurb">
+            <apex:outputLabel value="{!$Label.TicketInfolabel1}"></apex:outputLabel>
+            <!-- Please let us know what product you need support with below: -->
+            </p>
+            <div class="label">
+                <label for="priority">
+                <apex:outputLabel value="{!$Label.Case_Priority_Label}"></apex:outputLabel>
+                <!-- Priority -->
+                </label>
+            </div>
+            <div class="val">
+               <apex:inputField id="priority" value="{!objCase.Priority}" onchange="showCommonFieldsDiv();"/>
+                    &nbsp;&nbsp;
+                <apex:image style="align:absmiddle" alt="Priority Help Button" styleClass="priority-help-button" url="{!URLFOR($Resource.HIDResources, '/HIDResource/Images/help.gif')}"/>              
+                </div>
+            <div class="label">
+                <label for="country" id="lbl_country"><span class="req">*</span>
+                <apex:outputLabel value="{!$Label.conCountry}"></apex:outputLabel>                
+                <!-- Country -->
+                </label>
+            </div>            
+            <div class="val">
+                
+                <apex:selectList id="country" size="1" value="{!country}" onChange="return displayStates(this.value);" >
+                    <apex:selectOptions value="{!options}"/>
+                </apex:selectList>
+            </div>
+            <div class="label">
+                <label for="Language" id="lbl_language"><span class="req">*</span> 
+                <apex:outputLabel value="{!$Label.Case_Language}"></apex:outputLabel> 
+                <!-- Language -->
+                </label>
+            </div>
+            <div class="val">
+                <apex:inputField id="language" value="{!objCase.Case_Language__c}" onchange="showCommonFieldsDiv();"/>
+               
+            </div>
+            <div class="label">
+                <label for="product" id="lbl_product"><span class="req">*</span> 
+                <apex:outputLabel value="{!$Label.Case_Product}"></apex:outputLabel>
+                <!-- Product -->
+                </label>
+            </div>            
+            <div class="val">            
+                <apex:inputField id="product" value="{!objCase.Product__c}" onchange="checkforModel('{!$Component.mod}','{!$Component.selModel}'); return false; "></apex:inputField>
+            </div>            
+            <apex:outputPanel id="mod" style="display:none;">
+                <div class="label">
+                    <label for="model" id="lbl_model"><span class="req">*</span> 
+                    <apex:outputLabel value="{!$Label.Case_Model}"></apex:outputLabel>
+                    <!-- Model -->
+                    </label>
+                </div>            
+                <div class="val">                    
+                    <apex:inputField id="selModel" value="{!objCase.Model__c}"/>
+                         
+                </div>                
+           </apex:outputPanel>           
+           <div id="commonFieldsDiv" style="display: none;">  
+             <p class="ts_blurb">
+             
+             <!-- Please describe in detail the problem you are having and the steps to reproduce the issue: -->
+             <apex:outputLabel value="{!$Label.TicketInfolabel2}"></apex:outputLabel>
+             </p>
+           
+           <apex:outputpanel id="softwarePanel" style="display: none;">  
+             <div class="label">
+                <label for="software">
+                <apex:outputLabel value="{!$Label.Case_Software}"></apex:outputLabel>
+                <!-- Software -->
+                </label>
+             </div>
+              <div class="val">
+                 <apex:inputField id="software" value="{!objCase.Software__c}"/>
+                          
+              </div>             
+           </apex:outputpanel>
+           <apex:outputpanel id="LicensePanel" style="display: none;">    
+             <div class="label" style="{!If(strLanguageCode=='ru','height:30px;','')}">
+                <label for="LicSerialNum">
+                <apex:outputLabel style="height:15px;" value="{!$Label.Case_Licens_Key_Serial_Number}"></apex:outputLabel>
+              
+                <!-- License Key/Serial Number -->
+                </label> 
+             </div>
+             <div class="val" style="{!If(strLanguageCode=='ru','height:33px;','')}">
+                 <apex:inputField id="LicenceNum" value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>  
+             </div>
+            </apex:outputpanel>
+            <apex:outputpanel id="OSPanel" style="display: none;">   
+              <div class="label">
+                  <label for="OpSys">
+                  <apex:outputLabel value="{!$Label.Case_OS}"></apex:outputLabel>
+                  <!--  Operating System  -->
+                  </label>
+              </div>
+              <div class="val">
+                  <apex:inputField id="OS" value="{!objCase.OS__c}"/>
+                  
+              </div>              
+            </apex:outputpanel>
+            <apex:outputpanel id="DriverPanel" style="display: none;">  
+              <div class="label">
+                 <label for="driver">
+                 <apex:outputLabel value="{!$Label.Case_Driver}"></apex:outputLabel>
+                 <!-- Driver -->
+                 </label>
+              </div>
+              <div class="val">
+                 <apex:inputField id="driver" value="{!objCase.Driver__c}"/>  
+              </div>
+            </apex:outputpanel>
+            <apex:outputpanel id="firmwarePanel" style="display: none;">   
+              <div class="label">
+                    <label for="firmware">
+                    <apex:outputLabel value="{!$ObjectType.Case.Fields.Firmware__c.Label}"></apex:outputLabel>
+                    <!-- Firmware/Version -->
+                    </label>
+              </div>
+               <div class="val">
+                    <apex:inputField id="firmware" value="{!objCase.Firmware__c}"/>  
+              </div>
+            </apex:outputpanel>
+            <apex:outputPanel id="cardCountPanel" style="display: none;">
+                <div class="label">
+                    <label for="card_count">
+                    <apex:outputLabel value="{!$Label.Case_Card_Count}"></apex:outputLabel>
+                    <!-- Card Count -->
+                    </label>
+                </div>
+                <div class="val">
+                <!--    <apex:inputField id="card_Count" value="{!objCase.Card_Count__c}"/>    -->
+                <apex:inputText id="card_count" value="{!cardCount}" maxlength="18"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputpanel id="ribbonPanel" style="display: none;">
+                <div class="label">
+                    <label for="ribbon">
+                    <apex:outputLabel value="{!$Label.Case_Ribbon_Type}"></apex:outputLabel>                    
+                    <!-- Ribbon Type -->
+                    </label>
+                </div>
+                <div class="val">
+                    <apex:inputField id="ribbon_type" value="{!objCase.Ribbon_Type__c}"/>                   
+                </div>
+            </apex:outputpanel>
+            <apex:outputPanel id="cardPanel" style="display: none;">
+                <div class="label">
+                    <label for="card_label">
+                    <apex:outputLabel value="{!$Label.Case_Card_Type}"></apex:outputLabel> 
+                    <!-- Card Type -->
+                    </label>
+                </div>
+                <div class="val">
+                    <apex:inputField id="card_type" value="{!objCase.Card_Type__c}"/>
+                </div>
+            </apex:outputPanel>
+            <apex:outputPanel id="laminationPanel" style="display: none;">
+                <div class="label">
+                    <label for="lamination_label">
+                    <apex:outputLabel value="{!$Label.Case_Lamination_Type}"></apex:outputLabel>                    
+                    <!-- Laminate Type -->
+                    </label>
+                </div>
+                <div class="val">
+                    <apex:inputField id="laminate_type" value="{!objCase.Lamination_Type__c}"/>                   
+                </div>
+            </apex:outputPanel>
+             <div class="ts_textArea">
+                    <div class="label">
+                        <label for="description">
+                        <apex:outputLabel value="{!$Label.TicketProblem}"></apex:outputLabel>
+                        <!-- Please describe the problem you are having: -->                        
+                        </label>
+                    </div>
+                    <div class="val">
+                    <!--    <textarea id="description" name="description" rows="4" style="margin: 2px 0px; width: 406px; height: 71px; resize: none;"></textarea>    -->
+                        <apex:inputTextarea id="description" rows="4" value="{!probDesc}" style="margin: 2px 0px; width: 406px; height: 71px; resize: none;"/>                    
+                    </div>
+              </div>
+       
+              <div class="ts_textArea">
+                    <div class="label">
+                        <label for="remedyProblem">
+                        <apex:outputLabel value="{!$Label.TicketProblemselfsol}"></apex:outputLabel>
+                        <!-- What have you done to remedy this problem? -->                        
+                        </label>
+                    </div>
+                    <div class="val">
+                     <!--   <textarea id="remedyProblem" name="remedyProblem" rows="4" style="margin: 2px 0px; width: 406px; height: 71px; resize: none;"></textarea>-->
+                         <apex:inputTextarea id="remedyProblem" rows="4" value="{!remedyProb}" style="margin: 2px 0px; width: 406px; height: 71px; resize: none;"/>
+                    </div>                    
+              </div>              
+              <p class="ts_blurb"> 
+              <apex:outputLabel value="{!$Label.TicketInfolabel3}"></apex:outputLabel>
+              <!-- Tell us how we can reach you below: -->              
+              </p>              
+              <div class="label">
+                    <label for="firstname" id="lbl_first_name"><span class="req">*</span> 
+                    <apex:outputLabel value="{!$Label.conFirstName}"></apex:outputLabel>
+                    <!-- First name -->
+                    </label>
+              </div>
+              <div class="val">
+                  <apex:inputText id="first_name" value="{!first_name}"/>
+              </div>
+              <div class="label">
+                    <label for="last_name" id="lbl_last_name"><span class="req">*</span> 
+                    <apex:outputLabel value="{!$Label.conLastName}"></apex:outputLabel>                    
+                    <!-- Last name -->
+                    </label>
+              </div>
+              <div class="val">
+                   <apex:inputText id="last_name" value="{!last_name}"/>
+              </div>
+              <div class="label">
+                    <label for="title">
+                    <apex:outputLabel value="{!$Label.conTitle}"></apex:outputLabel>     
+                    <!-- Title -->                    
+                    </label>
+              </div>
+              <div class="val">
+                    <apex:inputText id="title" value="{!title}"/>
+              </div>
+              <div class="label">
+                    <label for="company" id="lbl_company"><span class="req">*</span> 
+                    <apex:outputLabel value="{!$Label.conCompany}"></apex:outputLabel>    
+                    <!-- Company -->
+                    </label>
+              </div>
+              <div class="val">
+                    <apex:inputText id="company" value="{!company}"/>
+              </div>
+              <div class="label">
+                    <label for="address" id="lbl_address"><span class="req">*</span>
+                    <apex:outputLabel value="{!$Label.conAddress1}"></apex:outputLabel> 
+                    <!-- Address 1 -->
+                    </label>
+              </div>
+              <div class="val">
+                    <apex:inputText id="address1" value="{!address1}"/>
+              </div>
+              <div class="label">
+                    <label for="address2">
+                    <apex:outputLabel value="{!$Label.conAddress2}"></apex:outputLabel>
+                    <!-- Address 2 -->
+                    </label>
+              </div>
+              <div class="val">
+                    <apex:inputText id="address2" value="{!address2}"/>
+              </div>
+              <div class="label">
+                    <span class="req">*</span><label id="lbl_city" for="city">
+                    <apex:outputLabel value="{!$Label.conCity}"></apex:outputLabel>
+                    <!-- City -->
+                    </label>
+              </div>
+              <div class="val">
+                    <apex:inputText id="city" value="{!city}"/>
+              </div>
+               <apex:outputPanel id="statePanel">
+              <div class="label">
+                     <span class="req">*</span><label for="state" id="stateLabel">
+                     <apex:outputLabel value="{!$Label.conStateProvince}"></apex:outputLabel>
+                     <!-- State/Province -->
+                     </label>
+              </div>             
+              <div class="val">
+                <apex:selectList id="stateList" size="1" value="{!State}">
+                    <apex:selectOptions value="{!StatesSelectList}"/>
+                </apex:selectList>
+              </div>
+              </apex:outputPanel>
+              <div class="label">
+                   <span class="req">*</span> <label for="zip" id="lbl_zip">
+                   <apex:outputLabel value="{!$Label.conPostalCode}"></apex:outputLabel>
+                   <!-- ZIP or Postal Code -->
+                   </label>
+              </div>
+              <div class="val">
+                    <apex:inputText id="zip" value="{!zipCode}"/>
+              </div>
+              <div class="label">
+                    <label for="phone" id="lbl_phone"><span class="req">*</span> 
+                    <apex:outputLabel value="{!$Label.conTelephone}"></apex:outputLabel>
+                    <!-- Telephone -->
+                    </label>
+              </div>
+              <div class="val">
+                   <!-- <apex:inputText id="phone" value="{!phone}"/> -->
+                   <apex:inputField id="phone" value="{!objCase.Contact_Phone_Web__c}"/>  
+              </div>
+              <div class="label">
+                    <label for="fax">
+                    <apex:outputLabel value="{!$Label.conFax}"></apex:outputLabel>
+                    <!-- Fax -->
+                    </label>
+              </div>
+              <div class="val">
+                    <apex:inputText id="fax" value="{!fax}"/>
+              </div>
+              <div class="label">
+                    <label for="email" id="lbl_email"><span class="req">*</span> 
+                    <apex:outputLabel value="{!$Label.conEmail}"></apex:outputLabel>                    
+                    <!-- Email -->
+                    </label>
+              </div>
+              <div class="val">
+                   <apex:inputText id="email" value="{!email}"/>
+              </div>
+              <div class="label" style="{!If(strLanguageCode=='ru','height:30px;','')}">
+                    <label for="email2" id="lbl_email2">
+                    <apex:outputLabel value="{!$Label.conconfirm}"></apex:outputLabel>
+                    <!-- please confirm -->
+                    &nbsp;
+                    <span class="req">*</span>                     
+                    &nbsp;<apex:outputLabel value="{!$Label.conEmail}"></apex:outputLabel>
+                    <!-- email -->
+                    </label>
+              </div>
+              <div class="val" style="{!If(strLanguageCode=='ru','height:33px;','')}">
+                     <apex:inputText id="confEmail" value="{!confirmEmail}"/>
+              </div>
+              <div class="label" >
+                    <label for="security_code" id="lbl_security_code"><span class="req">*</span> 
+                    <apex:outputLabel value="{!$Label.conSeccode}"></apex:outputLabel>
+                    <!-- Security Code -->
+                    </label>
+              </div>
+              <div class = "val" style="height: 35px;">
+              <apex:inputText id="secuCode" value="{!input}"/>
+                  <apex:outputPanel styleClass="container" layout="block" id="code" onmousedown="return false" style="float: right;">
+                      <apex:outputText value="{!char1}" styleClass="blueChar"/>
+                      <apex:outputText value="{!char2}" styleClass="blueChar"/>
+                      <apex:outputText value="{!char3}" styleClass="blueChar"/>
+                      <apex:outputText value="{!char4}" styleClass="blueChar"/>
+                      <apex:outputText value="{!char5}" styleClass="blueChar"/>
+                      <apex:outputText value="{!char6}" styleClass="blueChar"/>
+                  </apex:outputPanel>
+              </div>
+               <div class="submitBTNDiv">
+          <!-- <apex:commandLink action="{!validate}" reRender="result">   
+               <apex:actionFunction name="callValidate" action="{!validate}"/>-->
+                
+                <apex:commandButton style="width:66px;background-color:rgb(238, 145, 26);color:white;background-image:none;" value="{!$Label.Button_Submit}" id="submitBtn" onclick="return validateEmail();">
+                    <apex:actionFunction name="callValidate" action="{!validate}" />
+                </apex:commandButton>
+                <!--<apex:image url="{!URLFOR($Resource.HIDResources,'/HIDResource/Images/submit_button.gif')}" width="66px" height="26px" id="submitBtn" onclick="validateEmail();">
+                 <apex:actionFunction name="callValidate" action="{!validate}" />
+                 </apex:image>-->
+              <!--   </apex:commandLink> -->
+            </div>                             
+            </div> <!-- This is end of 'commonFieldsDiv' div -->                   
+        </div>
+         
+    </div>    
+            
+        <div class="priority-help-pop-up" style="font-size: 11px;">  
+                    <div class="content">
+                        <p>{!$Label.Priority_Guide_Message}</p>
+                    
+                    <p><strong>{!$Label.Priority_Critical}</strong><br/>{!$Label.Critical_Message}</p>
+                    <p><strong>{!$Label.Priority_High}</strong><br/>{!$Label.High_Message}</p>
+                    <p><strong>{!$Label.Priority_Medium}</strong><br/>{!$Label.Medium_Message}</p>
+                    <p><strong>{!$Label.Priority_Low}</strong><br/>{!$Label.Low_Message}</p>
+                    </div>
+    </div>   
+    </body>
+    </apex:form>    
+    <script>
+        function checkforModel(modelId,selModelId){
+           
+           var myVar=setTimeout(function(){checkforModelInterval(modelId,selModelId)},1000);           
+         }
+         
+         function checkforModelInterval(modelId,selModelId){    
+                   
+             if(document.getElementById(selModelId).options.length > 1){
+                 document.getElementById(modelId).style.display = 'block'; 
+             }else{
+                 document.getElementById(modelId).style.display = 'None'; 
+             };
+             showCommonFieldsDiv();
+         
+             return false;                
+        }
+        
+        function displayStates(selcntry){
+            
+            rerenderStates(selcntry);
+            showCommonFieldsDiv();
+            return false;
+        }
+        
+        function showCommonFieldsDiv(){ 
+            setStatelanguage();           
+            document.getElementById('commonFieldsDiv').style.display = 'block';            
+            showPanels();                   
+            return false;
+        }
+        
+        function showPanels(){           
+                  
+         var product = document.getElementById('{!$Component.tktForm:product}').value;
+          
+             if(product == 'Asure ID' ||  product == 'EasyLobby' || product == 'naviGO' || product == 'pivCLASS'){
+               document.getElementById('{!$Component.tktForm:LicensePanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:OSPanel}').style.display = 'block';  
+               document.getElementById('{!$Component.tktForm:firmwarePanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:DriverPanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:softwarePanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:cardCountPanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:ribbonPanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:cardPanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:laminationPanel}').style.display = 'none';                 
+             }else if (product == 'Printers'){
+               document.getElementById('{!$Component.tktForm:LicensePanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:OSPanel}').style.display = 'block';  
+               document.getElementById('{!$Component.tktForm:firmwarePanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:DriverPanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:softwarePanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:cardCountPanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:ribbonPanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:cardPanel}').style.display = 'block';
+               document.getElementById('{!$Component.tktForm:laminationPanel}').style.display = 'block'; 
+             }else{
+               document.getElementById('{!$Component.tktForm:LicensePanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:OSPanel}').style.display = 'none';  
+               document.getElementById('{!$Component.tktForm:firmwarePanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:DriverPanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:softwarePanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:cardCountPanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:ribbonPanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:cardPanel}').style.display = 'none';
+               document.getElementById('{!$Component.tktForm:laminationPanel}').style.display = 'none';   
+             }        
+            return false;       
+        }
+        
+        function validateEmail() {           
+            var emailText = document.getElementById('{!$Component.tktForm:email}').value;           
+            var pattern = /^[a-zA-Z0-9\-_]+(\.[a-zA-Z0-9\-_]+)*@[a-z0-9]+(\-[a-z0-9]+)*(\.[a-z0-9]+(\-[a-z0-9]+)*)*\.[a-z]{2,4}$/;
+            if (emailText != ''){
+                if (pattern.test(emailText)) {
+                    confirmEmail();
+                } else {
+                    alert("{!$Label.conEmailmessage}" + emailText);                                   
+                }
+            }else{
+                 alert("{!$Label.conEmailmessage}");   
+            } 
+            //validate();            
+            return false;
+        }
+                
+        function confirmEmail(){
+            var email = document.getElementById('{!$Component.tktForm:email}').value;
+            var confEmail = document.getElementById('{!$Component.tktForm:confEmail}').value;
+           
+            if(email != confEmail){ 
+                alert("{!$Label.conEmailmessage2}");
+                return false;        
+            }else{                
+                validate();                
+            }
+            return false;
+        }
+        
+        function validate(){           
+            var country = document.getElementById('{!$Component.tktForm:country}').value;          
+            var lang = document.getElementById('{!$Component.tktForm:language}').value;
+            var product = document.getElementById('{!$Component.tktForm:product}').value;
+            var model = document.getElementById('{!$Component.tktForm:selModel}').value;
+            var fname = document.getElementById('{!$Component.tktForm:first_name}').value;
+            var lname = document.getElementById('{!$Component.tktForm:last_name}').value;
+            var comp = document.getElementById('{!$Component.tktForm:company}').value;
+            var add1 = document.getElementById('{!$Component.tktForm:address1}').value;
+            var city = document.getElementById('{!$Component.tktForm:city}').value;
+            var state = document.getElementById('{!$Component.tktForm:stateList}').value;
+            var zipCode = document.getElementById('{!$Component.tktForm:zip}').value;
+            var phone = document.getElementById('{!$Component.tktForm:phone}').value;
+            var email = document.getElementById('{!$Component.tktForm:email}').value;
+            var confEmail = document.getElementById('{!$Component.tktForm:confEmail}').value;
+            var secuCode = document.getElementById('{!$Component.tktForm:secuCode}').value;
+            var msgs = "{!$Label.TicketvalidateMessage} \n";
+            var hasErrMsg = false;
+            
+            if (country == ''){
+                var cntry = document.getElementById("lbl_country");
+                var cntr = document.getElementById('{!$Component.tktForm:country}');
+                cntry.style.color = "red";
+                cntr.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$Label.conCountry}\n";                             
+            }
+            if (lang == ''){
+                var lng = document.getElementById("lbl_language");
+                var lan = document.getElementById('{!$Component.tktForm:language}');
+                lng.style.color = "red";
+                lan.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$ObjectType.Case.Fields.Case_Language__c.Label}\n";                
+            }            
+            if (product == ''){
+                var prd = document.getElementById("lbl_product");
+                var pdct = document.getElementById('{!$Component.tktForm:product}');
+                prd.style.color = "red";
+                pdct.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$ObjectType.Case.Fields.Product__c.Label}\n";  
+            }
+            if (model == ''){
+                var mdl = document.getElementById("lbl_model");
+                var mod = document.getElementById('{!$Component.tktForm:selModel}');
+                mdl.style.color = "red";
+                mod.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += ' - {!$ObjectType.Case.Fields.Model__c.Label}\n';
+            }
+            if (fname == ''){
+                var fn = document.getElementById("lbl_first_name");
+                var fnm = document.getElementById('{!$Component.tktForm:first_name}');              
+                fn.style.color = "red";
+                fnm.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$Label.conFirstName}\n";
+            }
+            if (lname == ''){
+                var ln = document.getElementById("lbl_last_name");
+                var lnm = document.getElementById('{!$Component.tktForm:last_name}');
+                ln.style.color = "red";
+                lnm.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$Label.conLastName}\n";
+            }
+            if (comp == ''){
+                var cmp = document.getElementById("lbl_company");
+                var cmpny = document.getElementById('{!$Component.tktForm:company}');
+                cmp.style.color = "red";
+                cmpny.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$Label.conCompany}\n";
+            }
+            if (add1 == ''){
+                var ad = document.getElementById("lbl_address");
+                var address = document.getElementById('{!$Component.tktForm:address1}');
+                ad.style.color = "red";
+                address.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$Label.conAddress1}\n";
+            }
+            if (city == ''){
+               var ct = document.getElementById("lbl_city");
+               var cty = document.getElementById('{!$Component.tktForm:city}');
+               ct.style.color = "red";
+               cty.style.backgroundColor = 'yellow';
+               hasErrMsg = true;
+               msgs += " - {!$Label.conCity}\n";
+            }
+            if (country == 'Canada' || country == 'Brazil' || country == 'United States'){
+                if (state == ''){
+                    var st = document.getElementById("stateLabel");
+                    var stt = document.getElementById('{!$Component.tktForm:stateList}');
+                    st.style.color = "red";
+                    stt.style.backgroundColor = 'yellow';
+                    hasErrMsg = true;
+                    msgs += " - {!$Label.conStateProvince}\n";
+                }
+            }
+            if (zipCode == ''){
+                var zp = document.getElementById("lbl_zip");
+                var zi = document.getElementById('{!$Component.tktForm:zip}');
+                zp.style.color = "red";
+                zi.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$Label.conPostalCode}\n";
+            }
+            if (phone == ''){
+                var ph = document.getElementById("lbl_phone");
+                var phn = document.getElementById('{!$Component.tktForm:phone}');
+                ph.style.color = "red";
+                phn.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$Label.conTelephone}\n";
+            }
+            if (email == ''){
+                var em = document.getElementById("lbl_email");
+                var eml = document.getElementById('{!$Component.tktForm:email}');
+                em.style.color = "red";
+                eml.style.backgroundColor = 'yellow';
+                hasErrMsg = true;
+                msgs += " - {!$Label.conEmail}\n";
+            }
+            if (confEmail == ''){
+                var em2 = document.getElementById("lbl_email2");
+                var eml2 = document.getElementById('{!$Component.tktForm:confEmail}');
+                em2.style.color = "red";
+                eml2.style.backgroundColor = 'yellow';
+                hasErrMsg = true;              
+                msgs += " - {!$Label.conConfirmEmail}\n";
+            }
+            if (secuCode == ''){
+                var sec = document.getElementById("lbl_security_code");
+                var scCode = document.getElementById('{!$Component.tktForm:secuCode}');
+                sec.style.color = "red";
+                scCode.style.backgroundColor = 'yellow'; 
+                hasErrMsg = true;
+                msgs += " - {!$Label.conCaptchamsg}\n";
+            }            
+        
+        if(!hasErrMsg){            
+            var cc = document.getElementById('{!$Component.tktForm:card_count}').value;
+            
+                if(isNaN(cc)){
+                    alert("{!$Label.cardCountmsg}");
+                }else{
+                    checkSecuriteCode();
+                }                
+        }else{
+            alert(msgs);
+        }
+        return false;
+    }
+    
+    function checkSecuriteCode(){        
+        var inputSec = document.getElementById('{!$Component.tktForm:secuCode}').value;       
+        if(inputSec == "{!secCode}"){
+            callValidate();  
+        }else{
+            alert("{!$Label.conCaptchamsg}");
+        } 
+        return false;                       
+    }
+    setlanguageNoneKorean();
+    function setlanguageNoneKorean(){
+        var select = document.getElementById('{!$Component.ticketPage:tktForm:language}');
+        for(var i = 0; i < select.options.length; i++){
+            if(select[i].value == ''){                 
+                select[i].innerHTML = "{!$Label.Language_None}";
+            }
+        }
+    }
+    
+    setCountrylanguage();
+    
+   
+    
+    function setStatelanguage(){
+        var select = document.getElementById('{!$Component.ticketPage:tktForm:stateList}');
+        for(var i = 0; i < select.options.length; i++){
+            if(select[i].innerHTML == 'Not Required'){                 
+                select[i].innerHTML = "{!$Label.Case_State_Not_Req}";
+            }
+        }
+    }
+   
+    function setCountrylanguage(){
+       
+        var select = document.getElementById('{!$Component.ticketPage:tktForm:country}');
+        for(var i = 0; i < select.options.length; i++){ 
+            if(select[i].innerHTML == 'Select Country'){                 
+                select[i].innerHTML = "{!$Label.Country_Select}";
+            }
+            if(select[i].innerHTML == 'Aland'){                 
+                select[i].innerHTML = "{!$Label.Country_Aland}";
+            }
+            if(select[i].innerHTML == 'Albania'){                 
+                select[i].innerHTML = "{!$Label.Country_Albania}";
+            }
+            if(select[i].innerHTML == 'Algeria'){                 
+                select[i].innerHTML = "{!$Label.Country_Algeria}";
+            }
+            if(select[i].innerHTML == 'American Samoa'){                 
+                select[i].innerHTML = "{!$Label.Country_American_Samoa}";
+            }
+            if(select[i].innerHTML == 'Andorra'){                 
+                select[i].innerHTML = "{!$Label.Country_Andorra}";
+            }
+            if(select[i].innerHTML == 'Antarctica'){                 
+                select[i].innerHTML = "{!$Label.Country_Antarctica}";
+            }
+            if(select[i].innerHTML == 'Argentina'){                 
+                select[i].innerHTML = "{!$Label.Country_Argentina}";
+            }
+            if(select[i].innerHTML == 'Armenia'){                 
+                select[i].innerHTML = "{!$Label.Country_Armenia}";
+            }
+            if(select[i].innerHTML == 'Australia'){                 
+                select[i].innerHTML = "{!$Label.Country_Australia}";
+            }
+            if(select[i].innerHTML == 'Austria'){                 
+                select[i].innerHTML = "{!$Label.Country_Austria}";
+            }
+            if(select[i].innerHTML == 'Bahrain'){                 
+                select[i].innerHTML = "{!$Label.Country_Bahrain}";
+            }
+            if(select[i].innerHTML == 'Belarus'){                 
+                select[i].innerHTML = "{!$Label.Country_Belarus}";
+            }
+            if(select[i].innerHTML == 'Belgium'){                 
+                select[i].innerHTML = "{!$Label.Country_Belgium}";
+            }
+            if(select[i].innerHTML == 'Belize'){                 
+                select[i].innerHTML = "{!$Label.Country_Belize}";
+            }
+            if(select[i].innerHTML == 'Bermuda'){                 
+                select[i].innerHTML = "{!$Label.Country_Bermuda}";
+            }
+            if(select[i].innerHTML == 'Bolivia'){                 
+                select[i].innerHTML = "{!$Label.Country_Bolivia}";
+            }
+            if(select[i].innerHTML == 'Bosnia and Herzegovina'){                 
+                select[i].innerHTML = "{!$Label.Country_Bosnia_and_Herzegovina}";
+            }
+            if(select[i].innerHTML == 'Bouvet Island'){                 
+                select[i].innerHTML = "{!$Label.Country_Bouvet_Island}";
+            }
+            if(select[i].innerHTML == 'Brazil'){                 
+                select[i].innerHTML = "{!$Label.Country_Brazil}";
+            }
+            if(select[i].innerHTML == 'Bulgaria'){                 
+                select[i].innerHTML = "{!$Label.Country_Bulgaria}";
+            }
+            if(select[i].innerHTML == 'Cambodia'){                 
+                select[i].innerHTML = "{!$Label.Country_Cambodia}";
+            }
+            if(select[i].innerHTML == 'Cameroon'){                 
+                select[i].innerHTML = "{!$Label.Country_Cameroon}";
+            }
+            if(select[i].innerHTML == 'Canada'){                 
+                select[i].innerHTML = "{!$Label.Country_Canada}";
+            }
+            if(select[i].innerHTML == 'Cape Verde'){                 
+                select[i].innerHTML = "{!$Label.Country_Cape_Verde}";
+            }
+            if(select[i].innerHTML == 'Cayman Islands'){                 
+                select[i].innerHTML = "{!$Label.Country_Cayman_Islands}";
+            }            
+            if(select[i].innerHTML == 'Central African Republic'){                 
+                select[i].innerHTML = "{!$Label.country_Central_African_Republic}";
+            }
+            if(select[i].innerHTML == 'Chad'){                 
+                select[i].innerHTML = "{!$Label.Country_Chad}";
+            }
+            if(select[i].innerHTML == 'Chile'){                 
+                select[i].innerHTML = "{!$Label.Country_Chile}";
+            }
+            if(select[i].innerHTML == 'China'){                 
+                select[i].innerHTML = "{!$Label.Country_China}";
+            }
+            if(select[i].innerHTML == 'Colombia'){                 
+                select[i].innerHTML = "{!$Label.Country_Colombia}";
+            }
+            if(select[i].innerHTML == 'Comoros'){                 
+                select[i].innerHTML = "{!$Label.Country_Comoros}";
+            }
+            if(select[i].innerHTML == 'Croatia'){                 
+                select[i].innerHTML = "{!$Label.Country_Croatia}";
+            }
+            if(select[i].innerHTML == 'Cyprus'){                 
+                select[i].innerHTML = "{!$Label.Country_Cyprus}";
+            }
+            if(select[i].innerHTML == 'Czech Republic'){                 
+                select[i].innerHTML = "{!$Label.Country_Czech_Republic}";
+            }
+            if(select[i].innerHTML == 'Denmark'){                 
+                select[i].innerHTML = "{!$Label.Country_Denmark}";
+            }
+            if(select[i].innerHTML == 'Dominican Republic'){                 
+                select[i].innerHTML = "{!$Label.Country_Dominican_Republic}";
+            }
+            if(select[i].innerHTML == 'Ecuador'){                 
+                select[i].innerHTML = "{!$Label.Country_Ecuador}";
+            }
+            if(select[i].innerHTML == 'Egypt'){                 
+                select[i].innerHTML = "{!$Label.Country_Egypt}";
+            }
+            if(select[i].innerHTML == 'Equatorial Guinea'){                 
+                select[i].innerHTML = "{!$Label.Country_Equatorial_Guinea}";
+            }
+            if(select[i].innerHTML == 'Eritrea'){                 
+                select[i].innerHTML = "{!$Label.Country_Eritrea}";
+            }
+            if(select[i].innerHTML == 'Estonia'){                 
+                select[i].innerHTML = "{!$Label.Country_Estonia}";
+            }
+            if(select[i].innerHTML == 'Ethiopia'){                 
+                select[i].innerHTML = "{!$Label.Country_Ethiopia}";
+            }
+            if(select[i].innerHTML == 'Falkland Islands'){                 
+                select[i].innerHTML = "{!$Label.Country_Falkland_Islands}";
+            }
+            if(select[i].innerHTML == 'Faroe Islands'){                 
+                select[i].innerHTML = "{!$Label.Country_Faroe_Islands}";
+            }
+            if(select[i].innerHTML == 'Fiji'){                 
+                select[i].innerHTML = "{!$Label.Country_Fiji}";
+            }
+            if(select[i].innerHTML == 'Finland'){                 
+                select[i].innerHTML = "{!$Label.Country_Finland}";
+            }
+            if(select[i].innerHTML == 'France'){                 
+                select[i].innerHTML = "{!$Label.Country_France}";
+            }
+            if(select[i].innerHTML == 'French Polynesia'){                 
+                select[i].innerHTML = "{!$Label.Country_French_Polynesia}";
+            }
+            if(select[i].innerHTML == 'Gambia'){                 
+                select[i].innerHTML = "{!$Label.Country_Gambia}";
+            }
+            if(select[i].innerHTML == 'Georgia'){                 
+                select[i].innerHTML = "{!$Label.Country_Georgia}";
+            }
+            if(select[i].innerHTML == 'Germany'){                 
+                select[i].innerHTML = "{!$Label.Country_Germany}";
+            }
+            if(select[i].innerHTML == 'Greece'){                 
+                select[i].innerHTML = "{!$Label.Country_Greece}";
+            }
+            if(select[i].innerHTML == 'Grenada'){                 
+                select[i].innerHTML = "{!$Label.Country_Grenada}";
+            }
+            if(select[i].innerHTML == 'Guernsey'){                 
+                select[i].innerHTML = "{!$Label.Country_Guernsey}";
+            }
+            if(select[i].innerHTML == 'Guinea'){                 
+                select[i].innerHTML = "{!$Label.Country_Guinea}";
+            }
+            if(select[i].innerHTML == 'Guyana'){                 
+                select[i].innerHTML = "{!$Label.Country_Guyana}";
+            }
+            if(select[i].innerHTML == 'Hong Kong'){                 
+                select[i].innerHTML = "{!$Label.Country_Hong_Kong}";
+            }
+            if(select[i].innerHTML == 'Hungary'){                 
+                select[i].innerHTML = "{!$Label.Country_Hungary}";
+            }
+            if(select[i].innerHTML == 'Iceland'){                 
+                select[i].innerHTML = "{!$Label.Country_Iceland}";
+            }
+            if(select[i].innerHTML == 'India'){                 
+                select[i].innerHTML = "{!$Label.Country_India}";
+            }
+            if(select[i].innerHTML == 'Indonesia'){                 
+                select[i].innerHTML = "{!$Label.Country_Indonesia}";
+            }
+            if(select[i].innerHTML == 'Ireland'){                 
+                select[i].innerHTML = "{!$Label.Country_Ireland}";
+            }
+            if(select[i].innerHTML == 'Ireland'){                 
+                select[i].innerHTML = "{!$Label.Country_Ireland}";
+            }
+            if(select[i].innerHTML == 'Italy'){                 
+                select[i].innerHTML = "{!$Label.Country_Italy}";
+            }
+            if(select[i].innerHTML == 'Jamaica'){                 
+                select[i].innerHTML = "{!$Label.Country_Jamaica}";
+            }
+            if(select[i].innerHTML == 'Japan'){                 
+                select[i].innerHTML = "{!$Label.Country_Japan}";
+            }
+            if(select[i].innerHTML == 'Jordan'){                 
+                select[i].innerHTML = "{!$Label.Country_Jordan}";
+            }
+            if(select[i].innerHTML == 'Korea, North'){                 
+                select[i].innerHTML = "{!$Label.Country_Korea_North}";
+            }            
+            if(select[i].innerHTML == 'Kuwait'){                 
+                select[i].innerHTML = "{!$Label.Country_Kuwait}";
+            }
+            if(select[i].innerHTML == 'Kyrgyzstan'){                 
+                select[i].innerHTML = "{!$Label.Country_Kyrgyzstan}";
+            }
+            if(select[i].innerHTML == 'Latvia'){                 
+                select[i].innerHTML = "{!$Label.Country_Latvia}";
+            }
+            if(select[i].innerHTML == 'Lebanon'){                 
+                select[i].innerHTML = "{!$Label.Country_Lebanon}";
+            }
+            if(select[i].innerHTML == 'Libya'){                 
+                select[i].innerHTML = "{!$Label.Country_Libya}";
+            }
+            if(select[i].innerHTML == 'Lithuania'){                 
+                select[i].innerHTML = "{!$Label.Country_Lithuania}";
+            }
+            if(select[i].innerHTML == 'Macau'){                 
+                select[i].innerHTML = "{!$Label.Country_Macau}";
+            }
+            if(select[i].innerHTML == 'Macedonia'){                 
+                select[i].innerHTML = "{!$Label.Country_Macedonia}";
+            }
+            if(select[i].innerHTML == 'Malaysia'){                 
+                select[i].innerHTML = "{!$Label.Country_Malaysia}";
+            }
+            if(select[i].innerHTML == 'Malta'){                 
+                select[i].innerHTML = "{!$Label.Country_Malta}";
+            }
+            if(select[i].innerHTML == 'Mauritania'){                 
+                select[i].innerHTML = "{!$Label.Country_Mauritania}";
+            }
+            if(select[i].innerHTML == 'Mauritius'){                 
+                select[i].innerHTML = "{!$Label.Country_Mauritius}";
+            }
+            if(select[i].innerHTML == 'Mexico'){                 
+                select[i].innerHTML = "{!$Label.Country_Mexico}";
+            }
+            if(select[i].innerHTML == 'Micronesia'){                 
+                select[i].innerHTML = "{!$Label.Country_Micronesia}";
+            }
+            if(select[i].innerHTML == 'Moldova'){                 
+                select[i].innerHTML = "{!$Label.Country_Moldova}";
+            }
+            if(select[i].innerHTML == 'Mongolia'){                 
+                select[i].innerHTML = "{!$Label.Country_Mongolia}";
+            }
+            if(select[i].innerHTML == 'Morocco'){                 
+                select[i].innerHTML = "{!$Label.Country_Morocco}";
+            }
+            if(select[i].innerHTML == 'Myanmar'){                 
+                select[i].innerHTML = "{!$Label.Country_Myanmar}";
+            }
+            if(select[i].innerHTML == 'Namibia'){                 
+                select[i].innerHTML = "{!$Label.Country_Namibia}";
+            }
+            if(select[i].innerHTML == 'Nepal'){                 
+                select[i].innerHTML = "{!$Label.Country_Nepal}";
+            }
+            if(select[i].innerHTML == 'Netherlands'){                 
+                select[i].innerHTML = "{!$Label.Country_Netherlands}";
+            }
+            if(select[i].innerHTML == 'Netherlands Antilles'){                 
+                select[i].innerHTML = "{!$Label.Country_Netherlands_Antilles}";
+            }
+            if(select[i].innerHTML == 'New Caledonia'){                 
+                select[i].innerHTML = "{!$Label.Country_New_Caledonia}";
+            }
+            if(select[i].innerHTML == 'New Zealand'){                 
+                select[i].innerHTML = "{!$Label.Country_New_Zealand}";
+            }
+            if(select[i].innerHTML == 'Norway'){                 
+                select[i].innerHTML = "{!$Label.Country_Norway}";
+            }
+            if(select[i].innerHTML == 'Papua New Guinea'){                 
+                select[i].innerHTML = "{!$Label.Country_Papua_New_Guinea}";
+            }
+            if(select[i].innerHTML == 'Peru'){                 
+                select[i].innerHTML = "{!$Label.Country_Peru}";
+            }
+            if(select[i].innerHTML == 'Poland'){                 
+                select[i].innerHTML = "{!$Label.Country_Poland}";
+            }
+            if(select[i].innerHTML == 'Reunion'){                 
+                select[i].innerHTML = "{!$Label.Country_Reunion}";
+            }
+            if(select[i].innerHTML == 'Romania'){                 
+                select[i].innerHTML = "{!$Label.Country_Romania}";
+            }
+            if(select[i].innerHTML == 'Saint Helena'){                 
+                select[i].innerHTML = "{!$Label.Country_Saint_Helena}";
+            }
+            if(select[i].innerHTML == 'Saint Lucia'){                 
+                select[i].innerHTML = "{!$Label.Country_Saint_Lucia}";
+            }
+            if(select[i].innerHTML == 'Saint Pierre and Miquelon'){                 
+                select[i].innerHTML = "{!$Label.Country_Saint_Pierre_and_Miquelon}";
+            }
+            if(select[i].innerHTML == 'San Marino'){                 
+                select[i].innerHTML = "{!$Label.Country_San_Marino}";
+            }
+            if(select[i].innerHTML == 'Saudi Arabia'){                 
+                select[i].innerHTML = "{!$Label.Country_Saudi_Arabia}";
+            }
+            if(select[i].innerHTML == 'Senegal'){                 
+                select[i].innerHTML = "{!$Label.Country_Senegal}";
+            }
+            if(select[i].innerHTML == 'Serbia'){                 
+                select[i].innerHTML = "{!$Label.Country_Serbia}";
+            }
+            if(select[i].innerHTML == 'Singapore'){                 
+                select[i].innerHTML = "{!$Label.Country_Singapore}";
+            }
+            if(select[i].innerHTML == 'Slovakia'){                 
+                select[i].innerHTML = "{!$Label.Country_Slovakia}";
+            }
+            if(select[i].innerHTML == 'Slovenia'){                 
+                select[i].innerHTML = "{!$Label.Country_Slovenia}";
+            }
+            if(select[i].innerHTML == 'Solomon Islands'){                 
+                select[i].innerHTML = "{!$Label.Country_Solomon_Islands}";
+            }
+            if(select[i].innerHTML == 'Somalia'){                 
+                select[i].innerHTML = "{!$Label.Country_Somalia}";
+            }
+            if(select[i].innerHTML == 'South Africa'){                 
+                select[i].innerHTML = "{!$Label.Country_South_Africa}";
+            }
+            if(select[i].innerHTML == 'Spain'){                 
+                select[i].innerHTML = "{!$Label.Country_Spain}";
+            }
+            if(select[i].innerHTML == 'Sudan'){                 
+                select[i].innerHTML = "{!$Label.Country_Sudan}";
+            }
+            if(select[i].innerHTML == 'Sweden'){                 
+                select[i].innerHTML = "{!$Label.Country_Sweden}";
+            }
+            if(select[i].innerHTML == 'Switzerland'){                 
+                select[i].innerHTML = "{!$Label.Country_Switzerland}";
+            }
+            if(select[i].innerHTML == 'Syria'){                 
+                select[i].innerHTML = "{!$Label.Country_Syria}";
+            }
+            if(select[i].innerHTML == 'Taiwan'){                 
+                select[i].innerHTML = "{!$Label.Country_Taiwan}";
+            }
+            if(select[i].innerHTML == 'Tanzania'){                 
+                select[i].innerHTML = "{!$Label.Country_Tanzania}";
+            }
+            if(select[i].innerHTML == 'Tunisia'){                 
+                select[i].innerHTML = "{!$Label.Country_Tunisia}";
+            }
+            if(select[i].innerHTML == 'Turkey'){                 
+                select[i].innerHTML = "{!$Label.Country_Turkey}";
+            }
+            if(select[i].innerHTML == 'Turks and Caicos Islands'){                 
+                select[i].innerHTML = "{!$Label.Country_Turks_and_Caicos_Islands}";
+            }
+            if(select[i].innerHTML == 'Uganda'){                 
+                select[i].innerHTML = "{!$Label.Country_Uganda}";
+            }
+            if(select[i].innerHTML == 'United Kingdom'){                 
+                select[i].innerHTML = "{!$Label.Country_United_Kingdom}";
+            }
+            if(select[i].innerHTML == 'United States'){                 
+                select[i].innerHTML = "{!$Label.Country_United_States}";
+            }
+            if(select[i].innerHTML == 'Uzbekistan'){                 
+                select[i].innerHTML = "{!$Label.Country_Uzbekistan}";
+            }
+            if(select[i].innerHTML == 'Vatican City'){                 
+                select[i].innerHTML = "{!$Label.Country_Vatican_City}";
+            }
+            if(select[i].innerHTML == 'Venezuela'){                 
+                select[i].innerHTML = "{!$Label.Country_Venezuela}";
+            }
+            if(select[i].innerHTML == 'Virgin Islands, British'){                 
+                select[i].innerHTML = "{!$Label.Country_Virgin_Islands_British}";
+            }
+            if(select[i].innerHTML == 'Virgin Islands, U.S.'){                 
+                select[i].innerHTML = "{!$Label.Country_Virgin_Islands_U_S}";
+            }
+            if(select[i].innerHTML == 'Western Sahara'){                 
+                select[i].innerHTML = "{!$Label.Country_Western_Sahara}";
+            }
+            if(select[i].innerHTML == 'Zambia'){                 
+                select[i].innerHTML = "{!$Label.Country_Zambia}";
+            }
+        }
+       
+    }
+            
+    </script>      
+     
+          
+    <script>
+        //help pop-up
+        $('.priority-help-button').click(function() {
+            jQuery().colorbox({
+            transition: 'none',
+            title: '<apex:image url="{!URLFOR($Resource.HIDResources,'/HIDResource/Images/help_blue_icon.gif')}" alt="HID Global Technical Support - Priorities - Help" styleClass="help-button-icon" height="28" width="28" /> {!$Label.Priority_Guide}',
+            initialWidth:544,
+            initialHeight:260,
+            innerWidth:544,
+            innerHeight:245,
+            inline: true,
+            href:'.priority-help-pop-up',
+            onLoad: function() {
+            
+            $('#cboxTitle').css({'color':'#1f58a4','font-size':'18px'});
+            
+            $('#cboxClose').css({'text-transform':'capitalize','padding':'3px 25px 3px 0','background':'url({!URLFOR($Resource.HIDResources, '/HIDResource/Images/close-button.gif')}) right no-repeat'});
+            },
+            
+            onComplete: function () {
+            $('.priority-help-pop-up').show();
+            },
+            onCleanup: function(){
+            $('.priority-help-pop-up').hide();
+            }
+            }
+            
+            );
+           
+            document.getElementById("cboxClose").innerHTML = '{!$Label.Help_Case_Close}';
+           
+        });
+        
+        
+    </script> 
+    <style>
+        .blueChar{
+            color: #000080;
+            font-weight: bold;
+            font-size: 26px;
+            padding:2px;
+        }        
+        .container{            
+            width: 120px;
+            height: 30px;
+            text-align: right;
+            background-Image:url("{!URLFOR($Resource.HIDResources, '/HIDResource/Images/CaptchaSecurityImages.jpg')}");    
+        }
+        
+        
+        
+        
+        
+        #cboxOverlay{background:#fff;}    
+        #colorbox{}
+        #cboxTopLeft{width:25px; height:45px; margin-left:25px; background:url({!URLFOR($Resource.HIDResources,'/HIDResource/Images/border5.png')}) 0 0 no-repeat;}
+        #cboxTopCenter{height:45px; background:url({!URLFOR($Resource.HIDResources,'/HIDResource/Images/border5.png')}) 0 -98px repeat-x;}
+        #cboxTopRight{width:25px; height:45px; margin-left:-25px; background:url({!URLFOR($Resource.HIDResources,'/HIDResource/Images/border5.png')}) -57px 0 no-repeat;}
+        #cboxBottomLeft{width:25px; height:40px; margin-left:25px; background:url({!URLFOR($Resource.HIDResources,'/HIDResource/Images/border5.png')}) 0 -57px no-repeat;}
+        #cboxBottomCenter{height:40px; background:url({!URLFOR($Resource.HIDResources,'/HIDResource/Images/border5.png')}) 0 -145px repeat-x;}
+        #cboxBottomRight{width:25px; height:40px; margin-left:-25px; background:url({!URLFOR($Resource.HIDResources,'/HIDResource/Images/border5.png')}) -57px -57px no-repeat;}
+        #cboxMiddleLeft{width:37px; background:url({!URLFOR($Resource.HIDResources,'/HIDResource/Images/border6.png')}) 11px 0 no-repeat;}
+        #cboxMiddleRight{width:25px; background:url({!URLFOR($Resource.HIDResources,'/HIDResource/Images/border6.png')}) -37px 0 no-repeat;}
+    </style>   
+</apex:page>

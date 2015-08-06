@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog Profile --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Catalog Profile --></value>
+    </caseValues>
+    <fields>
+        <label>Catálogo</label>
+        <name>Catalog__c</name>
+        <relationshipLabel>Perfiles de catálogos</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Id de perfil</label>
+        <name>Profile_Id__c</name>
+    </fields>
+    <fields>
+        <label>Nombre del perfil</label>
+        <name>Profile_Name__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <nameFieldLabel><!-- Catalog Profile Name --></nameFieldLabel>
+</CustomObjectTranslation>

@@ -1,0 +1,70 @@
+<apex:page standardcontroller="BigMachines__Quote__c" extensions="BigMachines.BigMachinesEditQuoteController" tabStyle="BigMachines__Quotes__tab">
+    <apex:sectionHeader title="{!$ObjectType.BigMachines__Quote__c.Label} Edit" subtitle="{!subtitle}" rendered="{!displayHeader}" />
+    <apex:outputText rendered="false" value="{!BigMachines__Quote__c.Name}" />
+    <apex:outputText rendered="false" value="{!BigMachines__Quote__c.BigMachines__Transaction_Id__c}" />
+    <apex:outputText rendered="false" value="{!BigMachines__Quote__c.BigMachines__Opportunity__c}" />
+    <apex:outputText rendered="false" value="{!BigMachines__Quote__c.BigMachines__Opportunity__r.AccountId}" />
+    <style>
+    /* adds scroll bar to sidebar, kills some sfdc js that resizes the main body, and sets the scrollbars for the main iframe */
+    .sidebarInner {
+        overflow-y:auto;/*optionally add scrollbar*/
+        overflow-x:hidden;
+        position:relative;/*fixes inept positioning in IE*/
+    }
+    #bodyTable {
+        height:1px !important;
+    }
+    #edit_quote {
+        overflow-y:scroll;
+        overflow-x:auto;
+    }
+    </style>
+    <script type="text/javascript">
+    (function(){
+    var sfdcFooterId = 'sfdcFooter';//id to use to identify the sfdc page footer
+    function resize() {
+        //magic constants: sfdc header:111px, bm header: 74px, bm bottom margin:20px, , rounded corner bottom:20px
+        var pageHeight = window.innerHeight || document.documentElement.clientHeight;
+        var sfdcFooter = document.getElementById(sfdcFooterId).offsetHeight;
+        //resize the iframe
+        document.getElementById('edit_quote').style.height = (pageHeight - 111 - 74 - 20 - 20 - sfdcFooter) + 'px';
+        //resize the sidebar, handle, and inner
+        document.getElementById('sidebarDiv').style.height = pageHeight - 111 - sfdcFooter - 20 + 'px';
+        document.getElementById('handle').style.height = pageHeight - 111 - sfdcFooter - 20 + 'px';
+        document.getElementById('sidebarDiv').lastChild.style.height = pageHeight - 111 - sfdcFooter - 20 + 'px';
+    }
+/*
+    function resize() {
+        //magic constants: sfdc header:94px, bm header: 57px, bm bottom margin:10px
+        var pageHeight = window.innerHeight || document.documentElement.clientHeight;
+        var sfdcFooter = document.getElementById(sfdcFooterId).offsetHeight;
+        //resize the iframe
+        document.getElementById('edit_quote').style.height = (pageHeight - 94 - 57 - 10 - sfdcFooter) + 'px';
+        //resize the sidebar, handle, and inner
+        document.getElementById('sidebarDiv').style.height = pageHeight - 94 - sfdcFooter + 'px';
+        document.getElementById('handle').style.height = pageHeight - 94 - sfdcFooter + 'px';
+        document.getElementById('sidebarDiv').lastChild.style.height = pageHeight - 94 - sfdcFooter + 'px';
+    }
+*/    
+    window.onload=function() {
+        var divs = document.getElementsByTagName('div');
+        for (var i = 0; i < divs.length; i++) {
+            if (divs[i].className.indexOf('bPageFooter') != -1) {
+                divs[i].style.display = 'none';
+                if (!divs[i].id) {
+                    divs[i].id = sfdcFooterId;
+                } else {
+                    sfdcFooterId = divs[i].id;
+                }
+                break;
+            }
+        }
+        resize();
+        //do not wire up the resize event until after we have the footer
+        window.onresize=resize;
+    }
+    })();
+    </script>
+    <apex:pageMessages />
+    <iframe height="390px" src="{!EditURL}&_partnerSessionUrl={!$Api.Partner_Server_URL_210}&_partnerSessionId={!$Api.Session_ID}" id="edit_quote" name="edit_quote" title="Content" scrolling="yes" width="100%" frameborder="0"></iframe>
+</apex:page>

@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog Group --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Catalog Group --></value>
+    </caseValues>
+    <fields>
+        <label>Catalogo</label>
+        <name>Catalog__c</name>
+        <relationshipLabel>Gruppi del catalogo</relationshipLabel>
+    </fields>
+    <fields>
+        <label>ID gruppo</label>
+        <name>Group_Id__c</name>
+    </fields>
+    <fields>
+        <label>Nome gruppo</label>
+        <name>Group_Name__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <nameFieldLabel><!-- Catalog Group Name --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <fields>
+        <label>順序番号</label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label>質問</label>
+        <name>Question__c</name>
+        <relationshipLabel>クイズ形式の質問</relationshipLabel>
+    </fields>
+    <fields>
+        <label>クイズ</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>クイズ形式の質問</relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Quiz Question Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Quiz Question Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>フィールドにマイナスの値を指定できません</errorMessage>
+        <name>Negative_Order_Value</name>
+    </validationRules>
+    <webLinks>
+        <label>質問の追加</label>
+        <name>Add_Question</name>
+    </webLinks>
+    <webLinks>
+        <label>ページ区切りを追加</label>
+        <name>Add_page_break</name>
+    </webLinks>
+    <webLinks>
+        <label>新しい質問</label>
+        <name>New_Question</name>
+    </webLinks>
+</CustomObjectTranslation>

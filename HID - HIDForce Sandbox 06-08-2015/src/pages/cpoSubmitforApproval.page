@@ -1,0 +1,42 @@
+<!-------------------------------------------------------------------------------------------
+- Type             : visualforce Page
+- Name             : cpoSubmitforApproval
+- Created by       : Hitesh Patel
+- Created Date     : 8th May 2015
+- Last Modified By : Hitesh Patel 8th May 2015
+- Purpose          : page used to CPO submit for approval
+---------------------------------------------------------------------------------------------->
+<apex:page id="myPage" cache="true" standardController="opportunity" extensions="opportunityApprovalHistoryController">
+    <apex:form >
+        <script>
+            function gotoOpportunityPage(){
+                window.location.href = "/{!opp.id}";
+                return false;
+            }
+        </script>
+        
+        <apex:sectionHeader title="Submit for Approval" subtitle="{!opp.Name}"/>
+        <apex:outputLink style="text-decoration:none;color:#015BA7;" value="/{!opp.id}" rendered="{!If(strApprovalErrormsg != '', true, false)}">« Back to Opportunity: {!opp.Name}</apex:outputLink>
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock title="Submit for Approval" rendered="{!If(strApprovalErrormsg == '', true, false)}">
+            <apex:pageblockButtons location="bottom">
+                <apex:commandButton value="Submit for Approval" action="{!submitForApproval}"/>
+                <apex:commandButton value="Cancel" onclick="return gotoOpportunityPage();"/>
+            </apex:pageblockButtons>
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Opportunity Name"></apex:outputLabel>
+                    <apex:outputLabel value="{!opp.Name}"></apex:outputLabel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Owner"></apex:outputLabel>
+                    <apex:outputLink value="/{!opp.ownerid}">{!opp.Owner.Name}</apex:outputLink>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Comments"></apex:outputLabel>
+                    <apex:inputField style="width:60%;" value="{!opp.Comments_to_Approver__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

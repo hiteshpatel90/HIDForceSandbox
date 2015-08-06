@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Notification Setting --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Notification Setting --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Chatter --></label>
+        <name>Chatter__c</name>
+    </fields>
+    <fields>
+        <label>Correo electrónico</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <help><!-- 12345 --></help>
+        <label>Habilitado</label>
+        <name>Enabled__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+</CustomObjectTranslation>

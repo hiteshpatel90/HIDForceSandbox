@@ -1,0 +1,122 @@
+<apex:page showHeader="false" standardStylesheets="false" sideBar="false" controller="AXIOM_BASE.SearchTrainingController" action="{!initMethod}">
+
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_BASE__css_SearchTraining)}" />
+	<apex:outputText value="{!contextString}" escape="true" id="responseText" style="display:none;"/>
+	<apex:form >
+		<div id="container">
+			<!-- HEADER SECTION -->
+			<div class="header-wrapper"></div>
+			<!-- MAIN CONTENT -->
+			<main>
+				<!-- LEFT COLUMN SECTION -->
+				<div class="left-column">
+					<section class="page-title"></section>
+					<!-- ACCORDION FEATURE -->
+					<div class="accordion">
+						<dl>
+							<dt>Overview</dt>
+							<dd> </dd>
+
+							<dt>Available Training</dt>
+							<dd>
+								<apex:outputPanel layout="block" rendered="{!showResult}"  id="pgBlock">
+									<div class="component-body" style="display: block;">
+										<div class="component-body-header">&nbsp;</div>
+										<apex:repeat value="{!content}" var="con">
+											<div class="component-body-item">
+												<div class="component-body-item-content">
+													<table>
+														<tr>
+															<td>
+																<apex:commandLink action="{!launchAssign}" target="_blank" value="{!con.description}">
+																	<apex:param name="idModule" value="{!con.id}" />
+																</apex:commandLink>
+															</td>
+														</tr>
+													</table>
+												</div>
+											</div>
+										</apex:repeat>
+									</div>
+								</apex:outputPanel>
+								<apex:outputPanel rendered="{!NOT(showResult)}">
+									<div class="component-body-item">
+										<div class="component-body-item-content">
+											<apex:outputText value="No module to display" />
+										</div>
+									</div>
+								</apex:outputPanel>
+							</dd>
+
+							<!-- START OF BLOG POSTS -->
+							<dt>Read Our Recent Blog Posts</dt>
+							<dd style="display: block;">
+								<link href="http://axiomsfd.com/blog/feed/&chan=title&num=3&desc=250&date=y&utf=y&html=y"></link>
+								<script src="https://feed2js.org//feed2js.php?src=http://axiomsfd.com/blog/feed/&chan=title&num=3&desc=250&date=y&utf=y&html=y"></script>
+							</dd>
+						</dl>
+					</div>
+				</div>
+				<!-- SIDEBAR SECTION -->
+				<div id="aside"></div>
+			</main>
+		</div>
+		<div class="clear">&nbsp;</div>
+		<!-- FOOTER SECTION -->
+		<div id="footer-wrapper" role="contentinfo"></div>
+	</apex:form>
+	<script type='text/javascript' src="{!URLFOR($Resource.jQuery)}"/>
+	<!--[if IE]>
+	<script src="https://html5shiv.googlecode.com/svn/trunk/html5.js"></script>
+	<![endif]-->
+	<script>
+		$(function () {
+			$(".accordion dt:first").addClass("active");
+			$(".accordion dd:not(:first)").hide();
+
+			$(".accordion dt").click(function () {
+				$(this).next("dd").slideToggle("slow").siblings("dd:visible").slideUp("slow");
+				$(this).toggleClass("active");
+				$(this).siblings("dt").removeClass("active");
+			});
+
+			var $content = $($("[id$=responseText]").text());
+			appendContent($('div.header-wrapper'), $content.find('div.header-wrapper'));
+			appendContent($('#footer-wrapper'), $content.find('#footer-wrapper'));
+			appendContent($('#aside'), $content.find('aside'));
+			appendContent($('section.page-title'), $content.find('section.page-title'));
+			appendContent($('.accordion').find('dd:first'), $content.find('.accordion').find('dd:first'));
+			$("[id$=responseText]").remove();
+
+			function appendContent($targer, $cnt) {
+				var locationLink = 'https://contextualtraining.axiomsfd.com';
+				if ($cnt) {
+					try{
+						$cnt.find('img').each(function() {
+							var srcAtr = $(this).attr('src');
+							if (/images/.test(srcAtr)) {
+								srcAtr = srcAtr.replace(location.protocol + '//' + location.hostname + '/', '').replace('apex/','');
+								this.src = locationLink + '/' + srcAtr;
+							}
+						});
+					}catch(e){}
+					try{
+						$cnt.find('a').each(function() {
+							var hrefAtr = $(this).attr('href');
+							if (hrefAtr !== 'undefined') {
+								if (!/^(www|http|https|\/\/)/.test(hrefAtr) && ~hrefAtr.indexOf('/')) {
+									this.href = locationLink + hrefAtr;
+								}
+							}
+
+						});
+					}catch(e){}
+					try{
+					$targer.append($cnt.html());
+				}catch(e){}
+				}
+
+			}
+		});
+	</script>
+</apex:page>

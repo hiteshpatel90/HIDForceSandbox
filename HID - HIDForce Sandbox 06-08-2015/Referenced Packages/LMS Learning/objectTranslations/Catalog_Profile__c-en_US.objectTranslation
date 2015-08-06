@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Catalog Profile</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Catalog Profiles</value>
+    </caseValues>
+    <fields>
+        <label>Catalogue</label>
+        <name>Catalog__c</name>
+        <relationshipLabel>Catalogue profiles</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Profile ID</label>
+        <name>Profile_Id__c</name>
+    </fields>
+    <fields>
+        <label>Profile name</label>
+        <name>Profile_Name__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Question --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Question --></value>
+    </caseValues>
+    <fields>
+        <label>Difficulté</label>
+        <name>Difficulty__c</name>
+        <picklistValues>
+            <masterLabel>Easy</masterLabel>
+            <translation><!-- Easy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hard</masterLabel>
+            <translation><!-- Hard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medium</masterLabel>
+            <translation><!-- Medium --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Question</label>
+        <name>Question__c</name>
+    </fields>
+    <fields>
+        <label>Classement aléatoire</label>
+        <name>Randomization__c</name>
+    </fields>
+    <fields>
+        <label>Type de texte</label>
+        <name>Text_Type__c</name>
+        <picklistValues>
+            <masterLabel>Long Text</masterLabel>
+            <translation><!-- Long Text --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Short Text</masterLabel>
+            <translation><!-- Short Text --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Type</label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Free Text</masterLabel>
+            <translation><!-- Free Text --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multi Select</masterLabel>
+            <translation><!-- Multi Select --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single Select</masterLabel>
+            <translation><!-- Single Select --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>True/False</masterLabel>
+            <translation><!-- True/False --></translation>
+        </picklistValues>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Question Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Question Name --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+    <webLinks>
+        <label>Ajouter un saut de page</label>
+        <name>Add_page_break</name>
+    </webLinks>
+    <webLinks>
+        <label>Supprimer</label>
+        <name>Delete</name>
+    </webLinks>
+</CustomObjectTranslation>

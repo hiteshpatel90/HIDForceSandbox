@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <fields>
+        <label>Resposta</label>
+        <name>Answer__c</name>
+    </fields>
+    <fields>
+        <label>Correto</label>
+        <name>Correct_incorrect__c</name>
+    </fields>
+    <fields>
+        <label>Texto Livre</label>
+        <name>Free_Text__c</name>
+    </fields>
+    <fields>
+        <label>Ordem</label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label>Pergunta</label>
+        <name>Question__c</name>
+        <relationshipLabel>Respostas</relationshipLabel>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Answer Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Answer Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>campo não pode ter valor negativo</errorMessage>
+        <name>Negative_Order_Value</name>
+    </validationRules>
+</CustomObjectTranslation>

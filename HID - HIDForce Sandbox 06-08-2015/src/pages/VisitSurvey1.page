@@ -1,0 +1,25 @@
+<apex:page controller="visitSurveyController" title="{!$Label.VisitSurveyTitle}" showHeader="false" language="{!strLanguage}">
+	<apex:stylesheet value="{!$Resource.TechSupportSurveyStyle}"/>
+	<div id="outer">
+		<c:visitSurveyHeader />
+		<apex:form >
+			<apex:inputHidden value="{!strRenderHowBetter}"/>
+			<apex:pageBlock >
+				<apex:outputPanel layout="block" styleClass="pagenr">
+					<apex:outputText value="Page {!intCurrentPage}/3"/>
+				</apex:outputPanel>
+				<apex:pageBlockSection title="* {!$Label.VisitOverallImpression}" columns="1" collapsible="false">
+					<apex:selectRadio value="{!strOverallImpression}" label=" " layout="pageDirection" styleClass="vamiddle">
+						<apex:selectOptions value="{!fourValues}"/>
+					</apex:selectRadio>
+				</apex:pageBlockSection>
+				<apex:pageBlockSection title="{!$Label.VisitHowBetter}" columns="1" collapsible="false" id="visitHowBetter" rendered="{!strRenderHowBetter}">
+					<apex:inputTextarea value="{!strHowBetter}" label=" " cols="80" rows="8"/>
+				</apex:pageBlockSection>
+	        	<apex:pageBlockButtons location="bottom">
+	        		<apex:commandButton action="{!page2}" value="{!$Label.SurveyNext}"/>
+	        	</apex:pageBlockButtons>
+			</apex:pageBlock>
+		</apex:form>
+	</div>
+</apex:page>

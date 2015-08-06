@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>ActivityMustBelongsOppOrSI</fullName>
+        <categories>axiom, omd, dasnger zone, activity</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Activity Must Belongs to Opportunity or Strategic Initiative</shortDescription>
+        <value>Danger Zones/Decision Stages are available only on activities that related to Opportunities or Strategic Initiatives</value>
+    </labels>
+    <labels>
+        <fullName>AvailableDangerZones</fullName>
+        <categories>axiom, omd, dasnger zone, activity</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Available Danger Zones</shortDescription>
+        <value>Available Danger Zones</value>
+    </labels>
+    <labels>
+        <fullName>AvailableDecisionStages</fullName>
+        <categories>axiom, omd, dasnger zone, activity</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Available Decision Stages</shortDescription>
+        <value>Available Decision Stages</value>
+    </labels>
+    <labels>
+        <fullName>CreateError</fullName>
+        <categories>CRUD</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>CreateError</shortDescription>
+        <value>You do not have permissions to create this object.</value>
+    </labels>
+    <labels>
+        <fullName>DeleteError</fullName>
+        <categories>CRUD</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>DeleteError</shortDescription>
+        <value>You do not have permissions to delete this object.</value>
+    </labels>
+    <labels>
+        <fullName>InvalidActivityId</fullName>
+        <categories>axiom, omd, dasnger zone, activity</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Invalid Activity Id</shortDescription>
+        <value>Invalid Activity Id</value>
+    </labels>
+    <labels>
+        <fullName>NoDangerZonesOrDecisionStages</fullName>
+        <categories>axiom, omd, dasnger zone, activity</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>No Danger Zones Or Decision Stages</shortDescription>
+        <value>There are no Danger Zones or Decision Stages</value>
+    </labels>
+    <labels>
+        <fullName>SelectedDangerZones</fullName>
+        <categories>axiom, omd, dasnger zone, activity</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Selected Danger Zones</shortDescription>
+        <value>Selected Danger Zones</value>
+    </labels>
+    <labels>
+        <fullName>SelectedDecisionStages</fullName>
+        <categories>axiom, omd, dasnger zone, activity</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Selected Decision Stages</shortDescription>
+        <value>Selected Decision Stages</value>
+    </labels>
+    <labels>
+        <fullName>TooManyItems</fullName>
+        <categories>axiom, omd, dasnger zone, activity</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>Too many Danger Zones or Decision Stages selected</shortDescription>
+        <value>There are too many Danger Zones or Decision Stages selected. Maximum number of items is 13.</value>
+    </labels>
+    <labels>
+        <fullName>UpdateError</fullName>
+        <categories>CRUD</categories>
+        <language>en_US</language>
+        <protected>false</protected>
+        <shortDescription>UpdateError</shortDescription>
+        <value>You do not have permissions to update this object.</value>
+    </labels>
+</CustomLabels>

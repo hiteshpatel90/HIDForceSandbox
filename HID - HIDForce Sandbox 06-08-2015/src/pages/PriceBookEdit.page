@@ -1,0 +1,59 @@
+<apex:page standardController="Pricebook_Request__c" extensions="priceBookEditController" tabStyle="Pricebook_Request__c">
+    <div class="content">
+        <img class="pageTitleIcon" title="Pricebook Request Edit" alt="Pricebook Request" src="/s.gif"/>
+            <h1 class="pageType">Price Book Edit<span class="titleSeparatingColon">:</span></h1>
+            <h2 class="pageDescription"><apex:outputText value="{!objPriceBook.Name}"/></h2>
+        <div class="blank"/>
+    </div>
+    <apex:form id="frmPriceBook">
+        <apex:pageMessages />
+        <apex:pageBlock title="Pricebook Request Edit" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!customSave}" value="Save"/>
+                <apex:commandButton action="{!cancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+	        <apex:PageBlockSection title="Information" columns="1">
+                <apex:pageBlockSectionItem >
+					<apex:outputLabel value="Contact Name" for="Contact_Name__c"/>
+					<apex:outputPanel layout="block" styleClass="requiredInput">
+						<apex:outputPanel layout="block" styleClass="requiredBlock"/>
+	        			<apex:inputField value="{!objPriceBook.Contact_Name__c}" id="Contact_Name__c">
+	        				<apex:actionSupport action="{!updatePriceBook}" event="onblur" reRender="frmPriceBook" status="imgUpdateContact"/>
+	        			</apex:inputField>
+       		    		<apex:actionStatus id="imgUpdateContact">
+                       		<apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                		</apex:actionStatus>
+                	</apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel value="Send To" for="Send_To__c"/>
+                	<apex:outputPanel layout="block" styleClass="requiredInput">
+                		<apex:outputPanel layout="block" styleClass="requiredBlock"/>
+			        	<apex:inputField value="{!objPriceBook.Send_To__c}" id="Send_To__c"/>
+			        </apex:outputPanel>
+			    </apex:pageBlockSectionItem>
+	        	<apex:pageBlockSectionItem >
+	        		<apex:outputLabel value="Customer Price Book Type" for="Customer_Price_Book_Type__c"/>
+	        		<apex:outputPanel layout="block" styleClass="requiredInput">
+	        			<apex:outputPanel layout="block" styleClass="requiredBlock"/>
+			        	<apex:inputField value="{!objPriceBook.Customer_Price_Book_Type__c}" id="Customer_Price_Book_Type__c">
+							<apex:actionSupport action="{!updatePriceBook}" event="onchange" reRender="frmPriceBook" status="imgUpdatePriceBookType"/>
+						</apex:inputField>
+       		    		<apex:actionStatus id="imgUpdatePriceBookType">
+                       		<apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                		</apex:actionStatus>
+					</apex:outputPanel>
+				</apex:pageBlockSectionItem>
+				<apex:pageBlockSectionItem >
+	        		<apex:outputLabel value="Customer Price Book" for="Customer_Price_Book__c"/>
+	        		<apex:outputPanel layout="block" styleClass="requiredInput">
+	        			<apex:outputPanel layout="block" styleClass="requiredBlock"/>
+	        			<apex:selectList value="{!objPriceBook.Customer_Price_Book__c}" size="1" id="Customer_Price_Book__c">
+	        				<apex:selectOptions value="{!lstCustomerPriceBook}"/>
+			        	</apex:selectList>
+			        </apex:outputPanel>
+			    </apex:pageBlockSectionItem>
+	        </apex:PageBlockSection>
+	    </apex:pageBlock>
+    </apex:form>
+</apex:page>

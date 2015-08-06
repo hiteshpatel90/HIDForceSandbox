@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <customSettingsVisibility>Public</customSettingsVisibility>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>Administrator_Email__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Error messages will be sent to this email address to help troubleshoot issues with the integration.</description>
+        <externalId>false</externalId>
+        <label>Administrator Email</label>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Email</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Display_Page_Header__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If this box is checked, the BigMachines header will be displayed at the top of the page when creating and editing BigMachines quotes.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this box is checked, the BigMachines header will be displayed at the top of the page when creating and editing BigMachines quotes.</inlineHelpText>
+        <label>Display Page Header</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>First_Quote_Is_Primary__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>If this box is checked, the first quote on an opportunity is automatically set to be the primary quote for that opportunity.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this box is checked, the first quote on an opportunity is automatically set to be the primary quote for that opportunity.</inlineHelpText>
+        <label>First Quote Is Primary</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Optimize_Synchronization__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This option is provided to support legacy integrations.  New implementations should check this box.  If this box is checked, the integration package will use an optimized approach to synchronize quotes.  If you check this box and BigMachines is not using the correct XSLs, your opportunities will not be updated with the correct products from your quotes on the first save attempt.  Similarly, if you update your XSLs but do not check this box, when you delete products from BigMachines, they will not be removed from Salesforce.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this box is checked, the integration package will use an optimized approach to synchronize quotes. In order for this approach to work, BigMachines must be using optimizied XSLs. Do not check this box unless you are sure you are using the correct XSLs.</inlineHelpText>
+        <label>Optimize Synchronization</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Use_Opportunity_Pricebook__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>This option is provided to support legacy integrations.  New implementations should check this box.  If this box is checked, the integration package will send the ID of the opportunity pricebook to BigMachines when creating new quotes.  If this box is checked and the BigMachines pricebooks do not have the correct partner pricebook ID values, you will get an error when creating new quotes.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>If this box is checked, the integration package will send the ID of the opportunity pricebook to BigMachines when creating new quotes.  Do not check this box unless you are sure that the BigMachines pricebooks have the correct partner pricebook ID values.</inlineHelpText>
+        <label>Use Opportunity Pricebook</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>BigMachines Commerce Settings</label>
+</CustomObject>

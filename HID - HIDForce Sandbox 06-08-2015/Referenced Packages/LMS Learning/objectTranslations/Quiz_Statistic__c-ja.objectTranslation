@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quiz Statistic --></value>
+    </caseValues>
+    <fields>
+        <label>回答</label>
+        <name>Answer__c</name>
+    </fields>
+    <fields>
+        <label>割り当て</label>
+        <name>Assignment__c</name>
+        <relationshipLabel>クイズの統計</relationshipLabel>
+    </fields>
+    <fields>
+        <label>学習者</label>
+        <name>Learner__c</name>
+    </fields>
+    <fields>
+        <label>長い回答</label>
+        <name>Long_Answer__c</name>
+    </fields>
+    <fields>
+        <label>質問</label>
+        <name>Question__c</name>
+        <relationshipLabel>クイズの統計</relationshipLabel>
+    </fields>
+    <fields>
+        <label>クイズ</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>クイズの統計</relationshipLabel>
+    </fields>
+    <fields>
+        <label>一時回答</label>
+        <name>Temporary_Answer__c</name>
+    </fields>
+    <fields>
+        <label>成績簿</label>
+        <name>Transcript__c</name>
+        <relationshipLabel>クイズの統計</relationshipLabel>
+    </fields>
+    <fields>
+        <label>タイプ</label>
+        <name>Type__c</name>
+    </fields>
+    <nameFieldLabel><!-- Quiz Statistic --></nameFieldLabel>
+</CustomObjectTranslation>

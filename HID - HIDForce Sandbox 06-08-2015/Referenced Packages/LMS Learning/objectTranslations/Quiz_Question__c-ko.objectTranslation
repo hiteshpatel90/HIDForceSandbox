@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <fields>
+        <label>순서</label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label>문제</label>
+        <name>Question__c</name>
+        <relationshipLabel>질문 퀴즈</relationshipLabel>
+    </fields>
+    <fields>
+        <label>놀리다</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>질문 퀴즈</relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Quiz Question Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Quiz Question Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage><!-- field cannot have a negative value --></errorMessage>
+        <name>Negative_Order_Value</name>
+    </validationRules>
+    <webLinks>
+        <label>질문 을 추가</label>
+        <name>Add_Question</name>
+    </webLinks>
+    <webLinks>
+        <label>페이지 나누기를 추가</label>
+        <name>Add_page_break</name>
+    </webLinks>
+    <webLinks>
+        <label>새로운 질문</label>
+        <name>New_Question</name>
+    </webLinks>
+</CustomObjectTranslation>

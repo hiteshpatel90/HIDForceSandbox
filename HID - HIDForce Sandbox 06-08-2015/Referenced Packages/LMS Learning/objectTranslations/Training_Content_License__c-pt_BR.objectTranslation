@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <fields>
+        <label>Data de Expiração</label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label>Licença da ID CyberU</label>
+        <name>License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Período da Licença</label>
+        <name>License_Period__c</name>
+        <picklistValues>
+            <masterLabel>Days</masterLabel>
+            <translation><!-- Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hours</masterLabel>
+            <translation><!-- Hours --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indefinite</masterLabel>
+            <translation><!-- Indefinite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weeks</masterLabel>
+            <translation><!-- Weeks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Years</masterLabel>
+            <translation><!-- Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Termo da Licença</label>
+        <name>License_Term__c</name>
+    </fields>
+    <fields>
+        <label>Data da Compra</label>
+        <name>Purchase_Date__c</name>
+    </fields>
+    <fields>
+        <label>Espaços Comprados</label>
+        <name>Purchased_Seats__c</name>
+    </fields>
+    <fields>
+        <label>Comprado</label>
+        <name>Purchased__c</name>
+    </fields>
+    <fields>
+        <label>Vagas Restantes</label>
+        <name>Remaining_Seats__c</name>
+    </fields>
+    <fields>
+        <label>Preço da ID CyberU</label>
+        <name>Sale_Item_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Preço de Venda</label>
+        <name>Sale_Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of seats included in this license. Leave blank for unlimited. --></help>
+        <label>Participantes</label>
+        <name>Seats__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label>ID CyberU da Licença Alvo</label>
+        <name>Target_License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Módulo</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>Licenças do Módulo</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Vagas Usadas</label>
+        <name>Used_Seats__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Content License Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- License Details --></label>
+            <section>License Details</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- License ID --></nameFieldLabel>
+    <webLinks>
+        <label>Licenças de Compra</label>
+        <name>Purchase_Licenses</name>
+    </webLinks>
+</CustomObjectTranslation>

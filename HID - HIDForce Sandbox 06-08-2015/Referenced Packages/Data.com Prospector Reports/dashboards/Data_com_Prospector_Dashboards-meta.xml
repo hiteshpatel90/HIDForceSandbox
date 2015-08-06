@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<DashboardFolder xmlns="http://soap.sforce.com/2006/04/metadata">
+    <accessType>Shared</accessType>
+    <name>Data.com Prospector Dashboards</name>
+    <publicFolderAccess>ReadWrite</publicFolderAccess>
+    <sharedTo>
+        <group>SystemAdministrators</group>
+        <role>IAMExecutiveManagement</role>
+        <roleAndSubordinatesInternal>Global_Sales_Operations_VP</roleAndSubordinatesInternal>
+    </sharedTo>
+</DashboardFolder>

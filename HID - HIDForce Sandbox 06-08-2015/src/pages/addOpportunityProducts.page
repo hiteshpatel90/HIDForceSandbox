@@ -1,0 +1,20 @@
+<apex:page standardController="Opportunity" extensions="extaddOpportunityProducts">
+    <script>
+        function gotoNextPage(){
+            window.location.href = "/p/opp/SelectSearch?retURL=/{!Opportunity.id}&addTo={!Opportunity.id}";
+            return false;
+        }
+    </script>
+    <apex:form >
+        <apex:pagemessages ></apex:pagemessages>
+        <apex:pageBlock title="Select Product type">
+            <apex:pageblockButtons dir="RTL">
+                <apex:commandButton value="Cancel" action="{!URLFOR('/'+$CurrentPage.parameters.id)}"/>
+                <apex:commandButton value="Next" action="{!goToNextPage}"/>                
+            </apex:pageblockButtons>
+            <apex:selectRadio layout="pageDirection" value="{!strSelectedProd}">
+                <apex:selectOptions value="{!ProductMethods}"/>
+            </apex:selectRadio>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

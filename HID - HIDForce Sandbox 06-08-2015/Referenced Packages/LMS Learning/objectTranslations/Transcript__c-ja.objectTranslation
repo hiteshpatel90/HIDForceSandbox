@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Transcript --></value>
+    </caseValues>
+    <fields>
+        <label>研修生ユーザー ロール</label>
+        <name>TraineeUserRole__c</name>
+    </fields>
+    <fields>
+        <label>研修生ユーザー プロフィール</label>
+        <name>Trainee_User_Profile__c</name>
+    </fields>
+    <fields>
+        <label>研修生ユーザー タイプ</label>
+        <name>Trainee_User_Type__c</name>
+    </fields>
+    <fields>
+        <label>研修生</label>
+        <name>Trainee__c</name>
+        <relationshipLabel>成績簿</relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Transcript Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Transcript No. --></nameFieldLabel>
+</CustomObjectTranslation>

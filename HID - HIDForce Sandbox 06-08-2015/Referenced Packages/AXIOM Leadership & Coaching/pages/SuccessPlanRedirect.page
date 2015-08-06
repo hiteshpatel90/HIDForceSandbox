@@ -1,0 +1,4 @@
+<apex:page standardController="AXIOM_LC__Success_Plan__c" extensions="AXIOM_LC.SuccessPlanRedirectController" action="{!redirect}">
+<apex:pageMessages >
+</apex:pageMessages>
+</apex:page>

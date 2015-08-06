@@ -1,0 +1,16 @@
+<apex:page controller="SolutionController" showHeader="false" sidebar="false" >
+
+	<apex:styleSheet value="{!$Resource.solutionsStyles}" />
+	<apex:styleSheet value="{!HID_CSS_URL}" />
+
+	<div id="pageWrapper">
+
+		<div id="mainBody">
+			<h2>{!oneSolution.SolutionName}</h2>
+			<div class="solution">
+				<apex:outputText value="{!oneSolution.SolutionNote}" escape="false"/>
+			</div>
+		</div>
+	</div>
+
+</apex:page>

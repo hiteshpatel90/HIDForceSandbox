@@ -1,0 +1,23 @@
+<apex:page standardController="Case" extensions="TicketSubmissionController" sidebar="false" showHeader="false">
+    <html>
+        <head>
+            <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+        </head>
+        <body>          
+        <div id="thankYoudiv">    
+         <br/><br/> 
+             <h1 align="center"> Thank you! </h1> 
+          <br/><br/><br/>
+  
+      Your ticket <b> {!CaseNumber} </b> has been submitted. An HID Technical Service Representative will be contacting you within one
+       business day.
+       </div>
+     </body>
+     <script>
+         $(document).ready(function(){
+              var thankyou = document.getElementById("thankYoudiv");
+              thankyou.scrollIntoView(true);   
+        });
+     </script>
+   </html>
+</apex:page>

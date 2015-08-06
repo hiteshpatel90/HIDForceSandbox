@@ -1,0 +1,124 @@
+<apex:component controller="AXIOM_LC.Units_SuccessPlanHeaderController">
+<apex:attribute assignTo="{!SuccessPlanId}" name="SuccessPlanIds" description="This is the id for the success plan." type="Id" required="required"/>
+	<style>
+	.summary-item-note {
+		font-size: 10px;
+		margin-top: -5px;
+		}
+	.summary-item-content-data .item.display-inline-block .item.display-block {
+		margin-top: 1px;
+		}
+	.summary-item-content-data .display-inline-block {
+		vertical-align: top;
+	}
+	</style>
+
+	<table class="summary-wrapper hidden" id="summaryForSallers">
+		<tbody>
+			<tr>
+				<td class="summary-data-wrapper">
+					<div id="j_id0:summary" class="summary-data round-corners">
+						<div class="summary-item left">
+							<div class="summary-item-content" style="height:78px;width: 230px; text-overflow: ellipsis;">
+								<a id="current-seller" target="_blank" href="/{!SuccessPlan.Seller__c}"  class="summary-item-avatar">
+									<img src="{!Seller.SmallPhotoUrl}" />
+								</a>
+								<div class="item display-block" style="margin-left: 90px;">
+										<!-- <div class="summary-item-label">Representative</div>  -->
+										<div class="summary-item-data-point"><a id="current-seller" href="/{!SuccessPlan.Seller__c}" target="_blank">{!Seller.FirstName}&nbsp;{!Seller.LastName}</a></div>
+
+										<div class="item display-inline-block" style="text-overflow: ellipsis; width:139px;">
+										<div class="item display-block m-no-padd">
+											<div class="summary-item-label">Role</div>
+											<div class="summary-item-data-point m-minus-mar">{!Seller.UserRole.Name}</div>
+										</div>
+										<div class="item display-block m-no-padd">
+											<div class="summary-item-label">Coach</div>
+											<div class="summary-item-data-point m-minus-mar">{!Coach.FirstName}&nbsp;{!Coach.LastName}</div>
+										</div>
+										</div>
+								</div>
+							</div>
+						</div>
+						<div class="summary-item left">
+						<div class="summary-item-content summary-item-content-data" style="height:78px;width: 310px;">
+								<div class="item display-inline-block" style="margin-right: 10px;">
+
+									<div class="item display-block">
+											<div class="summary-item-label">Annualized Units Objective *</div>
+											<div class="summary-item-data-point"> {!AnnualUnitsObjectiveFormatted}</div>
+										</div>
+									<div class="item display-block">
+										<div class="summary-item-label">Predicted Units *</div>
+										<div class="summary-item-data-point" style="color:{!JSENCODE(IsPredictedGreater)};">{!PredictedUnitsFormatted}</div>
+									</div>
+									<div class="item display-block">
+										<div class="summary-item-note">*by {!PlanType}</div>
+									</div>
+								</div>
+
+									<div class="item display-inline-block">
+
+
+										<div class="item display-block">
+											<div class="summary-item-label">YTD Performance</div>
+											<div class="summary-item-data-point">{!PerformanceYTD}%</div>
+										</div>
+										<div class="item display-block">
+											<div class="summary-item-label">Predicted Performance</div>
+											<div class="summary-item-data-point">{!PredictedPerformance}%</div>
+										</div>
+
+								</div>
+							</div>
+						</div>
+						<div class="summary-item left" style="height: 108px;">
+							<div class="summary-item-content m-exp-opp" style="position: absolute">
+								<div class="display-block">
+									<div class="display-block">
+										<div class="summary-item-label m-exp-label">New Opportunities</div>
+										<div class="summary-item-data-point m-exp-label-small">{!CreatedOpps} created - {!ExpectedOpps} expected</div>
+									</div>
+									<div class="display-block">
+										<div class="summary-item-label m-exp-label">Closed</div>
+										<div class="summary-item-data-point m-exp-label-mid" style="font-size: 12px;">{!ClosedWins} wins - {!ExpectedWins} expected</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="summary-item" style="border: none; margin-left:770px;">
+							<div class="summary-item-content m-svt">
+								<div class="item display-block m-svt-item">
+									<div class="summary-item-label big m-ytd-label">Year To Date</div>
+									<div class="summary-item-label m-exp-label" style="padding: 2px 0 0;">Units vs Target *</div>
+								</div>
+								<div class="bar-graph-container">
+									<div class="bar-graph">
+											<div class="bar-graph-inner {!IF(AND(ActualToGoalRatio>Threshold,ActualToGoalRatio<100),'yellow',IF(AND(ActualToGoalRatio<Threshold),'red','green'))}" style="width: {!IF(ActualToGoalRatio>100, 100,ActualToGoalRatio)}%;">
+										</div>
+										</div>
+									<div class="item display-block left">
+										<div class="summary-item-data-point">
+											{!ActualUnitsFormatted}/
+											<div class="summary-item-data-point">
+												{!PlanedUnitsYTDFormatted}
+											</div>
+										</div>
+									</div>
+									<div class="item display-block right">
+										<div class="summary-item-data-point">
+											<div class="summary-item-data-point">
+												{!ActualToGoalRatio}%
+											</div>
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+						<div class="clear"></div>
+					</div>
+				</td>
+			</tr>
+		</tbody>
+	</table>
+</apex:component>

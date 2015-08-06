@@ -1,0 +1,220 @@
+<apex:page standardController="Account_Profile__c" extensions="accountProfileEditController" tabStyle="Account_Profile__c">
+	<script>
+		var returnURL = "{!returnURL}";
+        var accountId = "{!Account_Profile__c.Account__c}";
+        var accountClusterId = "{!Account_Profile__c.Account_Cluster__c}";
+        if(accountId == '' && accountClusterId == ''){
+            alert("No Account/Account Cluster selected. Please open an Account/Account Cluster and create the Profile there.");
+            window.location = "https://{!serverURL}"+returnURL;
+        }
+	</script>
+    <div class="content">
+        <img class="pageTitleIcon" title="Account" alt="Account" src="/s.gif"/>
+            <h1 class="pageType">Profile Edit<span class="titleSeparatingColon">:</span></h1>
+            <h2 class="pageDescription"><apex:outputText value="{!objAccountProfile.Name}"/></h2>
+        <div class="blank"/>
+    </div>
+    
+    <apex:form id="frmAccountProfile">
+       <apex:pageMessages />
+       <apex:inputHidden value="{!bolTierReset}" id="bolTierReset"/>
+        <apex:pageBlock title="Profile" mode="edit">
+        
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!customSave}" value="Save" rendered="{!bolRenderSave}"/>
+                <apex:commandButton action="{!customCancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+            
+            <apex:pageBlockSection title="Account Information" columns="2">
+            
+                <apex:pageBlockSectionItem rendered="{!bolAccount}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Account__c.label}" for="lblAccount"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:inputField value="{!objAccountProfile.Account__c}" id="lblAccount"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!IF(bolAccount,false,true)}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Account_Cluster__c.label}" for="lblAccountCluster"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:inputField value="{!objAccountProfile.Account_Cluster__c}" id="lblAccountCluster"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem />
+                
+                <apex:pageBlockSectionItem rendered="{!bolAccount}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Sub_Region__c.label}" for="lblSubRegion"/>
+                    <apex:outputText value="{!strSubRegion}" id="lblSubRegion"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!bolAccount}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.E_21_Account__c.label}" for="lblGlobalAccount"/>
+                    <apex:outputText value="{!strGlobalAccount}" id="lblGlobalAccount"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!IF(bolAccount,false,true)}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Cluster_Region__c.label}" for="lblClusterRegion"/>
+                    <apex:outputText value="{!strRegion}" id="lblRegion"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(bolAccount,false,true)}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Cluster_Type__c.label}" for="lblClusterType"/>
+                    <apex:outputText value="{!strClusterType}" id="lblClusterType"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem helptext="{!$ObjectType.Account_Profile__c.fields.Market_Size__c.inlineHelpText}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Market_Size__c.label}" for="lblMarketSize"/>
+                    <apex:selectList value="{!objAccountProfile.Market_Size__c}" size="1" id="lblMarketSize" disabled="{!bolMarketSize}">
+                        <apex:selectOptions value="{!lstMarketSize}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputField value="{!objAccountProfile.National_Account__c}" rendered="{!bolNationalAccount}">
+                    <apex:actionSupport action="{!bsUpdate}" event="onchange" reRender="frmAccountProfile" status="nagScreen"/>
+                    <apex:actionStatus id="nagScreen">
+                        <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                    </apex:actionStatus>
+                </apex:inputField>
+                <apex:pageBlockSectionItem rendered="{!IF(bolNationalAccount,false,true)}"/>
+                
+                <apex:pageBlockSectionItem helptext="{!$ObjectType.Account_Profile__c.fields.Pricebook_Currency__c.inlineHelpText}" rendered="{!bolAccount}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Pricebook_Currency__c.label}" for="lblPricebookCurrency"/>
+                    <apex:selectList value="{!objAccountProfile.Pricebook_Currency__c}" size="1" id="lblPricebookCurrency" disabled="{!bolPricebookCurrency}">
+                        <apex:selectOptions value="{!lstPricebookCurrency}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(bolAccount,false,true)}"/>
+                
+                <apex:pageBlockSectionItem helptext="{!$ObjectType.Account_Profile__c.fields.Purchasing_Method__c.inlineHelpText}" rendered="{!bolPurchasingMethod}">
+                	<apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Purchasing_Method__c.label}" for="lblPurchasingMethod"/>
+                	<apex:selectList value="{!objAccountProfile.Purchasing_Method__c}" size="1" id="lblPurchasingMethod">
+                		<apex:selectOptions value="{!lstPurchasingMethod}"/>
+                	</apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(bolPurchasingMethod,false,true)}"/>
+                
+                <apex:pageBlockSectionItem rendered="{!bolCompetitor}"/>
+                <apex:pageBlockSectionItem helptext="{!$ObjectType.Account_Profile__c.fields.Competitor__c.inlineHelpText}" rendered="{!bolCompetitor}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Competitor__c.label}" for="lblCompetitor"/>
+                    <apex:selectList value="{!objAccountProfile.Competitor__c}" size="1" id="lblCompetitor">
+                        <apex:selectOptions value="{!lstCompetitor}"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Account Classification" columns="2">
+            
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Business_Segment__c.label}" for="lblBusinessSegment"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:selectList value="{!objAccountProfile.Business_Segment__c}" size="1" id="lblBusinessSegment" disabled="{!bolBusinessSegment}">
+                            <apex:selectOptions value="{!lstBusinessSegment}"/>
+                            <apex:actionSupport action="{!bsUpdate}" event="onchange" reRender="frmAccountProfile" status="nagScreen"/>
+                        </apex:selectList>
+                        <apex:actionStatus id="nagScreen">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputField value="{!objAccountProfile.Partner_Directory__c}" rendered="{!IF(bolPartnerDirectory,true,false)}"/>
+                <apex:pageBlockSectionItem rendered="{!IF(bolPartnerDirectory,false,true)}"/>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Partner_Type__c.label}" for="lblPartnerType"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:selectList value="{!objAccountProfile.Partner_Type__c}" size="1" id="lblPartnerType" disabled="{!bolPartnerType}">
+                            <apex:selectOptions value="{!lstPartnerType}"/>
+                            <apex:actionSupport action="{!bsUpdate}" event="onchange" reRender="frmAccountProfile" status="nagScreen"/>
+                        </apex:selectList>
+                        <apex:actionStatus id="nagScreen">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputField value="{!objAccountProfile.NAS_Developer__c}" rendered="{!bolNASDeveloper}"/>
+                <apex:pageBlockSectionItem rendered="{!IF(bolNASDeveloper,false,true)}"/>
+                
+                <apex:pageBlockSectionItem rendered="{!bolProgramCategory}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Program_Category__c.label}" for="lblPartnerCategory"/>
+                    <apex:outputText value="{!objAccountProfile.Business_Segment__c}" id="lblPartnerCategory"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(bolProgramCategory,false,true)}"/>
+                
+                <apex:inputField value="{!objAccountProfile.Ranking__c}" rendered="{!bolRanking}"/>
+                <apex:pageBlockSectionItem rendered="{!IF(bolRanking,false,true)}"/>
+                
+                <apex:pageBlockSectionItem />
+                <apex:inputField value="{!objAccountProfile.pivCLASS_SDK_Partner__c}" rendered="{!bolPivCLASS}"/>
+                <apex:pageBlockSectionItem rendered="{!IF(bolPivCLASS,false,true)}"/>
+                
+                <apex:pageBlockSectionItem />
+                <apex:inputField value="{!objAccountProfile.pivCLASS_Technology_Partner__c}" rendered="{!bolPivCLASS}"/>
+                <apex:pageBlockSectionItem rendered="{!IF(bolPivCLASS,false,true)}"/>
+
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="2" rendered="{!bolTier}">
+            
+                <apex:inputField value="{!objAccountProfile.Tier__c}">
+                    <apex:actionSupport action="{!tierUpdate}" event="onchange" reRender="frmAccountProfile" status="nagScreen"/>
+                    <apex:actionStatus id="nagScreen">
+                        <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                    </apex:actionStatus>
+                </apex:inputField>
+                <apex:inputField value="{!objAccountProfile.Requested_Tier_Expiration_Date__c}"/>
+                
+                <apex:outputField value="{!objAccountProfile.Recommended_Tier__c}"/>
+
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="2">
+            
+                <apex:pageBlockSectionItem rendered="{!bolUseApplication}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Use_Application__c.label}" for="lblUseApplication"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:selectList value="{!objAccountProfile.Use_Application__c}" size="1" id="lblUseApplication">
+                            <apex:selectOptions value="{!lstUseApplication}"/>
+                            <apex:actionSupport action="{!bsUpdate}" event="onchange" reRender="frmAccountProfile" status="nagScreen"/>
+                        </apex:selectList>
+                        <apex:actionStatus id="nagScreen">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(bolUseApplication,false,true)}"/>
+                
+                <apex:pageBlockSectionItem rendered="{!bolIntegratedHardware}">
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Integrated_Hardware__c.label}" for="lblIntegratedHardware"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:inputField value="{!objAccountProfile.Integrated_Hardware__c}" id="lblIntegratedHardware"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                
+                <apex:inputField value="{!objAccountProfile.Contract_Manufacturer__c}" rendered="{!bolContractManufacturer}"/>
+                
+            </apex:pageBlockSection>
+            <!-- <apex:pageBlockSection title="Account Team" columns="2" rendered="{!bolAccountTeam}"> -->
+            <apex:pageBlockSection title="Account Team" columns="2">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.Account_Profile__c.fields.Sales_Manager__c.label}" for="lblSalesManager"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:inputField value="{!objAccountProfile.Sales_Manager__c}" id="lblSalesManager"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:outputField value="{!Account_Profile__c.Sales_Team__c}"/>
+                
+                <apex:outputField value="{!Account_Profile__c.Regional_Sales_Director__c}"/>
+                <apex:inputField value="{!objAccountProfile.Inside_Sales_Rep__c}"/>
+                
+                <apex:inputField value="{!objAccountProfile.Customer_Service_Rep__c}"/>
+                <apex:inputField value="{!objAccountProfile.National_Account_Manager__c}" rendered="{!bolNationalAccountManager}"/>
+                
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

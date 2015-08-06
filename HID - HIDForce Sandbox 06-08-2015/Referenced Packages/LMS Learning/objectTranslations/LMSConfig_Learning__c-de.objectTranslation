@@ -1,0 +1,152 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <fields>
+        <label>Ermoglichen, Einschreib. zu annulieren</label>
+        <name>Allow_Unenrollment__c</name>
+    </fields>
+    <fields>
+        <label>Verfugbare Benutzertypen</label>
+        <name>Available_user_types__c</name>
+    </fields>
+    <fields>
+        <label>Zertifikatseite</label>
+        <name>Certificate_Page_Name__c</name>
+    </fields>
+    <fields>
+        <label>CyberU-ID</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Geheimer Schlussel CyberU</label>
+        <name>CyberU_Secret_Key__c</name>
+    </fields>
+    <fields>
+        <label>Katalogsuche aktivieren</label>
+        <name>Enable_Catalog_Search__c</name>
+    </fields>
+    <fields>
+        <label>Autoupdate Meine Schulungen aktivieren</label>
+        <name>Enable_My_Training_auto_refresh__c</name>
+    </fields>
+    <fields>
+        <label>Zertifikat aktivieren</label>
+        <name>Enable_certificate__c</name>
+    </fields>
+    <fields>
+        <label>Gruppen-Ref.-ID</label>
+        <name>Group_Ref_ID__c</name>
+    </fields>
+    <fields>
+        <label>Offentlicher Link verfugbar</label>
+        <name>Is_Public_Link_Available__c</name>
+    </fields>
+    <fields>
+        <label>ID fur offentlichen Katalog</label>
+        <name>Public_Catalog__c</name>
+    </fields>
+    <fields>
+        <label>Sicherer Startlink</label>
+        <name>Secure_Launch_Link__c</name>
+    </fields>
+    <fields>
+        <label>Beschreibung anzeigen</label>
+        <name>Show_Description__c</name>
+    </fields>
+    <fields>
+        <label>Falligkeitsdatum anzeigen</label>
+        <name>Show_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>Dauer anzeigen</label>
+        <name>Show_Duration__c</name>
+    </fields>
+    <fields>
+        <label>Bewertung anzeigen</label>
+        <name>Show_Score__c</name>
+    </fields>
+    <fields>
+        <label>Schulungstyp anzeigen</label>
+        <name>Show_Type__c</name>
+    </fields>
+    <fields>
+        <label>Modul in neuem Fenster anzeigen</label>
+        <name>Show_module_in_new_window__c</name>
+    </fields>
+    <fields>
+        <label>Fortschrittsbalken anzeigen</label>
+        <name>Show_progress_bar__c</name>
+    </fields>
+    <fields>
+        <label>Status anzeigen</label>
+        <name>Show_status__c</name>
+    </fields>
+    <fields>
+        <label>Soziales Lernen</label>
+        <name>Social_Learning__c</name>
+    </fields>
+    <fields>
+        <label>&quot;Manager&quot; fur Mein Team-Hierarchie verw.</label>
+        <name>Use_Manager_field_for_My_Team_hierarchy__c</name>
+    </fields>
+    <fields>
+        <label>Benutzertypen</label>
+        <name>UserTypes__c</name>
+    </fields>
+    <fields>
+        <label>Admin Cornerstone-Benutzergruppe</label>
+        <name>User_Cornerstone_Group_Admin__c</name>
+    </fields>
+    <fields>
+        <label>Cornerstone-Benutzer-ID</label>
+        <name>User_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Benutzergeneriertes Lernen</label>
+        <name>User_Generated_Learning__c</name>
+    </fields>
+    <fields>
+        <label>Startlink fur gemeinsame Nutzung</label>
+        <name>shareable_launch_link__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+</CustomObjectTranslation>

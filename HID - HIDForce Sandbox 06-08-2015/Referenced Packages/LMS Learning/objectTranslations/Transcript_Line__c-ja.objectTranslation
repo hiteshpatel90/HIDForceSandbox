@@ -1,0 +1,197 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Assignment --></value>
+    </caseValues>
+    <fields>
+        <label><!-- ASSIGNED_ON --></label>
+        <name>ASSIGNED_ON__c</name>
+    </fields>
+    <fields>
+        <label>試行回数</label>
+        <name>Attempts__c</name>
+    </fields>
+    <fields>
+        <label>完了日</label>
+        <name>Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label>完了日</label>
+        <name>Completion_Date__c</name>
+    </fields>
+    <fields>
+        <label>研修タイプ</label>
+        <name>Content_Catalog__c</name>
+    </fields>
+    <fields>
+        <label>モジュールのタイトル</label>
+        <name>Content_Title__c</name>
+    </fields>
+    <fields>
+        <label>CyberU ID</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>コース割り当て</label>
+        <name>Course_Assignment__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>カリキュラム割り当て</label>
+        <name>Curriculum_Assignment__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>カリキュラム項目</label>
+        <name>Curriculum_Item__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>期日</label>
+        <name>Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>E メール</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label>は履歴です</label>
+        <name>Is_Historical__c</name>
+    </fields>
+    <fields>
+        <label>前回の開始日</label>
+        <name>Last_Launched_Date__c</name>
+    </fields>
+    <fields>
+        <label>学習パスの割り当て</label>
+        <name>Learning_Path_Assignment__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>学習パスの項目</label>
+        <name>Learning_Path_Item__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>完了パーセンテージ</label>
+        <name>Percent_Complete__c</name>
+    </fields>
+    <fields>
+        <label>進捗状況</label>
+        <name>Progress__c</name>
+    </fields>
+    <fields>
+        <label>クイズ</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>登録ステータス</label>
+        <name>Registration_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- STARTED_ON --></label>
+        <name>STARTED_ON__c</name>
+    </fields>
+    <fields>
+        <label>スコア</label>
+        <name>Score__c</name>
+    </fields>
+    <fields>
+        <label>スコア番号</label>
+        <name>Score_int__c</name>
+    </fields>
+    <fields>
+        <label>割り当てのステータス</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Failed</masterLabel>
+            <translation><!-- Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Passed</masterLabel>
+            <translation><!-- Passed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retired</masterLabel>
+            <translation><!-- Retired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unenrolled</masterLabel>
+            <translation><!-- Unenrolled --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- TARGET_DATE --></label>
+        <name>TARGET_DATE__c</name>
+    </fields>
+    <fields>
+        <label>研修生</label>
+        <name>Trainee__c</name>
+    </fields>
+    <fields>
+        <label>モジュール</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>コース項目</label>
+        <name>Training_Path_Item__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>コース名</label>
+        <name>Training_Path_Name__c</name>
+    </fields>
+    <fields>
+        <label>研修ユーザー ライセンス</label>
+        <name>Training_User_License__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>成績簿</label>
+        <name>Transcript__c</name>
+        <relationshipLabel>割り当て</relationshipLabel>
+    </fields>
+    <fields>
+        <label>表示 -</label>
+        <name>View__c</name>
+    </fields>
+    <layouts>
+        <layout>Transcript Line Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Launch Link --></label>
+            <section>Launch Link</section>
+        </sections>
+        <sections>
+            <label><!-- Progress Information --></label>
+            <section>Progress Information</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Assignment No. --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>期日の挿入において、現在のものより小さな値を入力してはなりません。</errorMessage>
+        <name>validate_Due_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>完了パーセンテージは 0 ～ 100% であることが必要です。</errorMessage>
+        <name>validate_percent_complete</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>スコアには正の数値を入力する必要があります。</errorMessage>
+        <name>validate_score</name>
+    </validationRules>
+</CustomObjectTranslation>

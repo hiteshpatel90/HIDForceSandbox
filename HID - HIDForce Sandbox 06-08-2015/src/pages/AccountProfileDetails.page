@@ -1,0 +1,10 @@
+<apex:page standardController="Price_Authorization_Form__c" extensions="AccountProfileDetailsController">
+    <apex:pageBlock >
+               <apex:pageBlockTable value="{!acProfile}" var="acp">
+               <apex:column value="{!acp.Business_Segment__c}"/>
+               <apex:column value="{!acp.Partner_Type__c}"/>
+               <apex:column value="{!acp.Tier__c}"/>
+               <apex:column value="{!acp.Sales_Manager__c}"/>
+           </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

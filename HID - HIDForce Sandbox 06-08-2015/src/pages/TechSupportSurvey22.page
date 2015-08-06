@@ -1,0 +1,23 @@
+<apex:page controller="techSupportSurveyController" title="{!$Label.SurveyTitle}" showHeader="false" language="{!strLanguage}">
+	<apex:stylesheet value="{!$Resource.TechSupportSurveyStyle}"/>
+	<div id="outer">
+		<c:techSupportSurveyHeader />
+		<apex:form >
+			<apex:pageBlock >
+				<apex:outputPanel layout="block" styleClass="pagenr">
+					<apex:outputText value="Page {!intCurrentPage}/3"/>
+				</apex:outputPanel>
+				<apex:pageBlockSection title="* {!$Label.SurveyWhyNotSatisfied}" columns="1" collapsible="false">
+					<apex:selectCheckboxes value="{!strWhyNotSatisfied}" label=" " layout="pageDirection" styleClass="vamiddle">
+						<apex:selectOptions value="{!fiveValues}"/>
+					</apex:selectCheckboxes>
+					<apex:inputTextarea value="{!strOtherFactors}" label="{!$Label.SurveyOtherFactors}" cols="80" rows="8"/>
+				</apex:pageBlockSection>
+				<apex:pageBlockButtons location="bottom">
+					<apex:commandButton action="{!page1}" value="{!$Label.SurveyBack}"/>
+					<apex:commandButton action="{!page3}" value="{!$Label.SurveyNext}"/>
+				</apex:pageBlockButtons>
+			</apex:pageBlock>
+		</apex:form>
+	</div>
+</apex:page>

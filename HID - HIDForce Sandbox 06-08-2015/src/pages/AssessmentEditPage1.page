@@ -1,0 +1,74 @@
+<apex:page standardController="Assessment__c" extensions="assessmentEditController" tabStyle="Assessment__c">
+    <script>
+        var asmtStatus = "{!Assessment__c.Approval_Status__c}";
+        var profileName = "{!$Profile.Name}";
+        if(profileName != "System Administrator"){
+            if(asmtStatus != 'Draft' && asmtStatus != 'Rejected' && asmtStatus != ''){
+                alert("The Record is Locked, Please Contact Your System Administrator for Assistance");
+                window.location = "https://{!serverURL}{!returnURL}";
+            }
+        }
+        
+        var accountId = "{!Assessment__c.Account__c}";
+        var accountClusterId = "{!Assessment__c.Account_Cluster__c}";
+        var bolAccountClusterOwnerEditorMatch = {!bolAccountClusterOwnerEditorMatch};
+        if(accountId == '' && accountClusterId == ''){
+            alert("No Account/Account Cluster selected. Please open an Account/Account Cluster and create the Assessment there.");
+            window.location = "https://{!serverURL}{!returnURL}";
+        }else if(accountClusterId != '' && bolAccountClusterOwnerEditorMatch == false){
+        	alert("Only Account Cluster Owner can create/edit Account Cluster Assessments.");
+        	window.location = "https://{!serverURL}{!returnURL}";
+        }
+    </script>
+    <c:assessmentHeader assessmentName="{!objAssessment.Name}" mode="Edit"/>
+    <apex:form id="frmScoring">
+        <apex:pageMessages />
+        <apex:pageBlock title="Assessment" mode="edit">
+            <apex:pageBlockButtons >
+                <apex:commandButton action="{!step2}" value="Next"/>
+                <apex:commandButton action="{!customCancel}" value="Cancel"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Information" columns="2">
+                <apex:pageBlockSectionItem rendered="{!bolAccount}">
+                    <apex:outputLabel value="{!$ObjectType.Assessment__c.fields.Account__c.label}" for="lblAccount"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:inputField value="{!objAssessment.Account__c}" id="lblAccount"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!IF(bolAccount,false,true)}">
+                    <apex:outputLabel value="{!$ObjectType.Assessment__c.fields.Account_Cluster__c.label}" for="lblAccountCluster"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:inputField value="{!objAssessment.Account_Cluster__c}" id="lblAccountCluster"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="{!$ObjectType.Assessment__c.fields.Business_Segment__c.label}" for="lblBusinessSegment"/>
+                    <apex:outputPanel layout="block" styleClass="requiredInput">
+                        <apex:outputPanel layout="block" styleClass="requiredBlock"/>
+                        <apex:selectList value="{!objAssessment.Business_Segment__c}" id="lblBusinessSegment" size="1">
+                            <apex:selectOptions value="{!lstBusinessSegment}"/>
+                            <apex:actionSupport action="{!updateAccount}" event="onchange" reRender="frmScoring" status="imgUpdateAccount"/>
+                        </apex:selectList>
+                        <apex:actionStatus id="imgUpdateAccount">
+                            <apex:facet name="start"><img src="/img/loading.gif"/></apex:facet>
+                        </apex:actionStatus>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel value="{!$ObjectType.Assessment__c.fields.Market_Size__c.label}" for="lblMarketSize"/>
+               		<apex:selectList value="{!objAssessment.Market_Size__c}" id="lblMarketSize" size="1">
+              			<apex:selectOptions value="{!lstMarketSize}"/>
+              		</apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                	<apex:outputLabel value="{!$ObjectType.Assessment__c.fields.Partner_Type__c.label}" for="lblPartnerType"/>
+               		<apex:selectList value="{!objAssessment.Partner_Type__c}" id="lblPartnerType" size="1">
+                   		<apex:selectOptions value="{!lstPartnerType}"/>
+               		</apex:selectList>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

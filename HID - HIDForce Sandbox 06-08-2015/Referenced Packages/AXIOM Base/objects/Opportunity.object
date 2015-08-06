@@ -1,0 +1,268 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Actual_Scores__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Actual Scores</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Available_Scores__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Available Scores</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ChangesToCloseDate__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Number of times the Close date changed.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Number of times the Close date changed.</inlineHelpText>
+        <label>Changes To Close Date</label>
+        <precision>3</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CommonalityStatus__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Commonality Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>minus</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>none</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>plus</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Date_Moved_Into_Stage__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Date Moved Into Stage</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>Days_In_Stage__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Today()- Date_Moved_Into_Stage__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days In Stage</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_Since_Last_Update__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(IsClosed, 0, TODAY() - BLANKVALUE(DATEVALUE(LastModifiedDate), TODAY()))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Since Last Update</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Days_Until_Close_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(IsClosed, 0, CloseDate - TODAY())</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Days Until Close Date</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Decision_Stage_Status__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Decision Stage Status</label>
+        <picklist>
+            <picklistValues>
+                <fullName>plus</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>none</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>minus</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>HasCC__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>HasCC</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Probability_of_Win__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Probability of Win depends on the &apos;CC&apos; role in related Bio Worksheets (if there&apos;s a role in at least one of them, then we take a result of dividing the actual score by available. And if not, then we multiply it by 0.65) and the status dimension and commonalities (if it is positive, then we add 5%, if it is negative or unknown, we deduct 10%, and if it is neutral, we do not change Win Probability</description>
+        <externalId>false</externalId>
+        <formula>IF(IsClosed, 
+	IF(IsWon, 
+		 1, 
+		 0
+	), 
+	IF(ISNULL(Actual_Scores__c) || Actual_Scores__c == 0, 
+		 0, 
+		IF(
+			(
+				Actual_Scores__c / BLANKVALUE( Available_Scores__c, 0.00000000000000001 ) * IF( SYS_BIOWorksheetCount__c &lt; 2, 1, IF(HasCC__c &gt;= 1, 1, 0.65))
+				 *
+				(
+					1 + 
+							 CASE(Decision_Stage_Status__c, 
+								 &apos;plus&apos;, 0.05,  
+								 &apos;none&apos;, 0,
+								 -0.1
+							 ) 
+							 +
+							 CASE(CommonalityStatus__c, 
+								 &apos;plus&apos;, 0.05,  
+								 &apos;none&apos;, 0,
+								 -0.1
+							 ) 					 
+				)
+			) &gt; 1, 
+				1, 
+				Actual_Scores__c / BLANKVALUE( Available_Scores__c, 0.00000000000000001 ) * IF( SYS_BIOWorksheetCount__c &lt; 2, 1, IF(HasCC__c &gt;= 1, 1, 0.65))
+				 *
+				(
+					1 +  
+							 CASE(Decision_Stage_Status__c, 
+								 &apos;plus&apos;, 0.05,  
+								 &apos;none&apos;, 0,
+								 -0.1
+							 ) 
+							 +
+							 CASE(CommonalityStatus__c, 
+								 &apos;plus&apos;, 0.05,  
+								 &apos;none&apos;, 0,
+								 -0.1
+							 ) 							 
+				)
+		)  
+	)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Probability of Win</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Proposal_Date__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Proposal Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Date</type>
+    </fields>
+    <fields>
+        <fullName>SYS_BIOWorksheetCount__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>BIO Worksheet Count</label>
+        <precision>6</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Strategic_Initiative__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Strategic Initiative</label>
+        <referenceTo>Strategic_Initiative__c</referenceTo>
+        <relationshipLabel>Opportunities</relationshipLabel>
+        <relationshipName>Opportunities</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+</CustomObject>

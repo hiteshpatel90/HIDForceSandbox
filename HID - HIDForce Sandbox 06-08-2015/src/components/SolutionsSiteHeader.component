@@ -1,0 +1,14 @@
+<apex:component >
+	<div id="header">
+		<a class="logoImage" href="http://www.hidglobal.com">
+			<img src="{!$Resource.solutionsLogo}"/>
+		</a>
+		<a class="logoText" href="http://www.hidglobal.com">
+			{!$Label.SolutionsLogoText}
+		</a>
+		<a class="returnText" href="{!$Label.SolutionsTechnicalSupportURL}">
+			{!$Label.SolutionsReturnToTechnicalSupport}
+		</a>
+		<h1 class="mainBanner">{!$Label.SolutionsBannerText}</h1>
+	</div>
+</apex:component>

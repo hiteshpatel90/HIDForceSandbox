@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Age__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(IsClosed, CloseDate - DATEVALUE(CreatedDate), TODAY() - DATEVALUE(CreatedDate))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Age</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Amount_Indicator__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF( ISNULL(Previous_Amount__c ), &apos;NONE&apos;, 
+        IF( Previous_Amount__c == Amount, &apos;NONE&apos;,
+            IF( Previous_Amount__c &gt; Amount, &apos;red&apos;, &apos;green&apos;)))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount Indicator</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Amount_Whole__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Amount</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Amount_Whole</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Previous_Amount__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Previous Amount</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Currency</type>
+    </fields>
+    <fields>
+        <fullName>Previous_Win__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Previous Win</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>Stage_Value__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>TEXT(StageName)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Stage Value</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Win_Indicator__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(AXIOM_BASE__Probability_of_Win__c &gt;  Previous_Win__c, &apos;green&apos;, IF(ISBLANK(Previous_Win__c), &apos;&apos;, &apos;red&apos;))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Win Indicator</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <webLinks>
+        <fullName>CustomClone</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Clone</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>if(hasProducts) {
+	$( &apos;&lt;div id=&quot;dialog-confirm&quot; title=&quot;Clone with Products?&quot;&gt;&lt;p&gt;&lt;span class=&quot;ui-icon ui-icon-alert&quot; style=&quot;float:left; margin:0 7px 20px 0;&quot;&gt;&lt;/span&gt;Would you like to clone with the Products?&lt;/p&gt;&lt;/div&gt;&apos; ).dialog({
+	resizable: false,
+	height:160,
+	modal: true,
+	buttons: {
+		&quot;Yes&quot;: function() {
+		$( this ).dialog( &quot;close&quot; );
+			customClone(true);
+		},
+		&quot;No&quot;: function() {
+		$( this ).dialog( &quot;close&quot; );
+			customClone(false);
+		}
+	}
+});
+} else {
+	customClone(false);
+}
+function customClone(withProducts){
+	$(&apos;.loader-text&apos;).text(&apos;Cloning Opportunity...&apos;);
+	$(&apos;.loader&apos;).show();
+	$(&apos;.opportunity&apos;).hide();
+	$(&apos;.chatter&apos;).hide();
+	$(&apos;.details&apos;).hide();
+	Visualforce.remoting.Manager.invokeAction(
+		controller + &apos;.OpportunityClone&apos;,
+		&apos;{!Opportunity.Id}&apos;,
+                withProducts,
+		function(result){
+			 if(result.indexOf(&apos;ERROR:&apos;) == 0){
+				 alert(result);
+				 $(&apos;.loader&apos;).hide();
+				 $(&apos;.opportunity&apos;).show();
+				 $(&apos;.chatter&apos;).show();
+				 $(&apos;.details&apos;).show();
+			 } else {
+			 var newId = result;
+			 $(&apos;.loader-text&apos;).text(&apos;Cloning Related Objects...&apos;);
+			 Visualforce.remoting.Manager.invokeAction(
+				   controller + &apos;.BioWorkSheetClone&apos;,
+				   &apos;{!Opportunity.Id}&apos;,
+				   result,
+				   function(res){  
+					   if(res == &apos;SUCCES&apos;){window.location = &quot;/&quot; + newId;}
+					   else {
+							 alert(res); 
+							 $(&apos;.loader&apos;).hide();
+							 $(&apos;.opportunity&apos;).show();
+							 $(&apos;.chatter&apos;).show();
+							 $(&apos;.details&apos;).show();
+					   }
+				   }
+			 );
+			 }
+		}
+	);
+}</url>
+    </webLinks>
+</CustomObject>

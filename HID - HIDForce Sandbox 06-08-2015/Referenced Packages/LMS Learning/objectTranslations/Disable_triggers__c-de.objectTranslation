@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <fields>
+        <label>Nach dem Loschen</label>
+        <name>After_Delete__c</name>
+    </fields>
+    <fields>
+        <label>Nach dem Einfugen</label>
+        <name>After_Insert__c</name>
+    </fields>
+    <fields>
+        <label>Nach dem Aktualisieren</label>
+        <name>After_Update__c</name>
+    </fields>
+    <fields>
+        <label>Vor dem Loschen</label>
+        <name>Before_Delete__c</name>
+    </fields>
+    <fields>
+        <label>Vor dem Einfugen</label>
+        <name>Before_Insert__c</name>
+    </fields>
+    <fields>
+        <label>Vor dem Aktualisieren</label>
+        <name>Before_Update__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+</CustomObjectTranslation>

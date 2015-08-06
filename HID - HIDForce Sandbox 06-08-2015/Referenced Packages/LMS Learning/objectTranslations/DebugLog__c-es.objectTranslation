@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Debug Log --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Debug Log --></value>
+    </caseValues>
+    <fields>
+        <label>Acción</label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label>ActivityTime</label>
+        <name>ActivityTime__c</name>
+    </fields>
+    <fields>
+        <label>Dominio</label>
+        <name>Domain__c</name>
+    </fields>
+    <fields>
+        <label>Nivel</label>
+        <name>Level__c</name>
+        <picklistValues>
+            <masterLabel>Error</masterLabel>
+            <translation><!-- Error --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Info</masterLabel>
+            <translation><!-- Info --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Warning</masterLabel>
+            <translation><!-- Warning --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Nota</label>
+        <name>Note__c</name>
+    </fields>
+    <fields>
+        <label>Destinatario</label>
+        <name>Recipient__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <nameFieldLabel><!-- DebugLog Name --></nameFieldLabel>
+</CustomObjectTranslation>

@@ -1,0 +1,83 @@
+<!-------------------------------------------------------------------------------------------
+- Type             : visualforce Page
+- Name             : MultiOpportunityTeamMemberEdit
+- Created by       : Hitesh Patel
+- Created Date     : 24th July 2015
+- Last Modified By : Hitesh Patel 24th July 2015
+- Purpose          : page used to Add Opportunity Team with Notification
+---------------------------------------------------------------------------------------------->
+<apex:page standardController="Opportunity" extensions="extMultiOpportunityTeamMemberEdit">
+    <apex:form >
+        <apex:sectionHeader title="Add Opportunity Team Members to {!Opportunity.Name}." />
+        <h4 style="font-weight:normal;font-size:109%">
+            <apex:pagemessage escape="false" summary="{!strInfoMsg}" severity="info" strength="1" />
+        </h4>
+        <br/>
+        <apex:pageBlock >
+            <apex:pageblockButtons >
+                <apex:commandButton value="Save" action="{!addOpportunityTeamMember}"/>
+                <apex:commandButton value="Save & More" action="{!addOpportunityTeamMemberAddMore}"/>
+                <apex:commandButton value="Cancel" action="{!cancelTeamMember}"/>
+            </apex:pageblockButtons>
+            <table width="60%">
+                <tr>
+                    <td>
+                        <apex:outputLabel style="color:#990000;" value="User"></apex:outputLabel>
+                    </td>
+                    <td>
+                        <apex:outputLabel style="color:#990000;"></apex:outputLabel>
+                    </td>
+                    <td>
+                        <apex:outputLabel style="color:#990000;" value="Team Role"></apex:outputLabel>
+                    </td>
+                    <td>
+                        <apex:outputLabel style="color:#990000;" value="Opportunity Access"></apex:outputLabel>
+                    </td>
+                </tr>
+                <tr>
+                    <td colspan="4">
+                        <hr/>
+                    </td>
+                </tr>
+                <apex:repeat value="{!lstOpportunityTeamMember}" var="om">
+                <tr>
+                    <td>
+                        <apex:outputLabel value="User"></apex:outputLabel>
+                    </td>
+                    <td>
+                        <apex:inputfield required="false" value="{!om.UserId}"/>
+                    </td>
+                    <td>
+                        <apex:inputfield value="{!om.TeamMemberRole}"/>
+                    </td>
+                    <td>
+                        <apex:inputfield value="{!om.OpportunityAccessLevel}"/>
+                        <apex:selectList multiselect="false" size="0">
+                            <apex:selectOption itemValue="Read" itemLabel="Read Only"/>
+                            <apex:selectOption itemValue="Edit" itemLabel="Read/Write"/>                            
+                        </apex:selectList>
+                    </td>
+                </tr>
+                </apex:repeat>
+                
+                <tr>
+                    <td colspan="4">   
+                    <br/>
+                    <apex:inputCheckbox value="{!isSendNotification}"/>
+                    <apex:outputLabel value="Send Notification Email"></apex:outputLabel>
+                       
+                    </td>
+                </tr>
+             </table>
+            
+            <!--<apex:pageblockSection >
+            
+                    <apex:inputfield value="{!objOppMem.UserId}"/>
+                    <apex:inputfield value="{!objOppMem.TeamMemberRole}"/>
+                    <apex:inputfield value="{!objOppMem.OpportunityAccessLevel}"/>
+                   
+                
+            </apex:pageblockSection>-->
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

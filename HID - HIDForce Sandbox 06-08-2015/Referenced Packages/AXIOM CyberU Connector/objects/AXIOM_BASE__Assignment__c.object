@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <fields>
+        <fullName>Course_Assignment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Course Assignment</label>
+        <referenceTo>lmscons__Training_Path_Assignment_Progress__c</referenceTo>
+        <relationshipLabel>Assignments</relationshipLabel>
+        <relationshipName>Assignments</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Curriculum_Assignment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Curriculum Assignment</label>
+        <referenceTo>lmscons__Curriculum_Assignment__c</referenceTo>
+        <relationshipLabel>Assignments</relationshipLabel>
+        <relationshipName>Assignments</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Learning_Path_Assignment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Learning Path Assignment</label>
+        <referenceTo>lmscons__Learning_Path_Assignment__c</referenceTo>
+        <relationshipLabel>Assignments</relationshipLabel>
+        <relationshipName>Assignments</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Module_Assignment__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Module Assignment</label>
+        <referenceTo>lmscons__Transcript_Line__c</referenceTo>
+        <relationshipLabel>Assignments</relationshipLabel>
+        <relationshipName>Assignments</relationshipName>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+</CustomObject>

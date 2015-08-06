@@ -1,0 +1,36 @@
+<apex:page controller="AllSolutionsController" showHeader="false" sidebar="false" >
+
+	<apex:styleSheet value="{!$Resource.solutionsStyles}" />
+	<apex:styleSheet value="{!HID_CSS_URL}" />
+
+	<div id="pageWrapper">
+
+		<div id="mainBody">
+		
+			<apex:outputPanel rendered="{!hasCategories}">
+				<h1>Solution Categories</h1>
+				<ul class="solution">
+					<apex:repeat value="{!categories}" var="category">
+						<li>
+							<apex:outputLink value="AllSolutions?id={!category.Id}&lang={!lang}">{!category.MasterLabel}</apex:outputLink>
+						</li>
+				  	</apex:repeat>
+				</ul>
+			</apex:outputPanel>
+			
+			<apex:outputPanel rendered="{!hasSolutions}">
+				<h1>Solutions</h1>
+				<ul class="solution">
+					<apex:repeat value="{!solutions}" var="solution" id="theRepeat">
+						<li>
+							<apex:outputLink value="Solution?solution_id={!solution.Id}" id="theLink">{!solution.SolutionName}</apex:outputLink>
+						</li>
+					</apex:repeat>
+				</ul>
+			</apex:outputPanel>
+
+		</div>
+		
+	</div>
+
+</apex:page>

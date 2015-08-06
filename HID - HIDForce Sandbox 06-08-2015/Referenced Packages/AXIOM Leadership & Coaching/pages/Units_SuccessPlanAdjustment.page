@@ -1,0 +1,1171 @@
+<apex:page standardController="AXIOM_LC__Success_Plan__c" extensions="AXIOM_LC.Units_SuccessPlanAdjustment" id="adjustmentPage" showHeader="false" sideBar="false">
+	<!-- <apex:messages /> -->
+	<link href="{!URLFOR($Resource.lc_css_component, 'lc_css_base.css')}" rel="stylesheet" />
+	<link href="{!URLFOR($Resource.lc_css_component, 'lc_css_component.css')}" rel="stylesheet" />
+
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/js/jquery-1.9.1.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/js/jquery-ui-1.10.3.custom.min.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_BASE__accounting)}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css')}" />
+	<link
+		href="{!URLFOR($Resource.lc_boot_component, './css/axiom-coaching.css')}"
+		rel="stylesheet" />
+
+	<script src="{!URLFOR($Resource.lc_boot_component_templates, 'underscore.js')}"></script>
+
+	<style media="screen" type="text/css">
+.disabledSlider {
+	position: absolute;
+	z-index: 66666;
+	top: 0;
+	left: 0;
+	bottom: 0;
+	right: 0;
+	background-color: rgba(0, 0, 0, 0.1);
+}
+
+.irs {
+	overflow: hidden;
+}
+
+input[type="text"] {
+	border: medium none;
+	padding-top: 0;
+	text-align: left;
+	background: inherit;
+}
+
+#annS,#avg,#cRat,#pRat,#opp {
+	display: none;
+}
+
+.highlight {
+	color: green;
+	font-weight: bold;
+}
+</style>
+	<div class="page-header">
+		<div class="page-heading left">
+			<!-- {!$Label.SP_AdjustSuccessPlan} -->
+			{!SuccessPlan.SuccessPlan_Name__c} *
+			<br/>
+		</div>
+		<div class="btn-container right">
+			<input type="button" id="save-button"
+				class="button primary left {!IF(isEditable,'','disabled')}"
+				value="{!$Label.Btn_Save}" />
+			<div class="clear"></div>
+		</div>
+		<div class="clear"></div>
+	</div>
+	<div class="page-content">
+		<div class="table-adjust" style="margin-right: 0;">
+			<apex:form >
+				<div id="form-confirm-submit" style="display: none;">
+					<p>Are you sure to update the Current Plan with your
+						adjustments?</p>
+					<apex:commandLink styleClass="button primary right"
+						style="text-decoration:none; " action="{!Save}" value="Ok"
+						id="saveButton" />
+				</div>
+				<div id="form-alert-submit" style="display: none;">
+					<p>Adjusted Annualized Units Objective should be same as the Plan
+						Units Objective. Please adjust other metrics using the Sliders to
+						adjust the Annualized Units Objective.</p>
+				</div>
+				<table class="table table-striped">
+					<thead>
+						<tr>
+							<th>{!$Label.axiom_lc__SP_Item}</th>
+							<th>{!$Label.axiom_lc__SP_Plan}</th>
+							<th>{!$Label.axiom_lc__SP_Actual}</th>
+							<th>{!$Label.axiom_lc__SP_Predicted}</th>
+							<th>{!$Label.axiom_lc__SP_PeerAverage}</th>
+							<th>{!$Label.axiom_lc__SP_Adjusted}</th>
+							<th>{!$Label.axiom_lc__Pin}</th>
+							<th>Move the slide bar to adjust the plan</th>
+						</tr>
+					</thead>
+					<tbody>
+						<tr>
+							<td>Annualized Units Objective</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.Annual_Units_Objective}"
+									id="annualSalesplan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.Annual_Units_Objective}"
+									id="annualSales_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPredicted.Annual_Units_Objective}"
+									id="annualSales_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.Annual_Units_Objective}"
+									id="annualSales_plan_peer" /></td>
+							<td><span id="annS_T">{!SuccessPlanWrpAdjusted.Annual_Units_Objective}</span>
+								<apex:inputHidden value="{!SuccessPlan.AXIOM_LC__Annual_Units__c}" /></td>
+							<td><input type="radio" name="pinGroup" value="1" /></td>
+							<td class="ui-slider-td">
+								<div style="position: relative;">
+									<div id="slider-annual-sales" class="sliderClass">
+										<div class="ui-slider-start-point"></div>
+										<span class="ui-slider-legend">0%</span>
+									</div>
+									<div class="ui-value-right">0%</div>
+								</div> <!-- <input id="slider-annual-sales" class="sliderClass" type="hidden" value="-100;100" /> -->
+							</td>
+						</tr>
+						<tr>
+							<td>{!$Label.SP_Periods}</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.Number_of_Periods}" id="periods_plan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.Number_of_Periods}"
+									id="periods_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPredicted.Number_of_Periods}"
+									id="periods_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.Number_of_Periods}"
+									id="periods_plan_peer" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpAdjusted.Number_of_Periods}"
+									id="periods_plan_adj" /></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>Units per period</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.Units_Per_Period}"
+									id="perPeriod_plan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.Units_Per_Period}"
+									id="perPeriod_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPredicted.Units_Per_Period}"
+									id="perPeriod_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.Units_Per_Period}"
+									id="perPeriod_plan_peer" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrp.Units_Per_Period}"
+									id="perPeriod_plan_adj" /></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>Avg. Num. of Units</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.Avg_Num_Of_Units}" id="avg_plan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.Avg_Num_Of_Units}"
+									id="avg_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPredicted.Avg_Num_Of_Units}"
+									id="avg_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.Avg_Num_Of_Units}"
+									id="avg_plan_peer" /></td>
+							<td><span id="avg_T">{!SuccessPlanWrpAdjusted.Avg_Num_Of_Units}</span>
+								<apex:inputHidden value="{!SuccessPlan.AXIOM_LC__Avg_Num_Of_Units__c}" /></td>
+							<td><input type="radio" name="pinGroup" value="2" /></td>
+							<td class="ui-slider-td">
+								<div style="position: relative;">
+									<div id="slider-avg-sales" class="sliderClass">
+										<div class="ui-slider-start-point"></div>
+										<span class="ui-slider-legend">0%</span>
+									</div>
+									<div class="ui-value-right">0%</div>
+								</div> <!-- <input id="slider-avg-sales" class="sliderClass" type="hidden" value="-100;100" /> -->
+							</td>
+						</tr>
+						<tr>
+							<td>{!$Label.SP_ClosesPerPeriod}</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.Closes_Per_Period}"
+									id="closesPerPeriod_plan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.Closes_Per_Period}"
+									id="closesPerPeriod_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPredicted.Closes_Per_Period}"
+									id="closesPerPeriod_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.Closes_Per_Period}"
+									id="closesPerPeriod_plan_peer" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpAdjusted.Closes_Per_Period}"
+									id="closesPerPeriod_plan_adj" /></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+						</tr>
+						<tr>
+							<td>{!$Label.SP_ClosingRatio}</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.Closing_Ratio}"
+									id="closingRatio_plan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.Closing_Ratio}"
+									id="closingRatio_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrppredicted.Closing_Ratio}"
+									id="closingRatio_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.Closing_Ratio}"
+									id="closingRatio_plan_peer" /></td>
+							<td><span id="cRat_T">{!SuccessPlanWrpAdjusted.Closing_Ratio}</span>
+								<apex:inputHidden value="{!SuccessPlan.AXIOM_LC__Closing_Ratio__c}" /></td>
+							<td><input type="radio" name="pinGroup" value="3" /></td>
+							<td class="ui-slider-td">
+								<div style="position: relative;">
+									<div id="slider-closing-ratio" class="sliderClass">
+										<div class="ui-slider-start-point"></div>
+										<span class="ui-slider-legend">0%</span>
+									</div>
+									<div class="ui-value-right">0%</div>
+								</div> <!-- <input id="slider-closing-ratio" class="sliderClass" type="hidden" value="-100;100" /> -->
+							</td>
+						</tr>
+						<tr>
+							<td>{!$Label.SP_ProposalsPerPeriod}</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.New_Proposals_per_Period}"
+									id="proposalsPerPeriod_plan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.New_Proposals_per_Period}"
+									id="proposalsPerPeriod_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPredicted.New_Proposals_per_Period}"
+									id="proposalsPerPeriod_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.New_Proposals_per_Period}"
+									id="proposalsPerPeriod_plan_peer" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpAdjusted.New_Proposals_per_Period}"
+									id="proposalsPerPeriod_plan_adj" /></td>
+							<td>&nbsp;</td>
+							<td>&nbsp;</td>
+
+						</tr>
+						<tr>
+							<td>{!$Label.SP_ProposalRatio}</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.Proposal_Ratio}"
+									id="proposalsRatio_plan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.Proposal_Ratio}"
+									id="proposalsRatio_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPredicted.Proposal_Ratio}"
+									id="proposalsRatio_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.Proposal_Ratio}"
+									id="proposalsRatio_plan_peer" /></td>
+							<td><span id="pRat_T">{!SuccessPlanWrpAdjusted.Proposal_Ratio}</span>
+								<apex:inputHidden value="{!SuccessPlan.AXIOM_LC__Proposal_Ratio__c}" /></td>
+							<td><input type="radio" name="pinGroup" value="4" /></td>
+							<td class="ui-slider-td">
+								<div style="position: relative;">
+									<div id="slider-proposal-ratio" class="sliderClass">
+										<div class="ui-slider-start-point"></div>
+										<span class="ui-slider-legend">0%</span>
+									</div>
+									<div class="ui-value-right">0%</div>
+								</div> <!-- <input id="slider-proposal-ratio" class="sliderClass"  type="hidden" value="-100;100" /> -->
+							</td>
+						</tr>
+						<tr>
+							<td>{!$Label.SP_NewOpportunitiesPerPeriod}</td>
+							<td><apex:outputText value="{!SuccessPlanWrp.New_Opportunities_per_Period}"
+									id="opportunitiesPerPeriod_plan" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpHistorical.New_Opportunities_per_Period}"
+									id="opportunitiesPerPeriod_plan_hist" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPredicted.New_Opportunities_per_Period}"
+									id="opportunitiesPerPeriod_plan_pred" /></td>
+							<td><apex:outputText value="{!SuccessPlanWrpPeerAverage.New_Opportunities_per_Period}"
+									id="opportunitiesPerPeriod_plan_peer" /></td>
+							<td><span id="opp_T">{!SuccessPlanWrpAdjusted.New_Opportunities_per_Period}</span>
+								<apex:inputHidden value="{!SuccessPlan.AXIOM_LC__New_Opportunities_per_Period__c}" /></td>
+							<td><input type="radio" name="pinGroup" value="5" /></td>
+							<td class="ui-slider-td">
+								<div style="position: relative;">
+									<div id="slider-new-opportunities" class="sliderClass">
+										<div class="ui-slider-start-point"></div>
+										<span class="ui-slider-legend">0%</span>
+									</div>
+									<div class="ui-value-right">0%</div>
+								</div> <!-- <input id="slider-new-opportunities" class="sliderClass" type="hidden" value="-100;100" /> -->
+							</td>
+						</tr>
+					</tbody>
+				</table>
+			</apex:form>
+		</div>
+		<div class="clear"></div>
+		<div class="bar-graphs">
+			<div class="bar-graph-container">
+				<label class="adjust adjust-left">{!$Label.SP_Predicted}</label> <label
+					class="adjust adjust-right" id="adjustRight"><span
+					id="adjActual"><b>$750,000/</b></span><span id="adjGoal">$1,200,000</span></label>
+				<div class="bar-graph adjust">
+					<div class="bar-graph-goal" style="width: 0%;"
+						id="act-bar-graph-goal"></div>
+					<div class="bar-graph-actual" style="width: 0%;"
+						id="act-bar-graph-actual">
+						<div class="bar-graph-actual-label-container">
+							<label class="bar-graph-actual-label"> <apex:outputText value="" id="actualAmount">{!$Label.axiom_lc__SP_Actual}: </apex:outputText>
+							</label>
+						</div>
+					</div>
+					<div class="bar-graph-inner yellow" style="width: 0%;"
+						id="act-bar-graph-inner"></div>
+				</div>
+			</div>
+			<div class="bar-graph-container">
+				<label class="adjust adjust-left">{!$Label.SP_Adjusted}</label> <label
+					class="adjust adjust-right"><span id="adjActual_cal"><b>$750,000/</b></span><span
+					id="adjGoal_cal">$1,200,000</span></label>
+				<div class="bar-graph adjust">
+					<div class="bar-graph-goal" style="width: 0%;"
+						id="adj-bar-graph-goal">
+						<div class="bar-graph-goal-label-container">
+							<label class="bar-graph-goal-label"> <apex:outputText value="" id="goalAmount">{!$Label.axiom_lc__SP_Goal}: </apex:outputText>
+							</label>
+						</div>
+					</div>
+					<div class="bar-graph-actual" style="width: 0%;"
+						id="adj-bar-graph-actual"></div>
+					<div class="bar-graph-inner yellow" style="width: 0%;"
+						id="adj-bar-graph-inner"></div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<apex:outputPanel layout="none" rendered="{!isEditable || isSeller}">
+		<div id="chatter">
+			<chatter:feed entityId="{!SuccessPlan.Id}"/>
+		</div>
+	</apex:outputPanel>
+	<apex:outputPanel layout="none" rendered="{!isSeller}">
+	<script type="text/javascript">
+		$(document).ready(function(){
+			$('.publishercontainer').remove();
+		});
+	</script>
+	<style>
+		.publishercontainer{display:none;}
+	</style>
+	</apex:outputPanel>
+
+	<style>
+.sliderClass {
+	width: 90%;
+	top: 10px;
+}
+
+.sliderClass .ui-slider-range {
+	background: #5292EA;
+}
+
+.sliderClass .ui-slider-handle {
+	border-color: transparent;
+	background: transparent url({!URLFOR($Resource.lc_boot_component_templates,'jquery/sliderHandler_metal.png')}) no-repeat;
+
+
+
+}
+.sliderClass .ui-slider-handle {
+	border-color: transparent;
+	background: transparent url({!URLFOR($Resource.lc_boot_component_templates,'jquery/sliderHandler_simple.png')}) no-repeat;
+
+
+
+}
+.ui-widget-content {
+	background: #E1E1E1 !important;
+}
+
+.ui-slider-legend {
+	left: 50%;
+	position: relative;
+	z-index: 600;
+	top: -22px;
+	color: rgb(121, 121, 121);
+}
+
+.ui-slider-start-point {
+	left: 51%;
+	position: absolute;
+	width: 1px;
+	height: 10px;
+	background-color: rgb(121, 121, 121);
+	z-index: 2;
+}
+
+.ui-slider-horizontal {
+	height: 10px;
+}
+
+.ui-slider .ui-slider-handle {
+	position: absolute;
+	z-index: 3;
+	width: 22px;
+	height: 22px;
+	cursor: default;
+}
+
+.ui-corner-all {
+	border-radius: 10px;
+}
+
+.ui-slider-horizontal .ui-slider-handle {
+	top: -8px;
+	outline:none !important;
+}
+
+.ui-value-right { /*position: absolute;
+	right: 13px;
+	top: 5px;*/
+	top: -11px;
+	position: absolute;
+	right: 7px;
+}
+
+.ui-slider-td {
+	position: relative;
+}
+</style>
+	<!--[if IE]>
+	<style>
+		.sliderClass .ui-slider-handle { border-color: transparent; background: transparent url({!URLFOR($Resource.lc_boot_component_templates, 'jquery/sliderHandler_metal_ie.png')})  no-repeat; }
+		.sliderClass .ui-slider-handle { border-color: transparent; background: transparent url({!URLFOR($Resource.lc_boot_component_templates, 'jquery/sliderHandler_simple_ie.png')})  no-repeat; }
+
+		.ui-slider.ui-state-disabled .ui-slider-handle, .ui-slider.ui-state-disabled .ui-slider-range{
+			filter: progid:DXImageTransform.Microsoft.Alpha(opacity=75);
+		}
+	</style>
+<![endif]-->
+	<script type="text/javascript">
+		var locales = {
+			"sq":           ",", // Albanian
+			"sq_AL":        ",", // Albanian (Albania)
+			"ar":           ".", // Arabic
+			"ar_BH":        ".", // Arabic (Bahrain)
+			"ar_EG":        ".", // Arabic (Egypt)
+			"ar_JO":        ".", // Arabic (Jordan)
+			"ar_KW":        ".", // Arabic (Kuwait)
+			"ar_LB":        ".", // Arabic (Lebanon)
+			"ar_QA":        ".", // Arabic (Qatar)
+			"ar_SA":        ".", // Arabic (Saudi Arabia)
+			"ar_AE":        ".", // Arabic (United Arab Emirates)
+			"hy":           ",", // Armenian
+			"hy_AM":        ",", // Armenian (Armenia)
+			"az_AZ":        ",", // Azerbaijani (Azerbaijan)
+			"eu":           ",", // Basque
+			"eu_ES":        ",", // Basque (Spain)
+			"be_BY":        ",", // Belarusian (Belarus)
+			"bn_BD":        ".", // Bengali (Bangladesh)
+			"bs":           ",", // Bosnian
+			"bs_BA":        ",", // Bosnian (Bosnia and Herzegovina)
+			"bg":           ",", // Bulgarian
+			"bg_BG":        ",", // Bulgarian (Bulgaria)
+			"ca":           ",", // Catalan
+			"ca_ES_EURO":   ",", // Catalan (Spain,Euro)
+			"ca_ES":        ",", // Catalan (Spain)
+			"zh":           ".", // Chinese
+			"zh_CN_PINYIN": ".", // Chinese (China, Pinyin Ordering)
+			"zh_CN_STROKE": ".", // Chinese (China, Stroke Ordering)
+			"zh_CN":        ".", // Chinese (China)
+			"zh_HK_STROKE": ".", // Chinese (Hong Kong SAR China, Stroke Ordering)
+			"zh_HK":        ".", // Chinese (Hong Kong SAR China)
+			"zh_MO":        ".", // Chinese (Macau SAR China)
+			"zh_SG":        ".", // Chinese (Singapore)
+			"zh_TW_STROKE": ".", // Chinese (Taiwan, Stroke Ordering)
+			"zh_TW":        ".", // Chinese (Taiwan)
+			"hr":           ",", // Croatian
+			"hr_HR":        ",", // Croatian (Croatia)
+			"cs":           ",", // Czech
+			"cs_CZ":        ",", // Czech (Czech Republic)
+			"da":           ",", // Danish
+			"da_DK":        ",", // Danish (Denmark)
+			"nl":           ",", // Dutch
+			"nl_BE":        ",", // Dutch (Belgium)
+			"nl_NL":        ",", // Dutch (Netherlands)
+			"nl_SR":        ",", // Dutch (Suriname)
+			"en_AU":        ".", // English (Australia)
+			"en_BB":        ".", // English (Barbados)
+			"en_BM":        ".", // English (Bermuda)
+			"en_CA":        ".", // English (Canada)
+			"en_GH":        ".", // English (Ghana)
+			"en_IN":        ".", // English (India)
+			"en_ID":        ".", // English (Indonesia)
+			"en_IE_EURO":   ".", // English (Ireland,Euro)
+			"en_IE":        ".", // English (Ireland)
+			"en_MY":        ".", // English (Malaysia)
+			"en_NZ":        ".", // English (New Zealand)
+			"en_NG":        ".", // English (Nigeria)
+			"en_PK":        ".", // English (Pakistan)
+			"en_PH":        ".", // English (Philippines)
+			"en_SG":        ".", // English (Singapore)
+			"en_ZA":        ".", // English (South Africa)
+			"en_GB":        ".", // English (United Kingdom)
+			"en_US":        ".", // English (United States)
+			"et":           ",", // Estonian
+			"et_EE":        ",", // Estonian (Estonia)
+			"fi":           ",", // Finnish
+			"fi_FI_EURO":   ",", // Finnish (Finland,Euro)
+			"fi_FI":        ",", // Finnish (Finland)
+			"fr":           ",", // French
+			"fr_BE":        ",", // French (Belgium)
+			"fr_CA":        ",", // French (Canada)
+			"fr_FR_EURO":   ",", // French (France,Euro)
+			"fr_FR":        ",", // French (France)
+			"fr_LU":        ",", // French (Luxembourg)
+			"fr_MC":        ",", // French (Monaco)
+			"fr_CH":        ".", // French (Switzerland)
+			"ka":           ",", // Georgian
+			"ka_GE":        ",", // Georgian (Georgia)
+			"de":           ",", // German
+			"de_AT_EURO":   ",", // German (Austria,Euro)
+			"de_AT":        ",", // German (Austria)
+			"de_DE_EURO":   ",", // German (Germany,Euro)
+			"de_DE":        ",", // German (Germany)
+			"de_LU_EURO":   ",", // German (Luxembourg,Euro)
+			"de_LU":        ",", // German (Luxembourg)
+			"de_CH":        ".", // German (Switzerland)
+			"el":           ",", // Greek
+			"el_GR":        ",", // Greek (Greece)
+			"iw":           ".", // Hebrew
+			"iw_IL":        ".", // Hebrew (Israel)
+			"hi":           ".", // Hindi
+			"hi_IN":        ".", // Hindi (India)
+			"hu":           ",", // Hungarian
+			"hu_HU":        ",", // Hungarian (Hungary)
+			"is":           ",", // Icelandic
+			"is_IS":        ",", // Icelandic (Iceland)
+			"in":           ",", // Indonesian
+			"in_ID":        ",", // Indonesian (Indonesia)
+			"ga":           ".", // Irish
+			"ga_IE":        ".", // Irish (Ireland)
+			"it":           ",", // Italian
+			"it_IT":        ",", // Italian (Italy)
+			"it_CH":        ".", // Italian (Switzerland)
+			"ja":           ".", // Japanese
+			"ja_JP":        ".", // Japanese (Japan)
+			"kk_KZ":        ",", // Kazakh (Kazakhstan)
+			"km_KH":        ",", // Khmer (Cambodia)
+			"ky_KG":        ".", // Kirghiz (Kyrgyzstan)
+			"ko":           ".", // Korean
+			"ko_KR":        ".", // Korean (South Korea)
+			"lv":           ",", // Latvian
+			"lv_LV":        ",", // Latvian (Latvia)
+			"lt":           ",", // Lithuanian
+			"lt_LT":        ",", // Lithuanian (Lithuania)
+			"lb":           ".", // Luxembourgish
+			"lb_LU":        ".", // Luxembourgish (Luxembourg)
+			"mk":           ",", // Macedonian
+			"mk_MK":        ",", // Macedonian (Macedonia)
+			"ms":           ".", // Malay
+			"ms_BN":        ",", // Malay (Brunei)
+			"ms_MY":        ".", // Malay (Malaysia)
+			"mt":           ".", // Maltese
+			"mt_MT":        ".", // Maltese (Malta)
+			"sh_ME":        ",", // Montenegrin (Montenegro)
+			"no":           ",", // Norwegian
+			"no_NO":        ",", // Norwegian (Norway)
+			"pl":           ",", // Polish
+			"pl_PL":        ",", // Polish (Poland)
+			"pt":           ",", // Portuguese
+			"pt_AO":        ",", // Portuguese (Angola)
+			"pt_BR":        ",", // Portuguese (Brazil)
+			"pt_PT":        ",", // Portuguese (Portugal)
+			"ro":           ",", // Romanian
+			"ro_MD":        ",", // Romanian (Moldova)
+			"ro_RO":        ",", // Romanian (Romania)
+			"rm":           ".", // Romansh
+			"rm_CH":        ".", // Romansh (Switzerland)
+			"ru":           ",", // Russian
+			"ru_RU":        ",", // Russian (Russia)
+			"sr":           ",", // Serbian
+			"sr_BA":        ",", // Serbian (Bosnia and Herzegovina)
+			"sh":           ",", // Serbian (Latin)
+			"sh_BA":        ",", // Serbian (Latin) (Bosnia and Herzegovina)
+			"sh_CS":        ",", // Serbian (Latin) (Serbia and Montenegro)
+			"sr_CS":        ",", // Serbian (Serbia and Montenegro)
+			"sk":           ",", // Slovak
+			"sk_SK":        ",", // Slovak (Slovakia)
+			"sl":           ",", // Slovenian
+			"sl_SI":        ",", // Slovenian (Slovenia)
+			"es":           ",", // Spanish
+			"es_AR":        ",", // Spanish (Argentina)
+			"es_BO":        ",", // Spanish (Bolivia)
+			"es_CL":        ",", // Spanish (Chile)
+			"es_CO":        ",", // Spanish (Colombia)
+			"es_CR":        ".", // Spanish (Costa Rica)
+			"es_DO":        ".", // Spanish (Dominican Republic)
+			"es_EC":        ",", // Spanish (Ecuador)
+			"es_SV":        ".", // Spanish (El Salvador)
+			"es_GT":        ".", // Spanish (Guatemala)
+			"es_HN":        ".", // Spanish (Honduras)
+			"es_MX":        ".", // Spanish (Mexico)
+			"es_PA":        ".", // Spanish (Panama)
+			"es_PY":        ",", // Spanish (Paraguay)
+			"es_PE":        ",", // Spanish (Peru)
+			"es_PR":        ".", // Spanish (Puerto Rico)
+			"es_ES_EURO":   ",", // Spanish (Spain,Euro)
+			"es_ES":        ",", // Spanish (Spain)
+			"es_UY":        ",", // Spanish (Uruguay)
+			"es_VE":        ",", // Spanish (Venezuela)
+			"sv":           ",", // Swedish
+			"sv_SE":        ",", // Swedish (Sweden)
+			"tl":           ".", // Tagalog
+			"tl_PH":        ".", // Tagalog (Philippines)
+			"tg_TJ":        ".", // Tajik (Tajikistan)
+			"th":           ".", // Thai
+			"th_TH":        ".", // Thai (Thailand)
+			"tr":           ",", // Turkish
+			"tr_TR":        ",", // Turkish (Turkey)
+			"uk":           ",", // Ukrainian
+			"uk_UA":        ",", // Ukrainian (Ukraine)
+			"ur":           ".", // Urdu
+			"ur_PK":        ".", // Urdu (Pakistan)
+			"vi":           ",", // Vietnamese
+			"vi_VN":        ",", // Vietnamese (Vietnam)
+			"cy":           ".", // Welsh
+			"cy_GB":        "."  // Welsh (United Kingdom)
+		};
+		function removecomma(param, decimalSepa){
+			if (!decimalSepa) decimalSepa = locales['{!UserLocale}'];
+			param = ''+param;
+			var comma = (decimalSepa == ',') ? param.replace(/[^0-9\,]+/g,"") : param.replace(/[^0-9\.]+/g,"");
+			comma = comma.replace(decimalSepa, '.');
+			return parseFloat(comma);
+		}
+		var decimalPlaces = 0
+		var separator2 = locales['{!UserLocale}'];
+		var separator1 = separator2 == '.' ? ',' : '.';
+	</script>
+	<script type="text/javascript">
+
+var annS_default = parseInt(removecomma('{!IF(SuccessPlanWrp.Annual_Units_Objective != NULL, SuccessPlanWrp.Annual_Units_Objective, 0)}'));
+var avg_default = parseInt(removecomma('{!IF(SuccessPlanWrp.Avg_Num_Of_Units != NULL, SuccessPlanWrp.Avg_Num_Of_Units, 0)}'));
+var cRat_default = parseFloat(removecomma('{!IF(SuccessPlanWrp.Closing_Ratio != NULL, SuccessPlanWrp.Closing_Ratio, 0)}')) > 100 ? 100 : parseFloat(removecomma('{!IF(SuccessPlanWrp.Closing_Ratio != NULL, SuccessPlanWrp.Closing_Ratio, 0)}'));
+var pRat_default = parseFloat(removecomma('{!IF(SuccessPlanWrp.Proposal_Ratio != NULL, SuccessPlanWrp.Proposal_Ratio, 0)}')) > 100 ? 100 : parseFloat(removecomma('{!IF(SuccessPlanWrp.Proposal_Ratio != NULL, SuccessPlanWrp.Proposal_Ratio, 0)}'));
+var opp_default = parseInt(removecomma('{!IF(SuccessPlanWrp.New_Opportunities_per_Period !=NULL,SuccessPlanWrp.New_Opportunities_per_Period,0)}'));
+var whta = "";
+	$( ".sliderClass" ).slider({
+	disabled: true,
+	orientation: "horizontal",
+	range: "min",
+	value: 0,
+	min: -100,
+	max: 100,
+	step: 1,
+	slide: function( event, ui ) {
+		var value = ui.value;
+		$(this).next('div.ui-value-right').text(value+"%");
+
+		if($(this).attr('id')=='slider-annual-sales') {
+			var result = parseFloat(annS_default)+parseFloat(annS_default)*value/100;
+			result = result<1?1:result;
+			$( "#annS_T" ).text( accounting.formatNumber(result.toFixed(0), 0 , separator1, separator2) );
+			$( "#annS_T" ).next('input').val(result.toFixed(0), 0, separator1, separator2);
+			calculate('ann');
+		} else if($(this).attr('id')=='slider-avg-sales'){
+			var result = parseFloat(avg_default)+parseFloat(avg_default)*value/100;
+			result = result<1?1:result;
+			$( "#avg_T" ).text( accounting.formatNumber(result.toFixed(0), 0, separator1, separator2) );
+			$( "#avg_T" ).next('input').val(result.toFixed(0));
+			calculate('avg');
+		} else if($(this).attr('id')=='slider-closing-ratio'){
+			var result = parseFloat(cRat_default)+parseFloat(cRat_default)*value/100;
+			result = result<1?1:result>100?100:result;
+			$( "#cRat_T" ).text( accounting.formatNumber(result.toFixed(2), 0, separator1, separator2) + "%" );
+			$( "#cRat_T" ).next('input').val(result.toFixed(2));
+			calculate('crat');
+		} else if($(this).attr('id')=='slider-proposal-ratio'){
+			var result = parseFloat(pRat_default)+parseFloat(pRat_default)*value/100;
+			result = result<1?1:result>100?100:result;
+			$( "#pRat_T" ).text( accounting.formatNumber(result.toFixed(2), 0, separator1, separator2) + "%" );
+			$( "#pRat_T" ).next('input').val(result.toFixed(2));
+			calculate('prat');
+		} else if($(this).attr('id')=='slider-new-opportunities'){
+			var result = parseFloat(opp_default)+parseFloat(opp_default)*value/100;
+			result = result<1?1:result;
+			$( "#opp_T" ).text( accounting.formatNumber(result.toFixed(0), 0, separator1, separator2) );
+			$( "#opp_T" ).next('input').val(result.toFixed(0));
+			calculate('opp');
+		}
+		checkSlidersPosition();
+	},
+	stop:function(){
+		checkSlidersPosition();
+	}
+	});
+	function checkSlidersPosition(){
+		var sas = $('#slider-annual-sales').slider('value');
+		var savs = $('#slider-avg-sales').slider('value');
+		var scr = $('#slider-closing-ratio').slider('value');
+		var spr = $('#slider-proposal-ratio').slider('value');
+		var sno = $('#slider-new-opportunities').slider('value');
+		if(sas == 0 && savs==0 && scr==0 && spr==0 && sno==0)slidersDefaultPosition();
+	}
+
+	function slidersDefaultPosition(){
+		var aO = $('[id$=annS_T]');
+		var bO = $('[id$=periods_plan_adj]');
+		var cO = $('[id$=perPeriod_plan_adj]');
+		var dO = $('[id$=avg_T]');
+		var eO = $('[id$=closesPerPeriod_plan_adj]');
+		var fO = $('[id$=cRat_T]');
+		var gO = $('[id$=proposalsPerPeriod_plan_adj]');
+		var hO = $('[id$=pRat_T]');
+		var iO = $('[id$=opp_T]');
+
+		var a = annS_default;
+		var b = parseInt(removecomma(bO.text()));
+		var c = a/b;
+		var d = avg_default;
+		var e = c/d;
+		var f = cRat_default;
+		var g = e/f;
+		var h = pRat_default;
+		var i = opp_default;
+
+		aO.text(accounting.formatNumber(a, 0, separator1, separator2));
+		cO.text(accounting.formatNumber(c, 0, separator1, separator2));
+		dO.text(accounting.formatNumber(d, 0, separator1, separator2));
+		eO.text(accounting.formatNumber(e, 0, separator1, separator2));
+		fO.text(accounting.formatNumber(f, 2, separator1, separator2)+'%');
+		gO.text(accounting.formatNumber((g*100), 0, separator1, separator2));
+		hO.text(accounting.formatNumber(h, 2, separator1, separator2)+'%');
+		iO.text(accounting.formatNumber(i, 0, separator1, separator2));
+
+
+		$( ".sliderClass" ).slider('value',0);
+
+	}
+	function disableSlider(selection) {
+		$('.sliderClass').slider("option", "disabled", false);
+		selection.slider("option", "disabled", true);
+	}
+	function calculate(m) {
+			responsiveCalc(m);
+			replaceContentInContainer();
+	}
+	function responsiveCalc(m){
+		var aO = $('[id$=annS_T]');
+		var bO = $('[id$=periods_plan_adj]');
+		var cO = $('[id$=perPeriod_plan_adj]');
+		var dO = $('[id$=avg_T]');
+		var eO = $('[id$=closesPerPeriod_plan_adj]');
+		var fO = $('[id$=cRat_T]');
+		var gO = $('[id$=proposalsPerPeriod_plan_adj]');
+		var hO = $('[id$=pRat_T]');
+		var iO = $('[id$=opp_T]');
+
+		var a = parseFloat(removecomma(aO.text()));
+		var b = parseInt(removecomma(bO.text()));
+		var c = parseFloat(removecomma(cO.text()));
+		var d = parseFloat(removecomma(dO.text()));
+		var e = parseFloat(removecomma(eO.text()));
+		var f = parseFloat(removecomma(fO.text()))/100;
+		var g = parseFloat(removecomma(gO.text()));
+		var h = parseFloat(removecomma(hO.text()))/100;
+		var i = parseFloat(removecomma(iO.text()));
+
+		/*console.log('a ' + a);
+		console.log('b ' + b);
+		console.log('c ' + c);
+		console.log('d ' + d);
+		console.log('e ' + e);
+		console.log('f ' + f);
+		console.log('g ' + g);
+		console.log('h ' + h);
+		console.log('i ' + i);
+		console.log('8=====================D');*/
+
+		////console.log('pinned: '+whta + ', slide: '+m);
+		switch(whta) {
+			case "annualSalesObjective":{
+				switch (m){
+					case 'avg':{
+
+
+						a=b*d*e;
+						a = _.isFinite(a)?a:1;
+						aO.text(accounting.formatNumber(a.toFixed(0), 0, separator1, separator2));
+
+						c=a/b;
+						c = _.isFinite(c)?c:1;
+						cO.text( accounting.formatNumber(c.toFixed(0), 0, separator1, separator2));
+
+					}break;
+					case 'crat':{
+						e=g*f;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						c=d*e;
+						c = _.isFinite(c)?c:1;
+						cO.text( accounting.formatNumber(c.toFixed(0), 0, separator1, separator2));
+
+						a = b*c;
+						a = _.isFinite(a)?a:1;
+						aO.text( accounting.formatNumber(a.toFixed(0), 0, separator1, separator2));
+
+						/*g=e/f;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						i = g/h;
+						iO.text( accounting.formatNumber(i.toFixed(0), 0, separator1, separator2));*/
+
+					}break;
+					case 'prat':{
+
+						g=h*i;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						e=g*f;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						c=d*e;
+						c = _.isFinite(c)?c:1;
+						cO.text( accounting.formatNumber(c.toFixed(0), 0, separator1, separator2));
+
+						a = b*c;
+						a = _.isFinite(a)?a:1;
+						aO.text( accounting.formatNumber(a.toFixed(0), 0, separator1, separator2));
+						/*
+						i = g/h;
+						iO.text( accounting.formatNumber(i.toFixed(0), 0, separator1, separator2));
+						*/
+					}break;
+					case 'opp':{
+
+						g=i*h;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						e=g*f;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						c=d*e;
+						c = _.isFinite(c)?c:1;
+						cO.text(accounting.formatNumber(c.toFixed(0), 0, separator1, separator2));
+
+						a = b*c;
+						a = _.isFinite(a)?a:1;
+						aO.text( accounting.formatNumber(a.toFixed(0), 0, separator1, separator2));
+
+					}break;
+				}
+				aO.next('input').val(a);
+
+			}break;
+			case "averageValue":{
+				switch (m){
+					case 'ann':{
+
+					c=a/b;
+					c = _.isFinite(c)?c:1;
+					cO.text( accounting.formatNumber(c.toFixed(0), 0, separator1, separator2));
+
+					d = c/e;
+					d = _.isFinite(d)?d:1;
+					dO.text( accounting.formatNumber(d.toFixed(0), 0, separator1, separator2));
+
+					}break;
+					case 'crat':{
+
+						e=g*f;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						d = c/e;
+						d = _.isFinite(d)?d:1;
+						dO.text( accounting.formatNumber(d.toFixed(0), 0, separator1, separator2));
+
+
+					}break;
+					case 'prat':{
+
+						g=i*h;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						e=g*f;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						d = c/e;
+						d = _.isFinite(d)?d:1;
+						dO.text( accounting.formatNumber(d.toFixed(0), 0, separator1, separator2));
+
+					}break;
+					case 'opp':{
+						g=i*h;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						e=g*f;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						d = c/e;
+						d = _.isFinite(d)?d:1;
+						dO.text( accounting.formatNumber(d.toFixed(0), 0, separator1, separator2));
+					}break;
+				}
+				dO.next('input').val(d);
+
+			}break;
+			case "closingRatio":{
+				switch (m){
+					case 'ann':{
+						c=a/b;
+						c = _.isFinite(c)?c:1;
+						cO.text(accounting.formatNumber(c.toFixed(0), 0, separator1, separator2));
+
+						e=c/d;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						f = e/g*100;
+						f = _.isFinite(f)?f>100?100:f:1;
+						fO.text( accounting.formatNumber(f.toFixed(2), 2, separator1, separator2)+"%");
+
+					}break;
+					case 'avg':{
+
+						e=c/d;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						f = e/g*100;
+						f = _.isFinite(f)?f>100?100:f:1;
+						fO.text( accounting.formatNumber(f.toFixed(2), 2, separator1, separator2)+"%");
+
+					}break;
+					case 'prat':{
+						g=i*h;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						f = e/g*100;
+						f = _.isFinite(f)?f>100?100:f:1;
+						fO.text( accounting.formatNumber(f.toFixed(2), 2, separator1, separator2)+"%");
+					}break;
+					case 'opp':{
+						g=i*h;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						f = e/g*100;
+						f = _.isFinite(f)?f>100?100:f:1;
+						fO.text( accounting.formatNumber(f.toFixed(2), 2, separator1, separator2)+"%");
+					}break;
+				}
+				fO.next('input').val(f>100?100:f);
+
+			}break;
+			case "proposalRatio":{
+				switch (m){
+					case 'ann':{
+						c=a/b;
+						c = _.isFinite(c)?c:1;
+						cO.text(accounting.formatNumber(c.toFixed(0), 0, separator1, separator2));
+
+						e=c/d;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						g = e/f;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						h = g/i*100;
+						h = _.isFinite(h)?h>100?100:h:1;
+						hO.text( accounting.formatNumber(h.toFixed(2), 2, separator1, separator2)+"%");
+					}break;
+					case 'avg':{
+						e=c/d;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						g = e/f;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						h = g/i*100;
+						h = _.isFinite(h)?h>100?100:h:1;
+						hO.text( accounting.formatNumber(h.toFixed(2), 2, separator1, separator2)+"%");
+					}break;
+					case 'crat':{
+						g =e/f;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						h = g/i*100;
+						h = _.isFinite(h)?h>100?100:h:1;
+						hO.text( accounting.formatNumber(h.toFixed(2), 2, separator1, separator2)+"%");
+
+					}break;
+					case 'opp':{
+
+						h = g/i*100;
+						h = _.isFinite(h)?h>100?100:h:1;
+						hO.text( accounting.formatNumber(h.toFixed(2), 2, separator1, separator2)+"%");
+
+					}break;
+				}
+				hO.next('input').val(h>100?100:h);
+
+			}break;
+			case "newOpportunities":{
+				switch (m){
+					case 'ann':{
+						c=a/b;
+						c = _.isFinite(c)?c:1;
+						cO.text(accounting.formatNumber(c.toFixed(0), 0, separator1, separator2));
+
+						e=c/d;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						g =e/f;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						i =g/h;
+						i = _.isFinite(i)?i:1;
+						iO.text( accounting.formatNumber(i.toFixed(0), 0, separator1, separator2));
+
+					}break;
+					case 'avg':{
+						e=c/d;
+						e = _.isFinite(e)?e:1;
+						eO.text( accounting.formatNumber(e.toFixed(0), 0, separator1, separator2));
+
+						g = e/f;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						i = g/h;
+						i = _.isFinite(i)?i:1;
+						iO.text( accounting.formatNumber(i.toFixed(0), 0, separator1, separator2));
+					}break;
+					case 'crat':{
+
+						g = e/f;
+						g = _.isFinite(g)?g:1;
+						gO.text( accounting.formatNumber(g.toFixed(0), 0, separator1, separator2));
+
+						i = g/h;
+						i = _.isFinite(i)?i:1;
+						iO.text( accounting.formatNumber(i.toFixed(0), 0, separator1, separator2));
+
+					}break;
+					case 'prat':{
+						i = g/h;
+						i = _.isFinite(i)?i:1;
+						iO.text( accounting.formatNumber(i.toFixed(0), 0, separator1, separator2));
+					}break;
+				}
+				iO.next('input').val(i);
+			}break;
+			default:break;
+		}
+
+
+	}
+$(document).ready(function(){
+	replaceContentInContainer();
+	$("#save-button").bind("click", confirmSave);
+	//$('.sliderClass').ionRangeSlider("remove");
+	$(":radio").on("click",function(){
+		switch(parseInt($(this).attr("value"))) {
+		case 1: {
+				disableSlider($("#slider-annual-sales"));
+				highlightSelection($("#annS_T"));
+				whta="annualSalesObjective";
+			}break;
+		case 2: {
+				disableSlider($("#slider-avg-sales"));
+				highlightSelection($("#avg_T"));
+				whta="averageValue";
+			}break;
+		case 3: {
+				disableSlider($("#slider-closing-ratio"));
+				highlightSelection($("#cRat_T"));
+				whta="closingRatio";
+			}break;
+		case 4: {
+				disableSlider($("#slider-proposal-ratio"));
+				highlightSelection($("#pRat_T"));
+				whta="proposalRatio";
+			}break;
+		case 5: {
+				disableSlider($("#slider-new-opportunities"));
+				highlightSelection($("#opp_T"));
+				whta="newOpportunities";
+			}break;
+		default: whta="";break;
+		}
+	});
+});
+
+function highlightSelection(selection) {
+	$('.highlight').removeClass('highlight');
+	selection.addClass('highlight');
+}
+
+function isNumber (n) {return !isNaN(parseFloat(n)) && isFinite(n);}
+
+function replaceContentInContainer() {
+	var predictedGoal = document.getElementById('act-bar-graph-goal');
+	var predictedActual = document.getElementById('act-bar-graph-actual');
+	var predictedBar = document.getElementById('act-bar-graph-inner');
+
+	var adjustGoal = document.getElementById('adj-bar-graph-goal');
+	var adjustActual = document.getElementById('adj-bar-graph-actual');
+	var adjustBar = document.getElementById('adj-bar-graph-inner');
+
+	var plan = parseFloat(removecomma($("[id*=annualSalesplan]").text()));
+	var predicted = parseFloat(removecomma($("[id*=annualSales_plan_pred]").text()));
+	var actual = parseFloat(removecomma($("[id*=annualSales_plan_hist]").text()));
+	var adjusted = parseFloat(removecomma($("#annS_T").text()));
+
+	$("[id*=actualAmount]").text(' '+accounting.formatNumber(actual, 0, separator1, separator2));
+	$("[id*=goalAmount]").text(' '+accounting.formatNumber(plan, 0, separator1, separator2));
+	$("#adjActual  b").text( accounting.formatNumber(predicted, 0, separator1, separator2) +" / ");
+	$("#adjGoal ").text( accounting.formatNumber(plan, 0, separator1, separator2));
+	$("#adjActual_cal  b").text( accounting.formatNumber(adjusted, 0, separator1, separator2) +" / ");
+	$("#adjGoal_cal ").text( accounting.formatNumber(plan, 0, separator1, separator2));
+
+	var max = plan;
+	if(actual>max) max = actual;
+	if(predicted>max) max = predicted;
+	if(adjusted>max) max = adjusted;
+
+	var actualPerc = (actual/max)*100;
+	var predictedPerc = predicted/max*100;
+	var adjustedPerc = adjusted/max*100;
+	var goalPerc = plan/max*100;
+
+
+
+	predictedGoal.style["width"]=goalPerc+"%";
+	adjustGoal.style["width"]=goalPerc+"%";
+	predictedActual.style["width"]=(actualPerc > 100 ? 100: actualPerc)+"%";
+	adjustActual.style["width"]=(actualPerc > 100 ? 100: actualPerc)+"%";
+
+	predictedBar.style["width"]=(predictedPerc > 100 ? 100: predictedPerc)+"%";
+	adjustBar.style["width"]= (adjustedPerc > 100  ? 100: adjustedPerc==100? 100:adjustedPerc)+"%";
+
+	/***************************************************/
+	predictedBar.className ="bar-graph-inner yellow";
+	adjustBar.className ="bar-graph-inner green";
+	/*adjusted >= plan ?
+				adjustBar.className ="bar-graph-inner green":
+				(adjusted>=plan*50/100 && adjusted<plan)?
+				adjustBar.className ="bar-graph-inner yellow":adjustBar.className ="bar-graph-inner red";
+	predicted >= plan ?
+				predictedBar.className ="bar-graph-inner green":
+				(predicted>=plan*50/100 && predicted<plan)?
+				predictedBar.className ="bar-graph-inner yellow":predictedBar.className ="bar-graph-inner red";*/
+}
+
+function confirmSave(evt) {
+	var edt = {!isEditable};
+	if(edt) {
+		var aO = $('[id$=annS_T]');
+		var a = parseFloat(removecomma(aO.text()));
+		////console.log(a);
+		//console.log(annS_default);
+		/*if( a===annS_default ){*/
+			var _cnfrm = $('#form-confirm-submit').css({display: 'block'});
+			$('<div></div>').dialog({
+				title: 'Confirm',
+				close: function(){}
+			}).append(_cnfrm);
+		/*} else {
+			var _cnfrm = $('#form-alert-submit').css({display: 'block'});
+			$('<div></div>').dialog({
+				title: 'Attention',
+				close: function(){}
+			}).append(_cnfrm);
+		}*/
+	}
+}
+
+</script>
+
+
+</apex:page>

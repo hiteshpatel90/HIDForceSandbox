@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Debug --></value>
+    </caseValues>
+    <fields>
+        <label>E メール</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label>ログ レベル E メール</label>
+        <name>Log_Level_Email__c</name>
+    </fields>
+    <fields>
+        <label>ログのレベル</label>
+        <name>Log_Level__c</name>
+    </fields>
+</CustomObjectTranslation>

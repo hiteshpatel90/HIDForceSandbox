@@ -8,7 +8,7 @@ public class mapPageExtension{
             strSOQL += ', ' + f.getFieldPath();
         }
         strSOQL += ' FROM Account LIMIT 10';
-        /* Test comment */
+        /* Test comment cc */
         matches = database.query(strSOQL);
         for(Account acc: matches){
             string strProviderDetailPin = '';

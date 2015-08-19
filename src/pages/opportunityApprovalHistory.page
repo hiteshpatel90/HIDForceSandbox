@@ -1,0 +1,585 @@
+<!-------------------------------------------------------------------------------------------
+- Type             : visualforce Page
+- Name             : opportunityApprovalHistory
+- Created by       : Hitesh Patel
+- Created Date     : 7th May 2015
+- Last Modified By : Hitesh Patel 7th May 2015
+- Purpose          : page used to display CPO Approval history for opportunity
+---------------------------------------------------------------------------------------------->
+<apex:page id="myPage" cache="true" standardController="opportunity" extensions="opportunityApprovalHistoryController" showHeader="false" sidebar="false">
+    <apex:form id="theForm">
+        <apex:variable value="{!Opportunity}" var="opp"/>
+        <apex:pageBlock id="pbMain">
+            <table width="100%">
+                <tr>
+                   <td align = "center" style= "font-weight:bold">
+                        <apex:commandLink action="{!gotoApprovalPage}" rendered="{!opp.CPO_Status__c != 'Submitted' && opp.CPO_Status__c != 'Accepted' && opp.CPO_Status__c != 'Approved' && opp.CPO_Status__c !='Awaiting Approval' && opp.CPO_Status__c !='On Hold' && opp.CPO_Status__c !='Cancelled' && opp.CPO_Status__c !='Recalled'}" target="_parent">
+                            <apex:image value="{!$Resource.SubmitForApprovalButton}"> </apex:image>
+                        </apex:commandLink>
+                   </td>
+                </tr>
+             </table>         
+             <table border = "1" width="100%" cellspacing="0">
+                 <tr>
+                     <th width="14%" text-align="center" valign="top">Sales Manager</th>
+                     <th width="14%" valign="top">Regional Segment <br/>Director</th>
+                     <th width="14%" valign="top">Product Marketing <br/>Review</th>
+                     <th width="14%" valign="top">Engineering Input</th>
+                     <th width="14%" valign="top">Product Marketing Review <br/>Post Engineering</th>
+                     <th width="14%" valign="top">Business Segment <br/>Leader</th>
+                     <th width="14%" valign="top">Opportunity Owner <br/>Review</th>
+                  </tr>
+                  <tr>
+                      <td id="SMtdVal">
+                          {!$User.CPO_Sales_Approver_Full_Name__c}
+                      </td>
+                      <td id="RSDtdVal">
+                          {!opp.Regional_Segment_Director__r.Name}                      
+                      </td>
+                      <td id="PMRtdVal">
+                          {!opp.Product_Marketing_Manager__r.Name}                      
+                      </td>
+                      <td id="EItdVal">
+                          {!opp.Engineering_Site_Manager__r.Name}
+                      </td>
+                      <td id="PMREtdVal">
+                          {!opp.Product_Marketing_Manager__r.Name}
+                      </td>
+                      <td id="BSLtdVal">
+                          {!opp.Business_Segment_Leader__r.Name}
+                      </td>
+                      <td id="OORtdVal">
+                          {!opp.owner.Name}
+                      </td>
+                  </tr>
+                  <tr>
+                      <td id="SMtd" bgcolor="white">
+                          <apex:outputlabel value="{!If(($User.Skip_CPO_Sales_Approver__c == false && $User.CPO_Sales_Approver__c != null) || opp.Sales_Manager_Approval__c != '', opp.Sales_Manager_Approval__c, 'Not Required')}"/>                      
+                      </td>
+                      <td id="RSDtd" bgcolor="white">
+                          <apex:outputlabel value="{!If(opp.Regional_Segment_Director__c != null, opp.Regional_Segment_Director_Approval__c, 'Not Required')}"/>
+                      </td>
+                      <td id="PMRtd" bgcolor="white">
+                          <apex:outputlabel value="{!If(opp.Product_Marketing_Manager__c != null, opp.Product_Marketing_Approval__c, 'Not Required')}"/>              
+                      </td>
+                      <td id="EItd" bgcolor="white">                  
+                          <apex:outputlabel value="{!If(opp.Engineering_Site_Manager__c != null, opp.Engineering_Input_Approval__c, 'Not Required')}"/>                      
+                      </td>
+                      <td id="PMREtd" bgcolor="white">                  
+                          <apex:outputlabel value="{!If(opp.Product_Marketing_Manager__c != null, opp.Product_Post_Engineering_Approval__c, 'Not Required')}"/>
+                      </td>
+                      <td id="BSLtd" bgcolor="white">
+                          <apex:outputlabel value="{!If(opp.Business_Segment_Leader__c != null, opp.Business_Segment_Leader_Approval__c, 'Not Required')}"/>
+                      </td>
+                      <td id="OORtd" bgcolor="white">
+                          <apex:outputlabel value="{!If(opp.ownerId != null, opp.Opportunity_Owner_Approval__c, 'Not Required')}"/>
+                      </td>
+                  </tr>   
+             </table>
+         <script>
+            <!--  1st Step -->      
+            var SM = "{!If(($User.Skip_CPO_Sales_Approver__c == false && $User.CPO_Sales_Approver__c != null)  || opp.Sales_Manager_Approval__c != '', opp.Sales_Manager_Approval__c, 'Not Required')}";
+            var SMtd = document.getElementById("SMtd");       
+            var SMtdVal = document.getElementById("SMtdVal");
+            
+            <!--  2nd Step --> 
+            var RSD = "{!If(opp.Regional_Segment_Director__c != null, opp.Regional_Segment_Director_Approval__c, 'Not Required')}";
+            var RSDtd = document.getElementById("RSDtd");
+            var RSDtdVal = document.getElementById("RSDtdVal");
+            
+            <!--  3rd Step --> 
+            var PMR = "{!If(opp.Product_Marketing_Manager__c != null, opp.Product_Marketing_Approval__c, 'Not Required')}";
+            var PMRtd = document.getElementById("PMRtd");
+            var PMRtdVal = document.getElementById("PMRtdVal");
+            
+            <!--  4th Step --> 
+            var EI = "{!If(opp.Engineering_Site_Manager__c != null, opp.Engineering_Input_Approval__c, 'Not Required')}";
+            var EItd = document.getElementById("EItd");
+            var EItdVal = document.getElementById("EItdVal");
+             
+            <!--  5th Step --> 
+            var PMRE = "{!If(opp.Product_Marketing_Manager__c != null, opp.Product_Post_Engineering_Approval__c, 'Not Required')}";
+            var PMREtd = document.getElementById("PMREtd");
+            var PMREtdVal = document.getElementById("PMREtdVal");
+            
+            <!--  6th Step --> 
+            var BSL = "{!If(opp.Business_Segment_Leader__c != null, opp.Business_Segment_Leader_Approval__c, 'Not Required')}";
+            var BSLtd = document.getElementById("BSLtd");
+            var BSLtdVal = document.getElementById("BSLtdVal");
+            
+            <!--  7th Step --> 
+            var OOR = "{!opp.Opportunity_Owner_Approval__c}";
+            var OORtd = document.getElementById("OORtd");
+            var OORtdVal = document.getElementById("OORtdVal");
+            
+            <!--  1st Step -->   
+            var getSM = SMtd.getAttribute("bgcolor");
+            
+            var isAwaitingAlreadySet = false;
+            if (SM=="Approved"){
+                SMtd.setAttribute("bgcolor","#a1f78d");
+                
+                if('{!strSalesManagerApprover}' != '' && SMtdVal.innerHTML != '{!strSalesManagerApprover}'){
+                    
+                    SMtdVal.innerHTML = '{!strSalesManagerApprover}';
+                }
+            }else if (SM == "Rejected"){
+                SMtd.setAttribute("bgcolor","#fb8a8c");
+
+                if('{!strlatestRejectedBy}' != '' && SMtdVal.innerHTML != '{!strlatestRejectedBy}'){
+                    SMtdVal.innerHTML = '{!strlatestRejectedBy}';
+                }
+                
+                if(RSD == "Awaiting Approval"){
+                    RSDtd.setAttribute("bgcolor","#FFFFFF");       
+                    RSDtd.innerHTML = "";
+                    RSD = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && RSDtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        RSDtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }         
+                if(PMR == "Awaiting Approval"){
+                    PMRtd.setAttribute("bgcolor","#FFFFFF");       
+                    PMRtd.innerHTML = "";
+                    PMR = "";
+                    
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && PMRtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        PMRtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(EI == "Awaiting Approval"){
+                    EItd.setAttribute("bgcolor","#FFFFFF");       
+                    EItd.innerHTML = "";
+                    EI = "";                    
+                   
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && EItdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        EItdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(PMRE == "Awaiting Approval"){
+                    PMREtd.setAttribute("bgcolor","#FFFFFF"); 
+                    PMREtd.innerHTML = "";
+                    PMRE = "";
+                    
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && PMREtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        PMREtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(BSL == "Awaiting Approval"){
+                    BSLtd.setAttribute("bgcolor","#FFFFFF"); 
+                    BSLtd.innerHTML = "";
+                    BSL = "";
+                    
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && BSLtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        BSLtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(OOR == "Awaiting Approval"){
+                    OORtd.setAttribute("bgcolor","#FFFFFF"); 
+                    OORtd.innerHTML = "";
+                    OOR = "";                    
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && OORtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        OORtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                } 
+            }else if (SM == "Awaiting Approval"){
+                SMtd.setAttribute("bgcolor","#ffd74b");
+                
+                
+                if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && SMtdVal.innerHTML != '{!strActualApprover}'){
+                    isAwaitingAlreadySet = true;
+                    SMtdVal.innerHTML = '{!strActualApprover}';
+                }
+            }
+            
+            <!--  2nd Step --> 
+            var getRSD = RSDtd.getAttribute("bgcolor");
+            
+            if (RSD =="Approved"){
+                RSDtd.setAttribute("bgcolor","#a1f78d");
+                
+                
+                if('{!strRegSegDirectorApprover}' != '' && RSDtdVal.innerHTML != '{!strRegSegDirectorApprover}'){
+                
+                    RSDtdVal.innerHTML = '{!strRegSegDirectorApprover}';
+                }
+            }else if (RSD == "Rejected"){
+                RSDtd.setAttribute("bgcolor","#fb8a8c");
+                
+                if('{!strlatestRejectedBy}' != '' && RSDtdVal.innerHTML != '{!strlatestRejectedBy}'){
+                    RSDtdVal.innerHTML = '{!strlatestRejectedBy}';
+                }
+                
+                if(PMR == "Awaiting Approval"){
+                    PMRtd.setAttribute("bgcolor","#FFFFFF");       
+                    PMRtd.innerHTML = "";
+                    PMR = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && PMRtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        PMRtdVal.innerHTML = '{!strActualApprover}';
+                    } 
+                }
+                if(EI == "Awaiting Approval"){
+                    EItd.setAttribute("bgcolor","#FFFFFF");       
+                    EItd.innerHTML = "";
+                    EI = "";                    
+                   
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && EItdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        EItdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(PMRE == "Awaiting Approval"){
+                    PMREtd.setAttribute("bgcolor","#FFFFFF"); 
+                    PMREtd.innerHTML = "";
+                    PMRE = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && PMREtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        PMREtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(BSL == "Awaiting Approval"){
+                    BSLtd.setAttribute("bgcolor","#FFFFFF"); 
+                    BSLtd.innerHTML = "";
+                    BSL = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && BSLtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        BSLtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(OOR == "Awaiting Approval"){
+                    OORtd.setAttribute("bgcolor","#FFFFFF"); 
+                    OORtd.innerHTML = "";
+                    OOR = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && OORtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        OORtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }            
+            }else if (RSD == "Awaiting Approval"){
+                RSDtd.setAttribute("bgcolor","#ffd74b");
+                if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && RSDtdVal.innerHTML != '{!strActualApprover}'){
+                    isAwaitingAlreadySet = true;
+                    RSDtdVal.innerHTML = '{!strActualApprover}';
+                }                
+            }  
+            
+            
+            <!-- 3rd Step -->
+            var getPMR = PMRtd.getAttribute("bgcolor");
+            
+            if (PMR =="Approved"){
+                PMRtd.setAttribute("bgcolor","#a1f78d");
+                
+                if('{!strProdMarketingApprover}' != '' && PMRtdVal.innerHTML != '{!strProdMarketingApprover}'){
+                    PMRtdVal.innerHTML = '{!strProdMarketingApprover}';
+                }
+            }
+            else if (PMR == "Rejected"){
+                PMRtd.setAttribute("bgcolor","#fb8a8c");
+                
+                if('{!strlatestRejectedBy}' != '' && PMRtdVal.innerHTML != '{!strlatestRejectedBy}'){
+                    PMRtdVal.innerHTML = '{!strlatestRejectedBy}';
+                }
+                if(EI == "Awaiting Approval"){
+                    EItd.setAttribute("bgcolor","#FFFFFF");       
+                    EItd.innerHTML = "";
+                    EI = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && EItdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        EItdVal.innerHTML = '{!strActualApprover}';
+                    } 
+                }
+                if(PMRE == "Awaiting Approval"){
+                    PMREtd.setAttribute("bgcolor","#FFFFFF"); 
+                    PMREtd.innerHTML = "";
+                    PMRE = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && PMREtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        PMREtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(BSL == "Awaiting Approval"){
+                    BSLtd.setAttribute("bgcolor","#FFFFFF"); 
+                    BSLtd.innerHTML = "";
+                    BSL = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && BSLtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        BSLtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(OOR == "Awaiting Approval"){
+                    OORtd.setAttribute("bgcolor","#FFFFFF"); 
+                    OORtd.innerHTML = "";
+                    OOR = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && OORtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        OORtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+            }else if (PMR == "Awaiting Approval"){
+                PMRtd.setAttribute("bgcolor","#ffd74b");
+               
+                if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && PMRtdVal.innerHTML != '{!strActualApprover}'){
+                    isAwaitingAlreadySet = true;
+                    PMRtdVal.innerHTML = '{!strActualApprover}';
+                }
+            }
+            
+            <!-- 4th Step -->
+            var getEI = EItd.getAttribute("bgcolor");
+            
+            if (EI=="Approved"){
+                EItd.setAttribute("bgcolor","#a1f78d");
+                
+                if('{!strEnggInputApprover}' != '' && EItdVal.innerHTML != '{!strEnggInputApprover}'){
+                    EItdVal.innerHTML = '{!strEnggInputApprover}';
+                }
+            }else if (EI == "Rejected"){
+                EItd.setAttribute("bgcolor","#fb8a8c");
+                
+                if('{!strlatestRejectedBy}' != '' && EItdVal.innerHTML != '{!strlatestRejectedBy}'){
+                    EItdVal.innerHTML = '{!strlatestRejectedBy}';
+                }
+                
+                if(PMRE == "Awaiting Approval"){
+                    PMREtd.setAttribute("bgcolor","#ffd74b"); 
+                    //PMREtd.innerHTML = "";
+                    PMRE = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && PMREtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        PMREtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(BSL == "Awaiting Approval"){
+                    BSLtd.setAttribute("bgcolor","#ffd74b"); 
+                    //BSLtd.innerHTML = "";
+                    BSL = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && BSLtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        BSLtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(OOR == "Awaiting Approval"){
+                    OORtd.setAttribute("bgcolor","#ffd74b"); 
+                    //OORtd.innerHTML = "";
+                    OOR = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && OORtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        OORtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+            }else if (EI == "Awaiting Approval"){
+                EItd.setAttribute("bgcolor","#ffd74b");
+                
+                if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && EItdVal.innerHTML != '{!strActualApprover}'){
+                    isAwaitingAlreadySet = true;
+                    EItdVal.innerHTML = '{!strActualApprover}';
+                }
+            }        
+            
+            <!--  5th Step -->
+            var getPMRE = PMREtd.getAttribute("bgcolor");
+            
+            if (PMRE =="Approved"){
+                PMREtd.setAttribute("bgcolor","#a1f78d");
+                
+                if('{!strProdPostMarketingApprover}' != '' && PMREtdVal.innerHTML != '{!strProdPostMarketingApprover}'){
+                    PMREtdVal.innerHTML = '{!strProdPostMarketingApprover}';
+                }
+            }else if (PMRE == "Rejected"){
+                PMREtd.setAttribute("bgcolor","#fb8a8c"); 
+                
+                if('{!strlatestRejectedBy}' != '' && PMREtdVal.innerHTML != '{!strlatestRejectedBy}'){
+                    PMREtdVal.innerHTML = '{!strlatestRejectedBy}';
+                }
+                           
+                if(BSL == "Awaiting Approval"){
+                    BSLtd.setAttribute("bgcolor","#FFFFFF"); 
+                    BSLtd.innerHTML = "";
+                    BSL = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && BSLtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        BSLtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+                if(OOR == "Awaiting Approval"){
+                    OORtd.setAttribute("bgcolor","#FFFFFF"); 
+                    OORtd.innerHTML = "";
+                    OOR = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && OORtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        OORtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+            }
+            else if (PMRE == "Awaiting Approval"){
+                PMREtd.setAttribute("bgcolor","#ffd74b");
+                
+                if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && PMREtdVal.innerHTML != '{!strActualApprover}'){
+                    isAwaitingAlreadySet = true;
+                    PMREtdVal.innerHTML = '{!strActualApprover}';
+                }
+            }  
+            
+            <!--  6th Step -->    
+            var getBSL = BSLtd.getAttribute("bgcolor");
+            
+            if (BSL=="Approved"){
+                BSLtd.setAttribute("bgcolor","#a1f78d");
+                
+                if('{!strBusSegApprover}' != '' && BSLtdVal.innerHTML != '{!strBusSegApprover}'){
+                    BSLtdVal.innerHTML = '{!strBusSegApprover}';
+                }
+            }else if (BSL== "Rejected"){
+                BSLtd.setAttribute("bgcolor","#fb8a8c");
+                
+                if('{!strlatestRejectedBy}' != '' && BSLtdVal.innerHTML != '{!strlatestRejectedBy}'){
+                    BSLtdVal.innerHTML = '{!strlatestRejectedBy}';
+                }
+                       
+                if(OOR == "Awaiting Approval"){
+                    OORtd.setAttribute("bgcolor","#FFFFFF"); 
+                    OORtd.innerHTML = "";
+                    OOR = "";
+                    
+                    if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && OORtdVal.innerHTML != '{!strActualApprover}'){
+                        isAwaitingAlreadySet = true;
+                        OORtdVal.innerHTML = '{!strActualApprover}';
+                    }
+                }
+            }else if (BSL== "Awaiting Approval"){
+                BSLtd.setAttribute("bgcolor","#ffd74b");
+                
+                if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && BSLtdVal.innerHTML != '{!strActualApprover}'){
+                    isAwaitingAlreadySet = true;
+                    BSLtdVal.innerHTML = '{!strActualApprover}';
+                }
+            }        
+            
+            <!-- 7th Step -->
+            
+            var getOOR = OORtd.getAttribute("bgcolor");
+            
+            if (OOR =="Approved"){
+                OORtd.setAttribute("bgcolor","#a1f78d");
+                
+                if('{!strOppOwnerApprover}' != '' && OORtdVal.innerHTML != '{!strOppOwnerApprover}'){
+                    OORtdVal.innerHTML = '{!strOppOwnerApprover}';
+                }
+            }else if (OOR == "Rejected"){
+                OORtd.setAttribute("bgcolor","#fb8a8c");
+                
+                if('{!strlatestRejectedBy}' != '' && OORtdVal.innerHTML != '{!strlatestRejectedBy}'){
+                    OORtdVal.innerHTML = '{!strlatestRejectedBy}';
+                }
+                       
+            }else if (OOR == "Awaiting Approval"){
+                OORtd.setAttribute("bgcolor","#ffd74b");
+                
+                if(isAwaitingAlreadySet == false && '{!strActualApprover}' != '' && OORtdVal.innerHTML != '{!strActualApprover}'){
+                    isAwaitingAlreadySet = true;
+                    OORtdVal.innerHTML = '{!strActualApprover}';
+                }
+            }        
+            
+        </script>
+        <br></br> 
+        <apex:variable value="{!WorkItem}" var="wi"/> 
+        <apex:outputPanel id="opApprove" rendered="{!wi != null}">
+            <!--  <apex:outputLink value="https://cs1.salesforce.com/p/process/ProcessInstanceWorkitemWizardStageManager?id={!piw.id}" target="_parent" style="color:blue">Approve/ Reject</apex:outputLink>       -->
+            <table width="100%">        
+                <tr>
+                    <td align = "center" style= "font-weight:bold">
+                        <apex:commandButton value="Approve/Reject" disabled="{!If(Opportunity.CPO_Status__c =='Cancelled',true,false)}" onclick="return goToApproveOrRejectPage()"
+                        rendered="{!(Opportunity.CPO_Status__c != 'Draft') && (($Profile.Name=='System Administrator') || ($Profile.Name=='HID Business Administrator') ||($User.Id==piw.ActorId) || IsdelegatedUserId )}"/>
+                        
+                        <apex:commandButton value="Reassign" disabled="{!If(Opportunity.CPO_Status__c =='Cancelled',true,false)}" onclick="return goToReassignPage()"
+                        rendered="{!(Opportunity.CPO_Status__c != 'Draft') && (($Profile.Name=='System Administrator') || ($Profile.Name=='HID Business Administrator') || ($User.Id==piw.ActorId) || IsdelegatedUserId )}"/>
+                        
+                        <apex:commandButton value="Recall Approval Request" disabled="{!If(Opportunity.CPO_Status__c =='Cancelled',true,false)}" onclick="return goToRecallPage()"
+                        rendered="{!(Opportunity.CPO_Status__c != 'Draft') && (($Profile.Name=='System Administrator') || ($Profile.Name=='HID Business Administrator') || ($User.Id==opp.OwnerId) || ($User.Id==piw.ActorId) || IsdelegatedUserId )}"/>
+                       
+                        <!--       <apex:commandButton value="Recall Approval Request" rendered="{!opp.CPO_Status__c=='Awaiting Approval' && (($Profile.Name=='System Administrator')||($User.Id==opp.Owner))}" onclick="gotoRecallApprovalSection()"/>   -->
+                    </td>           
+                </tr>
+            </table>                   
+            <script>          
+                function goToApproveOrRejectPage(){
+                    window.top.location = "https://{!serverURL}/p/process/ProcessInstanceWorkitemWizardStageManager?id={!piw.id}";  
+                    return false;            
+                }   
+                         
+                function gotoRecallApprovalSection(){
+                    window.top.location = "https://{!serverURL}/{!piw.id}/e?et=REMOVE&retURL={!opp.id}";
+                }
+                
+                function goToReassignPage(){
+                    window.top.location = "https://{!serverURL}/{!piw.id}/e?et=REASSIGN&retURL={!opp.id}";  
+                    return false;            
+                }
+                function goToRecallPage(){
+                    window.top.location = "https://{!serverURL}/{!piw.id}/e?et=REMOVE&retURL={!opp.id}";  
+                    return false;            
+                }
+                
+            </script>
+        </apex:outputPanel>  
+                  
+        <apex:pageBlockTable value="{!ApprovalHistory}" var="history">
+            <apex:column headerValue="Overall Status" value="{!history.processInstance.Status}">
+            </apex:column>
+            <apex:column headerValue="Submitter">
+                <apex:repeat value="{!history.approvalHistoryList}" var="apprHistory">
+                    <!--<apex:outputField value="{!apprHistory.ActorId}" rendered="{!apprHistory.StepStatus=='Started'}"/>-->
+                    <apex:commandLink value="{!apprHistory.Actor.Name}" onclick="window.top.location = '/{!apprHistory.ActorId}'" rendered="{!apprHistory.StepStatus=='Started'}"/>
+                </apex:repeat>
+            </apex:column>
+            <apex:column headerValue="Sales Team">
+                {!history.submitterSalesTeam}
+            </apex:column>
+            <apex:column >
+                <apex:pageBlockTable value="{!history.approvalHistoryList}" var="apprHistory">
+                    <apex:column headerValue="Date" value="{!apprHistory.CreatedDate}" style="width:20%">  
+                    </apex:column>
+                    <apex:column headerValue="Status" value="{!apprHistory.StepStatus}">
+                    </apex:column>
+                    <apex:column headerValue="Assigned To">
+                        <apex:commandLink value="{!apprHistory.OriginalActor.Name}" onclick="window.top.location = '/{!apprHistory.OriginalActorId}'"/>  
+                    </apex:column>
+                    <apex:column headerValue="Actual Approver">
+                        <apex:commandLink value="{!apprHistory.Actor.Name}" onclick="window.top.location = '/{!apprHistory.ActorId}'" rendered="{!apprHistory.StepStatus!='Started'}"/> 
+                        <apex:outputText rendered="{!apprHistory.StepStatus=='Started'}">N/A</apex:outputText> 
+                    </apex:column>
+                    <apex:column value="{!apprHistory.Comments}">
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:column>
+        </apex:pageBlockTable>  
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

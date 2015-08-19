@@ -1,0 +1,7 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<StaticResource xmlns="http://soap.sforce.com/2006/04/metadata">
+    <cacheControl>Public</cacheControl>
+    <contentType>application/x-zip-compressed</contentType>
+    <description>Homepage: http://www.larentis.eu/switch/
+Licensed under the Apache License, Version 2.0 http://www.apache.org/licenses/LICENSE-2.0</description>
+</StaticResource>

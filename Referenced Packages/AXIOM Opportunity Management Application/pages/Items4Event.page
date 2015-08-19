@@ -1,0 +1,33 @@
+<apex:page standardController="Event" extensions="AXIOMOMD.Items4Activity">
+	<apex:pageMessages id="page_messages"/>
+	<apex:form rendered="{!DangerZonesSelectorEnabled}">
+		<apex:pageBlock >
+			<apex:selectList value="{!SelectedOppSInitv}" size="1" rendered="{!NOT(AND(ISNULL(RelatedOpps),ISNULL(RelatedSInitvs)))}">
+				<apex:selectOption itemValue="" itemLabel="Opportunities" itemDisabled="true" rendered="{!NOT(ISNULL(RelatedOpps))}"/>
+				<apex:selectOptions value="{!RelatedOpps}"/>
+				<apex:selectOption itemValue="" itemLabel="Strategic Initiatives" itemDisabled="true" rendered="{!NOT(ISNULL(RelatedSInitvs))}"/>
+				<apex:selectOptions value="{!RelatedSInitvs}"/>
+				<apex:actionSupport action="{!filterBySelectedOppSi}" rerender="dz_ds_list" event="onchange" />
+			</apex:selectList>
+			<apex:pageBlockSection columns="2" id="dz_ds_list">
+				<AXIOM_BASE:MultiselectPicklist leftLabel="{!$Label.axiomomd__AvailableDangerZones}"
+					leftOptionsAtr="{!AvailableDZones}"
+					rightLabel="{!$Label.axiomomd__SelectedDangerZones}"
+					rightOptionsAtr="{!SelectedDZones}"
+					size="14"
+					width="150px">
+				</AXIOM_BASE:MultiselectPicklist>
+				<AXIOM_BASE:MultiselectPicklist leftLabel="{!$Label.axiomomd__AvailableDecisionStages}"
+					leftOptionsAtr="{!AvailableDStages}"
+					rightLabel="{!$Label.axiomomd__SelectedDecisionStages}"
+					rightOptionsAtr="{!SelectedDStages}"
+					size="14"
+					width="150px">
+				</AXIOM_BASE:MultiselectPicklist>
+			</apex:pageBlockSection>
+			<apex:pageBlockButtons >
+				<apex:commandButton value="Save" action="{!Save}"/>
+			</apex:pageBlockButtons>
+		</apex:pageBlock>
+	</apex:form>
+</apex:page>

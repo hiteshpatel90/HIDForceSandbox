@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <fields>
+        <label>Formation</label>
+        <name>Course__c</name>
+        <relationshipLabel>Éléments du cursus</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Cursus</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Éléments du cursus</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Parcours de formation</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>Éléments du cursus</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Module</label>
+        <name>Module__c</name>
+        <relationshipLabel>Éléments du cursus</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Quiz</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Éléments du cursus</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Séquence</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>Titre</label>
+        <name>Title__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Add Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>Formation</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Parcours de formation</label>
+        <name>Learning_Path2</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Module</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Quiz</label>
+        <name>Quiz</name>
+    </recordTypes>
+    <startsWith><!-- Consonant --></startsWith>
+    <webLinks>
+        <label>Ajouter une formation au cursus</label>
+        <name>AddCourseToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un parcours de formation au cursus</label>
+        <name>AddLPToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un module au cursus</label>
+        <name>AddModuleToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un quiz au cursus</label>
+        <name>Add_Quiz_to_Curriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Modifier la séquence</label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

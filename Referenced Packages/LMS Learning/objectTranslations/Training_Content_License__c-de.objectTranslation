@@ -1,0 +1,146 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <fields>
+        <label>Ablaufdatum</label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label>Lizenz-ID fur CyberU</label>
+        <name>License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Lizenzzeitraum</label>
+        <name>License_Period__c</name>
+        <picklistValues>
+            <masterLabel>Days</masterLabel>
+            <translation><!-- Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hours</masterLabel>
+            <translation><!-- Hours --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indefinite</masterLabel>
+            <translation><!-- Indefinite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weeks</masterLabel>
+            <translation><!-- Weeks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Years</masterLabel>
+            <translation><!-- Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Lizenzfrist</label>
+        <name>License_Term__c</name>
+    </fields>
+    <fields>
+        <label>Kaufdatum</label>
+        <name>Purchase_Date__c</name>
+    </fields>
+    <fields>
+        <label>Erworbene Platze</label>
+        <name>Purchased_Seats__c</name>
+    </fields>
+    <fields>
+        <label>Erworben</label>
+        <name>Purchased__c</name>
+    </fields>
+    <fields>
+        <label>Restplatze</label>
+        <name>Remaining_Seats__c</name>
+    </fields>
+    <fields>
+        <label>Preis-ID fur CyberU</label>
+        <name>Sale_Item_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Verkaufspreis</label>
+        <name>Sale_Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of seats included in this license. Leave blank for unlimited. --></help>
+        <label>Platze</label>
+        <name>Seats__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label>Ziellizenz-ID fur CyberU</label>
+        <name>Target_License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Modul</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>Modullizenzen</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Belegte Platze</label>
+        <name>Used_Seats__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Content License Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- License Details --></label>
+            <section>License Details</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- License ID --></nameFieldLabel>
+    <webLinks>
+        <label>Lizenzen erwerben</label>
+        <name>Purchase_Licenses</name>
+    </webLinks>
+</CustomObjectTranslation>

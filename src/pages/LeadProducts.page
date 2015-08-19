@@ -1,0 +1,369 @@
+<apex:page standardController="Lead" extensions="LeadProductController" showheader="false" sidebar="false" language="{!language}" >
+    <link rel="stylesheet" type="text/css" href="{!$Resource.leadProductsCSS}" />
+    <script type='text/javascript'>
+        /* var:termsLang, is a value (case sensitive) passed as a query parameter through the url of this page
+         * it is used to determine which hard coded terms and conditions to show
+        **/
+        var englishTermsDiv = 'en_usTermsDiv';
+        var language = '{!language}';
+        var termsId = language+'TermsDiv';
+        function showTerms(){
+            var promoForm = document.getElementById('leadFormDiv');
+            var termsDiv = (document.getElementById(termsId) != null) ? document.getElementById(termsId) : document.getElementById(englishTermsDiv);
+            termsDiv.style.display='block';
+            promoForm.style.visibility='hidden';
+        }
+        function hideTerms(){
+            var promoForm = document.getElementById('leadFormDiv');
+            var termsDiv = (document.getElementById(termsId) != null) ? document.getElementById(termsId) : document.getElementById(englishTermsDiv);
+            termsDiv.style.display='none';
+            promoForm.style.visibility='visible';
+        }
+        function changeLocation(redirectUrl){
+            var submitted = document.getElementById('hdnLeadSubmitted').value;
+            if (submitted == "true") {
+                window.top.location = redirectUrl;
+            }
+        }
+    </script>
+    <div id="leadFormDiv">
+        <apex:form id="leadForm" >
+            <apex:actionFunction action="{!insertLead}" name="insertLead" oncomplete="changeLocation('{!redirectUrl}');" rerender="contactInfoPanel, leadProductPanel" />
+            <apex:outputPanel id="leadFormPanel">
+            <h2>{!$ObjectType.Lead.fields.Contact_Information_translation__c.label}</h2>
+                        
+            <apex:outputPanel id="contactInfoPanel">
+
+            <apex:outputPanel id="theMessages" layout="block" rendered="{!hasErrorMessages}" >
+                <ul class="apex_err_msgs">
+                    <apex:repeat value="{!customErrorMessages}" var="anError" id="theRepeat">
+                        <li> {!anError} </li>
+                    </apex:repeat>
+                </ul>
+            </apex:outputPanel>
+            
+                <table cellpadding="2" cellspacing="2" border="0" width="100%" >
+                    <tbody>
+                        <tr class="ltGrey">
+                            <td>{!$ObjectType.Lead.fields.FirstName.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.FirstName}" required="true" /></td>
+                        </tr>
+                        <tr class="dkGrey">
+                            <td>{!$ObjectType.Lead.fields.LastName.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.LastName}" required="true" /></td>
+                        </tr>
+                        <tr class="ltGrey">
+                            <td>{!$ObjectType.Lead.fields.Company.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.Company}" required="true" /></td>
+                        </tr>
+                        <tr class="dkGrey">
+                            <td>{!$ObjectType.Lead.fields.Title.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.Title}" required="true" /></td>
+                        </tr>
+                        <tr class="ltGrey">
+                            <td>{!$ObjectType.Lead.fields.Country.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.Country}" /></td>
+                        </tr>
+                        <tr class="dkGrey">
+                            <td>{!$ObjectType.Lead.fields.Street.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.Street}" required="true" /></td>
+                        </tr>
+                        <tr class="ltGrey">
+                            <td>{!$ObjectType.Lead.fields.City.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.City}" required="true" /></td>
+                        </tr>
+                        <tr class="dkGrey">
+                            <td>{!$ObjectType.Lead.fields.State.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.State}" required="true" /></td>
+                        </tr>
+                        <tr class="ltGrey">
+                            <td>{!$ObjectType.Lead.fields.PostalCode.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.PostalCode}" required="true" /></td>
+                        </tr>
+                        <tr class="dkGrey">
+                            <td>{!$ObjectType.Lead.fields.Email.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.Email}" required="true" /></td>
+                        </tr>
+                        <tr class="ltGrey">
+                            <td>{!$ObjectType.Lead.fields.Phone.label}<span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!leadRecord.Phone}" required="true" /></td>
+                        </tr>
+                        <tr class="dkGrey">
+                            <td>
+                                <span id="acceptTxt">
+                                    <a href="#" onclick="showTerms();" >
+                                    <!-- <a href="#" onclick="changeLocation({!leadSubmitted}, '{!redirectUrl}');" > -->
+                                    
+                                         {!$ObjectType.Lead.fields.Terms_and_Conditions__c.label}
+                                    </a>
+                                </span>
+                                <span style="color:#cc0000;">*</span>
+                            </td>
+                            <td>
+                                <apex:outputPanel id="acceptCheckBox" >
+                                    <span id="inlineCheckBox" >
+                                        <apex:inputField value="{!leadRecord.Terms_and_Conditions__c}" required="true" />
+                                        <span style="display:inline;">
+                                            {!$ObjectType.Lead.fields.I_accept__c.label}
+                                        </span>
+                                    </span>
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                </tbody>
+            </table>
+            </apex:outputPanel>
+            
+            <h2>{!$ObjectType.Lead.fields.Product_Informationtranslate__c.label}</h2>
+            <apex:outputPanel layout="block" id="leadProductPanel">
+                <apex:actionRegion >
+                <table cellpadding="2" cellspacing="2" border="0" width="100%">
+                    <tr class="ltGrey">
+                    <td></td>
+                    <td width="25%">{!$ObjectType.Lead_Products__c.fields.Model_of_integrated_HID_Component__c.label}</td>
+                    <td width="25%">{!$ObjectType.Lead_Products__c.fields.Part_of_Integrated_HID_Component__c.label}</td>
+                    <td width="25%">{!$ObjectType.Lead_Products__c.fields.Model_Containing_HID_Component__c.label}</td>
+                    <td></td>
+                    </tr>
+                    
+                    <apex:repeat value="{!leadProductsList}" var="wrapper">
+                        <tr class="{!IF( MOD(wrapper.rowIndex, 2) == 0 , 'ltGrey', 'dkGrey')}" >
+                            <td><apex:outputLabel value="{!wrapper.rowIndex}"/><span style="color:#cc0000;">*</span></td>
+                            <td><apex:inputField value="{!wrapper.leadProduct.Model_of_integrated_HID_Component__c}" required="true" /></td>
+                            <td><apex:inputField value="{!wrapper.leadProduct.Part_of_Integrated_HID_Component__c}" required="true" /></td>
+                            <td><apex:inputField value="{!wrapper.leadProduct.Model_Containing_HID_Component__c}" required="true" /></td>
+                            <td>
+                            <!------------------------------------------------
+                                We only want to display the Add More button
+                                on the last row of the table.  So, if the
+                                index on the wrapper is equal to the total 
+                                number of rows, display the button, otherwise
+                                hide it
+                            ------------------------------------------------->
+                                <apex:outputPanel rendered="{!AND((wrapper.rowIndex == totalNumberOfProductsAdded), (totalNumberOfProductsAdded > 1))}" >
+                                    <apex:actionSupport action="{!handleRemoveProduct}" event="onclick" rerender="leadProductPanel" immediate="true" />
+                                    <input type="button" value="{!$ObjectType.Lead.fields.Remove__c.label}" />
+                                </apex:outputPanel>
+                                
+                                <apex:outputPanel rendered="{!(wrapper.rowIndex == totalNumberOfProductsAdded)}" >
+                                    <apex:actionSupport action="{!handleAddMoreRequest}" event="onclick" rerender="leadProductPanel" />
+                                    <input type="button" value="{!$ObjectType.Lead.fields.Add_MoreButton__c.label}" />
+                                </apex:outputPanel>
+                            </td>
+                        </tr>
+                    </apex:repeat>
+                </table>
+                </apex:actionRegion>
+                <input type="hidden" value="{!leadSaved}" id="hdnLeadSubmitted" />
+            </apex:outputPanel>
+            
+            <apex:outputPanel styleClass="submitContainer" layout="block" id="buttonPanel"  >
+                <input type="button" value="{!$ObjectType.Lead.fields.Submitbutton__c.label}" onclick="javascript:insertLead();"/>
+            </apex:outputPanel>
+            
+            </apex:outputPanel>
+        </apex:form>
+    </div> 
+<div id="en_usTermsDiv" class="termsDiv">
+    <div id="closeTerms" onclick="hideTerms();">&nbsp;</div>
+    <p align="center" style="padding-top:20px;" >
+    In order to apply to have your product designated <strong>"Genuine HID Technology"</strong>,<br/> you must agree to the following Terms and Conditions</p>
+    <p align="center"><a href="http://www.hidglobal.com/documents/genuine_logo_program_clickThrough_tc_en.pdf" target="_blank" >for printable version, click here</a></p>
+    <div id="termsAndCondsScrollBody">
+    
+    <p align="center">TERMS and CONDITIONS</p>
+    <p align="center"><strong>GENUINE HID TECHNOLOGY  PROGRAM </strong></p>
+    <p align="center"><strong>TERMS AND CONDITIONS</strong></p>
+    <p><strong>ELIGIBILITY</strong>. &nbsp;The Genuine HID Technology program (the  "Program") is open to HID Global developers, partners and technology licensees  in connection with marketing products that are pre-approved for the Program by HID Global at its sole discretion. Use of the  Genuine HID Technology logo applies to products that contain HID Global  modules, boards, chips, print engines, programmers and other enabling  technologies that are developed and produced by HID Global for the integration  into third party products and devices, as well as products built under HID  Genuine Technology licenses that extend the applications and solutions for the  HID ecosystem. Eligibility and participation will be determined in HID  Global's sole discretion. &nbsp; </p>
+    
+    <p><strong>APPLICATION</strong>.&nbsp; There are three steps.</p>
+    <p>First, complete a Program  application, which can be accessed at www.hidglobal.com/genuine_hid/genuine_hid_technology_form.php, and  submit the completed form to HID Global providing all requested information  including the name of the applicant organization ("you"), contact information  for the point of contact, identification of the product(s) in connection with  which the Genuine HID Technology Logo trademark license is requested, and  identification of the HID components or technologies that are or will be  embedded in such product(s) (the "Application").&nbsp; </p>
+    
+    <p>Second, enter the applicant  organization name, the name and title of the person signing, and click the "I  Accept" box below to confirm the applicant organization's agreement to these Terms and Conditions.&nbsp; By <em>clicking the "I Accept</em><strong>" </strong>box, you confirm that you have read,  understand, and agree to be bound by each and every term set forth in these  Terms and Conditions. </p>
+    
+    <p>Third, upon Confirmation  (defined below) by HID Global of its acceptance of your Application as to one  or more identified products as set forth in the Confirmation (the "Approved  Products"), the Trademark License below will become effective with respect to  such Approved Products.</p>
+    <p><strong>CONFIRMATION</strong>:&nbsp; If HID Global accepts your Application with  respect to one or more products, HID Global will </p>
+    
+    <p>[OPTION ONE:&nbsp; mail to you a packet of Program Materials  with a letter identifying the Approved Products.&nbsp; Your Application will be Confirmed as to the  Approved Products as of the date of HID Global's shipment of the Program  Materials to you ("Confirmation" or "Confirmed")]</p>
+    <p>[OPTION TWO:&nbsp; send you a packet of Program Materials by  electronic mail along with an electronic message identifying the Approved  Products.&nbsp; Your Application will be  Confirmed as to the Approved Products as of the time and date of HID Global's  email of the Program Materials to you ("Confirmation" or "Confirmed")]</p>
+    <p><strong>TRADEMARK  LICENSE</strong>.&nbsp; Subject to these Program Terms and  Conditions, HID Global grants you a non-exclusive, non-assignable, non-transferable,  royalty free license (without the right to sublicense) to use the Genuine HID  Technology Logo shown in HID Global's Branding and Logo Usage Guidelines, which  are available at www.hidglobal.com/documents/hid_logo_usage_guide_en.pdf, <br/>
+    &nbsp;in  connection with marketing, advertising, and promotional materials for Approved  Products, as set forth below:<br/></p>
+    
+    <ol style="list-style-stype: lower-alpha">
+    <li>in print format marketing, advertising, and promotional materials for Approved Products; </li>
+    <li>in electronic marketing, advertising, and promotional materials for Approved Products; </li>
+    <li>on product catalog pages featuring Approved Products; </li>
+    <li>in trade show exhibits for Approved Products; and </li>
+    <li>in press releases for Approved Products.</li>
+    </ol>
+    
+    <p>This license shall <u>not</u> include the  right to use the Genuine HID Technology Logo on any products, product inserts,  product user manuals, product packaging, promotional merchandise of any sort, business  cards, general business marketing, advertising, or promotional materials, and marketing,  advertising, or promotional materials for any products other than Approved  Products.&nbsp; The term of this license shall be one year, and shall be automatically  renewable for like successive one-year terms without any further action by you  being required, so long as you on any given renewal date are in full compliance  with all the terms, provisions, obligations, and conditions in this  agreement.&nbsp; The  Genuine HID Technology Logo is provided to you "As Is" and without warranty of  any type or kind<strong>. </strong></p>
+    <p>You agree only to use the Genuine HID Technology  Logo as specifically provided herein and you agree you will not alter, modify,  or change the Genuine HID Technology Logo or create any composite mark by  combining or closely associating the Genuine HID Technology Logo with another  trademark, service mark, mark, logo, insignia, design, name, symbol or other  branding.&nbsp; You agree to use the Genuine  HID Technology Logo in strict accordance with HID Global's Branding and Logo  Usage Guidelines, available at www.hidglobal.com/documents/hid_logo_usage_guide_en.pdf.&nbsp; You agree to cause to appear on all materials on or in  connection with which the Genuine HID Technology Logo  is used such legends, markings and notices as set forth in the HID Global Branding and Logo Usage Guidelines and as HID Global  may otherwise request in order to give appropriate notice of any trademark,  trade name or other rights.&nbsp; No other  markings, legends or notices may be used by you except as approved by HID  Global in advance of such use.&nbsp; You agree  that you will not state or imply that your Approved Products are "compatible"  with HID Global products or that HID Global sponsors or endorses your products,  including Approved Products, without HID Global's express written consent.</p>
+    <p>You agree,  represent and warrant that the nature and quality of any products supplied in  connection with the Genuine HID Technology Logo shall  be of high quality in your industry, shall not adversely affect the good name  of HID Global, and shall conform to the standards as may be prescribed from  time to time by HID Global.&nbsp; You further  agree, represent, and warrant that all products promoted or otherwise provided  by you in connection with the Genuine HID Technology  Logo shall be consistent with the product description in your  Application and in conformity with all applicable law and regulations. </p>
+    <p>HID Global may, from time to time, request in writing  specimens of (a) Approved Products in connection with  which you use the Genuine HID Technology Logo, and (b) any and all materials,  including literature, brochures, web sites, or advertising that you produce,  distribute, or display which include the Genuine HID Technology Logo  ("Materials"), to assess the level of consistency and quality of such use.&nbsp; HID Global has the right to inspect such  products and Materials, and you agree to provide specimens of such products and  Materials upon HID Global's request at no cost to HID Global.</p>
+    <p>You acknowledge HID Global's ownership and exclusive  right to use, and to authorize others to use, the HID trademark and logo, and  the Genuine HID Technology Logo and all protectable variations thereof.&nbsp; During the term of this Agreement and  thereafter, you will not contest HID Global's exclusive right, title and  interest in and to, or the validity of, the HID trademark and logo, and the Genuine  HID Technology Logo.&nbsp; In addition, you  shall not seek or obtain protection of any kind, including registration, of the  HID trademark and Logo, and the Genuine HID Technology Logo (or any mark  confusingly similar thereto) anywhere in the world.&nbsp; <strong> </strong></p>
+    <p>HID Global may immediately  terminate your participation in the Program and/or this Genuine HID Technology  Trademark License for any or all previously Approved Products by written notice  to you if you materially breach an  obligation in these Terms and Conditions, if your previously Approved Products  become ineligible for participation in the Program, or for any other reason or  for no reason at all, at HID Global's sole discretion ("HID Global License  Termination").&nbsp; The license of the Genuine HID Technology Logo will  automatically terminate if the Program is discontinued ("License and Program  Termination").&nbsp; Upon any HID Global  License Termination, you agree to immediately cease creating new materials  including the Genuine HID Technology Logo, to immediately discontinue any and  all use of the Genuine HID Technology Logo, and to discontinue use of any  existing materials in your control that include the Genuine HID Technology  Logo.&nbsp; Upon License and Program  Termination, you agree to immediately cease creating new materials including  the Genuine HID Technology Logo and within sixty (60) days of written notice from  HID Global of such termination to discontinue any and all use of the Genuine  HID Technology Logo and to discontinue use of any existing materials in your  control that include the Genuine HID Technology Logo.&nbsp; </p>
+    <p>You may terminate  participation in the Program at any time with thirty (30) days written notice  to HID Global by contacting HID Global and submitting a 30-day notice of  termination of participation in the Genuine HID Technology Program to the  following email address: legal@hidglobal.com ("Termination by You").&nbsp; In the case of any Termination by You, you agree to  immediately cease creating new materials including the Genuine HID Technology  Logo upon providing notice to HID Global of any Termination by You, and within  thirty (30) days of your notice of Termination by You to discontinue any and  all use of the Genuine HID Technology Logo and to discontinue use of any  existing materials in your control that include the Genuine HID Technology  Logo.</p>
+    <p>Participation in the Program and the  Trademark License are offered at the sole discretion of HID Global and HID  Global reserves the right, at its sole discretion, to limit, suspend, cancel,  discontinue, terminate, change, amend or modify the Program and its Terms and  Conditions, including the Trademark License, in whole or in part, at any  time.&nbsp; </p>
+    <p><strong>DISCLAIMER  OF WARRANTY / LIMITATION ON LIABILITY</strong>.<strong>&nbsp; </strong>HID Global will not be responsible or  liable for any injury, loss, claim, damage, or any special, exemplary,  punitive, indirect, incidental or consequential damages of any kind (including  without limitation lost profits or lost savings), whether based in contract,  tort, strict liability or otherwise, that arises out of or is in any way  connected with the Program, the Trademark License, or the Genuine HID Technology Logo, even if HID Global has  been advised of the possibility of damages.&nbsp;  The Program and the Trademark License are offered "as is" and "as  available." &nbsp;<strong>HID GLOBAL HEREBY DISCLAIMS any  and all warranties, whether statutory, express, or implied, including without  limitation THE IMPLIED WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR  PURPOSE, and non-infringement of third party rights.</strong></p>
+    <p><strong>INDEMNIFICATION.&nbsp; </strong>You hereby agree, at your expense, to defend, indemnify and hold  HID Global and its officers, agents, and employees harmless from any and all  third party claims, demands, causes of action and judgments (including attorney's  fees, court costs and expert's fees) related to or arising out of your  production, design, manufacture, distribution, shipment, marketing,  advertising, promotion, offering for sale and/or sale of any products or  services marketed, advertised, or promoted by you in conjunction with the Genuine  HID Technology Logo or any other HID Global name(s) or mark(s), and/or your  misuse of the Genuine HID Technology Logo or any other HID Global name(s) or  mark(s).</p>
+    <p><strong>MISCELLANEOUS</strong>.&nbsp; By participating in the  Program and by using the Genuine HID Technology Logo you agree to be bound by  the Terms and Conditions stated herein.&nbsp;  You also agree to review the Program Terms and Conditions periodically  on the HID Global website at www.hidglobal.com/documents/genuine_logo_program_tc_en.pdf  and you shall be bound by any modifications.&nbsp;  By continuing to participate in  the Program and by using the Genuine HID Technology  Logo, you are deemed to have agreed to any amended version of these  Terms and Conditions and are bound by any such revisions and should, therefore,  periodically visit the website to review the then current Terms and Conditions  to which you are bound. &nbsp;If you do not accept these Terms and  Conditions, or any subsequent modifications, your sole and exclusive remedy is  to terminate your participation in the Program.&nbsp;  These Terms and Conditions make up the entire agreement between us  regarding the Program and supersede any prior agreements (whether oral or  written).&nbsp; If a court holds any of these  Terms and Conditions unenforceable, the remainder of the Terms and Conditions  shall nevertheless remain enforceable.&nbsp; </p>
+    <p><strong>GOVERNING LAW</strong>.&nbsp; These Terms and Conditions shall be construed  in accordance with, and governed by, the laws of the state of California applicable to contracts entered into by California residents and to be performed within such State  without regard to its conflict of law provisions.&nbsp; </p>
+    <p><strong>EFFECTIVE DATE</strong>.&nbsp; The Trademark  License shall be deemed effective only as of the date on which it has been  fully executed by you <u>and</u> Confirmed by HID Global.&nbsp; It shall not be deemed effective unless and  until you have executed this Agreement <u>and</u> the HID Global has completed  Confirmation.&nbsp; </p>
+    </div>
+</div>
+<div id="deTermsDiv" class="termsDiv">
+    <div id="closeTerms" onclick="hideTerms();">&nbsp;</div>
+    <p align="center" style="padding-top:20px;" >
+    Bevor Sie für Ihr Produkt die Benennung <strong>„Genuine HID Technology“</strong> beantragen können, müssen Sie den folgenden Bedingungen zustimmen.</p>
+    <p align="center"><a href="http://www.hidglobal.com/documents/genuine_logo_program_clickThrough_tc_en.pdf" target="_blank" >Klicken Sie hier, um eine Druckversion aufzurufen</a></p>
+    <div id="termsAndCondsScrollBody">
+    
+    <p align="center">TEILNAHMEBEDINGUNGEN</p>
+    <p align="center"><strong>GENUINE HID TECHNOLOGY  PROGRAM </strong></p>
+    <p align="center"><strong>TEILNAHMEBEDINGUNGEN</strong></p>
+    <p><strong>BERECHTIGUNG.</strong> Das Genuine HID Technology Programm (nachfolgend „Programm“ genannt) ist für HID Global Entwickler, Partner und Technologielizenznehmer zugänglich, die Produkte vertreiben, welche zuvor von HID Global nach eigenem Ermessen für das Programm zugelassen wurden. Das Genuine HID Technology Logo darf für Produkte, in denen HID Global Module, Platinen, Chips, Drucktechnik, Programme oder andere Technologien, die von HID Global für den Einsatz in Produkten und Geräten von Drittanbietern entwickelt und produziert werden, verwendet werden, sowie für Produkte, welche unter HID Genuine Technology Lizenzen hergestellt wurden und die Anwendungsmöglichkeiten und Lösungen für HID Produkte erweitern. Die Berechtigung und Teilnahme an dem Programm bestimmt HID Global nach eigenem Ermessen.</p> 
+
+    <p><strong>BEWERBUNG.</strong> Die Bewerbung erfolgt in drei Schritten. 
+    Füllen Sie zunächst das Bewerbungsformular unter www.hidglobal.com/genuine_hid/genuine_hid_technology_form.php aus, und senden Sie das vollständig ausgefüllte Formular an HID Global. Achten Sie darauf, dass alle erforderlichen Informationen, einschließlich Name des Antrag stellenden Unternehmens („Sie“), Kontaktinformationen, Angaben zu den Produkten, für die die Genuine HID Technology Logo-Markenlizenz beantragt wird, sowie Angaben zu den HID Komponenten oder Technologien, die in diesen Produkten eingesetzt werden, mitgeteilt werden („Bewerbung“).</p> 
+    <p>Geben Sie anschließend den Namen des Antrag stellenden Unternehmens und den Namen und Titel der unterzeichnenden Person an, und klicken Sie auf „I accept“ (Ich stimme zu), um das Einverständnis des Antrag stellenden Unternehmens mit diesen Teilnahmebedingungen zu bestätigen. Wenn Sie auf „I accept“ klicken, bestätigen Sie, dass Sie diese Teilnahmebedingungen gelesen und verstanden haben und diese ausnahmslos akzeptieren.</p> 
+    <p>Zuletzt tritt mit der Bestätigung (nachfolgend definiert) von HID Global über die Annahme des Bewerbungsantrags für ein oder mehrere in der Bestätigung genannte Produkte („zugelassene Produkte“) die unten aufgeführte Markenlizenz für die zugelassenen Produkte in Kraft.</p> 
+    <p><strong>BESTÄTIGUNG:</strong> Wenn HID Global Ihren Antrag für ein oder mehrere Produkte genehmigt, tritt HID Global nach eigenem Ermessen auf einem der nachfolgend aufgeführten Wege mit Ihnen in Kontakt:</p> 
+    <p>[ERSTE OPTION: HID Global sendet Ihnen ein Paket mit Programmmaterial und einem Schreiben, in dem die zugelassenen Produkte aufgelistet sind. Ihr Antrag wird mit dem Versand des Programmmaterials an Sie bestätigt („Bestätigung“ bzw. „bestätigt“).]</p> 
+    <p>[ZWEITE OPTION: HID Global sendet Ihnen eine E-Mail mit Programmmaterial und einer Auflistung der zugelassenen Produkte. Ihr Antrag wird mit dem Versand der E-Mail, die das Programmmaterial enthält, bestätigt („Bestätigung“ bzw. „bestätigt“).]</p> 
+    <p><strong>MARKENLIZENZ.</strong> HID Global gewährt Ihnen bei Einhaltung dieser Programmbedingungen eine nicht exklusive, nicht abtretbare und nicht übertragbare kostenfreie Lizenz (ohne Recht zur Vergabe von Unterlizenzen) zur Verwendung des Genuine HID Technology Logos gemäß den HID Global Richtlinien zur Marken- und Logonutzung, die Ihnen HID Global zusammen mit dem Programmmaterial zukommen lässt, im Zusammenhang mit Marketing-, Werbe- und Promotionmaterial für zugelassene Produkte für:</p>
+
+    <ol style="list-style-stype: lower-alpha">
+        <li>gedrucktes Marketing-, Werbe- oder Promotionmaterial für zugelassene Produkte,</li> 
+        <li>elektronisches Marketing-, Werbe- oder Promotionmaterial für zugelassene Produkte,</li> 
+        <li>Katalogseiten mit zugelassenen Produkten,</li> 
+        <li>Ausstellung zugelassener Produkte auf Messen; und</li> 
+        <li>(Pressemitteilungen für zugelassene Produkte.</li>
+    </ol>
+    
+    <p>Diese Lizenz berechtigt nicht zur Nutzung des Genuine HID Technology Logos auf Produkten, Produktbeilagen, Bedienungsanleitungen, Produktverpackungen, Werbebroschüren jeglicher Art, Visitenkarten, allgemeinem Marketing-, Werbe- oder Promotionmaterial sowie Marketing-, Werbe- oder Promotionmaterial für nicht zugelassene Produkte. Die Gültigkeit dieser Lizenz beträgt ein Jahr und verlängert sich automatisch um ein Jahr, ohne dass eine Handlung Ihrerseits erforderlich ist, sofern Sie zum Verlängerungsdatum alle Bedingungen, Bestimmungen und Verpflichtungen dieser Vereinbarung erfüllen. Das Genuine HID Technology Logo wird Ihnen ohne Mangelgewähr und ohne Gewährleistung jeglicher Art zur Verfügung gestellt.</p> 
+    <p>Sie stimmen zu, nur das hier vorgesehene Genuine HID Technology Logo zu verwenden und dieses nicht zu verändern, zu modifizieren oder als Bestandteil einer gemischten Bildmarke durch Kombination mit anderen Markenzeichen oder enge Verknüpfung des Genuine HID Technology Logos mit anderen Markenzeichen, Dienstleistungsmarken, Marken, Logos, Bezeichnungen, Designs, Namen, Symbolen oder anderen Kennzeichen zu verwenden. Sie stimmen zu, das Genuine HID Technology Logo nur unter Einhaltung der HID Global Richtlinien zur Marken- und Logonutzung zu verwenden. Sie verpflichten sich, alle Materialien mit Genuine HID Technology Logo oder mit Bezug zu diesem Logo mit in den HID Global Richtlinien zur Marken- und Logonutzung festgelegten oder von HID Global anderweitig geforderten Erläuterungen, Kennzeichnungen oder Hinweisen zu versehen, um Markenzeichen, Markennamen oder andere Rechte hinreichend zu kennzeichnen. Sie dürfen keine anderen Kennzeichnungen, Erläuterungen oder Hinweise verwenden, die nicht zuvor von HID Global genehmigt wurden. Sie stimmen zu, nicht ohne ausdrückliche schriftliche Genehmigung von HID Global explizit oder implizit zu erwähnen, dass Ihre zugelassenen Produkte „kompatibel“ mit HID Global Produkten sind oder dass HID Global Ihre Produkte, einschließlich der zugelassenen Produkte, unterstützt oder befürwortet.</p> 
+    <p>Sie verpflichten sich, die Merkmale und hohe Qualität aller Produkte mit Genuine HID Technology Logo in Ihrer Branche zu kommunizieren und zu gewährleisten, dem Ansehen von HID Global nicht zu schaden und die von HID Global ausgegebenen Richtlinien zu befolgen. Sie gewährleisten zudem, dass alle von Ihnen beworbenen oder anderweitig bereitgestellten Produkte mit dem Genuine HID Technology Logo der Produktbeschreibung in Ihrem Antrag und allen relevanten Gesetzen und Vorschriften entsprechen.</p> 
+    <p>HID Global behält sich das Recht vor, schriftlich zu jeder Zeit Muster von (a) für die Verwendung des Genuine HID Technology Logos zugelassenen Produkten und (b) jeglichen von Ihnen erstellten, verteilten oder veröffentlichten Materialien wie Literatur, Broschüren, Webseiten oder Werbung mit dem Genuine HID Technology Logo („Materialien“) anzufordern, um die Qualität und korrekte Verwendung zu überprüfen. HID Global hat das Recht zur Überprüfung dieser Produkte und Materialien, und Sie verpflichten sich, auf Anfrage von HID Global kostenlos Muster dieser Produkte und Materialien bereitzustellen.</p> 
+    <p>Sie erkennen HID Global als Eigentümer des HID Markenzeichens und Logos, des Genuine HID Technology Logos und aller schutzfähigen Variationen sowie als Besitzer des ausschließlichen Nutzungsrechts an. HID Global allein darf die Nutzung des Markenzeichens und Logos durch Dritte autorisieren. Während und nach Ablauf dieser Vereinbarung dürfen Sie das ausschließliche Recht von HID Global an dem HID Markenzeichen, Logo und dem Genuine HID Technology Logo sowie deren Gültigkeit nicht anfechten. Sie dürfen ferner in keinem Land Rechte, einschließlich der Registrierung von Marken, an dem HID Markenzeichen, Logo und dem Genuine HID Technology Logo (oder einer verwechselbar ähnlichen Marke) erwerben.</p>
+     
+    
+    <p>HID Global behält sich vor, Ihre Teilnahme an diesem Programm und/oder die Genuine HID Technology Markenlizenz für bestimmte oder alle zugelassenen Produkte durch schriftliche Mitteilung zu beenden, falls Sie wesentlich gegen die Bestimmungen dieser Teilnahmebedingungen verstoßen oder falls ein zuvor zugelassenes Produkt die Bedingungen zur Teilnahme an diesem Programm nicht mehr erfüllt. HID Global kann Ihre Teilnahme und/oder die Lizenz auch aus anderen Gründen und ohne Angabe von Gründen nach eigenem Ermessen beenden („HID Global Lizenzkündigung“). Die Lizenz für das Genuine HID Technology Logo erlischt automatisch bei Beendigung des Programms („Lizenz- und Programmbeendigung“). Bei einer Lizenzkündigung durch HID Global sind Sie verpflichtet, die Produktion neuer Materialien mit Genuine HID Technology Logo unverzüglich zu beenden, die Verwendung des Genuine HID Technology Logos einzustellen und die Verwendung aller vorhandenen und unter Ihrer Kontrolle stehenden Materialien mit dem Genuine HID Technology Logo zu beenden. Bei einer Lizenz- und Programmbeendigung sind Sie verpflichtet, die Produktion neuer Materialien mit Genuine HID Technology Logo unverzüglich zu beenden sowie innerhalb von sechzig (60) Tagen nach schriftlicher Mitteilung von HID Global zur Beendigung des Programms die Verwendung des Genuine HID Technology Logos einzustellen und die Verwendung aller vorhandenen und unter Ihrer Kontrolle stehenden Materialien mit dem Genuine HID Technology Logo zu beenden.</p> 
+    <p>Sie können die Teilnahme an dem Programm zu jeder Zeit durch schriftliche Kündigung an HID Global mit einer Kündigungsfrist von dreißig (30) Tagen beenden. Senden Sie dazu eine E-Mail mit der Kündigung der Teilnahme an diesem Programm unter Einhaltung der 30-tägigen Kündigungsfrist an folgende E-Mail-Adresse: legal@hidglobal.com („Kündigung durch Sie“). Bei einer Kündigung durch Sie verpflichten Sie sich, nach Versand der schriftlichen Kündigung die Produktion neuer Materialien mit Genuine HID Technology Logo unverzüglich einzustellen und innerhalb von dreißig (30) Tagen nach Kündigung durch Sie die Verwendung des Genuine HID Technology Logos sowie die Verwendung vorhandener und unter Ihrer Kontrolle stehender Materialien mit dem Genuine HID Technology Logo zu beenden.</p> 
+    <p>Die Teilnahme an dem Programm und die Verwendung der Markenlizenz werden nach alleinigem Ermessen von HID Global genehmigt. HID Global behält sich das Recht vor, das Programm und die Teilnahmebedingungen einschließlich der Markenlizenz nach eigenem Ermessen vollständig oder teilweise und zu jeder Zeit zu beschränken, auszusetzen, abzubrechen, einzustellen, zu beenden oder in sonstiger Weise zu ändern.</p> 
+    
+    
+    <p><strong>AUSSCHLUSS VON HAFTUNG UND GEWÄHRLEISTUNG.</strong> HID Global übernimmt keine Haftung bei Verletzungen, Verlust, Ansprüchen, Forderungen oder konkreten Schäden, verschärftem Schadenersatz bzw. Strafe einschließendem Schadenersatz, indirekten, Neben- oder Folgeschäden jeglicher Art (einschließlich, jedoch nicht beschränkt auf entgangene Gewinne oder Einsparungen), ob aus Vertrag, unerlaubter Handlung, Gefährdungshaftung oder einem anderen Rechtsgrund, die durch die Teilnahme an diesem Programm oder durch die Verwendung der Markenlizenz oder des Genuine HID Technology Logos entstehen, selbst wenn HID Global auf die Möglichkeit solcher Schäden hingewiesen wurde. Das Programm und die Markenlizenz werden ohne Mängelgewähr und wie verfügbar angeboten. <strong>HID GLOBAL LEHNT HIERMIT JEGLICHE GESETZLICHEN, AUSDRÜCKLICHEN ODER STILLSCHWEIGENDEN GEWÄHRLEISTUNGEN AB, EINSCHLIESSLICH DER STILLSCHWEIGENDEN GEWÄHRLEISTUNG DER MARKTGÄNGIGKEIT, DER EIGNUNG FÜR EINEN BESTIMMTEN ZWECK UND DER EINHALTUNG DER RECHTE DRITTER.</strong></p> 
+    <p><strong>SCHADLOSHALTUNG.</strong></p> 
+    
+    <p>Hiermit verpflichten Sie sich, auf Ihre Kosten HID Global und seine Führungskräfte, Bevollmächtigten und Mitarbeiter gegen jegliche Forderungen, Klage- und sonstige Ansprüche Dritter sowie Urteile (einschließlich Anwalts-, Gerichts- und Sachverständigenkosten) schadlos zu halten, die aus oder in Verbindung mit der Produktion, der Entwicklung, der Herstellung, dem Vertrieb, dem Versand, der Vermarktung, der Bewerbung, des Angebots und/oder des Verkaufs von Produkten oder Dienstleistungen durch Sie, die von Ihnen mit dem Genuine HID Technology Logo oder anderen HID Global Namen oder Marken vermarktet oder beworben werden, oder aufgrund des Missbrauchs des Genuine HID Technology Logos oder eines anderen HID Global Namens oder einer HID Global Marke durch Sie entstehen.</p> 
+    <p><strong>SONSTIGE BESTIMMUNGEN.</strong> Mit der Teilnahme an diesem Programm und der Verwendung des Genuine HID Technology Logos erklären Sie sich mit den hier angegebenen Teilnahmebedingungen einverstanden. Sie verpflichten sich ebenfalls zur regelmäßigen Prüfung der Teilnahmebedingungen auf der HID Global Webseite unter www.hidglobal.com/documents/genuine_logo_program_tc_en.pdf und sind an etwaige Änderungen der Bedingungen gebunden. Mit der Fortsetzung der Teilnahme an dem Programm sowie durch die Weiternutzung des Genuine HID Technology Logos erklären Sie automatisch Ihr Einverständnis mit den Änderungen der Teilnahmebedingungen und verpflichten sich zur Einhaltung dieser geänderten Bedingungen. Daher sollten Sie regelmäßig unsere Webseite besuchen, um die aktuellen Teilnahmebedingungen einzusehen. Sollten Sie diese Teilnahmebedingungen oder spätere Änderungen nicht akzeptieren, besteht Ihr einziger und ausschließlicher Anspruch darin, die Teilnahme an dem Programm zu kündigen. Diese Teilnahmebedingungen stellen die gesamte Vereinbarung zwischen Ihnen und uns bezüglich des Programms dar und ersetzen alle vorherigen Vereinbarungen (mündlich und schriftlich). Erklärt ein Gericht bestimmte Teilnahmebedingungen für nicht durchsetzbar, berührt dies nicht die Durchsetzbarkeit der übrigen Teilnahmebedingungen.</p> 
+    <p><strong>GELTENDES RECHT.</strong> Diese Teilnahmebedingungen unterliegen den für Verträge, die von kalifornischen Bürgern geschlossen werden und in Kalifornien zu erfüllen sind, geltenden Gesetzen des Bundesstaats Kalifornien und werden nach diesen ausgelegt, ungeachtet etwaiger kollisionsrechtlicher Bestimmungen.</p> 
+    
+    <p><strong>DATUM DES INKRAFTTRETENS.</strong> Die Markenlizenz wird erst dann als in Kraft getreten angesehen, wenn diese Lizenz von Ihnen geschlossen und von HID Global bestätigt wurde. Sie gilt erst dann als in Kraft getreten, wenn Sie diese Vereinbarung unterzeichnet haben und die Bestätigung von HID Global vorliegt.</p>
+    </div>
+</div>
+<div id="frTermsDiv" class="termsDiv">
+    <div id="closeTerms" onclick="hideTerms();">&nbsp;</div>
+    <p align="center" style="padding-top:20px;" >
+    In order to apply to have your product designated <strong>"Genuine HID Technology"</strong>,<br/> you must agree to the following Terms and Conditions</p>
+    <p align="center"><a href="http://www.hidglobal.com/documents/genuine_logo_program_clickThrough_tc_en.pdf" target="_blank" >for printable version, click here</a></p>
+    <div id="termsAndCondsScrollBody">
+    
+    <p align="center">CONDITIONS GÉNÉRALES</p>
+    <p align="center"><strong>PROGRAMME GENUINE HID TECHNOLOGY</strong></p>
+    <p align="center"><strong>CONDITIONS GÉNÉRALES</strong></p>
+    
+    <p><strong>ÉLIGIBILITÉ.</strong> Le programme Genuine HID Technology (le « Programme ») s'adresse aux développeurs, partenaires et titulaires de licence HID Global en relation avec des produits marketing pré-approuvés pour le Programme par HID Global, à sa seule discrétion. L'utilisation du logo Genuine HID Technology s'applique aux produits contenant des modules, cartes, puces, moteurs d'impressions, programmateurs et autres technologies d'autorisation d'accès HID Global, développés et conçus par HID Global pour l'intégration dans des produits et dispositifs tiers, ainsi que des produits fabriqués dans le cadre de licences HID Genuine Technology qui élargissent les applications et solutions pour l'écosystème de HID. L'éligibilité et la participation seront déterminées à la seule discrétion de HID Global.</p> 
+
+    <p><strong>APPLICATION.</strong> Il existe trois étapes. 
+    Tout d'abord, veuillez remplir une demande d'adhésion au Programme, que vous pouvez obtenir à l'adresse www.hidglobal.com/genuine_hid/genuine_hid_technology_form.php, et renvoyez le formulaire complété à HID Global en fournissant toutes les informations demandées, y compris le nom de l'organisation qui émet la demande (« vous »), les coordonnées de la personne à contacter, l'identification du ou des produit(s) pour lesquels est demandée la licence de marque commerciale du logo Genuine HID Technology, et l'identification des composants ou technologies HID qui sont ou seront intégrés à ce ou ces produit(s) (la « Demande »).</p> 
+    <p>Ensuite, entrez le nom de l'organisation qui présente la demande, le nom et le titre de la personne signataire, puis activez la case « J'accepte » ci-dessous pour confirmer que l'organisation qui effectue la demande accepte les présentes Conditions générales. En activant la case « J'ACCEPTE », vous confirmez avoir lu, compris et accepté chaque terme des présentes Conditions générales.</p> 
+    <p>Enfin, sur Confirmation (définition ci-dessous) par HID Global de sa confirmation de votre Demande concernant un ou plusieurs produits identifiés comme indiqué dans la Confirmation (les « Produits approuvés »), la Licence de marque commerciale ci-dessous entrera en vigueur pour les Produits approuvés.</p> 
+    <p>CONFIRMATION : Si HID Global accepte votre Demande concernant un ou plusieurs produits, HID Global agira de l'une des façons suivantes, selon son propre choix</p> 
+    <p>[OPTION 1 : vous envoyer les Eléments du programme par colis avec une lettre identifiant les Produits approuvés. Votre Demande sera Confirmée pour les Produits approuvés à la date à laquelle HID Global vous envoie les Eléments du programme (« Confirmation » ou « Confirmé »)]</p> 
+    <p>[OPTION 2 : vous envoyer les Eléments du programme par courrier électronique avec un message identifiant les Produits approuvés. Votre Demande sera Confirmée pour les Produits approuvés à l'heure et à la date auxquelles HID Global vous envoie les Eléments du programme (« Confirmation » ou « Confirmé »)]</p> 
+    <p><strong>LICENCE DE MARQUE COMMERCIALE.</strong> Sous réserve des présentes Conditions générales du Programme, HID Global vous accorde une licence gratuite, non-exclusive, non-cessible et non-transférable (sans droit de sous-licence) d'utiliser le logo Genuine HID Technology présenté dans les Instructions d'utilisation du logo et de la marque HID Global, lesquelles vous seront envoyées avec les Eléments du programme, comme indiqué ci-dessus, en relation avec des éléments marketing, publicitaires et promotionnels pour les Produits approuvés, comme indiqué ci-dessous :</p>
+
+    
+    <ol style="list-style-stype: lower-alpha">
+        <li>dans des éléments marketing, publicitaires et promotionnels au format imprimé pour les Produits approuvés ;</li> 
+        <li>dans des éléments marketing, publicitaires et promotionnels au format électronique pour les Produits approuvés ;</li> 
+        <li>sur les pages du catalogue produits portant sur les Produits approuvés ;</li> 
+        <li>dans des salons pour les Produits approuvés ; et</li> 
+        <li>dans des communiqués de presse pour les Produits approuvés.</li>
+    </ol>
+    
+    <p>Cette licence ne doit pas inclure le droit d'utiliser le logo Genuine HID Technology sur quelque produit que ce soit, insert de produit, guide de l'utilisateur relatif au produit, emballage de produit, marchandise promotionnelle de quelque sorte que ce soit, cartes de visite, éléments de marketing commercial généraux, de publicité ou de promotion, ni sur des éléments marketings, publicitaires ou promotionnels pour d'autres produits que les Produits approuvés. La durée de cette licence est établie pour un an, automatiquement reconductible pour des périodes successives d'un an sans autre action nécessaire de votre part, tant que vous êtes, à toute date de renouvellement donnée, en parfaite conformité avec l'ensemble des termes, dispositions, obligations et conditions du présent contrat. Le logo Genuine HID Technology vous est fourni « en l'état » et sans garantie de quelque sorte que ce soit.</p> 
+
+    <p>Vous vous engagez à n'utiliser le logo Genuine HID Technology que selon les termes établis dans les présentes et vous vous engagez à ne pas altérer, modifier ou changer le logo Genuine HID Technology et à ne pas créer de marque composée en combinant ou associant étroitement le logo Genuine HID Technology à une autre marque commerciale, marque de service, marque, logo, insigne, conception, nom, symbole ou autre marquage. Vous vous engagez à n'utiliser le logo Genuine HID Technology qu'en stricte conformité avec les Instructions d'utilisation du logo et de la marque HID Global. Vous vous engagez à faire apparaître sur tous les éléments sur lesquels ou en relation avec lesquels est utilisé le logo Genuine HID Technology, les légendes, marquages et avis établis dans lesdites Instructions d'utilisation et conformément à ce que HID Global peut par ailleurs demander de façon à indiquer de façon adéquate tout droit de marque commerciale, nom commercial ou autres. Vous ne pouvez utiliser aucun autre marquage, légende ou avis sauf approbation préalable de HID Global à cet effet. Vous vous engagez à ne pas indiquer ou laisser entendre que vos Produits approuvés sont « compatibles » avec les produits de HID Global ou que HID Global parraine ou soutienne vos produits, y compris les Produits approuvés, sans le consentement écrit préalable de HID Global.</p> 
+    <p>Vous reconnaissez, représentez et garantissez que la nature et la qualité des produits fournis en relation avec le logo Genuine HID Technology doivent être d'excellente qualité dans votre secteur, ne doit pas avoir un effet négatif sur la réputation de HID Global, et doit se conformer aux normes prescrites de temps en temps par HID Global. Par ailleurs, vous reconnaissez, représentez et garantissez également que tous les produits promus ou fournis de toute autre façon par vous en relation avec le logo Genuine HID Technology doivent correspondre à la description du produit figurant dans votre Demande et doivent être conformes à toutes les lois et réglementations applicables.</p> 
+    <p>HID Global peut, de temps à autres, demander par écrit des échantillons de (a) Produits approuvés en relation avec lesquels vous utilisez le logo Genuine HID Technology, et (b) n'importe quel élément, y compris la documentation, des brochures, des sites Web ou des publicités que vous produisez, distribuez ou affichez qui incluent le logo Genuine HID Technology (les « Eléments »), en vue d'évaluer le niveau de conformité et la qualité de l'utilisation considérée. HID Global est en droit d'inspecter ces produits et éléments, et vous acceptez de fournir gratuitement des échantillons de ces produits et Eléments sur demande de HID Global.</p> 
+    <p>Vous reconnaissez la propriété et le droit exclusif de HID Global à utiliser et à autoriser d'autres personnes à utiliser, la marque commerciale et le logo de HID, ainsi que le logo Genuine HID Technology et toutes les variantes pouvant être protégées. Pendant la durée du présent Contrat et par la suite, vous ne contestez pas le droit exclusif de HID Global, son titre et son intérêt dans et pour la marque commerciale et le logo HID et pour le logo Genuine HID Technology, ni leur validité. De plus, vous ne cherchez pas à obtenir ni n'obtenez de protection de quelque sorte que ce soit, y compris l'enregistrement, de la marque commerciale et du logo de HID, ni du logo Genuine HID Technology (ou de toute marque qui y ressemblerait à s'y méprendre) partout dans le monde.</p>
+     
+    
+    <p>HID Global peut immédiatement résilier votre participation au Programme et/ou la présente licence de marque commerciale Genuine HID Technology pour tout ou l'ensemble des Produits approuvés préalablement en vous prévenant par écrit si vous violez matériellement une obligation des présentes Conditions générales, si vos Produits approuvés préalablement perdent leur caractère d'éligibilité au Programme, ou pour toute autre raison ou sans raison particulière, à la seule discrétion de HID Global (« Résiliation de la licence par HID Global »). La licence relative au logo Genuine HID Technology sera automatiquement résiliée si le Programme est interrompu (« Résiliation de la licence et du programme »). Dans le cas d'une Résiliation de la licence par HID Global, vous vous engagez à cesser immédiatement de créer de nouveaux éléments portant le logo Genuine HID Technology, d'interrompre immédiatement toute utilisation du logo Genuine HID Technology, et de cesser d'utiliser tout élément existant sous votre contrôle portant le logo Genuine HID Technology. Dans le cas d'une Résiliation de la licence et du programme, vous vous engagez à cesser immédiatement de créer de nouveaux éléments portant le logo Genuine HID Technology et, dans les soixante (60) jours suivant l'avis écrit de HID Global indiquant cette résiliation, d'interrompre toute utilisation du logo Genuine HID Technology, et de cesser d'utiliser tout élément existant sous votre contrôle portant le logo Genuine HID Technology.</p> 
+    <p>Vous pouvez résilier votre participation au Programme à tout moment par avis écrit de trente (30) jours adressé à HID Global en contactant HID Global et en soumettant un avis de 30 jours indiquant que vous résiliez votre participation au Programme Genuine HID Technology à l'adresse e-mail suivante : legal@hidglobal.com (« Résiliation à votre initiative »). Dans le cas d'une Résiliation à votre initiative, vous vous engagez à cesser immédiatement de créer de nouveaux éléments portant le logo Genuine HID Technology dès lors que vous en avisez HID Global et, dans les trente (30) jours qui suivent cet avis de Résiliation à votre initiative, d'interrompre immédiatement toute utilisation du logo Genuine HID Technology, et de cesser d'utiliser tout élément existant sous votre contrôle portant le logo Genuine HID Technology.</p> 
+    <p>La participation au Programme et la licence de marque commerciale sont fournis à la seule discrétion de HID Global et HID Global se réserve le droit de limiter, suspendre, annuler, interrompre, résilier, changer, amender ou modifier le Programme et ses Conditions générales, y compris la Licence de marque commerciale, en tout ou en partie, à tout moment.</p> 
+    <p><strong>LIMITATION DE GARANTIE</strong>. HID Global ne saurait être tenu responsable pour toute blessure, perte, réclamation, dégât ou pour tout dommage que ce soit, y compris des dommages-intérêts particuliers, exemplaires, punitifs, indirects, accessoires ou immatériels de toutes sortes (et notamment la perte de bénéfices ou d’économies), qu'ils soient basés sur une responsabilité contractuelle, un délit civil, une responsabilité stricte ou autre, découlant ou étant liée au Programme, à la Licence de marque commerciale ou au logo Genuine HID Technology, que HID Global ait été ou non avisée de la possibilité de tels dommages. Le Programme et la Licence de marque commerciale sont proposés « en l'état ». <strong>HID GLOBAL REFUTE PAR LES PRESENTES TOUTE GARANTIE LEGALE, EXPLICITE, OU IMPLICITE, NOTAMMENT LES GARANTIES IMPLICITES DE QUALITE MARCHANDE, D'ADEQUATION A UN USAGE PARTICULIER ET LA NON VIOLATION DES DROITS DES TIERS.</strong> </p>
+    
+    <p><strong>INDEMNISATION.</strong> Vous vous engagez par les présentes, à vos frais, à défendre, indemniser et exonérer HID Global et ses membres de la direction, agents et salariés contre toute réclamation, exigence, cause d'action et jugement (y compris les frais d'avocat, frais judiciaires et frais d'experts) de tout tiers étant en relation ou découlant de votre production, conception, fabrication, distribution, expédition, marketing, publicité, promotion, offre de vente et/ou vente de tout produit ou service commercialisé, recommandé, ou promu par vous en relation avec le logo Genuine HID Technology ou tout autre nom ou marque de HID Global, et/ou votre usage abusif du logo Genuine HID Technology ou de tout autre nom ou marque de HID Global.</p> 
+    <p><strong>DIVERS.</strong> En participant au Programme et en utilisant le logo Genuine HID Technology, vous reconnaissez être lié par les Conditions générales indiquées ici. Vous vous engagez également à consulter régulièrement les Conditions générales sur le site Web de HID Global à l'adresse suivante :
+    www.hidglobal.com/documents/genuine_logo_program_tc_en.pdf et vous reconnaissez être lié(e) par toute modification. En continuant de participer au Programme et en utilisant le logo Genuine HID Technology, vous êtes réputé avoir accepté toute version amendée des présentes Conditions générales et vous êtes lié par ces révisions et devez, par conséquent, consulter régulièrement le site Web pour passer en revue les Conditions générales alors en vigueur auxquelles vous êtes lié(e). Si vous n'acceptez pas les présentes Conditions générales ou les éventuelles modifications ultérieures, votre seul et unique recours consiste à résilier votre participation au Programme. Les présentes Conditions générales constituent le contrat complet entre nous concernant le Programme et se substituent à tout contrat antérieur (qu'il soit oral ou écrit). Si un tribunal déclare que l'une des présentes Conditions générales n'est pas applicable, le reste des Conditions générales reste toutefois en vigueur.</p> 
+    <p><strong>DROIT APPLICABLE.</strong> Les présentes Conditions générales sont interprétées conformément à, et régies par, la législation de l'Etat de Californie applicable aux contrats conclus par des résidents californiens et devant être exécutés sur le territoire dudit Etat, sans considération d'un éventuel conflit avec les dispositions légales.</p> 
+    <p>D<strong>ATE D'ENTRÉE EN VIGUEUR.</strong> La Licence de marque commerciale est réputée en vigueur uniquement à la date à laquelle elle a été entièrement exécutée par vous et confirmée par HID Global. Elle ne saurait être réputée en vigueur à moins et tant que vous n'avez pas exécuté le présent Contrat et que HID Global a effectué la Confirmation.</p>
+    </div>
+</div>
+<div id="itTermsDiv" class="termsDiv">
+    <div id="closeTerms" onclick="hideTerms();">&nbsp;</div>
+    <p align="center" style="padding-top:20px;" >
+    In order to apply to have your product designated <strong>"Genuine HID Technology"</strong>,<br/> you must agree to the following Terms and Conditions</p>
+    <p align="center"><a href="http://www.hidglobal.com/documents/genuine_logo_program_clickThrough_tc_en.pdf" target="_blank" >Per la versione stampabile, fare clic qui</a></p>
+    <div id="termsAndCondsScrollBody">
+    
+    <p align="center">TERMINI E CONDIZIONI</p>
+    <p align="center"><strong>PROGRAMMA GENUINE HID TECHNOLOGY</strong></p>
+    <p align="center"><strong>TERMINI E CONDIZIONI</strong></p>
+    <p><strong>IDONEITÀ.</strong> Il programma Genuine HID Technology (il “Programma”) è aperto agli sviluppatori HID Global e ai titolari di licenze per la tecnologia legate alla commercializzazione di prodotti pre-approvati per il Programma a esclusiva discrezione di HID Global. Il logo Genuine HID Technology è utilizzabile su prodotti che contengono moduli, schede, chip, moduli di stampa, programmi e altre tecnologie HID Global sviluppati e prodotti da HID Global per l’integrazione in prodotti e dispositivi di terze parti, nonché prodotti realizzati dietro licenza HID Genuine Technology che estende le applicazioni e le soluzioni per l’ecosistema HID. L’idoneità e la partecipazione saranno determinate a esclusiva discrezione di HID Global.</p> 
+    <p><strong>CANDIDATURA.</strong> Sono previste tre fasi. 
+    Innanzitutto, completare una candidatura al Programma, disponibile all’indirizzo www.hidglobal.com/genuine_hid/genuine_hid_technology_form.php, e inviare il modulo riempito a HID Global, specificando tutte le informazioni richieste, tra cui l’organizzazione candidata (“l’organizzazione”), le informazioni di contatto del referente, l’identificazione del prodotto o dei prodotti per cui è richiesta la licenza del marchio Genuine HID Technology Logo e l’identificazione dei componenti o delle tecnologie HID integrati, o da integrare, in tali prodotti (la “Candidatura”).</p> 
+    
+    <p>In secondo luogo, immettere il nome dell’organizzazione candidata, il nome e il titolo del firmatario e fare clic sulla casella “Accetto” in basso per confermare l’accettazione di Termini e condizioni da parte dell’organizzazione candidata. Selezionando la casella “Accetto” l’organizzazione conferma di aver letto, compreso e accettato tutti i termini stabiliti nel presente documento Termini e condizioni. 
+    Infine, dopo la Conferma (definita in seguito) dell’accettazione della Candidatura da parte di HID Global per uno o più prodotti identificati come stabilito nella Conferma (i “Prodotti approvati”), la Licenza del marchio di seguito diverrà effettiva per quanto riguarda tali Prodotti approvati.</p> 
+    <p><strong>CONFERMA.</strong> Nel caso in cui HID Global accetti la Candidatura per uno o più prodotti, HID Global adotterà una delle seguenti procedure, a sua discrezione.</p> 
+    <p>[POSSIBILITÀ UNO: HID Global invierà all’organizzazione un pacchetto di Materiali del programma insieme a una lettera che identifica i Prodotti approvati. La Candidatura sarà Confermata per i Prodotti approvati alla data di spedizione da parte di HID Global dei Materiali del programma all’organizzazione (“Conferma” o “Confermato”).]</p> 
+    <p>[POSSIBILITÀ DUE: HID Global invierà per posta elettronica all’organizzazione un pacchetto di Materiali del programma insieme a un messaggio elettronico che identifica i Prodotti approvati. La Candidatura sarà Confermata per i Prodotti approvati all’ora e alla data di spedizione da parte di HID Global del messaggio e-mail contenente i Materiali del programma all’organizzazione (“Conferma” o “Confermato”).] </p>
+    <p>LICENZA DEL MARCHIO. Secondo i Termini e condizioni del Programma, HID Global concede all’organizzazione una licenza non esclusiva, non assegnabile, non trasferibile e non soggetta a royalty (senza diritti di sublicenza) per l’uso del logo Genuine HID Technology presentato nelle regole per l’uso del marchio e del logo (Branding and Logo Usage Guidelines) di HID Global, che sarà inviata insieme ai Materiali del programma, come indicato in precedenza, in relazione ai materiali di marketing, pubblicitari e promozionali per i Prodotti approvati, secondo quanto stabilito di seguito:</p>
+
+    
+    <ol style="list-style-stype: lower-alpha">
+        <li>materiali di marketing, pubblicitari e promozionali in forma cartacea per i Prodotti approvati;</li> 
+        <li>materiali di marketing, pubblicitari e promozionali in forma elettronica per i Prodotti approvati;</li> 
+        <li>pagine di catalogo relative ai Prodotti approvati;</li> 
+        <li>fiere ed esposizioni relative ai Prodotti approvati;</li> 
+        <li>comunicati stampa sui Prodotti approvati.</li>
+    </ol>
+    
+    <p>Questa licenza non include il diritto a utilizzare il logo Genuine HID Technology su qualsiasi prodotto, inserto, manuale utente, confezione, merce promozionale di ogni genere, biglietti da visita, prodotti di marketing generici dell’azienda, pubblicità, materiali promozionali, di marketing o pubblicitari per prodotti diversi dai Prodotti approvati. Il termine della licenza è di un anno; la licenza viene rinnovata automaticamente per l’anno successivo, senza intervento dell’organizzazione, purché alla data del rinnovo l’organizzazione sia pienamente conforme a tutti i termini, le disposizioni, gli obblighi e le condizioni nell’accordo. Il logo Genuine HID Technology è fornito all’organizzazione “Così com’è”, senza garanzie di alcun tipo.</p> 
+    <p>L’organizzazione accetta di utilizzare il logo Genuine HID Technology secondo quanto specificato nel presente documento e accetta di non alterare, modificare o cambiare il logo Genuine HID Technology né di creare marchi compositi combinando o associando il logo Genuine HID Technology a un altro marchio commerciale, marchio di servizio, marchio, logo, insegna, design, nome, simbolo o marca. L’organizzazione accetta di utilizzare il logo Genuine HID Technology in rigorosa conformità alle regole per l’uso del marchio e del logo (Branding and Logo Usage Guidelines) di HID Global. L’organizzazione accetta di inserire in tutti i materiali o i prodotti per cui è utilizzato il logo Genuine HID Technology le legende, i simboli e gli avvisi stabiliti nelle suddette regole per l’uso del marchio e del logo (Branding and Logo Usage Guidelines) di HID Global, per cui HID Global può altrimenti richiedere di fornire una notifica appropriata di eventuali marchi, nomi di marchio o altri diritti. Non è consentito utilizzare marchi, legende o avvisi diversi da quelli anticipatamente approvati da HID Global per tale utilizzo. L’organizzazione accetta di non dichiarare o lasciar supporre che i Prodotti approvati siano “compatibili” con i prodotti HID Global o che HID Global sponsorizzi o approvi i prodotti, compresi i Prodotti approvati, senza esplicito consenso di HID Global in forma scritta.</p> 
+    <p>L’organizzazione accetta, rappresenta e garantisce che la natura e la qualità dei prodotti forniti con il logo Genuine HID Technology sono di alta qualità nel proprio settore, non influiscono negativamente sul buon nome di HID Global e sono conformi agli standard di volta in volta prescritti da HID Global. L’organizzazione, inoltre, accetta, rappresenta e garantisce che tutti i prodotti promossi o altrimenti forniti con il logo Genuine HID Technology sono coerenti con la descrizione del prodotto inserita nella Candidatura e sono conformi a tutte le leggi e le normative in vigore.</p> 
+    <p>HID Global può, di volta in volta, richiedere in forma scritta campioni di (a) Prodotti approvati per cui è utilizzato il logo Genuine HID Technology e (b) tutti i materiali, compresa la documentazione, le brochure, i siti Web o le pubblicità prodotte, distribuite o visualizzate che includono il logo Genuine HID Technology (“Materiali”), per valutare il livello di coerenza e qualità di tale utilizzo. HID Global ha il diritto di ispezionare tali Prodotti e Materiali; l’organizzazione accetta di fornire campioni di tali Prodotti e Materiali su richiesta di HID Global senza addebitare alcun costo a HID Global.</p> 
+    <p>L’organizzazione riconosce la proprietà di HID Global e il suo esclusivo diritto di utilizzare, e autorizzare altri a utilizzare, il logo e il marchio HID, il logo Genuine HID Technology e tutte le variazioni relative. Fino al termine del presente Accordo e successivamente a tale termine, l’organizzazione non contesterà il diritto esclusivo di HID Global, il titolo e l’interesse o la validità del logo e del marchio HID e del logo Genuine HID Technology. Inoltre l’organizzazione non cercherà né otterrà protezioni di alcun tipo, compresa la registrazione, del marchio e del logo HID o del logo Genuine HID Technology (o di qualsiasi marchio simile che possa causare confusione) in alcun paese del mondo.</p>
+     
+    
+    <p>HID Global può cessare immediatamente la partecipazione dell’organizzazione al Programma e/o la presente Licenza del marchio Genuine HID Technology per uno o più Prodotti approvati in precedenza mediante avviso scritto all’organizzazione, in caso di violazione materiale di un obbligo presente nei Termini e condizioni, nel caso in cui i Prodotti approvati in precedenza non siano più idonei per la partecipazione al Programma, per qualsiasi altro motivo o senza alcuna ragione a esclusiva discrezione di HID Global (“Cessazione della licenza HID Global”). La licenza del logo Genuine HID Technology cesserà automaticamente in caso di interruzione del Programma (“Cessazione della licenza e del programma”). A seguito di qualsiasi Cessazione della licenza HID Global, l’organizzazione accetta di interrompere immediatamente la creazione di nuovi materiali con il logo Genuine HID Technology, di cessare immediatamente l’uso del logo Genuine HID Technology e di terminare l’uso di materiali esistenti, sotto il controllo dell’organizzazione, che includono il logo Genuine HID Technology. A seguito della Cessazione della licenza e del programma, l’organizzazione accetta di interrompere immediatamente la creazione di nuovi materiali con il logo Genuine HID Technology e, entro sessanta (60) giorni dall’avviso scritto ricevuto da HID Global in merito a tale cessazione, di interrompere l’uso del logo Genuine HID Technology e l’uso di materiali esistenti, sotto il controllo dell’organizzazione, che includono il logo Genuine HID Technology.</p> 
+    <p>L’organizzazione può interrompere la partecipazione al Programma in qualsiasi momento contattando HID Global e inviando trenta (30) giorni prima un avviso di cessazione della partecipazione al programma Genuine HID Technology al seguente indirizzo e-mail: legal@hidglobal.com (“Cessazione da parte dell’organizzazione”). In caso di Cessazione da parte dell’organizzazione, l’organizzazione accetta di interrompere immediatamente la creazione di nuovi materiali con il logo Genuine HID Technology dopo aver avvisato HID Global di tale Cessazione e, entro trenta (30) giorni dall’avviso di Cessazione da parte dell’organizzazione, di terminare immediatamente l’uso del logo Genuine HID Technology e l’uso di materiali esistenti, sotto il controllo dell’organizzazione, che includono il logo Genuine HID Technology.</p> 
+    <p>La partecipazione al Programma e la Licenza del marchio sono offerte a esclusiva discrezione di HID Global, che si riserva il diritto, a sua esclusiva discrezione, di limitare, sospendere, annullare, cessare, terminare, cambiare, rettificare o modificare il Programma e i relativi Termini e condizioni, compresa la Licenza del marchio, sia interamente sia in parte e in qualsiasi momento.</p> 
+    
+    <p><strong>ESCLUSIONE DI ALTRE GARANZIE / LIMITAZIONI DELLA RESPONSABILITÀ.</strong> HID Global non potrà essere ritenuta responsabile per alcun infortunio, perdita, reclamo, danno o per qualsiasi danno speciale, esemplare, punitivo, indiretto, accidentale o consequenziale di alcun tipo (comprese in via non esclusiva le perdite di profitti o risparmi), fondati su contratti, illeciti, responsabilità o altro, derivanti o in altro modo collegati al Programma, alla Licenza del marchio o al logo Genuine HID Technology, anche nel caso in cui HID Global sia stata avvertita della possibilità di tali danni. Il Programma e la Licenza del marchio sono offerti “così come sono” e “come disponibili”. <strong>CON LA PRESENTE HID GLOBAL ESCLUDE QUALSIASI ALTRA GARANZIA, CONFORME ALLE LEGGI, ESPLICITA O IMPLICITA, COMPRESE IN VIA NON ESCLUSIVA LE GARANZIE IMPLICITE DI COMMERCIABILITÀ, IDONEITÀ A UN PARTICOLARE SCOPO E NON VIOLAZIONE DEI DIRITTI DI TERZE PARTI.</strong></p> 
+    <p><strong>RISARCIMENTO.</strong></p> 
+    
+    <p>Con la presente l’organizzazione accetta, a sue spese, di difendere, risarcire e mantenere indenni HID Global, i suoi funzionari, agenti e dipendenti da tutti i reclami, le domande, le cause e i processi legali di terze parti (comprese le spese legali e di consulenza) relative o derivanti dalla produzione, dalla progettazione, dalla fabbricazione, dalla distribuzione, dalla spedizione, dalla commercializzazione, dalla pubblicizzazione, dalla promozione, dall’offerta di vendita e/o dalla vendita di qualsiasi prodotto o servizio commercializzato, pubblicizzato o promosso dall’organizzazione con il logo Genuine HID Technology o con qualsiasi altro nome o marchio di HID Global, e/o dall’uso improprio del logo Genuine HID Technology e di eventuali altri nomi o marchi di HID Global.</p> 
+    <p><strong>VARIE.</strong> Con la partecipazione al Programma e l’uso del logo Genuine HID Technology, l’organizzazione accetta di essere vincolata ai presenti Termini e condizioni. Si accetta inoltre di riesaminare periodicamente Termini e condizioni del Programma sul sito Web di HID Global, all’indirizzo
+    www.hidglobal.com/documents/genuine_logo_program_tc_en.pdf e di essere vincolati a eventuali modifiche. Continuando a partecipare al Programma e utilizzando il logo Genuine HID Technology, si presume che l’organizzazione abbia accettato qualsiasi versione modificata dei presenti Termini e condizioni e che sia vincolata a tali revisioni; è pertanto opportuno visitare regolarmente il sito Web per rivedere i Termini e condizioni a cui si è vincolati. Con la mancata accettazione di Termini e condizioni, o in caso di successive modifiche, l’unica soluzione a disposizione dell’organizzazione è la cessazione della partecipazione al Programma. I presenti Termini e condizioni costituiscono l’intero contratto relativo al Programma e sostituiscono eventuali accordi precedenti (in forma orale o scritta). Nel caso in cui un tribunale ritenga inapplicabile una parte dei presenti Termini e condizioni, la parte rimanente deve essere considerata in ogni caso applicabile.</p> 
+    <p><strong>LEGGE REGOLANTE.</strong> I presenti Termini e condizioni sono realizzati nel rispetto delle leggi dello stato della California applicabili ai contratti stipulati con i residenti in California ed eseguiti all’interno di tale stato senza tenere conto di eventuali conflitti con le disposizioni di legge.</p> 
+    
+    <p><strong>DATA DI EFFICACIA.</strong> La Licenza del marchio sarà considerata effettiva solo alla data in cui viene applicata dall’organizzazione e Confermata da HID Global. Non potrà essere considerata effettiva se l’organizzazione non ha accettato il presente Contratto e se HID Global non ha fornito Conferma.</p>
+    </div>
+</div>
+</apex:page>

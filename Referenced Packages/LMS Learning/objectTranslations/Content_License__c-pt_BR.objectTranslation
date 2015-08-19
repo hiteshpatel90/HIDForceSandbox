@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- License --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- License --></value>
+    </caseValues>
+    <fields>
+        <label>Objeto</label>
+        <name>Content__c</name>
+        <relationshipLabel>Licenças</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Data Efetiva</label>
+        <name>Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label>Data de Expiração</label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label>Licença da ID CyberU</label>
+        <name>License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Descrição da Licença</label>
+        <name>License_Description__c</name>
+    </fields>
+    <fields>
+        <label>Período da Licença</label>
+        <name>License_Period__c</name>
+        <picklistValues>
+            <masterLabel>Days</masterLabel>
+            <translation><!-- Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hours</masterLabel>
+            <translation><!-- Hours --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indefinite</masterLabel>
+            <translation><!-- Indefinite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weeks</masterLabel>
+            <translation><!-- Weeks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Years</masterLabel>
+            <translation><!-- Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Termo da Licença</label>
+        <name>License_Term__c</name>
+    </fields>
+    <fields>
+        <label>Link do Objeto</label>
+        <name>Object_Link__c</name>
+    </fields>
+    <fields>
+        <label>Preço da ID CyberU</label>
+        <name>Sale_Item_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Participantes</label>
+        <name>Seats__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label>Utilizado</label>
+        <name>isUsed__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>License Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Description --></label>
+            <section>Description</section>
+        </sections>
+        <sections>
+            <label><!-- Details --></label>
+            <section>Details</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Object License ID --></nameFieldLabel>
+</CustomObjectTranslation>

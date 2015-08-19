@@ -1,0 +1,201 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Assignment</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Assignments</value>
+    </caseValues>
+    <fields>
+        <label><!-- ASSIGNED_ON --></label>
+        <name>ASSIGNED_ON__c</name>
+    </fields>
+    <fields>
+        <label><!-- Attempts --></label>
+        <name>Attempts__c</name>
+    </fields>
+    <fields>
+        <label>Completed date</label>
+        <name>Completed_Date__c</name>
+    </fields>
+    <fields>
+        <label>Completion date</label>
+        <name>Completion_Date__c</name>
+    </fields>
+    <fields>
+        <label>Training type</label>
+        <name>Content_Catalog__c</name>
+    </fields>
+    <fields>
+        <label><!-- Module Title --></label>
+        <name>Content_Title__c</name>
+    </fields>
+    <fields>
+        <label><!-- CyberU ID --></label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Course assignment</label>
+        <name>Course_Assignment__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Curriculum assignment</label>
+        <name>Curriculum_Assignment__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Curriculum item</label>
+        <name>Curriculum_Item__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Due date</label>
+        <name>Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>E-mail</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label>Is historical</label>
+        <name>Is_Historical__c</name>
+    </fields>
+    <fields>
+        <label>Last launched date</label>
+        <name>Last_Launched_Date__c</name>
+    </fields>
+    <fields>
+        <label>Learning path assignment</label>
+        <name>Learning_Path_Assignment__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Learning path item</label>
+        <name>Learning_Path_Item__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Per cent complete</label>
+        <name>Percent_Complete__c</name>
+    </fields>
+    <fields>
+        <label><!-- Progress --></label>
+        <name>Progress__c</name>
+    </fields>
+    <fields>
+        <label><!-- Quiz --></label>
+        <name>Quiz__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Registration status</label>
+        <name>Registration_Status__c</name>
+    </fields>
+    <fields>
+        <label><!-- STARTED_ON --></label>
+        <name>STARTED_ON__c</name>
+    </fields>
+    <fields>
+        <label><!-- Score --></label>
+        <name>Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Score number --></label>
+        <name>Score_int__c</name>
+    </fields>
+    <fields>
+        <label>Assignment status</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Failed</masterLabel>
+            <translation><!-- Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Passed</masterLabel>
+            <translation><!-- Passed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retired</masterLabel>
+            <translation><!-- Retired --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Unenrolled</masterLabel>
+            <translation><!-- Unenrolled --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- TARGET_DATE --></label>
+        <name>TARGET_DATE__c</name>
+    </fields>
+    <fields>
+        <label><!-- Trainee --></label>
+        <name>Trainee__c</name>
+    </fields>
+    <fields>
+        <label><!-- Module --></label>
+        <name>Training_Content__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Course item</label>
+        <name>Training_Path_Item__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Course Name --></label>
+        <name>Training_Path_Name__c</name>
+    </fields>
+    <fields>
+        <label>Training user licence</label>
+        <name>Training_User_License__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Training record</label>
+        <name>Transcript__c</name>
+        <relationshipLabel><!-- Assignments --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- View --></label>
+        <name>View__c</name>
+    </fields>
+    <layouts>
+        <layout>Transcript Line Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Launch Link --></label>
+            <section>Launch Link</section>
+        </sections>
+        <sections>
+            <label><!-- Progress Information --></label>
+            <section>Progress Information</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage>The due date inserted should not be less than the current date.</errorMessage>
+        <name>validate_Due_Date</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Per cent complete must be between 0 and 100%.</errorMessage>
+        <name>validate_percent_complete</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage><!-- Score must be a positive number. --></errorMessage>
+        <name>validate_score</name>
+    </validationRules>
+</CustomObjectTranslation>

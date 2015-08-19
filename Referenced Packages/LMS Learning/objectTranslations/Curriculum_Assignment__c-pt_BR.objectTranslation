@@ -1,0 +1,113 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Curriculum Assignment --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Curriculum Assignment --></value>
+    </caseValues>
+    <fields>
+        <label>Data de Conclusão</label>
+        <name>Completion_Date__c</name>
+    </fields>
+    <fields>
+        <label>Progresso do Currículo</label>
+        <name>Curriculum_Progress__c</name>
+    </fields>
+    <fields>
+        <label>Currículo</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Atribuições do Currículo</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Data de Vencimento</label>
+        <name>Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>Data de Expiração</label>
+        <name>Expired_Date__c</name>
+    </fields>
+    <fields>
+        <label>É Histórico</label>
+        <name>Is_Historical__c</name>
+    </fields>
+    <fields>
+        <label>Última Data de Lançamento</label>
+        <name>Last_Launched_Date__c</name>
+    </fields>
+    <fields>
+        <label>Próxima Data de Reatribuição</label>
+        <name>Reassign_Date__c</name>
+    </fields>
+    <fields>
+        <help><!-- Should be checked in case if it is necessary to create recurring training for this assignment. Also remember to set number of recurring training periods and recurring training period type (months or years) --></help>
+        <label>Treinamento Recorrente Habilitado</label>
+        <name>Recurring_Training_Enabled__c</name>
+    </fields>
+    <fields>
+        <label><!-- Recurring Training Period Type --></label>
+        <name>Recurring_Training_Period_Type__c</name>
+        <picklistValues>
+            <masterLabel>Months</masterLabel>
+            <translation><!-- Months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Years</masterLabel>
+            <translation><!-- Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <help><!-- Number of recurring training periods. After passing this periods assignment will be reassigned. --></help>
+        <label>Períodos do Treinamento Recorrente</label>
+        <name>Recurring_Training_Periods__c</name>
+    </fields>
+    <fields>
+        <help><!-- Date when assignment was created/reassigned --></help>
+        <label><!-- Recurring Training Reassign Date --></label>
+        <name>Recurring_Training_Reassign_Date__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not Started</masterLabel>
+            <translation><!-- Not Started --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Título</label>
+        <name>Title__c</name>
+    </fields>
+    <fields>
+        <label>Transcrição</label>
+        <name>Transcript__c</name>
+        <relationshipLabel>Atribuições do Currículo</relationshipLabel>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Curriculum Assignment Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Curriculum Assignment Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>O Progresso do Currículo deve ser entre 0 e 100%.</errorMessage>
+        <name>Validate_curriculum_progress</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>A data de vencimento inserida não deve ser anterior à data atual.</errorMessage>
+        <name>validate_Due_Date</name>
+    </validationRules>
+</CustomObjectTranslation>

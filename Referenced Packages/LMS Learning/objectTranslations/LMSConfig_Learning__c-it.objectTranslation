@@ -1,0 +1,121 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- LMSConfig_Learning --></value>
+    </caseValues>
+    <fields>
+        <label><!-- Allow Unenrollment --></label>
+        <name>Allow_Unenrollment__c</name>
+    </fields>
+    <fields>
+        <label>Tipi di utente disponibili</label>
+        <name>Available_user_types__c</name>
+    </fields>
+    <fields>
+        <label>Pagina certificato</label>
+        <name>Certificate_Page_Name__c</name>
+    </fields>
+    <fields>
+        <label>ID CyberU</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Codice segreto CyberU</label>
+        <name>CyberU_Secret_Key__c</name>
+    </fields>
+    <fields>
+        <label>Consenti ricerca nel catalogo</label>
+        <name>Enable_Catalog_Search__c</name>
+    </fields>
+    <fields>
+        <label><!-- Enable My Training auto-refresh --></label>
+        <name>Enable_My_Training_auto_refresh__c</name>
+    </fields>
+    <fields>
+        <label>Attiva certificato</label>
+        <name>Enable_certificate__c</name>
+    </fields>
+    <fields>
+        <label>ID riferimento gruppo</label>
+        <name>Group_Ref_ID__c</name>
+    </fields>
+    <fields>
+        <label>È collegamento pubblico disponibile</label>
+        <name>Is_Public_Link_Available__c</name>
+    </fields>
+    <fields>
+        <label>ID catalogo pubblico</label>
+        <name>Public_Catalog__c</name>
+    </fields>
+    <fields>
+        <label>Collegamento di avvio sicuro</label>
+        <name>Secure_Launch_Link__c</name>
+    </fields>
+    <fields>
+        <label>Mostra descrizione</label>
+        <name>Show_Description__c</name>
+    </fields>
+    <fields>
+        <label>Mostra data scadenza</label>
+        <name>Show_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>Mostra durata</label>
+        <name>Show_Duration__c</name>
+    </fields>
+    <fields>
+        <label>Mostra punteggio</label>
+        <name>Show_Score__c</name>
+    </fields>
+    <fields>
+        <label>Mostra tipo di formazione</label>
+        <name>Show_Type__c</name>
+    </fields>
+    <fields>
+        <label>Mostra modulo in una nuova finestra</label>
+        <name>Show_module_in_new_window__c</name>
+    </fields>
+    <fields>
+        <label>Mostra barra di avanzamento</label>
+        <name>Show_progress_bar__c</name>
+    </fields>
+    <fields>
+        <label>Mostra stato</label>
+        <name>Show_status__c</name>
+    </fields>
+    <fields>
+        <label>Apprendimento sociale</label>
+        <name>Social_Learning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Manager field for My Team hierarchy --></label>
+        <name>Use_Manager_field_for_My_Team_hierarchy__c</name>
+    </fields>
+    <fields>
+        <label><!-- UserTypes --></label>
+        <name>UserTypes__c</name>
+    </fields>
+    <fields>
+        <label>Amministratore gruppo Cornerstone utenti</label>
+        <name>User_Cornerstone_Group_Admin__c</name>
+    </fields>
+    <fields>
+        <label>ID Cornerstone utente</label>
+        <name>User_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Apprendimento generato dall&apos;utente</label>
+        <name>User_Generated_Learning__c</name>
+    </fields>
+    <fields>
+        <label>Collegamento di avvio condivisibile</label>
+        <name>shareable_launch_link__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <startsWith><!-- Consonant --></startsWith>
+</CustomObjectTranslation>

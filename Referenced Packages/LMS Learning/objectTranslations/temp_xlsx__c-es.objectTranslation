@@ -1,0 +1,93 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Versioning History --></value>
+    </caseValues>
+    <fields>
+        <label>ADQUIRIDA EL</label>
+        <name>ACQUIRED_ON__c</name>
+    </fields>
+    <fields>
+        <label>Acción</label>
+        <name>ADDR1__c</name>
+    </fields>
+    <fields>
+        <label>Tipo de predecesor</label>
+        <name>ADDR2__c</name>
+    </fields>
+    <fields>
+        <label>Id del objeto</label>
+        <name>ADDR3__c</name>
+    </fields>
+    <fields>
+        <label>Id. del elemento</label>
+        <name>ASSIGNED_ON__c</name>
+    </fields>
+    <fields>
+        <label>NOMBRE_CERT</label>
+        <name>CERT_NAME__c</name>
+    </fields>
+    <fields>
+        <label>ESTADO_CERT</label>
+        <name>CERT_STATUS__c</name>
+    </fields>
+    <fields>
+        <label>POBLACIÓN</label>
+        <name>CITY__c</name>
+    </fields>
+    <fields>
+        <label>NOMBRE_EMPRESA</label>
+        <name>COMPANY_NAME__c</name>
+    </fields>
+    <fields>
+        <label>PAÍS</label>
+        <name>COUNTRY__c</name>
+    </fields>
+    <fields>
+        <label>CORREO ELECTRÓNICO</label>
+        <name>EMAIL__c</name>
+    </fields>
+    <fields>
+        <label>Tipo</label>
+        <name>FNAME__c</name>
+    </fields>
+    <fields>
+        <label>NUM_CERT_OSTENTADO</label>
+        <name>HELD_CERT_NO__c</name>
+    </fields>
+    <fields>
+        <label>NOMBRE_L</label>
+        <name>LNAME__c</name>
+    </fields>
+    <fields>
+        <label>ID predecesor</label>
+        <name>PATH_NAME__c</name>
+    </fields>
+    <fields>
+        <label>Fecha de modificación</label>
+        <name>STARTED_ON__c</name>
+    </fields>
+    <fields>
+        <label>ESTADO</label>
+        <name>STATE__c</name>
+    </fields>
+    <fields>
+        <label>Estado</label>
+        <name>STATUS_DESC__c</name>
+    </fields>
+    <fields>
+        <label><!-- TARGET_DATE --></label>
+        <name>TARGET_DATE__c</name>
+    </fields>
+    <fields>
+        <label>VERSIÓN</label>
+        <name>VERSION__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+</CustomObjectTranslation>

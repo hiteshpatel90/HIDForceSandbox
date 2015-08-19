@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Question --></value>
+    </caseValues>
+    <fields>
+        <label>어려움</label>
+        <name>Difficulty__c</name>
+        <picklistValues>
+            <masterLabel>Easy</masterLabel>
+            <translation><!-- Easy --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hard</masterLabel>
+            <translation><!-- Hard --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Medium</masterLabel>
+            <translation><!-- Medium --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>문제</label>
+        <name>Question__c</name>
+    </fields>
+    <fields>
+        <label><!-- Randomization --></label>
+        <name>Randomization__c</name>
+    </fields>
+    <fields>
+        <label><!-- Text Type --></label>
+        <name>Text_Type__c</name>
+        <picklistValues>
+            <masterLabel>Long Text</masterLabel>
+            <translation><!-- Long Text --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Short Text</masterLabel>
+            <translation><!-- Short Text --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>유형</label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Free Text</masterLabel>
+            <translation><!-- Free Text --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Multi Select</masterLabel>
+            <translation><!-- Multi Select --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Single Select</masterLabel>
+            <translation><!-- Single Select --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>True/False</masterLabel>
+            <translation><!-- True/False --></translation>
+        </picklistValues>
+    </fields>
+    <layouts>
+        <layout>Question Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Question Name --></nameFieldLabel>
+    <webLinks>
+        <label>페이지 나누기를 추가</label>
+        <name>Add_page_break</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Delete --></label>
+        <name>Delete</name>
+    </webLinks>
+</CustomObjectTranslation>

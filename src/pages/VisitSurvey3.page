@@ -1,0 +1,23 @@
+<apex:page controller="visitSurveyController" title="{!$Label.VisitSurveyTitle}" showHeader="false" language="{!strLanguage}">
+	<apex:stylesheet value="{!$Resource.TechSupportSurveyStyle}"/>
+	<div id="outer">
+		<c:visitSurveyHeader />
+		<apex:form >
+            <apex:inputHidden value="{!strWhoId}"/>
+            <apex:inputHidden value="{!strWhatId}"/>	
+            <apex:inputHidden value="{!strWhoseId}"/>	
+			<apex:pageBlock >
+				<apex:outputPanel layout="block" styleClass="pagenr">
+					<apex:outputText value="Page {!intCurrentPage}/3"/>
+				</apex:outputPanel>
+				<apex:pageBlockSection title="{!$Label.VisitImprovement}" columns="1" collapsible="false">
+					<apex:inputTextarea value="{!strImprovement}" label=" " cols="80" rows="8"/>
+				</apex:pageBlockSection>
+				<apex:pageBlockButtons location="bottom">
+					<apex:commandButton action="{!page2}" value="{!$Label.SurveyBack}"/>
+					<apex:commandButton action="{!submit}" value="{!$Label.site.submit}"/>
+				</apex:pageBlockButtons>
+			</apex:pageBlock>
+		</apex:form>
+	</div>
+</apex:page>

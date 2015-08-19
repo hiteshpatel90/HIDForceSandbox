@@ -1,0 +1,827 @@
+<apex:page standardController="AXIOM_BASE__Strategic_Initiative__c" extensions="AXIOMOMD.StrategicInitiativeExtension">
+	<apex:outputPanel rendered="{!pageError == ''}">
+		<link href="{!URLFOR($Resource.AXIOM_BASE__chosenCSS, 'chosen.css')}" rel="stylesheet" />
+		<link href="{!URLFOR($Resource.AXIOM_BASE__bootstrap, 'css/bootstrap.min.css')}" rel="stylesheet" />
+		<link href="{!URLFOR($Resource.AXIOM_BASE__jQueryUI, 'jquery-ui.css')}" rel="stylesheet" />
+		<link href="{!URLFOR($Resource.AXIOM_BASE__coachingWizard, './css/sprites.css')}" rel="stylesheet" />
+		<link href="{!URLFOR($Resource.AXIOM_BASE__bootstrapSwitch, 'bootstrapSwitch.css')}" rel="stylesheet" />
+
+		<apex:outputPanel layout="none" rendered="{!$Setup.AXIOM_BASE__OrgSettings__c.AXIOM_BASE__DevelopmentMode__c}">
+			<apex:stylesheet value="{!URLFOR($Resource.AXIOMOMD__css_page)}"/>
+		</apex:outputPanel>
+		<apex:outputPanel layout="none" rendered="{!NOT($Setup.AXIOM_BASE__OrgSettings__c.AXIOM_BASE__DevelopmentMode__c)}">
+			<apex:stylesheet value="{!URLFOR($Resource.AXIOMOMD__css_component_all)}"/>
+		</apex:outputPanel>
+
+
+		<apex:outputText rendered="false" value="
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Amount__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Description__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Close_Date__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.OwnerId}
+			{!AXIOM_BASE__Strategic_Initiative__c.Owner.Name}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Account__r.Name}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Amount_Indicator__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Stage_Name__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Days_In_Stage__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Days_Until_Close_Date__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Age__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Days_Since_Last_Update__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Win_Indicator__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Probability_of_Win_Percent__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Decision_Stage_Status__c}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__CommonalityStatus__c}  
+			{!AXIOM_BASE__Strategic_Initiative__c.Id}
+			{!AXIOM_BASE__Strategic_Initiative__c.Name}
+			{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Account__c}
+		" />
+
+
+		<div id="css" class=" hidden"></div>
+
+		<style>
+			.loader-image-div{
+				display: block;
+				margin: 30px auto 20px;
+				height: 25px;
+				margin-left: 48%;
+				background: url('{!URLFOR($Resource.images, 'loading.gif')}') no-repeat;
+			}
+			.component-body-header{
+				display: none;
+			}
+			.loader {
+				height: 100%;
+				width: 100%;
+			}
+			.loader-image {
+				display: block;
+				margin: 30px auto 20px;
+			}
+			.loader-text {
+				font-size: 16px;
+				text-align: center;
+				width: 100%;
+			}
+			.loader2 {
+				height: 100%;
+				width: 100%;
+				display: none;
+			}
+			.component {
+				background-color: #FFFFFF;
+				border: 1px solid #B9B9B9;
+
+				border-radius: 6px;
+				-moz-border-radius: 6px;
+				-webkit-border-radius: 6px;
+
+				box-shadow: 0 1px 3px rgba(0, 0, 0, .17);
+				-moz-box-shadow: 0 1px 3px rgba(0,0,0,.17);
+				-webkit-box-shadow: 0 1px 3px rgba(0,0,0,.17);
+
+				position: relative;
+			}
+
+			.component-body-item .component-button .busy-image, .busy-image {
+				background-image: url("{!URLFOR($Resource.SI_images, 'loadingSmall.gif')}");
+				background-repeat: no-repeat;
+				background-size: 48px;
+				height: 11px;
+				width: 48px;
+			}
+
+			.a-title {
+				color: #333435 !important;
+			}
+			.chzn-container.chzn-container-multi {
+				width: 100% !important;
+			}
+			.OwnerName {
+				display: block;
+				font-size:14px;
+				font-weight: bold;
+				margin-bottom:4px;
+			}
+			.OwnerName, .ownerRole, .ownerCoach {
+				/* wrap long text and urls */
+				white-space: pre; /* CSS 2.0 */
+				white-space: pre-wrap; /* CSS 2.1 */
+				white-space: pre-line; /* CSS 3.0 */
+				white-space: -pre-wrap; /* Opera 4-6 */
+				white-space: -o-pre-wrap; /* Opera 7 */
+				white-space: -moz-pre-wrap; /* Mozilla */
+				word-wrap: break-word; /* IE 5+ */
+			}
+		</style>
+
+		<div class=" loader" style="height: 100%; width: 100%;">
+			<img class=" loader-image" src="{!URLFOR($Resource.SI_images, 'loading.gif')}" />
+			<div class=" loader-text">
+				Loading Strategic Initiative
+			</div>
+		</div>
+
+		<div class=" chatter hidden">
+			<chatter:feedWithFollowers entityId="{!Strategic_Initiative.Id}" />
+		</div>
+
+		<div class=" deal hidden">
+			<div class=" deal-body">
+				<div class=" header">
+					<div class=" error-message"></div>
+					<div class=" header-name left">
+						<div class=" header-title left">{!Strategic_Initiative.Name}</div>
+						<div class=" header-subtitle left"><a href="/{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Account__r.Id}">{!Strategic_Initiative.AXIOM_BASE__Account__r.Name}</a></div>
+						<div class=" clear"></div>
+					</div>
+					<div class=" header-logo right">
+						<div class=" right">
+							<apex:outputText value="{!BLANKVALUE($Setup.AXIOM_BASE__OrgSettings__c.AXIOM_BASE__DashboardName__c,'AXIOM&trade; Dashboard')}"
+								escape="false"/>
+						</div>
+						<div id="pdf-button" class=" hidden right no-pdf">
+							<img src="{!URLFOR($Resource.SI_images, 'printpdf.png')}" class=" printpdf"/>
+							<img src="{!URLFOR($Resource.SI_images, 'printpdf.gif')}" class=" hidden loadpdf" />
+						</div>
+						<a id="pdf-link" href="" target="_blank" class=" hidden no-pdf"></a>
+					</div>
+					<div class=" clear"></div>
+				</div>
+
+				<div class=" header-description">
+					<div class=" opportunity-item left">
+					</div>
+					<div class=" opportunity-owner right">
+						Powered by AXIOM&trade;
+						<div class=" clear"></div>
+					</div>
+					<div class=" clear"></div>
+				</div>
+
+				<div class=" header-description">
+					<div class=" deal-item left">
+						<apex:outputPanel id="description">
+							<div class=" view">
+								<div class=" left desc shortDesc">
+									<apex:outputField value="{!Strategic_Initiative.AXIOM_BASE__Description__c}" />
+									<div class=" show">
+										<a href="#" class=" less">...show less</a>
+										<a href="#" class=" more">...show more</a>
+									</div>
+								</div>
+								<div class=" edit-pencil left"></div>
+								<div class=" clear"></div>
+							</div>
+							<div class=" edit">
+								<textarea class=" item blur noLimit" api-name="AXIOM_BASE__Description__c" name="AXIOM_BASE__Description__c" default="Add a Description">{!Strategic_Initiative.AXIOM_BASE__Description__c}</textarea>
+
+								<div class=" error-message no-pdf"></div>
+							</div>
+						</apex:outputPanel>
+					</div>
+
+					<!--div class=" deal-owner right">
+						<div class=" owner-image round-corners right">
+							<img src="{!PhotoUrl}" />
+						</div>
+						Owner - <a href="/{!Strategic_Initiative.OwnerId}">{!Strategic_Initiative.Owner.Name}</a>
+						<div class=" clear"></div>
+					</div-->
+					<div class=" clear"></div>
+				</div>
+
+				<apex:form styleclass=" hidden">
+				<apex:actionFunction name="reRenderParentObj" action="{!updateSICounts}" reRender="description, summary-upd, detail" onComplete="loadParentObject(); renderWinData();" />
+				</apex:form>
+
+				<table class=" summary-wrapper">
+					<tr>
+						<td class=" summary-data-wrapper">
+							<apex:outputPanel id="summary" styleclass=" summary-data round-corners" layout="block">
+								<apex:outputPanel id="summary-upd" layout="block">
+								<script>
+									parentStage = '{!JSENCODE(AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Stage_Name__c)}';
+									parentCloseDate = '{!IF(Strategic_Initiative.AXIOM_BASE__Close_Date__c ==null, ' ', CASE(MONTH(Strategic_Initiative.AXIOM_BASE__Close_Date__c), 1, 'Jan', 2, 'Feb', 3, 'Mar', 4, 'Apr', 5, 'May', 6, 'Jun', 7, 'Jul', 8, 'Aug', 9, 'Sep', 10, 'Oct', 11, 'Nov', 12, 'Dec', 'None') + ' ' + TEXT(DAY(Strategic_Initiative.AXIOM_BASE__Close_Date__c )) + ', ' + TEXT(YEAR(Strategic_Initiative.AXIOM_BASE__Close_Date__c )))}';
+								</script>
+								<div class=" summary-owner summary-item deal-item left">
+									<div class=" summary-item-content" style="margin-left:0px;">
+										<apex:outputLink id="TheOwnerLink" value="/{!Strategic_Initiative.OwnerId}" target="_blank">
+											<apex:outputPanel styleclass=" owner-image round-corners" style="width:80px;height:80px;float:left;margin-left:10px;">
+												<apex:image value="{!PhotoUrl}" style="width:80px;height:80px;" />
+											</apex:outputPanel>
+										</apex:outputLink>
+										<div style="max-width: 50%; float: left; margin-left: 4%; display: block;">
+											<apex:outputPanel id="OwnerName" style="display:block">
+												<a href="" class=" OwnerName">{!Strategic_Initiative.Owner.Name}</a>
+											</apex:outputPanel>
+											<apex:outputPanel rendered="{!ownerRole != NULL && ownerRole != ''}">
+												<div class=" summary-item-label">Role</div>
+												<div class=" value ownerRole">
+													{!ownerRole}
+												</div>
+											</apex:outputPanel>
+											<apex:outputPanel rendered="{!ownerManager != NULL && ownerManager != ''}">
+												<div class=" summary-item-label">Coach</div>
+												<div class=" value ownerCoach">
+													{!ownerManager}
+												</div>
+											</apex:outputPanel>
+										</div>
+									</div>
+								</div>
+
+								<div class=" summary-amount summary-item {!IF(NOT(hasProducts), 'editable ', '')}deal-item left">
+									<div class=" summary-item-content">
+										<div class=" summary-item-label">Amount</div>
+										<apex:outputPanel rendered="{!NOT(hasProducts)}">
+											<div class=" view">
+												<div class=" cur value left">
+
+												</div>
+												<div class=" summary-arrow right {!Strategic_Initiative.AXIOM_BASE__Amount_Indicator__c}">
+
+												</div>
+												<div class=" clear"></div>
+											</div>
+
+											<div class=" edit">
+												<input class=" item blur amountString" api-name="AXIOM_BASE__Amount__c" name="AXIOM_BASE__Amount__c" type="text" value="{!amountString}" current="{!amountString}" default="0" />
+											</div>
+										</apex:outputPanel>
+										<apex:outputPanel rendered="{!hasProducts}">
+											<input class=" item blur amountString" api-name="AXIOM_BASE__Amount__c" type="hidden" value="{!amountString}" current="{!amountString}" default="0" disabled="disabled" />
+											<div class="viewNotUpdatable">
+												<div class=" cur value left">
+	
+												</div>
+												<div class=" summary-arrow right {!Strategic_Initiative.AXIOM_BASE__Amount_Indicator__c}">
+	
+												</div>
+												<div class=" clear"></div>
+											</div>
+										</apex:outputPanel>
+									</div>
+								</div>
+
+								<div class=" summary-deal-stage summary-item editable deal-item left">
+									<div class=" summary-item-content">
+										<div class=" summary-item-label">Strategic Initiative Stage</div>
+										<div class=" view">
+											<div class=" value left">{!IF(ISBLANK(Strategic_Initiative.AXIOM_BASE__Stage_Name__c), '-Select an option-', JSENCODE(Strategic_Initiative.AXIOM_BASE__Stage_Name__c))}</div>
+											<div class=" caret right no-pdf"></div>
+											<div class=" clear"></div>
+
+											<div class=" summary-item-date">
+												<div class=" summary-item-label">Days In Stage: </div>
+												<div class=" value left">
+												<apex:outputText value="{0, number, #,###}">
+													<apex:param value="{!Strategic_Initiative.AXIOM_BASE__Days_In_Stage__c}" />
+												</apex:outputText>
+												</div>
+											</div>
+										</div>
+										<div class=" edit">
+											<apex:form >
+												<apex:inputField value="{!Strategic_Initiative.AXIOM_BASE__Stage_Name__c}" required="false" styleClass="item" html-api-name="AXIOM_BASE__Stage_Name__c" html-data-placeholder="Choose Opportunity Stage" html-current="{!Strategic_Initiative.AXIOM_BASE__Stage_Name__c}" />
+												<div class=" save-button-wrapper">
+													<a href="" class=" save">Save</a>
+													<a href="" class=" cancel">Cancel</a>
+												</div>
+											</apex:form>
+										</div>
+									</div>
+								</div>
+
+								<div class=" summary-close-date summary-item editable deal-item left">
+									<div class=" summary-item-content">
+										<div class=" summary-item-label">Close Date</div>
+										<div class=" view">
+											<div class=" value">
+												<apex:outputText value="{0,date,MMM dd, yyyy}" rendered="{!NOT(ISBLANK(Strategic_Initiative.AXIOM_BASE__Close_Date__c))}">
+													<apex:param value="{!Strategic_Initiative.AXIOM_BASE__Close_Date__c}" />
+												</apex:outputText>
+												<apex:outputText value="{0}" rendered="{!ISBLANK(Strategic_Initiative.AXIOM_BASE__Close_Date__c)}">
+													<apex:param value="-Select a Date-" />
+												</apex:outputText>
+											</div>
+											<div class=" summary-item-date">
+												<div class=" summary-item-label">Days Until Close: </div>
+												<div class=" value left">
+												<apex:outputText value="{0, number, #,###}">
+													<apex:param value="{!Strategic_Initiative.AXIOM_BASE__Days_Until_Close_Date__c}" />
+												</apex:outputText>
+												</div>
+											</div>
+										</div>
+										<div class=" edit">
+												<!--apex:inputField value="{!Strategic_Initiative.AXIOM_BASE__Close_Date__c}" styleclass=" item change" /-->
+												<input disabled="disabled" style="width: 72%" type="text" id="CloseDate"
+													class=" item CloseDate date" api-name="AXIOM_BASE__Close_Date__c" 
+													name="AXIOM_BASE__Close_Date__c"
+													value="{!IF(Strategic_Initiative.AXIOM_BASE__Close_Date__c ==null, ' ', CASE(MONTH(Strategic_Initiative.AXIOM_BASE__Close_Date__c), 1, 'Jan', 2, 'Feb', 3, 'Mar', 4, 'Apr', 5, 'May', 6, 'Jun', 7, 'Jul', 8, 'Aug', 9, 'Sep', 10, 'Oct', 11, 'Nov', 12, 'Dec', 'None') + ' ' + TEXT(DAY(Strategic_Initiative.AXIOM_BASE__Close_Date__c )) + ', ' + TEXT(YEAR(Strategic_Initiative.AXIOM_BASE__Close_Date__c )))}"
+														/>
+												<div class=" cancel-button-wrapper">
+													<a href="" class=" save">Save</a>
+													<a href="" class=" cancel">Cancel</a>
+												</div>
+										</div>
+									</div>
+								</div>
+
+								<div class=" summary-days summary-item left">
+									<div class=" summary-item-content">
+										<div style="display:block;float:left;">
+											<table>
+												<tr>
+													<td>
+														<div class=" summary-item-date">
+															<div class=" summary-item-label">Strategic Initiative Age: </div>
+															<div class=" value">
+															<apex:outputText value="{0, number, #,###}">
+																<apex:param value="{!Strategic_Initiative.AXIOM_BASE__Age__c}" />
+															</apex:outputText>
+															</div>
+														</div>
+														<div class=" summary-item-date">
+															<div class=" summary-item-label">Days Since Last Update: </div>
+															<div class=" value">
+															<apex:outputText value="{0, number, #,###}">
+																<apex:param value="{!Strategic_Initiative.AXIOM_BASE__Days_Since_Last_Update__c}" />
+															</apex:outputText>
+															</div>
+														</div>
+													</td>
+													<td>
+														<div class=" summary-item-date right_column">
+															<div class=" summary-item-label">Changes to Close Date: </div>
+															<div class=" value">
+															<apex:outputText value="{0, number, #,###}">
+																<apex:param value="{!SIFieldHistCount}" />
+															</apex:outputText>
+															</div>
+														</div>
+													</td>
+												</tr>
+											</table>
+										</div>
+									</div>
+								</div>
+								</apex:outputPanel>
+								<apex:outputPanel id="WinScore" layout="block" styleclass=" summary-win summary-item right">
+									<div class="fusionChart summary-item-content" style="min-height: 110px !important;">
+										<div id="Win-radar"></div>
+									</div>
+								</apex:outputPanel>
+
+								<div class=" clear"></div>
+							</apex:outputPanel>
+						</td>
+
+						<!-- td class=" summary-filler">&nbsp;</td>
+
+						<td class=" summary-probability-wrapper">
+							<div class=" summary-probability summary-data round-corners">
+								<div class=" summary-item">
+									<div class=" summary-item-content">
+										<div id="chart_div" class=" left no-pdf"></div>
+										<div class=" left">
+											<div class=" summary-item-label">Win Probability</div>
+											<apex:outputPanel styleclass=" summary-item-value" id="winProb" layout="block">
+												<div class=" left">
+													<apex:outputText value="{0, number, #}%">
+														<apex:param value="{!IF(ISNULL(Strategic_Initiative.AXIOM_BASE__Probability_of_Win_Percent__c), 0, Strategic_Initiative.AXIOM_BASE__Probability_of_Win_Percent__c)}" />
+													</apex:outputText>
+													<script>
+													drawChart({!IF(ISNULL(Strategic_Initiative.AXIOM_BASE__Probability_of_Win_Percent__c), 0, ROUND(Strategic_Initiative.AXIOM_BASE__Probability_of_Win_Percent__c, 0))});
+													</script>
+												</div>
+												<apex:outputPanel styleclass=" summary-arrow right {!Strategic_Initiative.AXIOM_BASE__Win_Indicator__c}"></apex:outputPanel>
+												<div class=" clear"></div>
+											</apex:outputPanel>
+										</div>
+										<div class=" clear"></div>
+									</div>
+								</div>
+							</div>
+						</td -->
+					</tr>
+				</table>
+
+				<apex:outputPanel rendered="{!ShowCoachBut}" style="padding-left: 3px;">
+					<a href="javascript:void(0)" style="color:#fff;"  id="start-wizard" class=" m-coach-but">Coach</a>
+				</apex:outputPanel>
+
+				<table><tr><td>
+				<div class=" evaluators component round-corners"></div>
+				</td></tr></table>
+
+				<table><tr><td>
+				<div class=" component round-corners">
+					<div class=" component-header">
+						<div class=" actPlanSection-logo component-logo left" onclick='OpenCloseList("actionRegistersOpportunity");'></div>
+						<div class=" component-title left" onclick='OpenCloseList("actionRegistersOpportunity");'><a href="javascript:void(0);" class=" a-title">Decision Stages - Danger Zones - Activities</a></div>
+						<div class=" clear"></div>
+					</div>
+					<div class=" component-body" id="actionRegistersOpportunity" style="display: none;">
+						<table><tr>
+							<td class=" decisionStages-wrapper">
+								<div class=" decisionStages component small-component small-component-group-1 round-corners">
+
+								</div>
+							</td>
+
+							<td class=" dangerZones-wrapper">
+								<div class=" dangerZones component small-component small-component-group-1 round-corners">
+
+								</div>
+							</td>
+
+							<td class=" actionRegisters-wrapper">
+								<div class=" actionRegisters component small-component small-component-group-1 round-corners">
+
+								</div>
+							</td>
+						</tr></table>
+					</div>
+				</div>
+				</td></tr></table>
+
+				<table><tr><td>
+				<div class=" businessStates component round-corners"></div>
+				</td></tr></table>
+
+				<table><tr><td>
+				<div class=" currentPSCF component round-corners"></div>
+				</td></tr></table>
+
+				<table><tr><td>
+				<div class=" pscCriteria component round-corners"></div>
+				</td></tr></table>
+
+				<table><tr><td>
+				<div class=" financialCriteria component round-corners"></div>
+				</td></tr></table>
+
+				<table class=" small-component-wrapper"><tr>
+					<td class=" commonalities-wrapper">
+						<div class=" commonalities small-component small-component-group-2 component round-corners">
+
+						</div>
+					</td>
+
+					<td>
+					</td>
+
+					<td class=" decisionHistory-wrapper">
+						<div class=" decisionHistory small-component small-component-group-2 component round-corners">
+
+						</div>
+					</td>
+				</tr></table>
+			</div>
+		</div>
+
+		<div class=" details hidden">
+			<apex:detail subject="{!Strategic_Initiative.Id}" relatedList="true" title="false" id="detail" />
+		</div>
+	</apex:outputPanel>
+
+	<apex:outputPanel rendered="{!pageError != ''}">
+		<div style="font-size: 20px; margin: 20px; text-align: center;">
+			<p>{!pageError}</p>
+			<p>For more detailed configuration instruction please click <a href="https://axiom.desk.com/customer/portal/articles/566171-how-to-configure-custom-opportunity-stages-for-danger-zones">here</a>.</p>
+		</div>
+	</apex:outputPanel>
+
+
+		<script src="{!URLFOR($Resource.AXIOM_BASE__accounting)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__jQuery)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__jQueryUI, 'jquery-ui.js')}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__jQueryAutoGrow)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__underscoreJS)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__backboneJS)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__icanhazJS)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__chosenJS)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__bootstrap, 'js/bootstrap.min.js')}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__json2)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__templateUtility)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__jQueryCookie)}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__bootstrapSwitch, 'bootstrapSwitch.js')}"></script>
+		<script src="{!URLFOR($Resource.AXIOM_BASE__FusionChart, '/Charts/FusionCharts.js')}"></script>
+		<apex:outputPanel rendered="{!NOT($Setup.AXIOM_BASE__OrgSettings__c.AXIOM_BASE__DevelopmentMode__c)}" layout="none">
+			<script src="{!URLFOR($Resource.templates_jst)}"></script>
+		</apex:outputPanel>		
+		<script>
+			function OmdAppConfig() {
+				if ( arguments.callee._singletonInstance) {
+					return arguments.callee._singletonInstance;
+				}
+				arguments.callee._singletonInstance = this;
+
+
+				this.isDeveloperMode = function() {
+					return {!IF(NOT(ISNULL($Setup.AXIOM_BASE__OrgSettings__c)) && $Setup.AXIOM_BASE__OrgSettings__c.AXIOM_BASE__DevelopmentMode__c, 'true', 'false')};
+				}
+
+				return arguments.callee._singletonInstance;
+			}
+
+			OmdConf = new OmdAppConfig();
+			var oldHandler = window.onload;
+			var firstClick = true;
+			window.onload = function() {
+				$('#start-wizard').bind("click", function(){
+					if(firstClick){
+						firstClick=false; startWizard(true);
+					} else {
+						changeWizardConfig({seller:"{!Strategic_Initiative.OwnerId}", tab:"Opportunities", strategicId:"{!Strategic_Initiative.Id}", callback: function(){$('#wizard-container').modal().show();}});
+					}
+				});
+				_.each($('.details .btn'), function(btn){
+						if($(btn).attr('onclick').indexOf('axiomomd.') != -1){
+							if($(btn).attr('onclick').indexOf('/apex/') != -1  && $(btn).attr('onclick').indexOf('/apex/') > $(btn).attr('onclick').indexOf('axiomomd.')){
+								//convert object to string
+								var container = document.createElement('div');
+								container.appendChild(btn.cloneNode(true));
+								var stringElement = container.innerHTML;
+								//replace values in string
+								var newStringElem = stringElement.replace('/apex/', '/apex/c__').replace('/apex/c__c__', '/apex/c__');
+								//replace existing button with new
+								container.innerHTML = newStringElem;
+								btn.parentNode.replaceChild(container.firstChild,btn);
+							}
+						}
+					}
+				);
+				oldHandler();
+			}
+			function loadCurrency(){
+				var currency = jQuery('.amountString').val();
+				if (currency != null) {
+					currency = accounting.formatMoney(currency, isoCode);
+					jQuery('.cur').text(currency);
+				}
+			}
+			function addError(err){
+				jQuery('.deal .header .error-message').html('ERROR: ' + err[1] + '. This error could be caused by a validation rule on the Strategic Initiative. To edit the Strategic Initiative, <a href="/' + parentId + '/e?retURL=%2F' + parentId + '">click here</a>');
+			}
+			var pos = parseInt('{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Probability_of_Win_Percent__c}');
+			if (isNaN(pos)) {
+				pos = 0;
+			}
+			var siId = '{!AXIOM_BASE__Strategic_Initiative__c.Id}';
+
+			jQuery('document').ready(function() {
+				// reduced fanciness for IE8-
+				noFancies = (navigator.appName == 'Microsoft Internet Explorer' && parseFloat(navigator.userAgent.match(/MSIE ([0-9]{1,}[\.0-9]{0,})/)[1]) < 9);
+
+				// forced with url param (used for debugging)
+				if (window.location.href.indexOf('noFancies') != -1) {
+					noFancies = true;
+				}
+
+				// SFDC variables
+				cssURL = '{!URLFOR($Resource.AXIOMOMD__css_component_all)}';
+				ObjectType = 'deal';
+				controller = 'StrategicInitiativeExtension';
+				prentFieldAPI = 'AXIOM_BASE__Strategic_Initiative__c';
+				prentFieldAPI_OMD = 'AXIOMOMD__StrategicInitiative__c';
+				urlsMap = JSON.parse('{!urlMap}');
+				isoCode = '{!userIsoCode} ';
+				parentId = '{!JSENCODE(AXIOM_BASE__Strategic_Initiative__c.Id)}';;
+				accountId = '{!JSENCODE(AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Account__c)}';
+				calendarURL = '{!URLFOR($Resource.images, 'calendar.png')}';
+				orgName = '{!JSENCODE($Organization.Name)}';
+				dealName = '{!JSENCODE(AXIOM_BASE__Strategic_Initiative__c.Name)}';
+				parentAccountId = '{!JSENCODE(AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Account__c)}';
+				imagePrefix = '{!URLFOR($Resource.AXIOM_BASE__images)}/';
+				urlImage = '{!URLFOR($Resource.AXIOM_BASE__images)}';
+				decisionStatus = '{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__Decision_Stage_Status__c}';
+				commonalityStatus = '{!AXIOM_BASE__Strategic_Initiative__c.AXIOM_BASE__CommonalityStatus__c}';
+				isAlternativeObjEmpty = {!isAlternativeObjEmpty};
+				showCoachBut = {!ShowCoachBut};
+				modalOptions = JSON.parse('{!JSENCODE(modalOptions)}');
+				isUpdateableParent = {!isUpdateableSI};
+
+				// preload select values to reduce load times and reduce number of DOM changes
+				opportunityStages = [];
+				<apex:repeat value="{!opportunityStages}" var="opportunityStage">
+					opportunityStages.push('{!JSENCODE(opportunityStage)}');
+				</apex:repeat>
+
+				contacts = [];
+				<apex:repeat value="{!contacts}" var="contact">
+					var tmp = '{!JSENCODE(contact)}'.split('|'); contacts.push({ Id : tmp[0], Name : tmp[1]});
+				</apex:repeat>
+
+				roles = [];
+				rolesMap = {};
+				<apex:repeat value="{!roles}" var="role">
+					roles.push({val:'{!JSENCODE(role)}',label:'{!JSENCODE(roles[role])}'});
+					rolesMap['{!JSENCODE(role)}'] = '{!JSENCODE(roles[role])}';
+				</apex:repeat>
+
+				crMap = {};
+				<apex:repeat value="{!customRoles}" var="role">
+					crMap['{!JSENCODE(role)}'] = '{!JSENCODE(customRoles[role])}';
+				</apex:repeat>
+
+				alternatives = [];
+				alternativesMap = {};
+				<apex:repeat value="{!alternatives}" var="alternative">
+					alternatives.push({val:'{!JSENCODE(alternative)}',label:'{!JSENCODE(alternatives[alternative])}'});
+					alternativesMap['{!JSENCODE(alternative)}'] = '{!JSENCODE(alternatives[alternative])}';
+				</apex:repeat>
+				customAlternatives = [];
+
+				influenceScores = [];
+				<apex:repeat value="{!influenceScores}" var="influenceScore">
+					influenceScores.push('{!JSENCODE(influenceScore)}');
+				</apex:repeat>
+
+				qualityScores = [];
+				<apex:repeat value="{!qualityScores}" var="qualityScore">
+					qualityScores.push('{!JSENCODE(qualityScore)}');
+				</apex:repeat>
+
+			rQualityScores = [];
+			goodQualityScores = [];
+			_.each(qualityScores, function(qualityScore) {
+				if (parseInt(qualityScore.substring(0,1)) <= 2) {
+					rQualityScores.push(qualityScore);
+				} else {
+					goodQualityScores.push(qualityScore);
+				}
+			});
+
+				bsAreas = [];
+				<apex:repeat value="{!bsAreas}" var="bsArea">
+					bsAreas.push('{!JSENCODE(bsArea)}');
+				</apex:repeat>
+
+				bsImpacts = [];
+				<apex:repeat value="{!bsImpacts}" var="bsImpact">
+					bsImpacts.push('{!JSENCODE(bsImpact)}');
+				</apex:repeat>
+
+				pscAreas = [];
+				<apex:repeat value="{!pscAreas}" var="pscArea">
+					pscAreas.push('{!JSENCODE(pscArea)}');
+				</apex:repeat>
+
+				pscImpacts = [];
+				<apex:repeat value="{!pscImpacts}" var="pscImpact">
+					pscImpacts.push('{!JSENCODE(pscImpact)}');
+				</apex:repeat>
+
+				financialConsiderations = [];
+				<apex:repeat value="{!financialConsiderations}" var="financialConsideration">
+					financialConsiderations.push('{!JSENCODE(financialConsideration)}');
+				</apex:repeat>
+
+				// map of templates and related css file urls
+				// Naren Added both Opportunity and deal
+				tempDir = {
+					base : {
+						css : '{!URLFOR($Resource.css_base)}'
+					},
+					deal : {
+						name : 'deal',
+						url : '',
+						css : '{!URLFOR($Resource.SI_css_deal)}'
+					},
+					component : {
+						name : 'component',
+						url : '{!URLFOR($Resource.template_component)}',
+						css : '{!URLFOR($Resource.css_component)}'
+					},
+					actionRegisters : {
+						name : 'actionRegisters',
+						url : '{!URLFOR($Resource.template_component_actionRegisters)}',
+						css : '{!URLFOR($Resource.css_component_actionRegisters)}'
+					},
+					businessStates : {
+						name : 'businessStates',
+						url : '{!URLFOR($Resource.template_component_businessStates)}',
+						css : '{!URLFOR($Resource.css_component_businessStates)}'
+					},
+					commonalities : {
+						name : 'commonalities',
+						url : '{!URLFOR($Resource.template_component_commonalities)}',
+						css : '{!URLFOR($Resource.css_component_commonalities)}'
+					},
+					currentPSCF : {
+						name : 'currentPSCF',
+						url : '{!URLFOR($Resource.template_component_currentPSCF)}',
+						css : '{!URLFOR($Resource.css_component_currentPSCF)}'
+					},
+					dangerZones : {
+						name : 'dangerZones',
+						url : '{!URLFOR($Resource.template_component_dangerZones)}',
+						css : '{!URLFOR($Resource.css_component_dangerZones)}'
+					},
+					decisionHistory : {
+						name : 'decisionHistory',
+						url : '{!URLFOR($Resource.template_component_decisionHistory)}',
+						css : '{!URLFOR($Resource.css_component_decisionHistory)}'
+					},
+					decisionStages : {
+						name : 'decisionStages',
+						url : '{!URLFOR($Resource.template_component_decisionStages)}',
+						css : '{!URLFOR($Resource.css_component_decisionStages)}'
+					},
+					evaluators : {
+						name : 'evaluators',
+						url : '{!URLFOR($Resource.template_component_evaluators)}',
+						css : '{!URLFOR($Resource.css_component_evaluators)}'
+					},
+					financialCriteria : {
+						name : 'financialCriteria',
+						url : '{!URLFOR($Resource.template_component_financialCriteria)}',
+						css : '{!URLFOR($Resource.css_component_financialCriteria)}'
+					},
+					pscCriteria : {
+						name : 'pscCriteria',
+						url : '{!URLFOR($Resource.template_component_pscCriteria)}',
+						css : '{!URLFOR($Resource.css_component_pscCriteria)}'
+					},
+					Modal_Commonalities : {
+						name : 'Modal_Commonalities',
+						url : '{!URLFOR($Resource.modal_template_commonality)}',
+						css : '{!URLFOR($Resource.css_component_pscCriteria)}'
+					},
+					Modal_CurrentPSCF : {
+						name : 'Modal_CurrentPSCF',
+						url : '{!URLFOR($Resource.modal_template_currentPSCF)}',
+						css : '{!URLFOR($Resource.css_component_pscCriteria)}'
+					},
+					Modal_BusinessStates : {
+						name : 'Modal_BusinessStates',
+						url : '{!URLFOR($Resource.modal_template_businessStates)}',
+						css : '{!URLFOR($Resource.css_component_pscCriteria)}'
+					}
+				};
+
+				templates = new templateUtility();
+				SI = new parentModel();
+
+				preBoot();
+			});
+			function OpenCloseList(id){
+				if(document.getElementById(id).style.display == "none"){
+					setCookie(id);
+					document.getElementById(id).style.display = "block";
+					matchHeights('.small-component-group-1');
+				} else {
+					deleteCookie(id);
+					document.getElementById(id).style.display = "none";
+				}
+			}
+
+			function setCookie(name) {
+				var sessionId = jQuery.cookie('sid');
+				sessionId = sessionId.substring(20, 26);
+				var curCookie = jQuery.cookie(sessionId + '_' + siId + '_cookie');
+				curCookie += name + ';';
+				jQuery.cookie(sessionId + '_' + siId + '_cookie', curCookie);
+			}
+
+			function deleteCookie(name) {
+				var sessionId = jQuery.cookie('sid');
+				sessionId = sessionId.substring(20, 26);
+				var curCookie = jQuery.cookie(sessionId + '_' + siId + '_cookie');
+				if (curCookie == null) {
+					curCookie = '';
+				}
+				curCookie = curCookie.replace(name + ';', '');
+				jQuery.cookie(sessionId + '_' + siId + '_cookie', curCookie);
+			}
+		</script>
+		<apex:outputPanel rendered="{!$Setup.AXIOM_BASE__OrgSettings__c.AXIOM_BASE__DevelopmentMode__c}" layout="none">
+			<script src="{!URLFOR($Resource.model_opportunity)}"></script>
+			<script src="{!URLFOR($Resource.collection_componentData)}"></script>
+			<script src="{!URLFOR($Resource.view_component)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_actionRegisters)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_businessStates)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_commonalities)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_currentPSCF)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_dangerZones)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_decisionStages)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_evaluators)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_financialCriteria)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_pscCriteria)}"></script>
+			<script src="{!URLFOR($Resource.boot_component_decisionHistory)}"></script>
+			<script src="{!URLFOR($Resource.modal_boot_commonality)}"></script>
+			<script src="{!URLFOR($Resource.modal_boot_businessStates)}"></script>
+			<script src="{!URLFOR($Resource.modal_boot_currentPSCF)}"></script>
+			<script src="{!URLFOR($Resource.boot)}"></script>
+		</apex:outputPanel>
+		<apex:outputPanel rendered="{!NOT($Setup.AXIOM_BASE__OrgSettings__c.AXIOM_BASE__DevelopmentMode__c)}" layout="none">
+			<script src="{!URLFOR($Resource.boot_js_all)}"></script>
+		</apex:outputPanel>
+		<AXIOM_BASE:CoachingWizard seller="{!Strategic_Initiative.OwnerId}" tab="Opportunities" strategicId="{!Strategic_Initiative.Id}" />
+	<!-- JIRA Issue Collector -->
+	<!-- script type="text/javascript" src="https://axiomsfd.atlassian.net/s/d41d8cd98f00b204e9800998ecf8427e/en_USwe6n0c-1988229788/6139/26/1.4.0-m6/_/download/batch/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector/com.atlassian.jira.collector.plugin.jira-issue-collector-plugin:issuecollector.js?collectorId=446ed246">
+	</script-->
+</apex:page>

@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Course Item --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Course Item --></value>
+    </caseValues>
+    <fields>
+        <label>Quiz</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Éléments de formation</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Séquence</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>Module</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>Éléments de formation</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Formation</label>
+        <name>Training_Path__c</name>
+        <relationshipLabel>Éléments de formation</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Afficher</label>
+        <name>View__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Training Path Item Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Item Number --></nameFieldLabel>
+    <recordTypes>
+        <label>Module</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Quiz</label>
+        <name>Quiz</name>
+    </recordTypes>
+    <startsWith><!-- Consonant --></startsWith>
+    <webLinks>
+        <label>Ajouter à la formation</label>
+        <name>AddToCourse</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un module à la formation</label>
+        <name>Add_Module_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un quiz à la formation</label>
+        <name>Add_Quiz_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un quiz à la formation</label>
+        <name>Add_Quize_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label>Modifier la séquence</label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

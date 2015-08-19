@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Quiz Question --></value>
+    </caseValues>
+    <fields>
+        <label>Ordre</label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label>Question</label>
+        <name>Question__c</name>
+        <relationshipLabel>Questions de quiz</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Quiz</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Questions de quiz</relationshipLabel>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Quiz Question Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Quiz Question Name --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+    <validationRules>
+        <errorMessage>Le champ ne peut pas comporter de valeur négative.</errorMessage>
+        <name>Negative_Order_Value</name>
+    </validationRules>
+    <webLinks>
+        <label>Ajouter une question</label>
+        <name>Add_Question</name>
+    </webLinks>
+    <webLinks>
+        <label>Ajouter un saut de page</label>
+        <name>Add_page_break</name>
+    </webLinks>
+    <webLinks>
+        <label>Nouvelle question</label>
+        <name>New_Question</name>
+    </webLinks>
+</CustomObjectTranslation>

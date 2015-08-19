@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Cart --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Cart --></value>
+    </caseValues>
+    <fields>
+        <label>ID CyberU</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Stato acquisto</label>
+        <name>Purchase_Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Pending</masterLabel>
+            <translation><!-- Pending --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>ID riferimento</label>
+        <name>Reference_Id__c</name>
+    </fields>
+    <fields>
+        <label>Licenza contenuto della formazione</label>
+        <name>Training_Content_License__c</name>
+        <relationshipLabel>Carrelli</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Tipo</label>
+        <name>Type__c</name>
+        <picklistValues>
+            <masterLabel>Download</masterLabel>
+            <translation><!-- Download --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Purchase</masterLabel>
+            <translation><!-- Purchase --></translation>
+        </picklistValues>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <nameFieldLabel><!-- Cart ID --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+</CustomObjectTranslation>

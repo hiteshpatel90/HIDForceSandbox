@@ -1,0 +1,2339 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customApplications>
+        <label>학습 클라우드</label>
+        <name>Learning_Cloud</name>
+    </customApplications>
+    <customLabels>
+        <label><!-- API Callback URL --></label>
+        <name>API_Callback_URL</name>
+    </customLabels>
+    <customLabels>
+        <label>API 콜백 URL이 필드를 필수입니다.</label>
+        <name>API_Callback_URL_required_field</name>
+    </customLabels>
+    <customLabels>
+        <label>API는 사용자가 사용할 수 없습니다</label>
+        <name>API_not_enabled_for_user</name>
+    </customLabels>
+    <customLabels>
+        <label>액세스 위반 예외</label>
+        <name>AccessViolationException</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Action --></label>
+        <name>Action</name>
+    </customLabels>
+    <customLabels>
+        <label>액션 매개 변수 가 없습니다.</label>
+        <name>Action_parameter_missing</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Hide Filter --></label>
+        <name>ActivateUsers_Hide_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Hide Search --></label>
+        <name>ActivateUsers_Hide_Search</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Search Users --></label>
+        <name>ActivateUsers_Search_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Show Filter --></label>
+        <name>ActivateUsers_Show_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Add --></label>
+        <name>Add</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- AddItems Cancel --></label>
+        <name>AddItems_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Select All --></label>
+        <name>AddItems_Select_All</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- All --></label>
+        <name>AddMassCU_ALL</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Add Multiple Users --></label>
+        <name>Add_Multiple_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Add Questions --></label>
+        <name>Add_Questions</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Add to my training --></label>
+        <name>Add_to_my_training</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Adding of multiple users according to their profiles --></label>
+        <name>Adding_of_multiple_users_according_to_their_profiles</name>
+    </customLabels>
+    <customLabels>
+        <label>- 모든 -</label>
+        <name>All</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- An error has occured. Please check the template or try again later --></label>
+        <name>An_error_has_occured_Please_check_the_template_or_try_again_later</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Answer --></label>
+        <name>Answer</name>
+    </customLabels>
+    <customLabels>
+        <label>진</label>
+        <name>Answer_True</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Api User Name --></label>
+        <name>Api_User_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>API 사용자 이름과 API 사용자 비밀 번호 필수 입력란입니다.</label>
+        <name>Api_User_Name_and_Api_User_Password_required_fields</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Api User Password --></label>
+        <name>Api_User_Password</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Apply Filter --></label>
+        <name>Apply_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assign --></label>
+        <name>Assign</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- AssignFieldSetMessage --></label>
+        <name>AssignFieldSetMessage</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- DevPlanGroupsTabLabel --></label>
+        <name>AssignPlanGroupsTabLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>정렬 ...</label>
+        <name>AssignTrainingContent_Message_Sorting</name>
+    </customLabels>
+    <customLabels>
+        <label>선택</label>
+        <name>AssignTrainingContent_headerValue_Choose</name>
+    </customLabels>
+    <customLabels>
+        <label>라이센스 기간</label>
+        <name>AssignTrainingContent_headerValue_License_Term</name>
+    </customLabels>
+    <customLabels>
+        <label>구매 날짜</label>
+        <name>AssignTrainingContent_headerValue_Purchase_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>남은 라이센스</label>
+        <name>AssignTrainingContent_headerValue_Remaining_Licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>이 페이지에 당신의 선택은 손실됩니다.</label>
+        <name>AssignTrainingContent_js_Alert</name>
+    </customLabels>
+    <customLabels>
+        <label>다음 페이지</label>
+        <name>AssignTrainingContent_oT_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>이전 페이지</label>
+        <name>AssignTrainingContent_oT_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 을 할당</label>
+        <name>AssignTrainingContent_title_Assign_Training</name>
+    </customLabels>
+    <customLabels>
+        <label>할당 정보</label>
+        <name>AssignTrainingContent_title_Assignment_Information</name>
+    </customLabels>
+    <customLabels>
+        <label>사용 가능한 라이센스</label>
+        <name>AssignTrainingContent_title_Available_Licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>연수생을 선택</label>
+        <name>AssignTrainingContent_title_Select_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>연수생</label>
+        <name>AssignTrainingContent_title_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 컨텐츠</label>
+        <name>AssignTrainingContent_title_Training_Content</name>
+    </customLabels>
+    <customLabels>
+        <label>할당</label>
+        <name>AssignTrainingContent_value_Assign</name>
+    </customLabels>
+    <customLabels>
+        <label>취소</label>
+        <name>AssignTrainingContent_value_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>역할 에 의해 필터 :</label>
+        <name>AssignTrainingContent_value_Filter_by_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>이름</label>
+        <name>AssignTrainingContent_value_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>역할</label>
+        <name>AssignTrainingContent_value_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>수색</label>
+        <name>AssignTrainingContent_value_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>오름차순 정렬</label>
+        <name>AssignTrainingPath_alt_Sorted_Ascending</name>
+    </customLabels>
+    <customLabels>
+        <label>내림차순 정렬</label>
+        <name>AssignTrainingPath_alt_Sorted_Descending</name>
+    </customLabels>
+    <customLabels>
+        <label>다음 페이지&gt;</label>
+        <name>AssignTrainingPath_cL_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>&lt;이전 페이지</label>
+        <name>AssignTrainingPath_cL_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>선택</label>
+        <name>AssignTrainingPath_dV_Choose</name>
+    </customLabels>
+    <customLabels>
+        <label>라이센스 기간</label>
+        <name>AssignTrainingPath_dV_License_Term</name>
+    </customLabels>
+    <customLabels>
+        <label>구매 날짜</label>
+        <name>AssignTrainingPath_dV_Purchase_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>남은 라이센스</label>
+        <name>AssignTrainingPath_dV_Remaining_Licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 컨텐츠</label>
+        <name>AssignTrainingPath_dV_Training_Content</name>
+    </customLabels>
+    <customLabels>
+        <label>이 페이지에 당신의 선택은 손실됩니다.</label>
+        <name>AssignTrainingPath_jS_Alert1</name>
+    </customLabels>
+    <customLabels>
+        <label>다음 페이지&gt;</label>
+        <name>AssignTrainingPath_oT_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>&lt;이전 페이지</label>
+        <name>AssignTrainingPath_oT_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 경로 할당</label>
+        <name>AssignTrainingPath_title_Assign_Training_Path</name>
+    </customLabels>
+    <customLabels>
+        <label>할당 정보</label>
+        <name>AssignTrainingPath_title_Assignment_Information</name>
+    </customLabels>
+    <customLabels>
+        <label>사용 가능한 교육 경로 항목 라이센스</label>
+        <name>AssignTrainingPath_title_Available_Training_Path_Item_Licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>연수생을 선택</label>
+        <name>AssignTrainingPath_title_Select_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>연수생</label>
+        <name>AssignTrainingPath_title_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 경로</label>
+        <name>AssignTrainingPath_title_Training_Path</name>
+    </customLabels>
+    <customLabels>
+        <label>할당</label>
+        <name>AssignTrainingPath_value_Assign</name>
+    </customLabels>
+    <customLabels>
+        <label>취소</label>
+        <name>AssignTrainingPath_value_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>역할 에 의해 필터 :</label>
+        <name>AssignTrainingPath_value_Filter_by_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>이름</label>
+        <name>AssignTrainingPath_value_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>역할</label>
+        <name>AssignTrainingPath_value_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>수색</label>
+        <name>AssignTrainingPath_value_Search</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Do you want to Delete --></label>
+        <name>Assign_Delete_confirmtaion</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Select All --></label>
+        <name>Assign_Select_All</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment Could Not Be Removed --></label>
+        <name>Assignment_Could_Not_Be_Removed</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment Edit --></label>
+        <name>Assignment_Edit</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Assigned from: --></label>
+        <name>Assignment_List_Assigned_from</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Assigned to: --></label>
+        <name>Assignment_List_Assigned_to</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Assignments --></label>
+        <name>Assignment_List_Assignments</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Del Message --></label>
+        <name>Assignment_List_Del_Message</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Filter --></label>
+        <name>Assignment_List_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Hide Message --></label>
+        <name>Assignment_List_Hide_Message</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Hide confirm Message --></label>
+        <name>Assignment_List_Hide_confirm_Message</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Learning --></label>
+        <name>Assignment_List_Learning</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment list No records were found --></label>
+        <name>Assignment_List_No_records</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Show Historical --></label>
+        <name>Assignment_List_Show_Historical</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment List Trainee --></label>
+        <name>Assignment_List_Trainee</name>
+    </customLabels>
+    <customLabels>
+        <label>할당 이 삭제되었습니다</label>
+        <name>Assignment_Page_Assignment_Deleted</name>
+    </customLabels>
+    <customLabels>
+        <label>과제 는 다음 오류 때문에 삭제할 수 없습니다 :</label>
+        <name>Assignment_Page_Assignment_Not_Deleted</name>
+    </customLabels>
+    <customLabels>
+        <label>날짜가 날짜 &apos; 에서 지정 &apos;을 보다 작아야 할 수 없습니다 &apos; 에 할당 &apos;</label>
+        <name>Assignment_Page_Date_Error</name>
+    </customLabels>
+    <customLabels>
+        <label>당신이 영구적으로 선택한 과제 를 삭제 하시겠습니까?</label>
+        <name>Assignment_Page_Delete_Assignment</name>
+    </customLabels>
+    <customLabels>
+        <label>너무 많은 기록이 발견 ,검색 기준 을 변경하고 다시 시도하십시오.</label>
+        <name>Assignment_Page_To_Many_Records</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignment Page To Many Search Records --></label>
+        <name>Assignment_Page_To_Many_Search_Records</name>
+    </customLabels>
+    <customLabels>
+        <label>너무 많은 사용자가 발견 ,검색 기준 을 변경하고 다시 시도하십시오.</label>
+        <name>Assignment_Page_To_Many_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Too many users selected. Please select 200 or less. --></label>
+        <name>Assignment_Page_Too_many_users_selected</name>
+    </customLabels>
+    <customLabels>
+        <label>사용자가 (들) 을 찾을 수 없습니다</label>
+        <name>Assignment_Page_User_Not_Found</name>
+    </customLabels>
+    <customLabels>
+        <label>모든 사용자</label>
+        <name>Assignments_All_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignments Assigned --></label>
+        <name>Assignments_Assigned</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignments Completed --></label>
+        <name>Assignments_Completed</name>
+    </customLabels>
+    <customLabels>
+        <label>고객</label>
+        <name>Assignments_Customers_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>N / A</label>
+        <name>Assignments_NA</name>
+    </customLabels>
+    <customLabels>
+        <label>삭제 이 없습니다</label>
+        <name>Assignments_Nothing_To_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>파트너</label>
+        <name>Assignments_Partners_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignments Progress --></label>
+        <name>Assignments_Progress</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignments Score --></label>
+        <name>Assignments_Score</name>
+    </customLabels>
+    <customLabels>
+        <label>스탠다드</label>
+        <name>Assignments_Standart_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignments Status --></label>
+        <name>Assignments_Status</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Title --></label>
+        <name>Assignments_Title</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Type --></label>
+        <name>Assignments_Type</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Attempts --></label>
+        <name>Attempts</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Back --></label>
+        <name>Back</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Back to Learning Settings --></label>
+        <name>Back_to_Learning_Settings</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Back to course --></label>
+        <name>Back_to_course</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Back to module --></label>
+        <name>Back_to_module</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CERTIFICATE OF COMPLETION --></label>
+        <name>CERTIFICATE_OF_COMPLETION</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Sample of CSV file --></label>
+        <name>CSV_Example</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Can\&apos;t Delete from Custom Settings --></label>
+        <name>Can_not_Delete_from_Custom_Settings</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Can\&apos;t get Values, Default instance: --></label>
+        <name>Can_not_get_Values_Default_instance</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Can\&apos;t get default Org Values --></label>
+        <name>Can_not_get_default_Org_Values</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Cancel --></label>
+        <name>Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Catalog ErrorAccountDublicated: --></label>
+        <name>Catalog_ErrorAccountDublicated</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Catalog ErrorCourseDublicated --></label>
+        <name>Catalog_ErrorCourseDublicated</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Catalog ErrorCurriculumDuplicated --></label>
+        <name>Catalog_ErrorCurriculumDuplicated</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Catalog ErrorLearningPathDuplicated --></label>
+        <name>Catalog_ErrorLearningPathDuplicated</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Catalog ErrorPathDublicated --></label>
+        <name>Catalog_ErrorPathDublicated</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Catalog ErrorQuizDuplicated --></label>
+        <name>Catalog_ErrorQuizDuplicated</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Chatter --></label>
+        <name>Chatter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Chatter template text --></label>
+        <name>Chatter_template_text</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Clear Filter --></label>
+        <name>Clear_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Click --></label>
+        <name>Click</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Click here --></label>
+        <name>Click_here</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Close --></label>
+        <name>Close</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Batch Completed --></label>
+        <name>Completed</name>
+    </customLabels>
+    <customLabels>
+        <label>당신은 이 활동 에 대한 권한이 없습니다.</label>
+        <name>ConsumerAuthorization</name>
+    </customLabels>
+    <customLabels>
+        <label>설명</label>
+        <name>ConsumerCatalogDetail_Desc</name>
+    </customLabels>
+    <customLabels>
+        <label>재생 시간(분)</label>
+        <name>ConsumerCatalogDetail_Duration</name>
+    </customLabels>
+    <customLabels>
+        <label>언어</label>
+        <name>ConsumerCatalogDetail_Lang</name>
+    </customLabels>
+    <customLabels>
+        <label>숙련 점수</label>
+        <name>ConsumerCatalogDetail_MScope</name>
+    </customLabels>
+    <customLabels>
+        <label>최대 허용 시간(분)</label>
+        <name>ConsumerCatalogDetail_MTAllow</name>
+    </customLabels>
+    <customLabels>
+        <label>최대 점수</label>
+        <name>ConsumerCatalogDetail_MaxScope</name>
+    </customLabels>
+    <customLabels>
+        <label>개체 유형</label>
+        <name>ConsumerCatalogDetail_ObjType</name>
+    </customLabels>
+    <customLabels>
+        <label>게시자 이름</label>
+        <name>ConsumerCatalogDetail_PubName</name>
+    </customLabels>
+    <customLabels>
+        <label>정보</label>
+        <name>ConsumerCatalogDetail_STitle1</name>
+    </customLabels>
+    <customLabels>
+        <label>시간 제한 동작</label>
+        <name>ConsumerCatalogDetail_TLAction</name>
+    </customLabels>
+    <customLabels>
+        <label>일반적 학습 시간(분)</label>
+        <name>ConsumerCatalogDetail_TLTime</name>
+    </customLabels>
+    <customLabels>
+        <label>제목</label>
+        <name>ConsumerCatalogDetail_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>과정</label>
+        <name>ConsumerCatalogDetail_TitleCourse</name>
+    </customLabels>
+    <customLabels>
+        <label>라이센스</label>
+        <name>ConsumerCatalogDetail_TitleLicense</name>
+    </customLabels>
+    <customLabels>
+        <label>자세한 정보</label>
+        <name>ConsumerCatalogDetail_TitleMore_details</name>
+    </customLabels>
+    <customLabels>
+        <label>효과적인</label>
+        <name>ConsumerCatalogDetail_Title_Effective</name>
+    </customLabels>
+    <customLabels>
+        <label>만료</label>
+        <name>ConsumerCatalogDetail_Title_Expiration</name>
+    </customLabels>
+    <customLabels>
+        <label>좌석 번호</label>
+        <name>ConsumerCatalogDetail_Title_No_of_Seats</name>
+    </customLabels>
+    <customLabels>
+        <label>가격</label>
+        <name>ConsumerCatalogDetail_Title_Price</name>
+    </customLabels>
+    <customLabels>
+        <label>공개</label>
+        <name>ConsumerCatalogDetail_Title_Release</name>
+    </customLabels>
+    <customLabels>
+        <label>사이트 라이센스</label>
+        <name>ConsumerCatalogDetail_Title_Site_license</name>
+    </customLabels>
+    <customLabels>
+        <label>약관</label>
+        <name>ConsumerCatalogDetail_Title_Terms</name>
+    </customLabels>
+    <customLabels>
+        <label>카탈로그 검색</label>
+        <name>ConsumerCatalogSearch_BTitle1</name>
+    </customLabels>
+    <customLabels>
+        <label>검색 결과</label>
+        <name>ConsumerCatalogSearch_BTitle2</name>
+    </customLabels>
+    <customLabels>
+        <label>페이지 번호</label>
+        <name>ConsumerCatalogSearch_BTitle3</name>
+    </customLabels>
+    <customLabels>
+        <label>게시자 이름</label>
+        <name>ConsumerCatalogSearch_Column1</name>
+    </customLabels>
+    <customLabels>
+        <label>카탈로그 제목</label>
+        <name>ConsumerCatalogSearch_Column2</name>
+    </customLabels>
+    <customLabels>
+        <label>라이센스 조건</label>
+        <name>ConsumerCatalogSearch_Column3</name>
+    </customLabels>
+    <customLabels>
+        <label>특정 콘텐츠에 대한 검색하거나 전체 카탈로그를 검색하려면 이 입력란을 비워 두십시오 키워드를 입력하세요.</label>
+        <name>ConsumerCatalogSearch_Text1</name>
+    </customLabels>
+    <customLabels>
+        <label>세부 정보 보기</label>
+        <name>ConsumerCatalogSearch_ViewDetails</name>
+    </customLabels>
+    <customLabels>
+        <label>오름차순 정렬</label>
+        <name>ConsumerCatalogSearch_alt_Sorted_Ascending</name>
+    </customLabels>
+    <customLabels>
+        <label>내림차순 정렬</label>
+        <name>ConsumerCatalogSearch_alt_Sorted_Descending</name>
+    </customLabels>
+    <customLabels>
+        <label>학습 교류</label>
+        <name>ConsumerCatalogSearch_title_Learning_Exchange</name>
+    </customLabels>
+    <customLabels>
+        <label>제출</label>
+        <name>ConsumerDirector_value_Submit</name>
+    </customLabels>
+    <customLabels>
+        <label>학습 도움말</label>
+        <name>ConsumerHelp_h1</name>
+    </customLabels>
+    <customLabels>
+        <label>관리자 ID 필드</label>
+        <name>ConsumerSettings_ManagerId</name>
+    </customLabels>
+    <customLabels>
+        <label>내 팀 에있는 사용자를 표시 하면 에 따라</label>
+        <name>ConsumerSettings_MyTeamHierarchy</name>
+    </customLabels>
+    <customLabels>
+        <label>역할</label>
+        <name>ConsumerSettings_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>행동</label>
+        <name>ConsumerSettings_headerValue_Action</name>
+    </customLabels>
+    <customLabels>
+        <label>관리자</label>
+        <name>ConsumerSettings_headerValue_Admin</name>
+    </customLabels>
+    <customLabels>
+        <label>소비자 사용자</label>
+        <name>ConsumerSettings_headerValue_Consumer_User</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- ConsumerSettings_headerValue CyberU ID --></label>
+        <name>ConsumerSettings_headerValue_CyberU_ID</name>
+    </customLabels>
+    <customLabels>
+        <label>당신은LMS 소비자 응용 프로그램에서 이 사용자를 제거하시겠습니까?</label>
+        <name>ConsumerSettings_jS_Alert1</name>
+    </customLabels>
+    <customLabels>
+        <label>LearningListener 페이지의 URL 을 입력하고 &amp;quot;저장&amp;quot; 을 클릭하십시오.</label>
+        <name>ConsumerSettings_p_MsgUrl</name>
+    </customLabels>
+    <customLabels>
+        <label>CyberU 이 응용 프로그램을 등록</label>
+        <name>ConsumerSettings_subtitle_Register_this_Application_with_CyberU</name>
+    </customLabels>
+    <customLabels>
+        <label>소비자 사용자</label>
+        <name>ConsumerSettings_title_Consumer_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>LMS 소비자 설정</label>
+        <name>ConsumerSettings_title_LMS_Consumer_Settings</name>
+    </customLabels>
+    <customLabels>
+        <label>조직 안내</label>
+        <name>ConsumerSettings_title_Organization_Information</name>
+    </customLabels>
+    <customLabels>
+        <label>취소</label>
+        <name>ConsumerSettings_value_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>CyberU 콜백 URL</label>
+        <name>ConsumerSettings_value_CyberU_Callback_URL</name>
+    </customLabels>
+    <customLabels>
+        <label>CyberU 그룹 (Ad Group)</label>
+        <name>ConsumerSettings_value_CyberU_Group_Id</name>
+    </customLabels>
+    <customLabels>
+        <label>CyberU 비밀키</label>
+        <name>ConsumerSettings_value_CyberU_Secret_Key</name>
+    </customLabels>
+    <customLabels>
+        <label>삭제</label>
+        <name>ConsumerSettings_value_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>새로운 소비자 사용자</label>
+        <name>ConsumerSettings_value_New_Consumer_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>조직 이름</label>
+        <name>ConsumerSettings_value_Organization_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>저장</label>
+        <name>ConsumerSettings_value_Save</name>
+    </customLabels>
+    <customLabels>
+        <label>오류 :</label>
+        <name>ConsumerUser_Error</name>
+    </customLabels>
+    <customLabels>
+        <label>더 이상 사용자가 등록 존재하지 않습니다</label>
+        <name>ConsumerUser_ErrorMsg</name>
+    </customLabels>
+    <customLabels>
+        <label>처리 중 ...</label>
+        <name>ConsumerUser_Message_Processing</name>
+    </customLabels>
+    <customLabels>
+        <label>오름차순 정렬</label>
+        <name>ConsumerUser_alt_Sorted_Ascending</name>
+    </customLabels>
+    <customLabels>
+        <label>내림차순 정렬</label>
+        <name>ConsumerUser_alt_Sorted_Descending</name>
+    </customLabels>
+    <customLabels>
+        <label>페이 지당 레코드</label>
+        <name>ConsumerUser_b_Records</name>
+    </customLabels>
+    <customLabels>
+        <label>관리자</label>
+        <name>ConsumerUser_dV_Admin</name>
+    </customLabels>
+    <customLabels>
+        <label>키워드 를 입력하고 검색을 시작 검색을 클릭하십시오.</label>
+        <name>ConsumerUser_dV_Enter_key</name>
+    </customLabels>
+    <customLabels>
+        <label>아무 기록은 당신의 기준에 따라 찾을 수 없습니다</label>
+        <name>ConsumerUser_dV_No_records</name>
+    </customLabels>
+    <customLabels>
+        <label>이 페이지에 당신의 선택은 손실됩니다.</label>
+        <name>ConsumerUser_js_1</name>
+    </customLabels>
+    <customLabels>
+        <label>다음 페이지</label>
+        <name>ConsumerUser_oT_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>없음 다음 페이지 없음</label>
+        <name>ConsumerUser_oT_No_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>이전 페이지</label>
+        <name>ConsumerUser_oT_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>사용자 찾기</label>
+        <name>ConsumerUser_sP_Find_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- ConsumerUser_sP_OF_Users --></label>
+        <name>ConsumerUser_sP_OF_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>새로운 소비자 사용자 등록하기</label>
+        <name>ConsumerUser_subtitle_Register_new_Consumer_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>LMS 소비자 사용자</label>
+        <name>ConsumerUser_title_LMS_Consumer_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>다음 페이지</label>
+        <name>ConsumerUser_title_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>이전 페이지</label>
+        <name>ConsumerUser_title_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>취소</label>
+        <name>ConsumerUser_value_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>이메일</label>
+        <name>ConsumerUser_value_Email</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- ConsumerUser_value IsActive --></label>
+        <name>ConsumerUser_value_IsActive</name>
+    </customLabels>
+    <customLabels>
+        <label>프로필</label>
+        <name>ConsumerUser_value_Profile</name>
+    </customLabels>
+    <customLabels>
+        <label>역할</label>
+        <name>ConsumerUser_value_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>저장</label>
+        <name>ConsumerUser_value_Save</name>
+    </customLabels>
+    <customLabels>
+        <label>수색</label>
+        <name>ConsumerUser_value_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>사용자 이름</label>
+        <name>ConsumerUser_value_User_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>로딩 중</label>
+        <name>Consumer_Global_Loading</name>
+    </customLabels>
+    <customLabels>
+        <label>다음 페이지</label>
+        <name>Consumer_Global_NextPage</name>
+    </customLabels>
+    <customLabels>
+        <label>표시할 기록 없음</label>
+        <name>Consumer_Global_NoRecordsToDisplay</name>
+    </customLabels>
+    <customLabels>
+        <label>이전 페이지</label>
+        <name>Consumer_Global_PreviousPage</name>
+    </customLabels>
+    <customLabels>
+        <label>고객 글로벌 검색</label>
+        <name>Consumer_Global_Search</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Consumer Sufficient Privileges To Register Users --></label>
+        <name>Consumer_Sufficient_Privileges_To_Register_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Content not found --></label>
+        <name>Content_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Course already assigned --></label>
+        <name>Course_already_assigned</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Course has been assigned successfully. --></label>
+        <name>Course_has_been_assigned_successfully</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CreateChatterTemplateHelpText --></label>
+        <name>CreateChatterTemplateHelpText</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CreateMailTemplateHelpText --></label>
+        <name>CreateMailTemplateHelpText</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Create Chatter Template --></label>
+        <name>Create_Chatter_Template</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Create Consumer Users as Admin --></label>
+        <name>Create_Consumer_Users_as_Admin</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Create Consumer Users from CSV file: --></label>
+        <name>Create_Consumer_Users_from_CSV_file</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Create Email Template --></label>
+        <name>Create_Email_Template</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Create Sandbox --></label>
+        <name>Create_Sandbox</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Create Users from CSV --></label>
+        <name>Create_Users_from_CSV</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Create Users from Profiles --></label>
+        <name>Create_Users_from_Profiles</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Created Date --></label>
+        <name>Created_Date</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Created by --></label>
+        <name>Created_by</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Current Training --></label>
+        <name>Current_Training</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Curriculum assign error. --></label>
+        <name>Curriculum_assign_error</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CyberU Integration --></label>
+        <name>CyberU_Integration</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- DESCRIPTION --></label>
+        <name>DESCRIPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>기한</label>
+        <name>DUE_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- DURATION --></label>
+        <name>DURATION</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Deactivate --></label>
+        <name>Deactivate</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Default --></label>
+        <name>Default</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Default Number of Seats: must be a positive number --></label>
+        <name>Default_Number_of_Seats_must_be_a_positive_number</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Default Value --></label>
+        <name>Default_Value</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Delete --></label>
+        <name>Delete</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Delete Item Error --></label>
+        <name>Delete_Item_Error</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Details --></label>
+        <name>Details</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Difficulty --></label>
+        <name>Difficulty</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Inserting of due date should not be less than the current one --></label>
+        <name>Due_date_should_not_be_less_than_the_current_one</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Duplicate item found --></label>
+        <name>Duplicate_item_found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Duration --></label>
+        <name>Duration_normal</name>
+    </customLabels>
+    <customLabels>
+        <label>수정</label>
+        <name>Edit</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Edit Chatter Template --></label>
+        <name>Edit_Chatter_Template</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Edit Course Assignment --></label>
+        <name>Edit_Course_Assignment</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Edit Learning Path Assignment --></label>
+        <name>Edit_Learning_Path_Assignment</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Enabled --></label>
+        <name>Enabled</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- EquivalentDublicateRelatedObjects --></label>
+        <name>EquivalentDublicateRelatedObjects</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Equivalent equal elements --></label>
+        <name>EquivalentEquialElements</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Equivalents quiz or module --></label>
+        <name>EquivalentsQuizModule</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Error: No Table id set --></label>
+        <name>Error_No_Table_id_set</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Error QueryLocator --></label>
+        <name>Error_QueryLocator</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Error Request --></label>
+        <name>Error_Request</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Error Skillsoft Search --></label>
+        <name>Error_Skillsoft_Search</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Failed --></label>
+        <name>Failed</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Filter by Profiles --></label>
+        <name>Filter_by_Profiles</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- First Page Assign Plan Alt --></label>
+        <name>First_Page_Assign_Plan_Alt</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- First_Page_Assign_Plan_Title --></label>
+        <name>First_Page_Assign_Plan_Title</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- From --></label>
+        <name>From</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Groups not found --></label>
+        <name>Groups_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Ignore first row of csv. --></label>
+        <name>Ignore_first_row_of_csv</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- In Progress --></label>
+        <name>In_Progress</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Info --></label>
+        <name>Info</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Information --></label>
+        <name>Information</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- InformationAssign --></label>
+        <name>InformationAssign</name>
+    </customLabels>
+    <customLabels>
+        <label>정보 가 성공적으로 업데이 트되었습니다.</label>
+        <name>Information_has_been_updated_successfully</name>
+    </customLabels>
+    <customLabels>
+        <label>권한이 충분</label>
+        <name>Insufficient_Privileges_Error_Msg</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Invalid ID --></label>
+        <name>Invalid_ID</name>
+    </customLabels>
+    <customLabels>
+        <label>항목 삽입 할 수 없습니다.</label>
+        <name>Items_can_t_be_inserted</name>
+    </customLabels>
+    <customLabels>
+        <label>항목 을 선택하지 .</label>
+        <name>Items_not_selected</name>
+    </customLabels>
+    <customLabels>
+        <label>게시 ...</label>
+        <name>LMSContentDetail_Message_Publishing</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Last_Page_Assign_Alt --></label>
+        <name>Last_Page_Assign_Alt</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Last_Page_Assign_Title --></label>
+        <name>Last_Page_Assign_Title</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Learning Object --></label>
+        <name>Learning_Object</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Learning Path assign error. --></label>
+        <name>Learning_Path_assign_error</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- License --></label>
+        <name>License</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- License Edit --></label>
+        <name>License_Edit</name>
+    </customLabels>
+    <customLabels>
+        <label>라이센스 는 각 코스의 항목 을 선택 합니다.</label>
+        <name>License_must_be_selected</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- License not found --></label>
+        <name>License_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- List Assignments Archive --></label>
+        <name>List_Assignments_Archive</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- List Assignments Del --></label>
+        <name>List_Assignments_Del</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- LoadAssignments title --></label>
+        <name>LoadAssignments_title</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Load from file --></label>
+        <name>Load_from_file</name>
+    </customLabels>
+    <customLabels>
+        <label>로드 중입니다 ...</label>
+        <name>Loading</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Localization --></label>
+        <name>Localization</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Migrate Complete --></label>
+        <name>Migrate_Complete</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 참조를 누락되었습니다.</label>
+        <name>Missing_training_reference</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Default language module already linked to another module --></label>
+        <name>ModuleTrigger_default_already_linked_to_another</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Default language module is not published yet --></label>
+        <name>ModuleTrigger_default_not_published_yet</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Delete the link to the default language module --></label>
+        <name>ModuleTrigger_delete_link_to_default_language_module</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This module cannot be deleted until it&apos;s detached from all its translations --></label>
+        <name>ModuleTrigger_delete_module_translations</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This module has already been translated into selected language --></label>
+        <name>ModuleTrigger_module_has_already_been_translated</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This module is default language module with translations --></label>
+        <name>ModuleTrigger_module_is_default_with_translation</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This module is not published --></label>
+        <name>ModuleTrigger_module_not_published</name>
+    </customLabels>
+    <customLabels>
+        <label>모듈 이 업데이트되었습니다</label>
+        <name>Module_has_been_updateded</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Module not found --></label>
+        <name>Module_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label>모듈 이 업데이트 되지 않았습니다</label>
+        <name>Module_was_not_updated</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 을 지정</label>
+        <name>MyTeam_Assign_Training</name>
+    </customLabels>
+    <customLabels>
+        <label>취소</label>
+        <name>MyTeam_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>논평</label>
+        <name>MyTeam_Comment</name>
+    </customLabels>
+    <customLabels>
+        <label>코멘트</label>
+        <name>MyTeam_Comments</name>
+    </customLabels>
+    <customLabels>
+        <label>내 팀</label>
+        <name>MyTeam_Header</name>
+    </customLabels>
+    <customLabels>
+        <label>같은</label>
+        <name>MyTeam_Like</name>
+    </customLabels>
+    <customLabels>
+        <label>메시지</label>
+        <name>MyTeam_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>페이지</label>
+        <name>MyTeam_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>이 같은 사람들</label>
+        <name>MyTeam_People_Like_It</name>
+    </customLabels>
+    <customLabels>
+        <label>보내다</label>
+        <name>MyTeam_Send</name>
+    </customLabels>
+    <customLabels>
+        <label>모두보기</label>
+        <name>MyTeam_Show_All</name>
+    </customLabels>
+    <customLabels>
+        <label>비활성 사용자를 표시</label>
+        <name>MyTeam_Show_Inactive_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>의 팀</label>
+        <name>MyTeam_Team</name>
+    </customLabels>
+    <customLabels>
+        <label>팀 업데이트</label>
+        <name>MyTeam_Team_Updates</name>
+    </customLabels>
+    <customLabels>
+        <label>에</label>
+        <name>MyTeam_To</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 현황</label>
+        <name>MyTeam_Training_Status</name>
+    </customLabels>
+    <customLabels>
+        <label>같지 않은</label>
+        <name>MyTeam_Unlike</name>
+    </customLabels>
+    <customLabels>
+        <label>에 대한 할당 {0}</label>
+        <name>MyTeam_User_Assignments</name>
+    </customLabels>
+    <customLabels>
+        <label>더 많은 업데이트 보기</label>
+        <name>MyTeam_View_More_Updates</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- MyTraining Popup Page Description --></label>
+        <name>MyTrainingPopup_Description</name>
+    </customLabels>
+    <customLabels>
+        <label>카탈로그 에 추가</label>
+        <name>MyTraining_Add_to_Catalog</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- MyTraining Are you sure you want to unenroll this assignment --></label>
+        <name>MyTraining_Are_you_sure_you_want_to_unenroll_this_assignment</name>
+    </customLabels>
+    <customLabels>
+        <label>붙이다</label>
+        <name>MyTraining_Attach</name>
+    </customLabels>
+    <customLabels>
+        <label>첨부 파일</label>
+        <name>MyTraining_Attached_File</name>
+    </customLabels>
+    <customLabels>
+        <label>MyTraining BTitle1</label>
+        <name>MyTraining_BTitle1</name>
+    </customLabels>
+    <customLabels>
+        <label>MyTraining BTitle2</label>
+        <name>MyTraining_BTitle2</name>
+    </customLabels>
+    <customLabels>
+        <label>이전 모듈</label>
+        <name>MyTraining_BTitle3</name>
+    </customLabels>
+    <customLabels>
+        <label>이전 코스</label>
+        <name>MyTraining_BTitle4</name>
+    </customLabels>
+    <customLabels>
+        <label>취소</label>
+        <name>MyTraining_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>가까운</label>
+        <name>MyTraining_Close</name>
+    </customLabels>
+    <customLabels>
+        <label>MyTraining Column1</label>
+        <name>MyTraining_Column1</name>
+    </customLabels>
+    <customLabels>
+        <label>MyTraining Column2</label>
+        <name>MyTraining_Column2</name>
+    </customLabels>
+    <customLabels>
+        <label>MyTraining Column3</label>
+        <name>MyTraining_Column3</name>
+    </customLabels>
+    <customLabels>
+        <label>점수</label>
+        <name>MyTraining_Column4</name>
+    </customLabels>
+    <customLabels>
+        <label>지속</label>
+        <name>MyTraining_Column5</name>
+    </customLabels>
+    <customLabels>
+        <label>삭제</label>
+        <name>MyTraining_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- MyTraining_Details_Popup_Title --></label>
+        <name>MyTraining_Details_Popup_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>파일</label>
+        <name>MyTraining_File</name>
+    </customLabels>
+    <customLabels>
+        <label>MyTraining FilterBy</label>
+        <name>MyTraining_FilterBy</name>
+    </customLabels>
+    <customLabels>
+        <label>따라</label>
+        <name>MyTraining_Follow</name>
+    </customLabels>
+    <customLabels>
+        <label>다음의</label>
+        <name>MyTraining_Following</name>
+    </customLabels>
+    <customLabels>
+        <label>가입</label>
+        <name>MyTraining_Join</name>
+    </customLabels>
+    <customLabels>
+        <label>MyTraining LaunchCourse</label>
+        <name>MyTraining_LaunchCourse</name>
+    </customLabels>
+    <customLabels>
+        <label>회원</label>
+        <name>MyTraining_Member</name>
+    </customLabels>
+    <customLabels>
+        <label>이름</label>
+        <name>MyTraining_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>당신은 완료 할 현재의 교육 이 없습니다</label>
+        <name>MyTraining_No_Training_to_Complete</name>
+    </customLabels>
+    <customLabels>
+        <label>확인을</label>
+        <name>MyTraining_Ok</name>
+    </customLabels>
+    <customLabels>
+        <label>MyTraining OverallProgress</label>
+        <name>MyTraining_OverallProgress</name>
+    </customLabels>
+    <customLabels>
+        <label>삭제</label>
+        <name>MyTraining_Remove</name>
+    </customLabels>
+    <customLabels>
+        <label>검색</label>
+        <name>MyTraining_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>카탈로그 검색</label>
+        <name>MyTraining_SearchCatalog</name>
+    </customLabels>
+    <customLabels>
+        <label>그룹 을 선택</label>
+        <name>MyTraining_Select_Groups</name>
+    </customLabels>
+    <customLabels>
+        <label>사람 을 선택합니다</label>
+        <name>MyTraining_Select_People</name>
+    </customLabels>
+    <customLabels>
+        <label>메시지 보내기</label>
+        <name>MyTraining_Send_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>몫</label>
+        <name>MyTraining_Share</name>
+    </customLabels>
+    <customLabels>
+        <label>분</label>
+        <name>MyTraining_min</name>
+    </customLabels>
+    <customLabels>
+        <label>내 교육</label>
+        <name>MyTraining_title_My_Training</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- -NONE- value has been selected --></label>
+        <name>NONE_value_has_been_selected</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Name --></label>
+        <name>Name</name>
+    </customLabels>
+    <customLabels>
+        <label>새로운</label>
+        <name>New</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- NewCourseVersion --></label>
+        <name>NewCourseVersion</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- New Training Path Item --></label>
+        <name>New_Training_Path_Item</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- New Version --></label>
+        <name>New_Version</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Next_Page_Assign_Alt --></label>
+        <name>Next_Page_Assign_Alt</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Next_Page_Assign_Title --></label>
+        <name>Next_Page_Assign_Title</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- No Curriculum items found. --></label>
+        <name>No_Curriculum_items_found</name>
+    </customLabels>
+    <customLabels>
+        <label>결과가 없습니다</label>
+        <name>No_Results_Found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- No Templates Available --></label>
+        <name>No_Templates_Available</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- No cornerstone Users created id --></label>
+        <name>No_cornerstone_Users_created_id</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- No default Org Values found --></label>
+        <name>No_default_Org_Values_found</name>
+    </customLabels>
+    <customLabels>
+        <label>라이센스 에 대한 모든 남은 좌석은 사용되었습니다.</label>
+        <name>No_licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>라이센스 에 대한 모든 남은 좌석은 사용되었습니다.</label>
+        <name>No_licenses_courses</name>
+    </customLabels>
+    <customLabels>
+        <label>아무 기록은 당신의 기준에 따라 찾을 수 없습니다.</label>
+        <name>No_records_were_found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- No results found. Please search again. --></label>
+        <name>No_results_found_Please_search_again</name>
+    </customLabels>
+    <customLabels>
+        <label>아무 사용자가 삭제 작업에 대한 지정하지 않았습니다.</label>
+        <name>No_user_specified_for_delete_action</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- None --></label>
+        <name>None</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Not Found the valid User ids --></label>
+        <name>Not_Found_the_valid_User_ids</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Not Started --></label>
+        <name>Not_Started</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Notification --></label>
+        <name>Notification</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Notification Management --></label>
+        <name>Notification_Management</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Number --></label>
+        <name>Number</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Number of users added per batch: --></label>
+        <name>Number_of_users_added_per_batch</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Object Id --></label>
+        <name>Object_Id</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- OldCourseVersion --></label>
+        <name>OldCourseVersion</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Order --></label>
+        <name>Order</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Organization Template Folder --></label>
+        <name>Organization_Template_Folder</name>
+    </customLabels>
+    <customLabels>
+        <label>진행</label>
+        <name>PROGRESS</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- PageAssignAndLabel --></label>
+        <name>PageAssignAndLabel</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- PageAssignLabel --></label>
+        <name>PageAssignLabel</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- PageAssignOfLabel --></label>
+        <name>PageAssignOfLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>페이지 나누기</label>
+        <name>Page_Break</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Pagination_Next --></label>
+        <name>Pagination_Next</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Pagination_Previous --></label>
+        <name>Pagination_Previous</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Parent Object: --></label>
+        <name>Parent_Object</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Passed --></label>
+        <name>Passed</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Past Due --></label>
+        <name>Past_Due</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Pending Assignments --></label>
+        <name>Pending_Assignments</name>
+    </customLabels>
+    <customLabels>
+        <label>기다려주십시오</label>
+        <name>Please_Wait</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please add path items --></label>
+        <name>Please_add_path_items</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please confirm --></label>
+        <name>Please_confirm</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please enter a valid ID. --></label>
+        <name>Please_enter_a_valid_ID</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please select file. --></label>
+        <name>Please_select_file</name>
+    </customLabels>
+    <customLabels>
+        <label>하나 이상의 연수생 을 선택하십시오.</label>
+        <name>Please_select_one_or_more_trainees</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please specify both recurring traing period --></label>
+        <name>Please_specify_both_recurring_traing_period</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- To create a user according to his profile --></label>
+        <name>Please_specify_the_appropriate</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please try assigning by group later. Batch LIMIT of 5 is reached. --></label>
+        <name>Please_try_assigning_by_group_later</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please try assigning by group later. Batch limit of 5 is reached. --></label>
+        <name>Please_try_assigning_by_group_later_Batch_limit_of_5_is_reached</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please try later. Batch limit of 5 is reached. --></label>
+        <name>Please_try_later_Batch_limit_of_5_is_reached</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please try update later. Batch limit of 5 is reached. --></label>
+        <name>Please_try_update_later_Batch_limit_of_5_is_reached</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Please upload *.CSV file. --></label>
+        <name>Please_upload_CSV_file</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Previous_Page_Assign_Alt --></label>
+        <name>Previous_Page_Assign_Alt</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Previous_Page_Assign_Title --></label>
+        <name>Previous_Page_Assign_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>인쇄 증명서</label>
+        <name>Print_Certificate</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- ProfileIdfieldException --></label>
+        <name>ProfileIdfieldException</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Progress Information --></label>
+        <name>Progress_Information</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Question Back to Quiz --></label>
+        <name>Question_Back_to_Quiz</name>
+    </customLabels>
+    <customLabels>
+        <label>참 / 거짓</label>
+        <name>Question_True_False</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz_Congratulations --></label>
+        <name>Quiz_Congratulations</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz Congratulations Score --></label>
+        <name>Quiz_Congratulations_Score</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz Please fill in all fields --></label>
+        <name>Quiz_Please_fill_in_all_fields</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz Unfortunately Score --></label>
+        <name>Quiz_Unfortunately_Score</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz has been assigned successfully. --></label>
+        <name>Quiz_has_been_assigned_successfully</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz is already assigned --></label>
+        <name>Quiz_is_already_assigned</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- QuizMaxAttemptsReached --></label>
+        <name>Quiz_max_attempts_reached</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz not found --></label>
+        <name>Quiz_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz without questions cannot be assigned. --></label>
+        <name>Quiz_without_questions_cannot_be_assigned</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quiz_your_result_does_not_meet_min_passing_score --></label>
+        <name>Quiz_your_result_does_not_meet_min_passing_score</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Quizzes --></label>
+        <name>Quizzes</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- RecordType not found. --></label>
+        <name>RecordType_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Records per page of --></label>
+        <name>Records_per_page</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Recurring Training --></label>
+        <name>Recurring_Training</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Recurring Training Every --></label>
+        <name>Recurring_Training_Every</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Recurring Training Message --></label>
+        <name>Recurring_Training_Message</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Recurring training periods should be positive integer --></label>
+        <name>Recurring_training_periods_should_be_positive_integer</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Registration Status --></label>
+        <name>Registration_Status</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Remove --></label>
+        <name>Remove</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Retired --></label>
+        <name>Retired</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Review --></label>
+        <name>Review</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SCORE --></label>
+        <name>SCORE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- STATUS --></label>
+        <name>STATUS</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Save --></label>
+        <name>Save</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Save_and_New --></label>
+        <name>Save_and_New</name>
+    </customLabels>
+    <customLabels>
+        <label>검색</label>
+        <name>Search</name>
+    </customLabels>
+    <customLabels>
+        <label>고급 검색</label>
+        <name>SearchCatalog_Advanced_Search</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- All --></label>
+        <name>SearchCatalog_AllCatalogs</name>
+    </customLabels>
+    <customLabels>
+        <label>지정</label>
+        <name>SearchCatalog_Assign</name>
+    </customLabels>
+    <customLabels>
+        <label>학습 지정</label>
+        <name>SearchCatalog_Assign_Learning</name>
+    </customLabels>
+    <customLabels>
+        <label>취소</label>
+        <name>SearchCatalog_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>가까운</label>
+        <name>SearchCatalog_Close</name>
+    </customLabels>
+    <customLabels>
+        <label>기술</label>
+        <name>SearchCatalog_Column_Description</name>
+    </customLabels>
+    <customLabels>
+        <label>항목</label>
+        <name>SearchCatalog_Column_Items</name>
+    </customLabels>
+    <customLabels>
+        <label>결과</label>
+        <name>SearchCatalog_Column_Results</name>
+    </customLabels>
+    <customLabels>
+        <label>이름</label>
+        <name>SearchCatalog_Column_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>유형</label>
+        <name>SearchCatalog_Column_Type</name>
+    </customLabels>
+    <customLabels>
+        <label>코스</label>
+        <name>SearchCatalog_Courses</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 과정</label>
+        <name>SearchCatalog_Curriculums</name>
+    </customLabels>
+    <customLabels>
+        <label>등록</label>
+        <name>SearchCatalog_Enroll</name>
+    </customLabels>
+    <customLabels>
+        <label>학습 경로</label>
+        <name>SearchCatalog_LearningPaths</name>
+    </customLabels>
+    <customLabels>
+        <label>모듈</label>
+        <name>SearchCatalog_Modules</name>
+    </customLabels>
+    <customLabels>
+        <label>역할</label>
+        <name>SearchCatalog_Roles</name>
+    </customLabels>
+    <customLabels>
+        <label>검색 설명</label>
+        <name>SearchCatalog_Search_Description</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Catalog --></label>
+        <name>SearchCatalog_SelectCatalog</name>
+    </customLabels>
+    <customLabels>
+        <label>카탈로그 검색</label>
+        <name>SearchCatalog_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>훈련받는 사람</label>
+        <name>SearchCatalog_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Search Users --></label>
+        <name>Search_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Search for specific keywords or perform. --></label>
+        <name>Search_for_specific_keywords</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Search the Training catalog --></label>
+        <name>Search_the_Training_catalog</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SelectCourseVersionHead --></label>
+        <name>SelectCourseVersionHead</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- SelectCourseVersionTitle --></label>
+        <name>SelectCourseVersionTitle</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Select All --></label>
+        <name>Select_All</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Select Email Template --></label>
+        <name>Select_Email_Template</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Select File: --></label>
+        <name>Select_File</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Select one or more questions to add. --></label>
+        <name>Select_one_or_more_questions_to_add</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Sequence --></label>
+        <name>Sequence</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Session not created for cornerstone User Id --></label>
+        <name>Session_not_created_for_cornerstone_User_Id</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Show Completed Training --></label>
+        <name>Show_Completed_Training</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Sorry, but ID is invalid --></label>
+        <name>Sorry_but_ID_is_invalid</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Sorted Ascending --></label>
+        <name>Sorted_Ascending</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Sorted Descending --></label>
+        <name>Sorted_Descending</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Specify Filter Criteria --></label>
+        <name>Specify_Filter_Criteria</name>
+    </customLabels>
+    <customLabels>
+        <label>상태는 곧 재설정됩니다</label>
+        <name>Statuses_will_be_reset_shortly</name>
+    </customLabels>
+    <customLabels>
+        <label>교육</label>
+        <name>TRAINING</name>
+    </customLabels>
+    <customLabels>
+        <label>교육 TYPE</label>
+        <name>TRAINING_TYPE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Template download --></label>
+        <name>Template_download</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Test API --></label>
+        <name>Test_API</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Test Module --></label>
+        <name>Test_Module</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Test Quiz --></label>
+        <name>Test_Quiz</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- The application has not been set up properly --></label>
+        <name>The_application_has_not_been_set_up_properly</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- There are no Learning Path Items. --></label>
+        <name>There_are_no_Learning_Path_Items</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- There are no questions to add. --></label>
+        <name>There_are_no_questions_to_add</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- This certification is awarded to --></label>
+        <name>This_certification_is_awarded_to</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Title --></label>
+        <name>Title</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- TraineesTabLabel --></label>
+        <name>TraineesTabLabel</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Training Certificate --></label>
+        <name>Training_Certificate</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Training Path Item Edit --></label>
+        <name>Training_Path_Item_Edit</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Transcript --></label>
+        <name>Transcript</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Type Text --></label>
+        <name>Type_Text</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Unenroll --></label>
+        <name>Unenroll</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Unexpected error --></label>
+        <name>Unexpected_error</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Unselect users --></label>
+        <name>Unselect_users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Updating process has been completed. --></label>
+        <name>Updating_process_has_been_completed</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Updating process has been started --></label>
+        <name>Updating_process_has_been_started</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Updating process is in progress. --></label>
+        <name>Updating_process_is_in_progress</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload --></label>
+        <name>Upload</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Content --></label>
+        <name>Upload_Content</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Details --></label>
+        <name>Upload_Details</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload File --></label>
+        <name>Upload_File</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Fully Supported File Types --></label>
+        <name>Upload_Fully_Supported_File_Types</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Instructions --></label>
+        <name>Upload_Instructions</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Modules --></label>
+        <name>Upload_Modules</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Most Other File Types --></label>
+        <name>Upload_Most_Other_File_Types</name>
+    </customLabels>
+    <customLabels>
+        <label>참고 :</label>
+        <name>Upload_Note</name>
+    </customLabels>
+    <customLabels>
+        <label>유일한 SCORM 또는 AICC 패키지를 업로드 하시기 바랍니다.</label>
+        <name>Upload_Note_continue</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Partially Supported File Types --></label>
+        <name>Upload_Partially_Supported_File_Types</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Please Select Package --></label>
+        <name>Upload_Please_Select_Package</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload SCORM --></label>
+        <name>Upload_SCORM</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Upload Select File --></label>
+        <name>Upload_Select_File</name>
+    </customLabels>
+    <customLabels>
+        <label>로드 중 ...</label>
+        <name>Upload_msg</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Uploads --></label>
+        <name>Uploads</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- User --></label>
+        <name>User</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- User Assignments --></label>
+        <name>User_Assignments</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- User Template Folder --></label>
+        <name>User_Template_Folder</name>
+    </customLabels>
+    <customLabels>
+        <label>사용자 역할 이 성공적으로 변경되었습니다.</label>
+        <name>User_s_rights_were_changed</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Users --></label>
+        <name>Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Users Created: value is empty. --></label>
+        <name>Users_Created_value_is_empty</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Users Created: value must be between 1 and 50 --></label>
+        <name>Users_Created_value_must_be_between_1_and_50</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Users not found --></label>
+        <name>Users_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Value for selected language already exists --></label>
+        <name>Value_for_selected_language_already_exists</name>
+    </customLabels>
+    <customLabels>
+        <label>우리가 강력하게 완전히 게시 하기 전에 학습 객체를 테스트하는 것이 좋습니다 주시기 바랍니다.</label>
+        <name>Verified</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Verify Module --></label>
+        <name>Verify_Module</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Verify Quiz --></label>
+        <name>Verify_Quiz</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Warning --></label>
+        <name>Warning</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You are not authorized to access this content --></label>
+        <name>You_are_not_authorized_to_access_this_content</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You can upload only less than 10000 records. --></label>
+        <name>You_can_upload_only_less_than_10000_records</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You cannot delete a Purchased License --></label>
+        <name>You_cannot_delete_a_Purchased_License</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You cannot delete a consumed User License --></label>
+        <name>You_cannot_delete_a_consumed_User_License</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You cannot delete an approved Content License --></label>
+        <name>You_cannot_delete_an_approved_Content_License</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You cannot modify the User on a used License --></label>
+        <name>You_cannot_modify_the_User_on_a_used_License</name>
+    </customLabels>
+    <customLabels>
+        <label>이 과정 을 시작 하기 위해 면허증을 가지고 있지 않습니다.</label>
+        <name>You_do_not_have_a_license</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You do not have sufficient privileges to upload a Content. --></label>
+        <name>You_do_not_have_sufficient_privileges_to_upload</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You do not have the level of access --></label>
+        <name>You_do_not_have_the_level_of_access</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You must complete following Learning Objects --></label>
+        <name>You_must_complete_following_Learning_Objects</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You must select at least a User to register --></label>
+        <name>You_must_select_at_least_a_User_to_register</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- You should delete all Assignments before deleting a --></label>
+        <name>You_should_delete_all_Assignments_before_deleting_a</name>
+    </customLabels>
+    <customLabels>
+        <label>당신은 그것을 삭제하기 전에 이 코스 에 대한 모든 할당을 삭제해야합니다</label>
+        <name>You_should_delete_all_Assignments_for_this_Course_before_deleting_it</name>
+    </customLabels>
+    <customLabels>
+        <label>당신은 그것을 삭제하기 전에 이 과정 에 대한 모든 할당을 삭제해야합니다</label>
+        <name>You_should_delete_all_Assignments_for_this_Curriculum_before_deleting_it</name>
+    </customLabels>
+    <customLabels>
+        <label>당신은 그것을 삭제하기 전에 이 학습 경로 에 대한 모든 할당을 삭제해야합니다</label>
+        <name>You_should_delete_all_Assignments_for_this_Learning_Path_before_deleting_it</name>
+    </customLabels>
+    <customLabels>
+        <label>당신은 그것을 삭제하기 전에 해당 모듈 에 대한 모든 할당을 삭제해야합니다</label>
+        <name>You_should_delete_all_Assignments_for_this_module_before_deleting_it</name>
+    </customLabels>
+    <customLabels>
+        <label>귀사 가 성공적으로 CyberU 로 등록되었습니다.</label>
+        <name>Your_organization_was_successfully_registered_with_CyberU</name>
+    </customLabels>
+    <customLabels>
+        <label>아래의 라이센스 섹션에 새 라이센스 를 클릭하십시오.</label>
+        <name>click_new_lic</name>
+    </customLabels>
+    <customLabels>
+        <label>사용 가능한 라이센스 는 LMS 소비자 사용자가 소비 되었습니다.</label>
+        <name>consumed_lic</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- here --></label>
+        <name>here</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- in recognition of the successful completion of --></label>
+        <name>in_recognition_of_the_successful_completion_of</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- СSV file size exceeds --></label>
+        <name>limit_size_csv</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- loading_label --></label>
+        <name>loading_label</name>
+    </customLabels>
+    <customLabels>
+        <label>어떤 코스 항목 이 없습니다.</label>
+        <name>no_Course_Items</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- of --></label>
+        <name>of</name>
+    </customLabels>
+    <customLabels>
+        <label>라이센스와 하나 이상의 연수생 을 선택하십시오</label>
+        <name>select_a_license</name>
+    </customLabels>
+    <customLabels>
+        <label>하나 이상의 연수생 이나 과정 이 이미 선택한 연수생 에 할당 되었습니다 선택하십시오.</label>
+        <name>select_one_or_more_trainees_or_Course_has_already_been_assigned</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- signifies_the_next_session_requiring_your_attendence --></label>
+        <name>signifies_the_next_session_requiring_your_attendence</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- social_learning_sharing_successful --></label>
+        <name>social_learning_sharing_successful</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- &gt;social_learning_sharing_unsuccessful --></label>
+        <name>social_learning_sharing_unsuccessful</name>
+    </customLabels>
+    <customLabels>
+        <label>당신은 검색을 실행할 수 있는 권한 이 없습니다.</label>
+        <name>sufficient_privileges</name>
+    </customLabels>
+    <customLabels>
+        <label>API 정보를 업데이 트하는 동안시스템은 다음과 같은 오류 가 발생했습니다</label>
+        <name>system_error_API</name>
+    </customLabels>
+    <customLabels>
+        <label>다시 신선한 페이지 가 상태를 업데이 트하는 학습 객체를 테스트를 한 번 주시기 바랍니다.</label>
+        <name>testCourse</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- to return to the previous page. --></label>
+        <name>to_return_to_the_previous_page</name>
+    </customLabels>
+    <customLabels>
+        <label>tuId 매개 변수 가 없습니다.</label>
+        <name>tuId_parameter_missing</name>
+    </customLabels>
+    <customTabs>
+        <label>로그인 디버그</label>
+        <name>Debug_Log</name>
+    </customTabs>
+    <customTabs>
+        <label>학습 교류</label>
+        <name>LMS_Catalog_Search</name>
+    </customTabs>
+    <customTabs>
+        <label>학습 설정</label>
+        <name>LMS_Consumer_Settings</name>
+    </customTabs>
+    <customTabs>
+        <label>내 팀</label>
+        <name>My_Team</name>
+    </customTabs>
+    <customTabs>
+        <label>내 교육</label>
+        <name>My_Training</name>
+    </customTabs>
+    <customTabs>
+        <label>업로드</label>
+        <name>Upload_Content</name>
+    </customTabs>
+</Translations>

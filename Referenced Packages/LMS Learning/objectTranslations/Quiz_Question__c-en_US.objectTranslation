@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Quiz Question</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Quiz Questions</value>
+    </caseValues>
+    <fields>
+        <label><!-- Order --></label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label><!-- Question --></label>
+        <name>Question__c</name>
+        <relationshipLabel>Quiz questions</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quiz --></label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Quiz questions</relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Quiz Question Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- field cannot have a negative value --></errorMessage>
+        <name>Negative_Order_Value</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Add_Question --></label>
+        <name>Add_Question</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Add_page_break --></label>
+        <name>Add_page_break</name>
+    </webLinks>
+    <webLinks>
+        <label>New question</label>
+        <name>New_Question</name>
+    </webLinks>
+</CustomObjectTranslation>

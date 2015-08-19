@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ApexPage xmlns="http://soap.sforce.com/2006/04/metadata">
+    <apiVersion>27.0</apiVersion>
+    <availableInTouch>false</availableInTouch>
+    <confirmationTokenRequired>false</confirmationTokenRequired>
+    <description>Partner Portal Lead/Opportunity Controller Page.
+
+/*
+            jQuery(&quot;document&quot;).ready(function(){
+            
+                
+                jQuery(&quot;#pagination&quot;).click(function(){
+                    location.href = &quot;{!$Page.mainDisplayPage}?pnum=1&quot;+&quot;&amp;u={!$CurrentPage.parameters.u}&amp;token={!$CurrentPage.parameters.token}&quot;;
+                });
+            })
+            */</description>
+    <label>MainDisplayPage</label>
+</ApexPage>

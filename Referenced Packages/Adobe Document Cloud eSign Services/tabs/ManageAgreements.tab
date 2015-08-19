@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomTab xmlns="http://soap.sforce.com/2006/04/metadata">
+    <frameHeight>600</frameHeight>
+    <hasSidebar>false</hasSidebar>
+    <label>Manage Agreements</label>
+    <mobileReady>false</mobileReady>
+    <motif>Custom50: Big top</motif>
+    <url>https://www.echosign.com/salesforce-web/agreements?noChrome=true&amp;session={!API.Session_ID}&amp;server={!API.Partner_Server_URL_70}&amp;organizationId={!Organization.Id}&amp;namespace=echosign_dev1</url>
+    <urlEncodingKey>UTF-8</urlEncodingKey>
+</CustomTab>

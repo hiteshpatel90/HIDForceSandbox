@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>AXIOM CyberU Connector</fullName>
+    <apiAccessLevel>Unrestricted</apiAccessLevel>
+    <description>This is extension of AXIOM Base and CyberU. This package supports Contextual Training Modules and Courses/ Modules assignment for Corrective Actions.</description>
+    <namespacePrefix>AXIOM_CFSLINK</namespacePrefix>
+    <types>
+        <members>LMSDataLoad</members>
+        <members>LMSDataLoadTest</members>
+        <members>LMSGatewayImpl</members>
+        <members>LMSGatewayImplTest</members>
+        <name>ApexClass</name>
+    </types>
+    <types>
+        <members>CourseAssignment</members>
+        <members>CurriculumAssignment</members>
+        <members>CustomAssignment</members>
+        <members>LearningPathAssignment</members>
+        <members>ModuleAssignment</members>
+        <name>ApexTrigger</name>
+    </types>
+    <types>
+        <members>AXIOM_BASE__Assignment__c.Course_Assignment__c</members>
+        <members>AXIOM_BASE__Assignment__c.Curriculum_Assignment__c</members>
+        <members>AXIOM_BASE__Assignment__c.Learning_Path_Assignment__c</members>
+        <members>AXIOM_BASE__Assignment__c.Module_Assignment__c</members>
+        <members>AXIOM_BASE__OrgSettings__c.Assignment_Duration__c</members>
+        <members>lmscons__Curriculum__c.Coaching_Corrective_Action_Description__c</members>
+        <members>lmscons__Curriculum__c.Coaching_Root_Cause_Tag__c</members>
+        <members>lmscons__Learning_Path__c.Coaching_Corrective_Action_Description__c</members>
+        <members>lmscons__Learning_Path__c.Coaching_Root_Cause_Tag__c</members>
+        <members>lmscons__Training_Content__c.Coaching_Corrective_Action_Description__c</members>
+        <members>lmscons__Training_Content__c.Coaching_Root_Cause_Tag__c</members>
+        <members>lmscons__Training_Content__c.Training_Tag__c</members>
+        <members>lmscons__Training_Path__c.Coaching_Corrective_Action_Description__c</members>
+        <members>lmscons__Training_Path__c.Coaching_Root_Cause_Tag__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>lmscons__Curriculum__c.Coach_Description_Validation</members>
+        <members>lmscons__Learning_Path__c.Coach_Description_Validation</members>
+        <members>lmscons__Training_Content__c.Coach_Description_Validation</members>
+        <members>lmscons__Training_Path__c.Coach_Description_Validation</members>
+        <name>ValidationRule</name>
+    </types>
+    <version>33.0</version>
+</Package>

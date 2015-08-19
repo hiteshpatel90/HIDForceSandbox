@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Catalog Curriculum</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Catalog Curriculums</value>
+    </caseValues>
+    <fields>
+        <label>Catalogue</label>
+        <name>Catalog__c</name>
+        <relationshipLabel>Catalogue curriculums</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Curriculum --></label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Catalogue curriculums</relationshipLabel>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

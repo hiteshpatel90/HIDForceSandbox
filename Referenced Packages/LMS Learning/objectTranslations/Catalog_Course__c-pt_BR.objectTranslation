@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog Module --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Catalog Module --></value>
+    </caseValues>
+    <fields>
+        <label>Catálogo</label>
+        <name>Catalog__c</name>
+        <relationshipLabel>Módulos do Catálogo</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Curso de Treinamento</label>
+        <name>Training_Course__c</name>
+        <relationshipLabel>Módulos do Catálogo</relationshipLabel>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <nameFieldLabel><!-- Catalog Courses Name --></nameFieldLabel>
+</CustomObjectTranslation>

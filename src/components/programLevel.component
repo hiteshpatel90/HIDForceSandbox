@@ -1,0 +1,5 @@
+<apex:component controller="findProgramCode" access="global">
+    <apex:attribute name="myId" type="String" description="Partner Program Level" assignTo="{!myId}" />
+    <apex:attribute name="myType" type="String" description="Partner Program Level" assignTo="{!myType}" />
+    {!plevel}
+</apex:component>

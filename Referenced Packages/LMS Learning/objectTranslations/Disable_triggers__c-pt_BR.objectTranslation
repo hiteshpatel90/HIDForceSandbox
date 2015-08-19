@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Disable triggers --></value>
+    </caseValues>
+    <fields>
+        <label>Após Excluir</label>
+        <name>After_Delete__c</name>
+    </fields>
+    <fields>
+        <label>Após Inserir</label>
+        <name>After_Insert__c</name>
+    </fields>
+    <fields>
+        <label>Após Atualizar</label>
+        <name>After_Update__c</name>
+    </fields>
+    <fields>
+        <label>Antes de Excluir</label>
+        <name>Before_Delete__c</name>
+    </fields>
+    <fields>
+        <label>Antes de Inserir</label>
+        <name>Before_Insert__c</name>
+    </fields>
+    <fields>
+        <label>Antes de Atualizar</label>
+        <name>Before_Update__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+</CustomObjectTranslation>

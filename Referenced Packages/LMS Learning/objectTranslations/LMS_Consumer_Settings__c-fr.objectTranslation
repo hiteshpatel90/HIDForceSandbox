@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Consumer Settings --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Consumer Settings --></value>
+    </caseValues>
+    <fields>
+        <help><!-- The URL of the notification page set up for your organization. --></help>
+        <label>URL de rappel CyberU</label>
+        <name>Cornerstone_Callback_URL__c</name>
+    </fields>
+    <fields>
+        <label>Identifiant Cornerstone</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Message personnalisé</label>
+        <name>Custom_Message__c</name>
+    </fields>
+    <fields>
+        <help><!-- Secret key to sign CyberU callbacks --></help>
+        <label>Code secret de connexion à CyberU</label>
+        <name>CyberUSecretSignKey__c</name>
+    </fields>
+    <fields>
+        <label>Données d&apos;intégration CyberU</label>
+        <name>CyberU_Integration_Data__c</name>
+    </fields>
+    <fields>
+        <label>Période de licence par défaut</label>
+        <name>Default_License_Period__c</name>
+        <picklistValues>
+            <masterLabel>Days</masterLabel>
+            <translation><!-- Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hours</masterLabel>
+            <translation><!-- Hours --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indefinite</masterLabel>
+            <translation><!-- Indefinite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Months</masterLabel>
+            <translation><!-- Months --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weeks</masterLabel>
+            <translation><!-- Weeks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Years</masterLabel>
+            <translation><!-- Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Fin de licence par défaut</label>
+        <name>Default_License_Term__c</name>
+    </fields>
+    <fields>
+        <label>Prix de vente par défaut</label>
+        <name>Default_Sale_Price__c</name>
+    </fields>
+    <fields>
+        <label>Nombre de places par défaut</label>
+        <name>Default_Seats__c</name>
+    </fields>
+    <fields>
+        <label>Identifiant réf. du groupe</label>
+        <name>Group_Ref_ID__c</name>
+    </fields>
+    <fields>
+        <label>Identifiant de l&apos;organisation</label>
+        <name>Organization_ID__c</name>
+    </fields>
+    <fields>
+        <label>Nom de l&apos;organisation</label>
+        <name>Organization_Name__c</name>
+    </fields>
+    <fields>
+        <label>Mode test</label>
+        <name>Test_Mode__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>LMS Learning Settings Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Other Information --></label>
+            <section>Other Information</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Settings ID --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+    <validationRules>
+        <errorMessage>Le champ ne peut pas comporter de valeur négative.</errorMessage>
+        <name>Validate_Default_License_Term</name>
+    </validationRules>
+    <webLinks>
+        <label>Inscrire l&apos;Org. CyberU</label>
+        <name>Register_Cornerstone_Org</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,120 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>LMSConfig_Learning</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>LMSConfig_Learning</value>
+    </caseValues>
+    <fields>
+        <label>Allow unenrolment</label>
+        <name>Allow_Unenrollment__c</name>
+    </fields>
+    <fields>
+        <label><!-- Available user types --></label>
+        <name>Available_user_types__c</name>
+    </fields>
+    <fields>
+        <label>Certificate page</label>
+        <name>Certificate_Page_Name__c</name>
+    </fields>
+    <fields>
+        <label><!-- CyberU ID --></label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label><!-- CyberU Secret Key --></label>
+        <name>CyberU_Secret_Key__c</name>
+    </fields>
+    <fields>
+        <label>Enable catalogue search</label>
+        <name>Enable_Catalog_Search__c</name>
+    </fields>
+    <fields>
+        <label><!-- Enable My Training auto-refresh --></label>
+        <name>Enable_My_Training_auto_refresh__c</name>
+    </fields>
+    <fields>
+        <label>Enable certificate</label>
+        <name>Enable_certificate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Group Ref ID --></label>
+        <name>Group_Ref_ID__c</name>
+    </fields>
+    <fields>
+        <label>Is public link available</label>
+        <name>Is_Public_Link_Available__c</name>
+    </fields>
+    <fields>
+        <label>Public catalogue ID</label>
+        <name>Public_Catalog__c</name>
+    </fields>
+    <fields>
+        <label>Secure launch link</label>
+        <name>Secure_Launch_Link__c</name>
+    </fields>
+    <fields>
+        <label>Show description</label>
+        <name>Show_Description__c</name>
+    </fields>
+    <fields>
+        <label>Show due date</label>
+        <name>Show_Due_Date__c</name>
+    </fields>
+    <fields>
+        <label>Show duration</label>
+        <name>Show_Duration__c</name>
+    </fields>
+    <fields>
+        <label>Show score</label>
+        <name>Show_Score__c</name>
+    </fields>
+    <fields>
+        <label>Show training type</label>
+        <name>Show_Type__c</name>
+    </fields>
+    <fields>
+        <label><!-- Show module in new window --></label>
+        <name>Show_module_in_new_window__c</name>
+    </fields>
+    <fields>
+        <label>Show progress bar</label>
+        <name>Show_progress_bar__c</name>
+    </fields>
+    <fields>
+        <label>Show status</label>
+        <name>Show_status__c</name>
+    </fields>
+    <fields>
+        <label>Social learning</label>
+        <name>Social_Learning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Use Manager field for My Team hierarchy --></label>
+        <name>Use_Manager_field_for_My_Team_hierarchy__c</name>
+    </fields>
+    <fields>
+        <label><!-- UserTypes --></label>
+        <name>UserTypes__c</name>
+    </fields>
+    <fields>
+        <label>User cornerstone group admin</label>
+        <name>User_Cornerstone_Group_Admin__c</name>
+    </fields>
+    <fields>
+        <label><!-- User Cornerstone ID --></label>
+        <name>User_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>User generated learning</label>
+        <name>User_Generated_Learning__c</name>
+    </fields>
+    <fields>
+        <label><!-- Shareable launch link --></label>
+        <name>shareable_launch_link__c</name>
+    </fields>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

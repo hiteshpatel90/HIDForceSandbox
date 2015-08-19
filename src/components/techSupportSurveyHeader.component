@@ -1,0 +1,10 @@
+<apex:component id="techSupportSurveyHeader">
+	<apex:outputPanel layout="block" styleClass="header">
+		<apex:image value="{!$Resource.HIDLogo}" alt="Tech Support Logo" styleClass="vamiddle"/>
+		<h1>{!$Label.SurveyTitle}</h1>
+	</apex:outputPanel>
+	<apex:outputPanel layout="block" styleClass="greeting">
+		<h2>{!$Label.SurveyGreeting}</h2>
+	</apex:outputPanel>
+	<apex:pageMessages />
+</apex:component>

@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Training Unit Manager --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Training Unit Manager --></value>
+    </caseValues>
+    <fields>
+        <label>Contato</label>
+        <name>Contact__c</name>
+        <relationshipLabel>Gerentes da Unidade de Treinamento</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Unidade de Treinamento</label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel>Gerentes da Unidade de Treinamento</relationshipLabel>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <nameFieldLabel><!-- Training Unit Manager Name --></nameFieldLabel>
+</CustomObjectTranslation>

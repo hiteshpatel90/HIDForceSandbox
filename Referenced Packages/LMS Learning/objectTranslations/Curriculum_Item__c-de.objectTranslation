@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <fields>
+        <label>Kurs</label>
+        <name>Course__c</name>
+        <relationshipLabel>Lehrplanelemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Lehrplan</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Lehrplanelemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Lernpfad</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>Lehrplanelemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Modul</label>
+        <name>Module__c</name>
+        <relationshipLabel>Lehrplanelemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Quiz --></label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Lehrplanelemente</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Reihenfolge</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>Titel</label>
+        <name>Title__c</name>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Add Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>Kurs</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Lernpfad</label>
+        <name>Learning_Path2</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Modul</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label><!-- Quiz --></label>
+        <name>Quiz</name>
+    </recordTypes>
+    <webLinks>
+        <label>Kurs zum Lehrplan hinzufugen</label>
+        <name>AddCourseToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Lernpfad zum Lehrplan hinzufugen</label>
+        <name>AddLPToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Modul zum Lehrplan hinzufugen</label>
+        <name>AddModuleToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Quiz zum Lehrplan hinzufugen</label>
+        <name>Add_Quiz_to_Curriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>Sequenz bearbeiten</label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,182 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Object --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Object --></value>
+    </caseValues>
+    <fields>
+        <label>Autor</label>
+        <name>Author__c</name>
+        <relationshipLabel>Objetos</relationshipLabel>
+    </fields>
+    <fields>
+        <label>ID CyberU</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Descrição</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <label>Duração (min)</label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label>Palavras-chave</label>
+        <name>Keywords__c</name>
+    </fields>
+    <fields>
+        <label>Idioma</label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>English</masterLabel>
+            <translation><!-- English --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>French</masterLabel>
+            <translation><!-- French --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Pontuação da Perícia</label>
+        <name>Mastery_Score__c</name>
+    </fields>
+    <fields>
+        <label>Máximo Tempo Permitido (min)</label>
+        <name>Max_Minutes_Allowed__c</name>
+    </fields>
+    <fields>
+        <label>Pontuação Máxima</label>
+        <name>Maximum_Score__c</name>
+    </fields>
+    <fields>
+        <label>Link do Objeto</label>
+        <name>Object_Link__c</name>
+    </fields>
+    <fields>
+        <label>Porcentagem Concluída</label>
+        <name>Percent_Complete__c</name>
+    </fields>
+    <fields>
+        <label>Progresso</label>
+        <name>Progress__c</name>
+    </fields>
+    <fields>
+        <label>Carregar Link</label>
+        <name>Publication_Titlef__c</name>
+    </fields>
+    <fields>
+        <label>ID do Editor</label>
+        <name>Publisher_Course_Id__c</name>
+    </fields>
+    <fields>
+        <label>Pontuação</label>
+        <name>Score__c</name>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>Status_Progress__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Failed</masterLabel>
+            <translation><!-- Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Passed</masterLabel>
+            <translation><!-- Passed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retired</masterLabel>
+            <translation><!-- Retired --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Status</label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label>Testar Curso</label>
+        <name>Test_Course__c</name>
+    </fields>
+    <fields>
+        <label>Ação de Limite de Tempo</label>
+        <name>Time_Limit_Action__c</name>
+        <picklistValues>
+            <masterLabel>Exit</masterLabel>
+            <translation><!-- Exit --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Message</masterLabel>
+            <translation><!-- Message --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Título</label>
+        <name>Title__c</name>
+    </fields>
+    <fields>
+        <label>Tempo de Aprendizado Típico (min)</label>
+        <name>Typical_Learning_Time__c</name>
+    </fields>
+    <fields>
+        <label>Carregar Título</label>
+        <name>Upload_Title__c</name>
+    </fields>
+    <fields>
+        <label>Carregar ID</label>
+        <name>Upload__c</name>
+        <relationshipLabel>Objetos</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Utilizado</label>
+        <name>isUsed__c</name>
+    </fields>
+    <fields>
+        <label>Verificado</label>
+        <name>verified__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Object Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- CyberU Details --></label>
+            <section>CyberU Details</section>
+        </sections>
+        <sections>
+            <label><!-- Details --></label>
+            <section>Details</section>
+        </sections>
+        <sections>
+            <label><!-- Test and Verify Your Training Content --></label>
+            <section>Test and Verify Your Training Content</section>
+        </sections>
+        <sections>
+            <label><!-- Tracking Information --></label>
+            <section>Tracking Information</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Object ID --></nameFieldLabel>
+    <webLinks>
+        <label>Publicar</label>
+        <name>Publish</name>
+    </webLinks>
+    <webLinks>
+        <label>Carregar Objeto</label>
+        <name>Upload_Object</name>
+    </webLinks>
+</CustomObjectTranslation>

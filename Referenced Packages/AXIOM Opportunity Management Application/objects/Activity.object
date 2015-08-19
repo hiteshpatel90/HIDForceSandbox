@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <fullName>Danger_Zones__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Danger Zones</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Decision_Stages__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Decision Stages</label>
+        <required>false</required>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>tmpStringForDateFormat__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>tmpStringForDateFormat</label>
+        <length>255</length>
+        <required>false</required>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+</CustomObject>

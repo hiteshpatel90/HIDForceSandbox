@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Training Unit Usage</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Training Unit Usages</value>
+    </caseValues>
+    <fields>
+        <label>E-mail address</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label><!-- Learner --></label>
+        <name>Learner__c</name>
+        <relationshipLabel>Training unit usages</relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Registration Date --></label>
+        <name>Registration_Date__c</name>
+    </fields>
+    <fields>
+        <label><!-- Status --></label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Training title</label>
+        <name>Training_Title__c</name>
+    </fields>
+    <fields>
+        <label>Training unit cost</label>
+        <name>Training_Unit_Cost__c</name>
+    </fields>
+    <fields>
+        <label><!-- Training Unit --></label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel>Training unit usages</relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Training Unit Usage Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+</CustomObjectTranslation>

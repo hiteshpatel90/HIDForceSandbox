@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Debug --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Debug --></value>
+    </caseValues>
+    <fields>
+        <label>E-mail</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label>E-mail au niveau journal</label>
+        <name>Log_Level_Email__c</name>
+    </fields>
+    <fields>
+        <label>Niveau du journal</label>
+        <name>Log_Level__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <startsWith><!-- Consonant --></startsWith>
+</CustomObjectTranslation>

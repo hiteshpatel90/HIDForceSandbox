@@ -1,0 +1,225 @@
+<apex:page id="myPage" cache="true" standardController="Price_Authorization_Form__c" extensions="ApprovalHistoryController" showHeader="false" sidebar="false">
+    <apex:form id="theForm">    
+    <apex:pageMessages ></apex:pageMessages><br/>
+
+    <apex:variable value="{!Price_Authorization_Form__c}" var="paf"/>
+    <apex:pageBlock id="pbMain">
+    <table width="100%">
+        <tr>
+           <td align = "center" style= "font-weight:bold">
+                <apex:commandLink action="{!submitForApproval}" rendered="{!Price_Authorization_Form__c.Status__c != 'Approved' && Price_Authorization_Form__c.Status__c !='Awaiting Approval' && Price_Authorization_Form__c.Status__c !='Cancelled' && Price_Authorization_Form__c.Status__c !='Recalled'}" target="_parent">
+                <apex:image value="{!$Resource.SubmitForApprovalButton}"> </apex:image>
+                </apex:commandLink>
+           </td>
+        </tr>
+     </table>  
+     
+     <table border = "1" width="100%" cellspacing="0">
+         <tr>
+             <th text-align="center">L1 Approval Status</th>
+             <th>E21 Approval Status</th>
+             <th>L2 Approval Status</th>
+             <th>E21VP Approval Status</th>
+             <th>Pricing Approval Status</th>
+          </tr>
+          <tr>
+          <td>{!paf.L1_Approver__r.Name}</td>
+          <td>{!paf.E21_Approver__r.Name}</td>
+          <td>{!paf.L2_Approver__r.Name}</td>
+          <td>{!paf.E21VP_Approver__r.Name}</td>
+          <td>{!paf.Pricing_Approver__r.Name}</td>
+          </tr>
+          <tr>
+                      
+              <td id="L1td" bgcolor="white">{!if(paf.Is_L1_Approval_Needed__c == true,paf.L1_Approval__c,'Not Required')}</td>
+              <td id="E21td" bgcolor="white">{!if(paf.Is_E21_Approval_Needed__c == true,paf.E21_Approval__c,'Not Required')}</td>
+              <td id="L2td" bgcolor="white">{!if(paf.Is_L2_Approval_Needed__c == true,paf.L2_Approval__c,'Not Required')}</td>
+              <td id="E21VPtd" bgcolor="white">{!if(paf.Is_E21VP_Approval_Needed__c == true,paf.E21VP_Approval__c,'Not Required')}</td>
+              <td id="Pricingtd" bgcolor="white">{!if(paf.Is_Pricing_Approval_Needed__c == true,paf.Pricing_Approval__c,'Not Required')}</td>                 
+          </tr>   
+     </table>
+     <script>
+        
+        
+        if({!isReloaded} == true){
+            window.top.location = "/{!Price_Authorization_Form__c}";
+        }
+             
+       var L1 = "{!if(paf.Is_L1_Approval_Needed__c == true,paf.L1_Approval__c,'Not Required')}";
+       var L1td = document.getElementById("L1td");       
+       
+       var E21 = "{!if(paf.Is_E21_Approval_Needed__c == true,paf.E21_Approval__c,'Not Required')}";
+       var E21td = document.getElementById("E21td");
+       
+       var L2 = "{!if(paf.Is_L2_Approval_Needed__c == true,paf.L2_Approval__c,'Not Required')}";
+       var L2td = document.getElementById("L2td");
+       
+       var E21VP = "{!if(paf.Is_E21VP_Approval_Needed__c == true,paf.E21VP_Approval__c,'Not Required')}";
+       var E21VPtd = document.getElementById("E21VPtd");
+       
+       var pricing = "{!if(paf.Is_Pricing_Approval_Needed__c == true,paf.Pricing_Approval__c,'Not Required')}";
+       var pricingtd = document.getElementById("Pricingtd");
+       
+       var getL1 = L1td.getAttribute("bgcolor");
+       
+      if (L1=="Approved"){
+         L1td.setAttribute("bgcolor","#a1f78d");}
+      else if (L1 == "Rejected"){
+         L1td.setAttribute("bgcolor","#fb8a8c");
+         if(E21 == "Awaiting Approval"){
+             E21td.setAttribute("bgcolor","#FFFFFF");       
+             E21td.innerHTML = "";
+             E21 = ""; 
+         }         
+         if(L2 == "Awaiting Approval"){
+             L2td.setAttribute("bgcolor","#FFFFFF");       
+             L2td.innerHTML = "";
+             L2 = ""; 
+         }
+         if(E21VP == "Awaiting Approval"){
+             E21VPtd.setAttribute("bgcolor","#FFFFFF");       
+             E21VPtd.innerHTML = "";
+             E21VP = ""; 
+         }
+         if(pricing == "Awaiting Approval"){
+             pricingtd.setAttribute("bgcolor","#FFFFFF"); 
+             pricingtd.innerHTML = "";
+             pricing = "";
+         }  
+     }
+      else if (L1 == "Awaiting Approval"){
+         L1td.setAttribute("bgcolor","#ffd74b");}
+       
+       var getE21 = E21td.getAttribute("bgcolor");
+        
+      if (E21=="Approved"){
+         E21td.setAttribute("bgcolor","#a1f78d");}
+      else if (E21 == "Rejected"){
+         E21td.setAttribute("bgcolor","#fb8a8c");
+         if(L2 == "Awaiting Approval"){
+             L2td.setAttribute("bgcolor","#FFFFFF");       
+             L2td.innerHTML = "";
+             L2 = ""; 
+         }
+         if(E21VP == "Awaiting Approval"){
+             E21VPtd.setAttribute("bgcolor","#FFFFFF");       
+             E21VPtd.innerHTML = "";
+             E21VP = ""; 
+         }
+         if(pricing == "Awaiting Approval"){
+             pricingtd.setAttribute("bgcolor","#FFFFFF"); 
+             pricingtd.innerHTML = "";
+             pricing = "";
+         } 
+      }
+      else if (E21 == "Awaiting Approval"){
+         E21td.setAttribute("bgcolor","#ffd74b");}  
+         
+         
+       
+       var getL2 = L2td.getAttribute("bgcolor");
+        
+      if (L2=="Approved"){
+         L2td.setAttribute("bgcolor","#a1f78d");}
+      else if (L2 == "Rejected"){
+         L2td.setAttribute("bgcolor","#fb8a8c");
+         if(E21VP == "Awaiting Approval"){
+             E21VPtd.setAttribute("bgcolor","#FFFFFF");       
+             E21VPtd.innerHTML = "";
+             E21VP = ""; 
+         }
+         if(pricing == "Awaiting Approval"){
+             pricingtd.setAttribute("bgcolor","#FFFFFF"); 
+             pricingtd.innerHTML = "";
+             pricing = "";
+         } 
+      }
+      else if (L2 == "Awaiting Approval"){
+         L2td.setAttribute("bgcolor","#ffd74b");}
+         
+       var getE21VP = E21VPtd.getAttribute("bgcolor");
+        
+      if (E21VP=="Approved"){
+         E21VPtd.setAttribute("bgcolor","#a1f78d");}
+      else if (E21VP == "Rejected"){
+         E21VPtd.setAttribute("bgcolor","#fb8a8c");
+         if(pricing == "Awaiting Approval"){
+             pricingtd.setAttribute("bgcolor","#FFFFFF"); 
+             pricingtd.innerHTML = "";
+             pricing = "";
+         }
+      }
+      else if (E21VP == "Awaiting Approval"){
+         E21VPtd.setAttribute("bgcolor","#ffd74b");}
+         
+         
+       
+       var getPricing = pricingtd.getAttribute("bgcolor");
+        
+      if (pricing=="Approved"){
+         pricingtd.setAttribute("bgcolor","#a1f78d");}
+      else if (pricing == "Rejected"){
+         pricingtd.setAttribute("bgcolor","#fb8a8c");}
+      else if (pricing == "Awaiting Approval"){
+         pricingtd.setAttribute("bgcolor","#ffd74b");}  
+            
+             
+            
+     </script>
+         <br></br> 
+        <apex:variable value="{!WorkItem}" var="wi"/> 
+        <apex:outputPanel id="opApprove" rendered="{!wi != null}">
+         <!--  <apex:outputLink value="https://cs1.salesforce.com/p/process/ProcessInstanceWorkitemWizardStageManager?id={!piw.id}" target="_parent" style="color:blue">Approve/ Reject</apex:outputLink>       -->
+         <table width="100%">
+         
+        <tr>
+           <td align = "center" style= "font-weight:bold">
+             <apex:commandButton value="Approve/Reject" disabled="{!If(Price_Authorization_Form__c.Status__c =='Cancelled',true,false)}" onclick="goToApproveOrRejectPage()"
+              rendered="{!(Price_Authorization_Form__c.Status__c != 'Draft') && ((sysAdminProfId==$User.ProfileId)||($User.Id==piw.ActorId) || IsdelegatedUserId )}"/>
+      <!--       <apex:commandButton value="Recall Approval Request" rendered="{!paf.Status__c=='Awaiting Approval' && ((sysAdminProfId==$User.ProfileId)||($User.Id==paf.Owner))}" onclick="gotoRecallApprovalSection()"/>   -->
+           </td>           
+        </tr>
+     </table>                   
+         <script>          
+             function goToApproveOrRejectPage(){
+                 window.top.location = "https://{!serverURL}/p/process/ProcessInstanceWorkitemWizardStageManager?id={!piw.id}";              
+             }            
+             function gotoRecallApprovalSection(){
+                 window.top.location = "https://{!serverURL}/{!piw.id}/e?et=REMOVE&retURL={!paf.id}";
+             }
+         </script>
+        </apex:outputPanel>  
+          
+   <apex:pageBlockTable value="{!ApprovalHistory}" var="history">
+            <apex:column headerValue="Overall Status" value="{!history.processInstance.Status}">
+            </apex:column>
+            <apex:column headerValue="Submitter">
+                <apex:repeat value="{!history.approvalHistoryList}" var="apprHistory">
+                    <apex:outputField value="{!apprHistory.ActorId}" rendered="{!apprHistory.StepStatus=='Started'}"/>
+                </apex:repeat>
+            </apex:column>
+            <apex:column headerValue="Sales Team">
+                {!history.submitterSalesTeam}
+            </apex:column>
+            <apex:column >
+                <apex:pageBlockTable value="{!history.approvalHistoryList}" var="apprHistory">
+                    <apex:column headerValue="Date" value="{!apprHistory.CreatedDate}" style="width:20%">  
+                    </apex:column>
+                    <apex:column headerValue="Status" value="{!apprHistory.StepStatus}">
+                    </apex:column>
+                    <apex:column headerValue="Assigned To" value="{!apprHistory.OriginalActorId}">  
+                    </apex:column>
+                    <apex:column headerValue="Actual Approver">
+                        <apex:outputField value="{!apprHistory.ActorId}" rendered="{!apprHistory.StepStatus!='Started'}"/>
+                        <apex:outputText rendered="{!apprHistory.StepStatus=='Started'}">N/A</apex:outputText> 
+                    </apex:column>
+                    <apex:column value="{!apprHistory.Comments}">
+                    </apex:column>
+                </apex:pageBlockTable>
+            </apex:column>
+        </apex:pageBlockTable>  
+      </apex:pageBlock>
+    </apex:form>
+    <script>
+    </script>
+</apex:page>

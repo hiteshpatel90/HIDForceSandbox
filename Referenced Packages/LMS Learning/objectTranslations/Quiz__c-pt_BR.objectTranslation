@@ -1,0 +1,159 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quiz --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Quiz --></value>
+    </caseValues>
+    <fields>
+        <label>Descrição</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- You can specify a time unit after a time value &apos;X&apos;, such as Xd, Xh or Xm, to represent days (d), hours (h) and minutes (m), respectively.
+If you do not specify a time unit, minute will be assumed. --></help>
+        <label>Duração</label>
+        <name>DurationTime__c</name>
+    </fields>
+    <fields>
+        <label>Duração (min)</label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label>Habilitar Certificado</label>
+        <name>Enable_Certificate__c</name>
+    </fields>
+    <fields>
+        <label>Idioma</label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>da</masterLabel>
+            <translation><!-- da --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>de</masterLabel>
+            <translation><!-- de --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>en_US</masterLabel>
+            <translation><!-- en_US --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>es</masterLabel>
+            <translation><!-- es --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fi</masterLabel>
+            <translation><!-- fi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fr</masterLabel>
+            <translation><!-- fr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>it</masterLabel>
+            <translation><!-- it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ja</masterLabel>
+            <translation><!-- ja --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ko</masterLabel>
+            <translation><!-- ko --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>nl_NL</masterLabel>
+            <translation><!-- nl_NL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>pt_BR</masterLabel>
+            <translation><!-- pt_BR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ru</masterLabel>
+            <translation><!-- ru --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>sv</masterLabel>
+            <translation><!-- sv --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>th</masterLabel>
+            <translation><!-- th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_CN</masterLabel>
+            <translation><!-- zh_CN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_TW</masterLabel>
+            <translation><!-- zh_TW --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Manter respostas do usuário</label>
+        <name>Maintain_correct_answers__c</name>
+    </fields>
+    <fields>
+        <label>Tentativas Máximas</label>
+        <name>Max_Attempts__c</name>
+    </fields>
+    <fields>
+        <label>Pontuação de Aprovação</label>
+        <name>Passing_Score__c</name>
+    </fields>
+    <fields>
+        <label>Randomização</label>
+        <name>Randomization__c</name>
+    </fields>
+    <fields>
+        <label>Mostrar Pontuação</label>
+        <name>Show_Score__c</name>
+    </fields>
+    <fields>
+        <label>Unidade de Treinamento</label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel>Testes</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Permitir usuário avaliar as respostas</label>
+        <name>review_answers__c</name>
+    </fields>
+    <fields>
+        <label>Permitir usuários reprovados a progredir</label>
+        <name>show_100_if_fail__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Quiz Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Test and Verify Your Quiz --></label>
+            <section>Test and Verify Your Quiz</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Title --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>DURAÇÃO NÃO É VÁLIDA</errorMessage>
+        <name>Not_Valid_Duration_Value</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>A Pontuação de Aprovação deve ser entre 0 e 100%.</errorMessage>
+        <name>Validate_Passing_Score</name>
+    </validationRules>
+    <webLinks>
+        <label>Adicionar ao Meu Treinamento</label>
+        <name>Add_to_My_Training</name>
+    </webLinks>
+    <webLinks>
+        <label>Atribuir Quiz</label>
+        <name>Assign_Quiz</name>
+    </webLinks>
+</CustomObjectTranslation>

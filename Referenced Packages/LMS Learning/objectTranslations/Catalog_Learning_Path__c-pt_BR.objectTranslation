@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog Learning Path --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Catalog Learning Path --></value>
+    </caseValues>
+    <fields>
+        <label>Catálogo</label>
+        <name>Catalog__c</name>
+        <relationshipLabel>Caminhos de Aprendizado do Catálogo</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Caminho de Aprendizado</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>Caminhos de Aprendizado do Catálogo</relationshipLabel>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <nameFieldLabel><!-- Catalog Learning Name --></nameFieldLabel>
+</CustomObjectTranslation>

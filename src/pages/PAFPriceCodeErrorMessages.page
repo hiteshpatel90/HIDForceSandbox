@@ -1,0 +1,9 @@
+<apex:page standardController="Price_Authorization_Form__c" extensions="ApprovalHistoryController" showHeader="true" sidebar="true">
+    <apex:outputPanel >
+        <apex:repeat value="{!errMessage}" var="errmsg">
+           <apex:outputText value="{!errmsg}" escape="false" style="color:red;"></apex:outputText> <br/>
+        </apex:repeat>
+    </apex:outputPanel> <br/>
+  <!--  <apex:outputLink value="https://cs1.salesforce.com/{!$CurrentPage.parameters.pafId}">Go Back</apex:outputLink>  -->
+  <apex:outputLink value="https://{!serverURL}/{!$CurrentPage.parameters.pafId}">Go Back</apex:outputLink> 
+</apex:page>

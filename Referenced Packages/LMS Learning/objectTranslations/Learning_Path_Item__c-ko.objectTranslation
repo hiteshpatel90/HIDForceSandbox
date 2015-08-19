@@ -1,0 +1,78 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Learning Path Item --></value>
+    </caseValues>
+    <fields>
+        <label>코스</label>
+        <name>Course__c</name>
+        <relationshipLabel>학습 경로 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>학습 경로</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>학습 경로 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>모듈</label>
+        <name>Module__c</name>
+        <relationshipLabel>학습 경로 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>놀리다</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>학습 경로 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>순서</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>제목</label>
+        <name>Title__c</name>
+    </fields>
+    <layouts>
+        <layout>Add Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>코스</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>모듈</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>놀리다</label>
+        <name>Quiz</name>
+    </recordTypes>
+    <webLinks>
+        <label>경로를 학습 에 코스 를 추가</label>
+        <name>AddCourseToLearningPath</name>
+    </webLinks>
+    <webLinks>
+        <label>경로를 학습 에 모듈 을 추가</label>
+        <name>AddModuleToLearningPath</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Add_Quiz_to_Learning_Path --></label>
+        <name>Add_Quiz_to_Learning_Path</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Edit_Sequence --></label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

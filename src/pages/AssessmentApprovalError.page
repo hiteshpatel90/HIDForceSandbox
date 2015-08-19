@@ -1,0 +1,4 @@
+<apex:page standardController="Assessment__c" extensions="assessmentApprovalController">
+    <apex:pageMessages ></apex:pageMessages><br/>
+    <apex:outputLink value="/{!Assessment__c.id}">Go Back</apex:outputLink>
+</apex:page>

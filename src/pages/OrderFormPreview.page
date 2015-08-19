@@ -1,0 +1,110 @@
+<apex:page id="pg" standardController="Order" showHeader="false" sidebar="false" extensions="extCustomerPurchaseOrderForm">
+    <apex:form id="frm">
+        
+        <apex:pageBlock id="pbCPO" title="Customer Purchase Order">  
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Close Window" onclick="window.top.close();"/>
+            </apex:pageBlockButtons>          
+            <apex:pageBlockSection id="pbSselQuote" title="PO Information">            
+             <apex:outputField value="{!order.AccountID}" REndered="FALSE"/> 
+             <apex:outputField value="{!order.Make_Order_Match_Quote__c }" REndered="FALSE"/> 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Sales Quote"></apex:outputLabel>
+                    <apex:outputPanel >                      
+                        <apex:outputField value="{!objBigMachinesQuoteProduct.BigMachines__Quote__c }" / > 
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbSselQuoteacc">
+                    <apex:outputLabel value="End User Account Name"></apex:outputLabel>                    
+                   <apex:outputLink value="/{!objAccount.id}">{!objAccount.Name}</apex:outputLink>                                 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Customer PO"></apex:outputLabel>                    
+                    <apex:outputField value="{!Order.PoNumber}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Customer PO Date"></apex:outputLabel>
+                    <apex:outputField value="{!order.PoDate}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Opportunity Name"></apex:outputLabel>                    
+                    <apex:outputLabel value="{!strselQuoteOpp}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Related Sales Quote"></apex:outputLabel>
+                    <apex:outputLabel value="{!strselQuote}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            
+            <apex:pageblockSection id="pbshipInfo" title="Billing / Shipping Information" columns="2">            
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Bill to Account"></apex:outputLabel>                    
+                    <apex:outputField value="{!order.Bill_to_Account__c}"/>                    
+                 </apex:pageBlockSectionItem>                 
+                 <apex:pageBlockSectionItem id="PBSIShiptoAccount">
+                    <apex:outputLabel value="Ship to Account"></apex:outputLabel>                    
+                    <apex:outputField id="txtShiptoAccount" value="{!order.Shipping_Account__c}"/>        
+                 </apex:pageBlockSectionItem>                 
+                 <apex:pageBlockSectionItem id="PBSIBilltoAddress">
+                    <apex:outputLabel value="Bill to Address"></apex:outputLabel>
+                    <apex:outputField id="txtBilltoAddress" value="{!order.Bill_To_Addresses__c}"/>
+                 </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem id="PBSIShiptoAddress" >
+                    <apex:outputLabel value="Ship to Address"></apex:outputLabel>
+                    <apex:outputField id="txtBilltoAddress" value="{!order.Ship_To_Addresses__c}"/>                    
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Shipping Instructions"></apex:outputLabel>
+                    <apex:outputField id="shippingInstruction" value="{!order.Shipping_Instructions__c}" style="width:300px; height: 100px;"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageblockSection>           
+        </apex:pageblock>
+  
+        <apex:outputPanel id="opDetail">
+            <apex:pageBlock id="pnDetail" title="Part Detail" >    
+                <apex:pageBlockButtons location="bottom">
+                    <apex:commandButton value="Close Window" onclick="window.top.close();"/>
+                </apex:pageBlockButtons>
+                <apex:pageBlockTable id="pbTblcpoLI" value="{!lstwrapCustomerPurchaseOrderLIPreview}" var="wcpo">
+                    <apex:variable value="{!0}" var="c"/>
+                    <apex:column width="10" headerValue="Add to order">
+                        <apex:inputcheckbox disabled="true" id="selCPOLIdes" value="{!wcpo.isCPOLIselected}" />                        
+                        <apex:variable value="{!c+1}" var="c"/>
+                    </apex:column>
+                    <apex:column width="2" headerValue="General">
+                        <apex:inputcheckbox disabled="true" rendered="{!wcpo.isPartSelect}" id="selCPOLIGeneral" value="{!wcpo.isGeneralSQsel}"/>
+                    </apex:column>
+                    <apex:column width="2" headerValue="Sort order">
+                        <apex:outputField style="width:42px;" value="{!wcpo.objCustPurchaseOLI.Line_Number__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Part #">                     
+                        <apex:outputLink value="/{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Product__c}">{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Product__r.Name}</apex:outputLink>
+                        
+                    </apex:column>
+                    <apex:column width="2" headerValue="Approved Quantity">
+                        <apex:outputField style="width:42px;" value="{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Quantity__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Sales Price">
+                        <apex:outputField value="{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Sales_Price__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="BigMachine Quote">                    
+                        <apex:outputLink value="/{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Quote__c}">{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Quote__r.Name}</apex:outputLink>
+                    </apex:column>                    
+                    <apex:column headerValue="PO Quantity" width="10">                        
+                        <apex:outputField value="{!wcpo.objCustPurchaseOLI.Quantity}"/>                       
+                    </apex:column>                  
+                    <apex:column headerValue="Ship to Addresses" >   
+                        <apex:outputField value="{!wcpo.objCustPurchaseOLI.Ship_to_Addresses__c}"/>                        
+                    </apex:column>
+                    <apex:column headerValue="Request Date" >    
+                        <apex:outputField value="{!wcpo.objCustPurchaseOLI.Request_Date__c}"/>
+                    </apex:column>                            
+                </apex:pageBlockTable>
+                
+            </apex:pageBlock>
+            </apex:outputPanel>
+    </apex:form>   
+</apex:page>

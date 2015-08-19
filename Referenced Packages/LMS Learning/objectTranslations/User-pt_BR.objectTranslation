@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fields>
+        <label>Status CFS</label>
+        <name>CFS_Status__c</name>
+        <picklistValues>
+            <masterLabel>Active</masterLabel>
+            <translation><!-- Active --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Deactivated</masterLabel>
+            <translation><!-- Deactivated --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Not CFS user</masterLabel>
+            <translation><!-- Not CFS user --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Admin de Grupos Cornerstone</label>
+        <name>Cornerstone_Group_Admin__c</name>
+    </fields>
+    <fields>
+        <label>ID da Cornerstone</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+</CustomObjectTranslation>

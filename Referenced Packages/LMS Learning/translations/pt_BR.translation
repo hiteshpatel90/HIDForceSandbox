@@ -1,0 +1,2344 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Translations xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customApplications>
+        <label>Nuvem de Aprendizado</label>
+        <name>Learning_Cloud</name>
+    </customApplications>
+    <customLabels>
+        <label>URL de Callback do API</label>
+        <name>API_Callback_URL</name>
+    </customLabels>
+    <customLabels>
+        <label>URL de Callback do API é campo obrigatório.</label>
+        <name>API_Callback_URL_required_field</name>
+    </customLabels>
+    <customLabels>
+        <label>API não habilitado para usuário</label>
+        <name>API_not_enabled_for_user</name>
+    </customLabels>
+    <customLabels>
+        <label>Exceção de Violação de Acesso</label>
+        <name>AccessViolationException</name>
+    </customLabels>
+    <customLabels>
+        <label>Ação</label>
+        <name>Action</name>
+    </customLabels>
+    <customLabels>
+        <label>Parâmetro da ação faltando.</label>
+        <name>Action_parameter_missing</name>
+    </customLabels>
+    <customLabels>
+        <label>Ocultar Filtro</label>
+        <name>ActivateUsers_Hide_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label>Ocultar Pesquisa</label>
+        <name>ActivateUsers_Hide_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar Usuários</label>
+        <name>ActivateUsers_Search_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Mostrar Filtro</label>
+        <name>ActivateUsers_Show_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label>Adicionar</label>
+        <name>Add</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>AddItems_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Todos</label>
+        <name>AddItems_Select_All</name>
+    </customLabels>
+    <customLabels>
+        <label>Todos</label>
+        <name>AddMassCU_ALL</name>
+    </customLabels>
+    <customLabels>
+        <label>Adicionar Vários Usuários</label>
+        <name>Add_Multiple_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Adicionar Perguntas</label>
+        <name>Add_Questions</name>
+    </customLabels>
+    <customLabels>
+        <label>Adicionar ao meu treinamento</label>
+        <name>Add_to_my_training</name>
+    </customLabels>
+    <customLabels>
+        <label>Adicionando vários usuários de acordo com os perfis</label>
+        <name>Adding_of_multiple_users_according_to_their_profiles</name>
+    </customLabels>
+    <customLabels>
+        <label>-Todos-</label>
+        <name>All</name>
+    </customLabels>
+    <customLabels>
+        <label>Ocorreu um erro. Verifique o modelo ou tente novamente mais tarde.</label>
+        <name>An_error_has_occured_Please_check_the_template_or_try_again_later</name>
+    </customLabels>
+    <customLabels>
+        <label>Resposta</label>
+        <name>Answer</name>
+    </customLabels>
+    <customLabels>
+        <label>VERDADEIRO</label>
+        <name>Answer_True</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome do Usuário do API</label>
+        <name>Api_User_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome do Usuário do API e Senha de Usuário do API são campos obrigatórios.</label>
+        <name>Api_User_Name_and_Api_User_Password_required_fields</name>
+    </customLabels>
+    <customLabels>
+        <label>Senha de Usuário do API</label>
+        <name>Api_User_Password</name>
+    </customLabels>
+    <customLabels>
+        <label>Aplicar Filtro</label>
+        <name>Apply_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuir</label>
+        <name>Assign</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecione o máximo de 10 campos na definição de campo de usuário.</label>
+        <name>AssignFieldSetMessage</name>
+    </customLabels>
+    <customLabels>
+        <label>Grupos</label>
+        <name>AssignPlanGroupsTabLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Classificando...</label>
+        <name>AssignTrainingContent_Message_Sorting</name>
+    </customLabels>
+    <customLabels>
+        <label>Escolher</label>
+        <name>AssignTrainingContent_headerValue_Choose</name>
+    </customLabels>
+    <customLabels>
+        <label>Termo da Licença</label>
+        <name>AssignTrainingContent_headerValue_License_Term</name>
+    </customLabels>
+    <customLabels>
+        <label>Data da Compra</label>
+        <name>AssignTrainingContent_headerValue_Purchase_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>Licenças Restantes</label>
+        <name>AssignTrainingContent_headerValue_Remaining_Licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>Sua seleção nesta página será perdida. Deseja prosseguir?</label>
+        <name>AssignTrainingContent_js_Alert</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima Página</label>
+        <name>AssignTrainingContent_oT_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Página Anterior</label>
+        <name>AssignTrainingContent_oT_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuir Treinamento</label>
+        <name>AssignTrainingContent_title_Assign_Training</name>
+    </customLabels>
+    <customLabels>
+        <label>Informação da Atribuição</label>
+        <name>AssignTrainingContent_title_Assignment_Information</name>
+    </customLabels>
+    <customLabels>
+        <label>Licenças Disponíveis</label>
+        <name>AssignTrainingContent_title_Available_Licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Estagiários</label>
+        <name>AssignTrainingContent_title_Select_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>Estagiários</label>
+        <name>AssignTrainingContent_title_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>Conteúdo do Treinamento</label>
+        <name>AssignTrainingContent_title_Training_Content</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuir</label>
+        <name>AssignTrainingContent_value_Assign</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>AssignTrainingContent_value_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Filtrar por Função:</label>
+        <name>AssignTrainingContent_value_Filter_by_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome</label>
+        <name>AssignTrainingContent_value_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Função</label>
+        <name>AssignTrainingContent_value_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar</label>
+        <name>AssignTrainingContent_value_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Ordem Ascendente</label>
+        <name>AssignTrainingPath_alt_Sorted_Ascending</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Ordem Descendente</label>
+        <name>AssignTrainingPath_alt_Sorted_Descending</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima Página</label>
+        <name>AssignTrainingPath_cL_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Página Anterior</label>
+        <name>AssignTrainingPath_cL_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Escolher</label>
+        <name>AssignTrainingPath_dV_Choose</name>
+    </customLabels>
+    <customLabels>
+        <label>Termo da Licença</label>
+        <name>AssignTrainingPath_dV_License_Term</name>
+    </customLabels>
+    <customLabels>
+        <label>Data da Compra</label>
+        <name>AssignTrainingPath_dV_Purchase_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>Licenças Restantes</label>
+        <name>AssignTrainingPath_dV_Remaining_Licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>Conteúdo do Treinamento</label>
+        <name>AssignTrainingPath_dV_Training_Content</name>
+    </customLabels>
+    <customLabels>
+        <label>Sua seleção nesta página será perdida. Deseja prosseguir?</label>
+        <name>AssignTrainingPath_jS_Alert1</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima Página</label>
+        <name>AssignTrainingPath_oT_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Página Anterior</label>
+        <name>AssignTrainingPath_oT_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuir Curso</label>
+        <name>AssignTrainingPath_title_Assign_Training_Path</name>
+    </customLabels>
+    <customLabels>
+        <label>Informação da Atribuição</label>
+        <name>AssignTrainingPath_title_Assignment_Information</name>
+    </customLabels>
+    <customLabels>
+        <label>Licenças do Item do Curso Disponível</label>
+        <name>AssignTrainingPath_title_Available_Training_Path_Item_Licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Estagiários</label>
+        <name>AssignTrainingPath_title_Select_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>Estagiários</label>
+        <name>AssignTrainingPath_title_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>Curso</label>
+        <name>AssignTrainingPath_title_Training_Path</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuir</label>
+        <name>AssignTrainingPath_value_Assign</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>AssignTrainingPath_value_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Filtrar por Função:</label>
+        <name>AssignTrainingPath_value_Filter_by_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome</label>
+        <name>AssignTrainingPath_value_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Função</label>
+        <name>AssignTrainingPath_value_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar</label>
+        <name>AssignTrainingPath_value_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Deseja desmarcar usuários?</label>
+        <name>Assign_Delete_confirmtaion</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Todos</label>
+        <name>Assign_Select_All</name>
+    </customLabels>
+    <customLabels>
+        <label>Use a guia Atribuições para excluir esta atribuição.</label>
+        <name>Assignment_Could_Not_Be_Removed</name>
+    </customLabels>
+    <customLabels>
+        <label>Editar Atribuição</label>
+        <name>Assignment_Edit</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuído de:</label>
+        <name>Assignment_List_Assigned_from</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuído para:</label>
+        <name>Assignment_List_Assigned_to</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuições</label>
+        <name>Assignment_List_Assignments</name>
+    </customLabels>
+    <customLabels>
+        <label>Tem certeza que deseja excluir permanentemente a atribuição selecionada?</label>
+        <name>Assignment_List_Del_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Filtro</label>
+        <name>Assignment_List_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label>Tem certeza que deseja arquivar a atribuição selecionada?</label>
+        <name>Assignment_List_Hide_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>A atribuição foi adicionada aos registros arquivados</label>
+        <name>Assignment_List_Hide_confirm_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Aprendizado</label>
+        <name>Assignment_List_Learning</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum registro encontrado</label>
+        <name>Assignment_List_No_records</name>
+    </customLabels>
+    <customLabels>
+        <label>Mostrar Dados Arquivados</label>
+        <name>Assignment_List_Show_Historical</name>
+    </customLabels>
+    <customLabels>
+        <label>Estagiário</label>
+        <name>Assignment_List_Trainee</name>
+    </customLabels>
+    <customLabels>
+        <label>A atribuição foi excluída com êxito</label>
+        <name>Assignment_Page_Assignment_Deleted</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuição não pode ser excluída devido ao seguinte erro:</label>
+        <name>Assignment_Page_Assignment_Not_Deleted</name>
+    </customLabels>
+    <customLabels>
+        <label>Data de &apos;Atribuído para&apos; não pode ser anterior à data de &apos;Atribuído de&apos;</label>
+        <name>Assignment_Page_Date_Error</name>
+    </customLabels>
+    <customLabels>
+        <label>Tem certeza que deseja excluir permanentemente a atribuição selecionada?</label>
+        <name>Assignment_Page_Delete_Assignment</name>
+    </customLabels>
+    <customLabels>
+        <label>Muitos registros encontrados, mude o critério de pesquisa e tente novamente.</label>
+        <name>Assignment_Page_To_Many_Records</name>
+    </customLabels>
+    <customLabels>
+        <label>Sua pesquisa produziu mais de {0} linhas. Somente as primeiras {0} linhas são exibidas.</label>
+        <name>Assignment_Page_To_Many_Search_Records</name>
+    </customLabels>
+    <customLabels>
+        <label>Muitos usuários encontrados, mude o critério de pesquisa e tente novamente.</label>
+        <name>Assignment_Page_To_Many_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Muitos usuários selecionados</label>
+        <name>Assignment_Page_Too_many_users_selected</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários não encontrados</label>
+        <name>Assignment_Page_User_Not_Found</name>
+    </customLabels>
+    <customLabels>
+        <label>Todos os Usuários</label>
+        <name>Assignments_All_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuído</label>
+        <name>Assignments_Assigned</name>
+    </customLabels>
+    <customLabels>
+        <label>Concluído</label>
+        <name>Assignments_Completed</name>
+    </customLabels>
+    <customLabels>
+        <label>Clientes</label>
+        <name>Assignments_Customers_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>n/a</label>
+        <name>Assignments_NA</name>
+    </customLabels>
+    <customLabels>
+        <label>Nada para excluir</label>
+        <name>Assignments_Nothing_To_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Parceiros</label>
+        <name>Assignments_Partners_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Progresso</label>
+        <name>Assignments_Progress</name>
+    </customLabels>
+    <customLabels>
+        <label>Pontuação</label>
+        <name>Assignments_Score</name>
+    </customLabels>
+    <customLabels>
+        <label>Padrão</label>
+        <name>Assignments_Standart_Users</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Assignments Status --></label>
+        <name>Assignments_Status</name>
+    </customLabels>
+    <customLabels>
+        <label>Título</label>
+        <name>Assignments_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Tipo</label>
+        <name>Assignments_Type</name>
+    </customLabels>
+    <customLabels>
+        <label>Tentativas</label>
+        <name>Attempts</name>
+    </customLabels>
+    <customLabels>
+        <label>Voltar</label>
+        <name>Back</name>
+    </customLabels>
+    <customLabels>
+        <label>Voltar para as Configurações de Aprendizado</label>
+        <name>Back_to_Learning_Settings</name>
+    </customLabels>
+    <customLabels>
+        <label>Voltar para o curso</label>
+        <name>Back_to_course</name>
+    </customLabels>
+    <customLabels>
+        <label>Voltar para o módulo</label>
+        <name>Back_to_module</name>
+    </customLabels>
+    <customLabels>
+        <label>CERTIFICADO DE CONCLUSÃO</label>
+        <name>CERTIFICATE_OF_COMPLETION</name>
+    </customLabels>
+    <customLabels>
+        <label>Exemplo de arquivo CSV</label>
+        <name>CSV_Example</name>
+    </customLabels>
+    <customLabels>
+        <label>Impossível Excluir das Configurações Personalizadas:</label>
+        <name>Can_not_Delete_from_Custom_Settings</name>
+    </customLabels>
+    <customLabels>
+        <label>Impossível obter Valores, instância Padrão:</label>
+        <name>Can_not_get_Values_Default_instance</name>
+    </customLabels>
+    <customLabels>
+        <label>Impossível obter Valores da Org.</label>
+        <name>Can_not_get_default_Org_Values</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>A Conta selecionada já existe neste Catálogo.</label>
+        <name>Catalog_ErrorAccountDublicated</name>
+    </customLabels>
+    <customLabels>
+        <label>O Módulo selecionado já existe neste Catálogo.</label>
+        <name>Catalog_ErrorCourseDublicated</name>
+    </customLabels>
+    <customLabels>
+        <label>O Currículo selecionado já existe neste Catálogo.</label>
+        <name>Catalog_ErrorCurriculumDuplicated</name>
+    </customLabels>
+    <customLabels>
+        <label>O Caminho de Aprendizado selecionado já existe neste Catálogo.</label>
+        <name>Catalog_ErrorLearningPathDuplicated</name>
+    </customLabels>
+    <customLabels>
+        <label>O Curso selecionado já existe neste Catálogo.</label>
+        <name>Catalog_ErrorPathDublicated</name>
+    </customLabels>
+    <customLabels>
+        <label>O Quiz selecionado já existe neste Catálogo.</label>
+        <name>Catalog_ErrorQuizDuplicated</name>
+    </customLabels>
+    <customLabels>
+        <label>Conversa</label>
+        <name>Chatter</name>
+    </customLabels>
+    <customLabels>
+        <label>Texto do modelo de conversa. Esquerda:</label>
+        <name>Chatter_template_text</name>
+    </customLabels>
+    <customLabels>
+        <label>Apagar Filtro</label>
+        <name>Clear_Filter</name>
+    </customLabels>
+    <customLabels>
+        <label>Clique</label>
+        <name>Click</name>
+    </customLabels>
+    <customLabels>
+        <label>Clique aqui</label>
+        <name>Click_here</name>
+    </customLabels>
+    <customLabels>
+        <label>Fechar</label>
+        <name>Close</name>
+    </customLabels>
+    <customLabels>
+        <label>Concluído</label>
+        <name>Completed</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem autorização para esta atividade. Entre em contato com o suporte para obter autorização.</label>
+        <name>ConsumerAuthorization</name>
+    </customLabels>
+    <customLabels>
+        <label>Descrição</label>
+        <name>ConsumerCatalogDetail_Desc</name>
+    </customLabels>
+    <customLabels>
+        <label>Duração (min)</label>
+        <name>ConsumerCatalogDetail_Duration</name>
+    </customLabels>
+    <customLabels>
+        <label>Idioma</label>
+        <name>ConsumerCatalogDetail_Lang</name>
+    </customLabels>
+    <customLabels>
+        <label>Pontuação da Perícia</label>
+        <name>ConsumerCatalogDetail_MScope</name>
+    </customLabels>
+    <customLabels>
+        <label>Máximo Tempo Permitido (min)</label>
+        <name>ConsumerCatalogDetail_MTAllow</name>
+    </customLabels>
+    <customLabels>
+        <label>Pontuação Máxima</label>
+        <name>ConsumerCatalogDetail_MaxScope</name>
+    </customLabels>
+    <customLabels>
+        <label>Tipo de Objeto</label>
+        <name>ConsumerCatalogDetail_ObjType</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome do Editor</label>
+        <name>ConsumerCatalogDetail_PubName</name>
+    </customLabels>
+    <customLabels>
+        <label>Informações</label>
+        <name>ConsumerCatalogDetail_STitle1</name>
+    </customLabels>
+    <customLabels>
+        <label>Ação de Limite de Tempo</label>
+        <name>ConsumerCatalogDetail_TLAction</name>
+    </customLabels>
+    <customLabels>
+        <label>Tempo de Aprendizado Típico (min)</label>
+        <name>ConsumerCatalogDetail_TLTime</name>
+    </customLabels>
+    <customLabels>
+        <label>Título</label>
+        <name>ConsumerCatalogDetail_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Curso</label>
+        <name>ConsumerCatalogDetail_TitleCourse</name>
+    </customLabels>
+    <customLabels>
+        <label>Licença</label>
+        <name>ConsumerCatalogDetail_TitleLicense</name>
+    </customLabels>
+    <customLabels>
+        <label>Mais detalhes</label>
+        <name>ConsumerCatalogDetail_TitleMore_details</name>
+    </customLabels>
+    <customLabels>
+        <label>Efetiva</label>
+        <name>ConsumerCatalogDetail_Title_Effective</name>
+    </customLabels>
+    <customLabels>
+        <label>Expiração</label>
+        <name>ConsumerCatalogDetail_Title_Expiration</name>
+    </customLabels>
+    <customLabels>
+        <label>Número de Vagas</label>
+        <name>ConsumerCatalogDetail_Title_No_of_Seats</name>
+    </customLabels>
+    <customLabels>
+        <label>Preço</label>
+        <name>ConsumerCatalogDetail_Title_Price</name>
+    </customLabels>
+    <customLabels>
+        <label>Liberar</label>
+        <name>ConsumerCatalogDetail_Title_Release</name>
+    </customLabels>
+    <customLabels>
+        <label>Licença do Site</label>
+        <name>ConsumerCatalogDetail_Title_Site_license</name>
+    </customLabels>
+    <customLabels>
+        <label>Termos</label>
+        <name>ConsumerCatalogDetail_Title_Terms</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisa de Catálogo</label>
+        <name>ConsumerCatalogSearch_BTitle1</name>
+    </customLabels>
+    <customLabels>
+        <label>Resultados da Pesquisa</label>
+        <name>ConsumerCatalogSearch_BTitle2</name>
+    </customLabels>
+    <customLabels>
+        <label>Núm. da Página</label>
+        <name>ConsumerCatalogSearch_BTitle3</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome do Editor</label>
+        <name>ConsumerCatalogSearch_Column1</name>
+    </customLabels>
+    <customLabels>
+        <label>Título do Catálogo</label>
+        <name>ConsumerCatalogSearch_Column2</name>
+    </customLabels>
+    <customLabels>
+        <label>Termo da Licença</label>
+        <name>ConsumerCatalogSearch_Column3</name>
+    </customLabels>
+    <customLabels>
+        <label>Digite sua palavra-chave para pesquisar conteúdo específico ou deixe em branco para pesquisar em todo o catálogo. Conteúdo publicado no Aplicativo de Publicação demora 5 minutos para estar disponível na Bolsa de Aprendizado. Se o conteúdo recém-publicado não estiver disponível, tente novamente em alguns minutos.</label>
+        <name>ConsumerCatalogSearch_Text1</name>
+    </customLabels>
+    <customLabels>
+        <label>Visualizar Detalhes</label>
+        <name>ConsumerCatalogSearch_ViewDetails</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Ordem Ascendente</label>
+        <name>ConsumerCatalogSearch_alt_Sorted_Ascending</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Ordem Descendente</label>
+        <name>ConsumerCatalogSearch_alt_Sorted_Descending</name>
+    </customLabels>
+    <customLabels>
+        <label>Troca de Aprendizado</label>
+        <name>ConsumerCatalogSearch_title_Learning_Exchange</name>
+    </customLabels>
+    <customLabels>
+        <label>Enviar</label>
+        <name>ConsumerDirector_value_Submit</name>
+    </customLabels>
+    <customLabels>
+        <label>Ajuda de Aprendizado</label>
+        <name>ConsumerHelp_h1</name>
+    </customLabels>
+    <customLabels>
+        <label>Campo ID do Gerente</label>
+        <name>ConsumerSettings_ManagerId</name>
+    </customLabels>
+    <customLabels>
+        <label>Hierarquia da página Minha Equipe</label>
+        <name>ConsumerSettings_MyTeamHierarchy</name>
+    </customLabels>
+    <customLabels>
+        <label>Hierarquia da Função</label>
+        <name>ConsumerSettings_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>Ação</label>
+        <name>ConsumerSettings_headerValue_Action</name>
+    </customLabels>
+    <customLabels>
+        <label>Admin</label>
+        <name>ConsumerSettings_headerValue_Admin</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuário do Consumidor</label>
+        <name>ConsumerSettings_headerValue_Consumer_User</name>
+    </customLabels>
+    <customLabels>
+        <label>ID CyberU</label>
+        <name>ConsumerSettings_headerValue_CyberU_ID</name>
+    </customLabels>
+    <customLabels>
+        <label>Tem certeza que deseja remover este usuário da aplicação de Consumidor LMS?</label>
+        <name>ConsumerSettings_jS_Alert1</name>
+    </customLabels>
+    <customLabels>
+        <label>Digite o URL da página LearningListener e clique em &quot;Salvar&quot;.</label>
+        <name>ConsumerSettings_p_MsgUrl</name>
+    </customLabels>
+    <customLabels>
+        <label>Registrar esta Aplicação com CyberU</label>
+        <name>ConsumerSettings_subtitle_Register_this_Application_with_CyberU</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários do Consumidor</label>
+        <name>ConsumerSettings_title_Consumer_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Configurações do Consumidor LMS</label>
+        <name>ConsumerSettings_title_LMS_Consumer_Settings</name>
+    </customLabels>
+    <customLabels>
+        <label>Informações da Organização</label>
+        <name>ConsumerSettings_title_Organization_Information</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>ConsumerSettings_value_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível iniciar uma tarefa de lote enquanto outra tarefa de lote está sendo executada. Tente novamente mais tarde.</label>
+        <name>ConsumerSettings_value_CyberU_Callback_URL</name>
+    </customLabels>
+    <customLabels>
+        <label>ID do Grupo CyberU</label>
+        <name>ConsumerSettings_value_CyberU_Group_Id</name>
+    </customLabels>
+    <customLabels>
+        <label>Chave Secreta CyberU</label>
+        <name>ConsumerSettings_value_CyberU_Secret_Key</name>
+    </customLabels>
+    <customLabels>
+        <label>Remover</label>
+        <name>ConsumerSettings_value_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Novos Usuários do Consumidor</label>
+        <name>ConsumerSettings_value_New_Consumer_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome da Organização</label>
+        <name>ConsumerSettings_value_Organization_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Salvar</label>
+        <name>ConsumerSettings_value_Save</name>
+    </customLabels>
+    <customLabels>
+        <label>Erro:</label>
+        <name>ConsumerUser_Error</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum usuário mais para registro</label>
+        <name>ConsumerUser_ErrorMsg</name>
+    </customLabels>
+    <customLabels>
+        <label>Processando...</label>
+        <name>ConsumerUser_Message_Processing</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Ordem Ascendente</label>
+        <name>ConsumerUser_alt_Sorted_Ascending</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Ordem Descendente</label>
+        <name>ConsumerUser_alt_Sorted_Descending</name>
+    </customLabels>
+    <customLabels>
+        <label>Registros por Página</label>
+        <name>ConsumerUser_b_Records</name>
+    </customLabels>
+    <customLabels>
+        <label>Admin</label>
+        <name>ConsumerUser_dV_Admin</name>
+    </customLabels>
+    <customLabels>
+        <label>Digite sua palavra-chave e clique em Pesquisar para iniciar sua pesquisa. Os resultados da pesquisa incluem todos os registros que correspondem às palavras-chave digitadas.</label>
+        <name>ConsumerUser_dV_Enter_key</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum registro encontrado com base nesse critério</label>
+        <name>ConsumerUser_dV_No_records</name>
+    </customLabels>
+    <customLabels>
+        <label>Sua seleção nesta página será perdida. Deseja prosseguir?</label>
+        <name>ConsumerUser_js_1</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima Página</label>
+        <name>ConsumerUser_oT_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhuma Próxima Página</label>
+        <name>ConsumerUser_oT_No_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Página Anterior</label>
+        <name>ConsumerUser_oT_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Encontrar Usuários</label>
+        <name>ConsumerUser_sP_Find_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários encontraram mais de</label>
+        <name>ConsumerUser_sP_OF_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Registrar Novos Usuários do Consumidor</label>
+        <name>ConsumerUser_subtitle_Register_new_Consumer_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários do Consumidor LMS</label>
+        <name>ConsumerUser_title_LMS_Consumer_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima Página</label>
+        <name>ConsumerUser_title_Next_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Página Anterior</label>
+        <name>ConsumerUser_title_Previous_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>ConsumerUser_value_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Email</label>
+        <name>ConsumerUser_value_Email</name>
+    </customLabels>
+    <customLabels>
+        <label>É Ativo</label>
+        <name>ConsumerUser_value_IsActive</name>
+    </customLabels>
+    <customLabels>
+        <label>Perfil</label>
+        <name>ConsumerUser_value_Profile</name>
+    </customLabels>
+    <customLabels>
+        <label>Função</label>
+        <name>ConsumerUser_value_Role</name>
+    </customLabels>
+    <customLabels>
+        <label>Salvar</label>
+        <name>ConsumerUser_value_Save</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar</label>
+        <name>ConsumerUser_value_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome do Usuário</label>
+        <name>ConsumerUser_value_User_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregando</label>
+        <name>Consumer_Global_Loading</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima Página</label>
+        <name>Consumer_Global_NextPage</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum registro para exibir.</label>
+        <name>Consumer_Global_NoRecordsToDisplay</name>
+    </customLabels>
+    <customLabels>
+        <label>Página Anterior</label>
+        <name>Consumer_Global_PreviousPage</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar</label>
+        <name>Consumer_Global_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem privilégios suficientes para registrar usuários no CyberU.</label>
+        <name>Consumer_Sufficient_Privileges_To_Register_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Conteúdo não encontrado</label>
+        <name>Content_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Curso já atribuído</label>
+        <name>Course_already_assigned</name>
+    </customLabels>
+    <customLabels>
+        <label>O curso foi atribuído com sucesso.</label>
+        <name>Course_has_been_assigned_successfully</name>
+    </customLabels>
+    <customLabels>
+        <label>&lt;b&gt;Campos dinâmicos disponíveis: &lt;/b&gt;{0} - Título de Treinamento, {1} - Nome do Estagiário, {2} - Data de Vencimento, {3} - Descrição do Treinamento.&lt;br/&gt;
+&lt;b&gt;Exemplo:&lt;/b&gt; Prezado {1}. Seu administrador de aprendizado atribuiu a você: {0} - {3}, Faça este treinamento até {2}. Sinceramente, Sua equipe Educacional.</label>
+        <name>CreateChatterTemplateHelpText</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- CreateMailTemplateHelpText --></label>
+        <name>CreateMailTemplateHelpText</name>
+    </customLabels>
+    <customLabels>
+        <label>Criar Modelo da Conversa</label>
+        <name>Create_Chatter_Template</name>
+    </customLabels>
+    <customLabels>
+        <label>Criar Usuários de Consumidor como Admin:</label>
+        <name>Create_Consumer_Users_as_Admin</name>
+    </customLabels>
+    <customLabels>
+        <label>Criar Usuários de Consumidor do arquivo CSV:</label>
+        <name>Create_Consumer_Users_from_CSV_file</name>
+    </customLabels>
+    <customLabels>
+        <label>Criar Modelo de Email</label>
+        <name>Create_Email_Template</name>
+    </customLabels>
+    <customLabels>
+        <label>Criar Caixa de Areia</label>
+        <name>Create_Sandbox</name>
+    </customLabels>
+    <customLabels>
+        <label>Criar Usuários de CSV</label>
+        <name>Create_Users_from_CSV</name>
+    </customLabels>
+    <customLabels>
+        <label>Criar Usuários de Perfis</label>
+        <name>Create_Users_from_Profiles</name>
+    </customLabels>
+    <customLabels>
+        <label>Data de Criação</label>
+        <name>Created_Date</name>
+    </customLabels>
+    <customLabels>
+        <label>Criado por</label>
+        <name>Created_by</name>
+    </customLabels>
+    <customLabels>
+        <label>Treinamento Atual</label>
+        <name>Current_Training</name>
+    </customLabels>
+    <customLabels>
+        <label>Erro de atribuição do currículo.</label>
+        <name>Curriculum_assign_error</name>
+    </customLabels>
+    <customLabels>
+        <label>Integração de CyberU</label>
+        <name>CyberU_Integration</name>
+    </customLabels>
+    <customLabels>
+        <label>DESCRIÇÃO</label>
+        <name>DESCRIPTION</name>
+    </customLabels>
+    <customLabels>
+        <label>DATA DE VENCIMENTO</label>
+        <name>DUE_DATE</name>
+    </customLabels>
+    <customLabels>
+        <label>DURAÇÃO</label>
+        <name>DURATION</name>
+    </customLabels>
+    <customLabels>
+        <label>Desativar</label>
+        <name>Deactivate</name>
+    </customLabels>
+    <customLabels>
+        <label>Padrão</label>
+        <name>Default</name>
+    </customLabels>
+    <customLabels>
+        <label>Número de Vagas Padrão: deve ser um número positivo</label>
+        <name>Default_Number_of_Seats_must_be_a_positive_number</name>
+    </customLabels>
+    <customLabels>
+        <label>Valor Padrão</label>
+        <name>Default_Value</name>
+    </customLabels>
+    <customLabels>
+        <label>Excluir</label>
+        <name>Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível excluir estes itens no momento, atribuição de lote em andamento.</label>
+        <name>Delete_Item_Error</name>
+    </customLabels>
+    <customLabels>
+        <label>Detalhes</label>
+        <name>Details</name>
+    </customLabels>
+    <customLabels>
+        <label>Dificuldade</label>
+        <name>Difficulty</name>
+    </customLabels>
+    <customLabels>
+        <label>A data de vencimento inserida não deve ser anterior à data atual</label>
+        <name>Due_date_should_not_be_less_than_the_current_one</name>
+    </customLabels>
+    <customLabels>
+        <label>Item duplicado encontrado.</label>
+        <name>Duplicate_item_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Duração</label>
+        <name>Duration_normal</name>
+    </customLabels>
+    <customLabels>
+        <label>Editar</label>
+        <name>Edit</name>
+    </customLabels>
+    <customLabels>
+        <label>Editar Modelo da Conversa</label>
+        <name>Edit_Chatter_Template</name>
+    </customLabels>
+    <customLabels>
+        <label>Editar Atribuição do Curso</label>
+        <name>Edit_Course_Assignment</name>
+    </customLabels>
+    <customLabels>
+        <label>Editar Atribuição do Caminho de Aprendizado</label>
+        <name>Edit_Learning_Path_Assignment</name>
+    </customLabels>
+    <customLabels>
+        <label>Habilitado</label>
+        <name>Enabled</name>
+    </customLabels>
+    <customLabels>
+        <label>Esses itens já são equivalências. Selecione outro.</label>
+        <name>EquivalentDublicateRelatedObjects</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível selecionar duas vezes o mesmo objeto como equivalente</label>
+        <name>EquivalentEquialElements</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecione Quiz ou Módulo. Não é permitido selecionar os dois elementos ao mesmo tempo</label>
+        <name>EquivalentsQuizModule</name>
+    </customLabels>
+    <customLabels>
+        <label>Erro: ID da Tabela não definida, é preciso definir uma ID na sua tabela e cada linha</label>
+        <name>Error_No_Table_id_set</name>
+    </customLabels>
+    <customLabels>
+        <label>Erro no QueryLocator:</label>
+        <name>Error_QueryLocator</name>
+    </customLabels>
+    <customLabels>
+        <label>Erro na Solicitação:</label>
+        <name>Error_Request</name>
+    </customLabels>
+    <customLabels>
+        <label>Erro na Pesquisa Skillsoft:</label>
+        <name>Error_Skillsoft_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Falhou</label>
+        <name>Failed</name>
+    </customLabels>
+    <customLabels>
+        <label>Filtrar por Perfis:</label>
+        <name>Filter_by_Profiles</name>
+    </customLabels>
+    <customLabels>
+        <label>Primeira Página</label>
+        <name>First_Page_Assign_Plan_Alt</name>
+    </customLabels>
+    <customLabels>
+        <label>Primeira Página</label>
+        <name>First_Page_Assign_Plan_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>De</label>
+        <name>From</name>
+    </customLabels>
+    <customLabels>
+        <label>Grupos não encontrados</label>
+        <name>Groups_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Ignore a primeira linha do csv.</label>
+        <name>Ignore_first_row_of_csv</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Andamento</label>
+        <name>In_Progress</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- Info --></label>
+        <name>Info</name>
+    </customLabels>
+    <customLabels>
+        <label>Informações</label>
+        <name>Information</name>
+    </customLabels>
+    <customLabels>
+        <label>Informações</label>
+        <name>InformationAssign</name>
+    </customLabels>
+    <customLabels>
+        <label>Informações atualizadas com êxito.</label>
+        <name>Information_has_been_updated_successfully</name>
+    </customLabels>
+    <customLabels>
+        <label>Privilégios Insuficientes</label>
+        <name>Insufficient_Privileges_Error_Msg</name>
+    </customLabels>
+    <customLabels>
+        <label>ID INVÁLIDA</label>
+        <name>Invalid_ID</name>
+    </customLabels>
+    <customLabels>
+        <label>Itens não podem ser inseridos.</label>
+        <name>Items_can_t_be_inserted</name>
+    </customLabels>
+    <customLabels>
+        <label>Itens não selecionados.</label>
+        <name>Items_not_selected</name>
+    </customLabels>
+    <customLabels>
+        <label>Publicando...</label>
+        <name>LMSContentDetail_Message_Publishing</name>
+    </customLabels>
+    <customLabels>
+        <label>Última Página</label>
+        <name>Last_Page_Assign_Alt</name>
+    </customLabels>
+    <customLabels>
+        <label>Última Página</label>
+        <name>Last_Page_Assign_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Objeto de Aprendizado</label>
+        <name>Learning_Object</name>
+    </customLabels>
+    <customLabels>
+        <label>Erro de atribuição do Caminho de Aprendizado.</label>
+        <name>Learning_Path_assign_error</name>
+    </customLabels>
+    <customLabels>
+        <label>Licença</label>
+        <name>License</name>
+    </customLabels>
+    <customLabels>
+        <label>Editar Licença</label>
+        <name>License_Edit</name>
+    </customLabels>
+    <customLabels>
+        <label>Uma Licença deve ser selecionada em cada Item do Curso.</label>
+        <name>License_must_be_selected</name>
+    </customLabels>
+    <customLabels>
+        <label>Licença não encontrada</label>
+        <name>License_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Arquivar</label>
+        <name>List_Assignments_Archive</name>
+    </customLabels>
+    <customLabels>
+        <label>Exc</label>
+        <name>List_Assignments_Del</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregar dados do arquivo CSV</label>
+        <name>LoadAssignments_title</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregar a partir do arquivo</label>
+        <name>Load_from_file</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregando...</label>
+        <name>Loading</name>
+    </customLabels>
+    <customLabels>
+        <label>Localização</label>
+        <name>Localization</name>
+    </customLabels>
+    <customLabels>
+        <label>Migração Concluída!</label>
+        <name>Migrate_Complete</name>
+    </customLabels>
+    <customLabels>
+        <label>Falta a referência do treinamento.</label>
+        <name>Missing_training_reference</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível selecionar este módulo como módulo de idioma padrão porque já está vinculado a outro módulo de idioma padrão</label>
+        <name>ModuleTrigger_default_already_linked_to_another</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível selecionar este módulo como módulo de idioma padrão porquê ainda não foi publicado.</label>
+        <name>ModuleTrigger_default_not_published_yet</name>
+    </customLabels>
+    <customLabels>
+        <label>Este módulo não pode ser excluído antes de ser desanexado de todo o módulo do idioma padrão</label>
+        <name>ModuleTrigger_delete_link_to_default_language_module</name>
+    </customLabels>
+    <customLabels>
+        <label>Este módulo não pode ser excluído antes de ser desanexado de todas as traduções</label>
+        <name>ModuleTrigger_delete_module_translations</name>
+    </customLabels>
+    <customLabels>
+        <label>Este módulo já foi traduzido para</label>
+        <name>ModuleTrigger_module_has_already_been_translated</name>
+    </customLabels>
+    <customLabels>
+        <label>Este módulo não pode ser usado como tradução de outro módulo porque ele é o módulo de idioma padrão de outros módulos.</label>
+        <name>ModuleTrigger_module_is_default_with_translation</name>
+    </customLabels>
+    <customLabels>
+        <label>Este módulo deve ser publicado antes de ser usado como tradução de outro módulo.</label>
+        <name>ModuleTrigger_module_not_published</name>
+    </customLabels>
+    <customLabels>
+        <label>Módulo foi atualizado</label>
+        <name>Module_has_been_updateded</name>
+    </customLabels>
+    <customLabels>
+        <label>Módulo Não Encontrado</label>
+        <name>Module_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Módulo não foi atualizado</label>
+        <name>Module_was_not_updated</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuir Treinamento</label>
+        <name>MyTeam_Assign_Training</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>MyTeam_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Comentário</label>
+        <name>MyTeam_Comment</name>
+    </customLabels>
+    <customLabels>
+        <label>Comentários</label>
+        <name>MyTeam_Comments</name>
+    </customLabels>
+    <customLabels>
+        <label>Minha Equipe</label>
+        <name>MyTeam_Header</name>
+    </customLabels>
+    <customLabels>
+        <label>Curtir</label>
+        <name>MyTeam_Like</name>
+    </customLabels>
+    <customLabels>
+        <label>Mensagem</label>
+        <name>MyTeam_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Página</label>
+        <name>MyTeam_Page</name>
+    </customLabels>
+    <customLabels>
+        <label>pessoas gostam</label>
+        <name>MyTeam_People_Like_It</name>
+    </customLabels>
+    <customLabels>
+        <label>Enviar</label>
+        <name>MyTeam_Send</name>
+    </customLabels>
+    <customLabels>
+        <label>Mostrar Tudo</label>
+        <name>MyTeam_Show_All</name>
+    </customLabels>
+    <customLabels>
+        <label>Mostrar Usuários Inativos</label>
+        <name>MyTeam_Show_Inactive_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Equipe de</label>
+        <name>MyTeam_Team</name>
+    </customLabels>
+    <customLabels>
+        <label>Atualizações da Equipe</label>
+        <name>MyTeam_Team_Updates</name>
+    </customLabels>
+    <customLabels>
+        <label>Para</label>
+        <name>MyTeam_To</name>
+    </customLabels>
+    <customLabels>
+        <label>Status do Treinamento</label>
+        <name>MyTeam_Training_Status</name>
+    </customLabels>
+    <customLabels>
+        <label>Não curtir</label>
+        <name>MyTeam_Unlike</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuições para {0}</label>
+        <name>MyTeam_User_Assignments</name>
+    </customLabels>
+    <customLabels>
+        <label>Visualizar mais atualizações</label>
+        <name>MyTeam_View_More_Updates</name>
+    </customLabels>
+    <customLabels>
+        <label>Descrição</label>
+        <name>MyTrainingPopup_Description</name>
+    </customLabels>
+    <customLabels>
+        <label>Adicionar ao Catálogo</label>
+        <name>MyTraining_Add_to_Catalog</name>
+    </customLabels>
+    <customLabels>
+        <label>Tem certeza que deseja cancelar a inscrição desta atribuição?</label>
+        <name>MyTraining_Are_you_sure_you_want_to_unenroll_this_assignment</name>
+    </customLabels>
+    <customLabels>
+        <label>Anexar</label>
+        <name>MyTraining_Attach</name>
+    </customLabels>
+    <customLabels>
+        <label>Arquivo Anexado</label>
+        <name>MyTraining_Attached_File</name>
+    </customLabels>
+    <customLabels>
+        <label>Meus Cursos</label>
+        <name>MyTraining_BTitle1</name>
+    </customLabels>
+    <customLabels>
+        <label>Meus Módulos</label>
+        <name>MyTraining_BTitle2</name>
+    </customLabels>
+    <customLabels>
+        <label>Módulos Anteriores</label>
+        <name>MyTraining_BTitle3</name>
+    </customLabels>
+    <customLabels>
+        <label>Cursos Anteriores</label>
+        <name>MyTraining_BTitle4</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>MyTraining_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Fechar</label>
+        <name>MyTraining_Close</name>
+    </customLabels>
+    <customLabels>
+        <label>Conteúdo do Treinamento</label>
+        <name>MyTraining_Column1</name>
+    </customLabels>
+    <customLabels>
+        <label>Progresso</label>
+        <name>MyTraining_Column2</name>
+    </customLabels>
+    <customLabels>
+        <label>Data de Vencimento</label>
+        <name>MyTraining_Column3</name>
+    </customLabels>
+    <customLabels>
+        <label>Pontuação</label>
+        <name>MyTraining_Column4</name>
+    </customLabels>
+    <customLabels>
+        <label>Duração</label>
+        <name>MyTraining_Column5</name>
+    </customLabels>
+    <customLabels>
+        <label>Excluir</label>
+        <name>MyTraining_Delete</name>
+    </customLabels>
+    <customLabels>
+        <label>Detalhes</label>
+        <name>MyTraining_Details_Popup_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Arquivo</label>
+        <name>MyTraining_File</name>
+    </customLabels>
+    <customLabels>
+        <label>Filtrar por</label>
+        <name>MyTraining_FilterBy</name>
+    </customLabels>
+    <customLabels>
+        <label>Seguir</label>
+        <name>MyTraining_Follow</name>
+    </customLabels>
+    <customLabels>
+        <label>Seguindo</label>
+        <name>MyTraining_Following</name>
+    </customLabels>
+    <customLabels>
+        <label>Participar</label>
+        <name>MyTraining_Join</name>
+    </customLabels>
+    <customLabels>
+        <label>Lançar</label>
+        <name>MyTraining_LaunchCourse</name>
+    </customLabels>
+    <customLabels>
+        <label>Membro</label>
+        <name>MyTraining_Member</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome</label>
+        <name>MyTraining_Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem nenhum treinamento corrente.</label>
+        <name>MyTraining_No_Training_to_Complete</name>
+    </customLabels>
+    <customLabels>
+        <label>Ok</label>
+        <name>MyTraining_Ok</name>
+    </customLabels>
+    <customLabels>
+        <label>Progresso em Geral</label>
+        <name>MyTraining_OverallProgress</name>
+    </customLabels>
+    <customLabels>
+        <label>Remover</label>
+        <name>MyTraining_Remove</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar</label>
+        <name>MyTraining_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar o Catálogo</label>
+        <name>MyTraining_SearchCatalog</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Grupos</label>
+        <name>MyTraining_Select_Groups</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Pessoas</label>
+        <name>MyTraining_Select_People</name>
+    </customLabels>
+    <customLabels>
+        <label>Enviar uma Mensagem</label>
+        <name>MyTraining_Send_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Compartilhar</label>
+        <name>MyTraining_Share</name>
+    </customLabels>
+    <customLabels>
+        <label>mín</label>
+        <name>MyTraining_min</name>
+    </customLabels>
+    <customLabels>
+        <label>Meu Treinamento</label>
+        <name>MyTraining_title_My_Training</name>
+    </customLabels>
+    <customLabels>
+        <label>-NENHUM- valor selecionado.</label>
+        <name>NONE_value_has_been_selected</name>
+    </customLabels>
+    <customLabels>
+        <label>Nome</label>
+        <name>Name</name>
+    </customLabels>
+    <customLabels>
+        <label>Novos</label>
+        <name>New</name>
+    </customLabels>
+    <customLabels>
+        <label>Tentar nova versão do curso.</label>
+        <name>NewCourseVersion</name>
+    </customLabels>
+    <customLabels>
+        <label>Novo Item do Caminho de Treinamento</label>
+        <name>New_Training_Path_Item</name>
+    </customLabels>
+    <customLabels>
+        <label>Nova Versão</label>
+        <name>New_Version</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima</label>
+        <name>Next_Page_Assign_Alt</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima</label>
+        <name>Next_Page_Assign_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum item de Currículo encontrado.</label>
+        <name>No_Curriculum_items_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum resultado encontrado</label>
+        <name>No_Results_Found</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum Modelo Disponível</label>
+        <name>No_Templates_Available</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhuma ID criada para Usuários Cornerstone:</label>
+        <name>No_cornerstone_Users_created_id</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum Valor Org padrão encontrado!</label>
+        <name>No_default_Org_Values_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Todos os Participantes Restantes das licenças foram usados. Favor criar uma nova licença.</label>
+        <name>No_licenses</name>
+    </customLabels>
+    <customLabels>
+        <label>Todos os Participantes Restantes das licenças foram usados. Crie uma nova licença para:</label>
+        <name>No_licenses_courses</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum registro encontrado com base nesse critério.</label>
+        <name>No_records_were_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum resultado encontrado. Pesquise novamente.</label>
+        <name>No_results_found_Please_search_again</name>
+    </customLabels>
+    <customLabels>
+        <label>Nenhum usuário especificado para a ação excluir.</label>
+        <name>No_user_specified_for_delete_action</name>
+    </customLabels>
+    <customLabels>
+        <label>NENHUMA</label>
+        <name>None</name>
+    </customLabels>
+    <customLabels>
+        <label>IDS de Usuário válidas não encontradas</label>
+        <name>Not_Found_the_valid_User_ids</name>
+    </customLabels>
+    <customLabels>
+        <label>Não Iniciado</label>
+        <name>Not_Started</name>
+    </customLabels>
+    <customLabels>
+        <label>Notificação</label>
+        <name>Notification</name>
+    </customLabels>
+    <customLabels>
+        <label>Gerenciamento de Notificações</label>
+        <name>Notification_Management</name>
+    </customLabels>
+    <customLabels>
+        <label>Número</label>
+        <name>Number</name>
+    </customLabels>
+    <customLabels>
+        <label>Número de usuários adicionado por lote:</label>
+        <name>Number_of_users_added_per_batch</name>
+    </customLabels>
+    <customLabels>
+        <label>ID do Objeto</label>
+        <name>Object_Id</name>
+    </customLabels>
+    <customLabels>
+        <label>Sair da versão antiga do curso.</label>
+        <name>OldCourseVersion</name>
+    </customLabels>
+    <customLabels>
+        <label>Ordem</label>
+        <name>Order</name>
+    </customLabels>
+    <customLabels>
+        <label>Pasta de Modelos da Organização</label>
+        <name>Organization_Template_Folder</name>
+    </customLabels>
+    <customLabels>
+        <label>PROGRESSO</label>
+        <name>PROGRESS</name>
+    </customLabels>
+    <customLabels>
+        <label>E</label>
+        <name>PageAssignAndLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Página</label>
+        <name>PageAssignLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>de</label>
+        <name>PageAssignOfLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Quebra de Página</label>
+        <name>Page_Break</name>
+    </customLabels>
+    <customLabels>
+        <label>Próxima</label>
+        <name>Pagination_Next</name>
+    </customLabels>
+    <customLabels>
+        <label>Anterior</label>
+        <name>Pagination_Previous</name>
+    </customLabels>
+    <customLabels>
+        <label>Assunto Principal:</label>
+        <name>Parent_Object</name>
+    </customLabels>
+    <customLabels>
+        <label>Aprovado</label>
+        <name>Passed</name>
+    </customLabels>
+    <customLabels>
+        <label>Vencido</label>
+        <name>Past_Due</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários Selecionados</label>
+        <name>Pending_Assignments</name>
+    </customLabels>
+    <customLabels>
+        <label>Aguarde</label>
+        <name>Please_Wait</name>
+    </customLabels>
+    <customLabels>
+        <label>Adicionar itens do caminho</label>
+        <name>Please_add_path_items</name>
+    </customLabels>
+    <customLabels>
+        <label>Confirme</label>
+        <name>Please_confirm</name>
+    </customLabels>
+    <customLabels>
+        <label>Digite uma ID válida.</label>
+        <name>Please_enter_a_valid_ID</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecione arquivo.</label>
+        <name>Please_select_file</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecione um ou mais estagiários.</label>
+        <name>Please_select_one_or_more_trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>Especifique o período de treinamento recorrente e o tipo de período de treinamento recorrente</label>
+        <name>Please_specify_both_recurring_traing_period</name>
+    </customLabels>
+    <customLabels>
+        <label>Para criar um usuário em conformidade com o seu perfil, especifique um adequado e confirme a escolha.</label>
+        <name>Please_specify_the_appropriate</name>
+    </customLabels>
+    <customLabels>
+        <label>Tente atribuir por grupo mais tarde. LIMITE de 5 do lote foi alcançado.</label>
+        <name>Please_try_assigning_by_group_later</name>
+    </customLabels>
+    <customLabels>
+        <label>Tente atribuir por grupo mais tarde. Limite de 5 do lote foi alcançado.</label>
+        <name>Please_try_assigning_by_group_later_Batch_limit_of_5_is_reached</name>
+    </customLabels>
+    <customLabels>
+        <label>Tente novamente mais tarde. Limite de 5 do lote foi alcançado.</label>
+        <name>Please_try_later_Batch_limit_of_5_is_reached</name>
+    </customLabels>
+    <customLabels>
+        <label>Tente atualizar novamente mais tarde. Limite de 5 do lote foi alcançado.</label>
+        <name>Please_try_update_later_Batch_limit_of_5_is_reached</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregue o arquivo *.CSV.</label>
+        <name>Please_upload_CSV_file</name>
+    </customLabels>
+    <customLabels>
+        <label>Anterior</label>
+        <name>Previous_Page_Assign_Alt</name>
+    </customLabels>
+    <customLabels>
+        <label>Anterior</label>
+        <name>Previous_Page_Assign_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Imprimir Certificado</label>
+        <name>Print_Certificate</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem acesso ao campo User.ProfileId.</label>
+        <name>ProfileIdfieldException</name>
+    </customLabels>
+    <customLabels>
+        <label>Informação do Progresso</label>
+        <name>Progress_Information</name>
+    </customLabels>
+    <customLabels>
+        <label>Voltar para o Quiz</label>
+        <name>Question_Back_to_Quiz</name>
+    </customLabels>
+    <customLabels>
+        <label>Verdadeiro/Falso</label>
+        <name>Question_True_False</name>
+    </customLabels>
+    <customLabels>
+        <label>Obrigado!</label>
+        <name>Quiz_Congratulations</name>
+    </customLabels>
+    <customLabels>
+        <label>Parabéns! Você passou com a pontuação de {0}%</label>
+        <name>Quiz_Congratulations_Score</name>
+    </customLabels>
+    <customLabels>
+        <label>Preencha os campos obrigatórios</label>
+        <name>Quiz_Please_fill_in_all_fields</name>
+    </customLabels>
+    <customLabels>
+        <label>Infelizmente sua pontuação de {0}% está abaixo do mínimo necessário para aprovação.</label>
+        <name>Quiz_Unfortunately_Score</name>
+    </customLabels>
+    <customLabels>
+        <label>O teste foi atribuído com sucesso.</label>
+        <name>Quiz_has_been_assigned_successfully</name>
+    </customLabels>
+    <customLabels>
+        <label>Quiz já atribuído</label>
+        <name>Quiz_is_already_assigned</name>
+    </customLabels>
+    <customLabels>
+        <label>O número máximo de tentativa para passar no Teste foi atingido</label>
+        <name>Quiz_max_attempts_reached</name>
+    </customLabels>
+    <customLabels>
+        <label>Quiz não encontrado</label>
+        <name>Quiz_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Quiz sem perguntas não pode ser atribuído.</label>
+        <name>Quiz_without_questions_cannot_be_assigned</name>
+    </customLabels>
+    <customLabels>
+        <label>Infelizmente sua pontuação está abaixo do mínimo necessário para aprovação.</label>
+        <name>Quiz_your_result_does_not_meet_min_passing_score</name>
+    </customLabels>
+    <customLabels>
+        <label>Testes</label>
+        <name>Quizzes</name>
+    </customLabels>
+    <customLabels>
+        <label>Tipo de Arquivo não encontrado.</label>
+        <name>RecordType_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Registros por página.</label>
+        <name>Records_per_page</name>
+    </customLabels>
+    <customLabels>
+        <label>Treinamento Recorrente</label>
+        <name>Recurring_Training</name>
+    </customLabels>
+    <customLabels>
+        <label>, todo</label>
+        <name>Recurring_Training_Every</name>
+    </customLabels>
+    <customLabels>
+        <label>Data de Atribuição e Data de Vencimento permanecem inalteradas.</label>
+        <name>Recurring_Training_Message</name>
+    </customLabels>
+    <customLabels>
+        <label>Períodos de treinamento recorrente devem ser um número inteiro</label>
+        <name>Recurring_training_periods_should_be_positive_integer</name>
+    </customLabels>
+    <customLabels>
+        <label>Status do Registro</label>
+        <name>Registration_Status</name>
+    </customLabels>
+    <customLabels>
+        <label>Remover</label>
+        <name>Remove</name>
+    </customLabels>
+    <customLabels>
+        <label>Desativada</label>
+        <name>Retired</name>
+    </customLabels>
+    <customLabels>
+        <label>Revisão</label>
+        <name>Review</name>
+    </customLabels>
+    <customLabels>
+        <label>PONTUAÇÃO</label>
+        <name>SCORE</name>
+    </customLabels>
+    <customLabels>
+        <label><!-- STATUS --></label>
+        <name>STATUS</name>
+    </customLabels>
+    <customLabels>
+        <label>Salvar</label>
+        <name>Save</name>
+    </customLabels>
+    <customLabels>
+        <label>Salvar e Novo</label>
+        <name>Save_and_New</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar</label>
+        <name>Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisa Avançada</label>
+        <name>SearchCatalog_Advanced_Search</name>
+    </customLabels>
+    <customLabels>
+        <label>Todos</label>
+        <name>SearchCatalog_AllCatalogs</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuir</label>
+        <name>SearchCatalog_Assign</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuir Aprendizado</label>
+        <name>SearchCatalog_Assign_Learning</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar</label>
+        <name>SearchCatalog_Cancel</name>
+    </customLabels>
+    <customLabels>
+        <label>Fechar</label>
+        <name>SearchCatalog_Close</name>
+    </customLabels>
+    <customLabels>
+        <label>Descrição</label>
+        <name>SearchCatalog_Column_Description</name>
+    </customLabels>
+    <customLabels>
+        <label>Itens</label>
+        <name>SearchCatalog_Column_Items</name>
+    </customLabels>
+    <customLabels>
+        <label>resultados</label>
+        <name>SearchCatalog_Column_Results</name>
+    </customLabels>
+    <customLabels>
+        <label>Título</label>
+        <name>SearchCatalog_Column_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Tipo</label>
+        <name>SearchCatalog_Column_Type</name>
+    </customLabels>
+    <customLabels>
+        <label>Cursos</label>
+        <name>SearchCatalog_Courses</name>
+    </customLabels>
+    <customLabels>
+        <label>Currículos</label>
+        <name>SearchCatalog_Curriculums</name>
+    </customLabels>
+    <customLabels>
+        <label>Inscrever</label>
+        <name>SearchCatalog_Enroll</name>
+    </customLabels>
+    <customLabels>
+        <label>Caminhos de Aprendizado</label>
+        <name>SearchCatalog_LearningPaths</name>
+    </customLabels>
+    <customLabels>
+        <label>Módulos</label>
+        <name>SearchCatalog_Modules</name>
+    </customLabels>
+    <customLabels>
+        <label>Função</label>
+        <name>SearchCatalog_Roles</name>
+    </customLabels>
+    <customLabels>
+        <label>Descrição da Busca</label>
+        <name>SearchCatalog_Search_Description</name>
+    </customLabels>
+    <customLabels>
+        <label>Catálogo</label>
+        <name>SearchCatalog_SelectCatalog</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar o Catálogo</label>
+        <name>SearchCatalog_Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Estagiário</label>
+        <name>SearchCatalog_Trainees</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar Usuários</label>
+        <name>Search_Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Procurar palavras-chave específicas ou fazer uma pesquisa em branco para listar o catálogo inteiro.</label>
+        <name>Search_for_specific_keywords</name>
+    </customLabels>
+    <customLabels>
+        <label>Pesquisar no Catálogo de Treinamento</label>
+        <name>Search_the_Training_catalog</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar versão do curso</label>
+        <name>SelectCourseVersionHead</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar versão do curso</label>
+        <name>SelectCourseVersionTitle</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Todos</label>
+        <name>Select_All</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Modelo de Email</label>
+        <name>Select_Email_Template</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Arquivo:</label>
+        <name>Select_File</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar uma ou mais perguntas para adicionar.</label>
+        <name>Select_one_or_more_questions_to_add</name>
+    </customLabels>
+    <customLabels>
+        <label>Sequência</label>
+        <name>Sequence</name>
+    </customLabels>
+    <customLabels>
+        <label>Sessão não criada na ID de Usuário Cornerstone</label>
+        <name>Session_not_created_for_cornerstone_User_Id</name>
+    </customLabels>
+    <customLabels>
+        <label>Mostrar Treinamento Concluído</label>
+        <name>Show_Completed_Training</name>
+    </customLabels>
+    <customLabels>
+        <label>ID inválido</label>
+        <name>Sorry_but_ID_is_invalid</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Ordem Ascendente</label>
+        <name>Sorted_Ascending</name>
+    </customLabels>
+    <customLabels>
+        <label>Em Ordem Descendente</label>
+        <name>Sorted_Descending</name>
+    </customLabels>
+    <customLabels>
+        <label>Especificar Critérios de Filtro</label>
+        <name>Specify_Filter_Criteria</name>
+    </customLabels>
+    <customLabels>
+        <label>Status serão redefinidos em breve</label>
+        <name>Statuses_will_be_reset_shortly</name>
+    </customLabels>
+    <customLabels>
+        <label>TREINAMENTO</label>
+        <name>TRAINING</name>
+    </customLabels>
+    <customLabels>
+        <label>TIPO DE TREINAMENTO</label>
+        <name>TRAINING_TYPE</name>
+    </customLabels>
+    <customLabels>
+        <label>para o download do modelo.</label>
+        <name>Template_download</name>
+    </customLabels>
+    <customLabels>
+        <label>Testar API</label>
+        <name>Test_API</name>
+    </customLabels>
+    <customLabels>
+        <label>Testar Módulo</label>
+        <name>Test_Module</name>
+    </customLabels>
+    <customLabels>
+        <label>Testar Quiz</label>
+        <name>Test_Quiz</name>
+    </customLabels>
+    <customLabels>
+        <label>A aplicação não foi definida corretamente. Consulte o Guia de Instalação e Configuração.</label>
+        <name>The_application_has_not_been_set_up_properly</name>
+    </customLabels>
+    <customLabels>
+        <label>Não há nenhum item do Caminho de Aprendizado. É preciso criar o Caminho de Aprendizado para prosseguir.</label>
+        <name>There_are_no_Learning_Path_Items</name>
+    </customLabels>
+    <customLabels>
+        <label>Sem perguntas para adicionar.</label>
+        <name>There_are_no_questions_to_add</name>
+    </customLabels>
+    <customLabels>
+        <label>Este certificado foi concedido para</label>
+        <name>This_certification_is_awarded_to</name>
+    </customLabels>
+    <customLabels>
+        <label>Título</label>
+        <name>Title</name>
+    </customLabels>
+    <customLabels>
+        <label>Estagiários</label>
+        <name>TraineesTabLabel</name>
+    </customLabels>
+    <customLabels>
+        <label>Certificado de Treinamento</label>
+        <name>Training_Certificate</name>
+    </customLabels>
+    <customLabels>
+        <label>Editar Item do Caminho de Treinamento</label>
+        <name>Training_Path_Item_Edit</name>
+    </customLabels>
+    <customLabels>
+        <label>Transcrição</label>
+        <name>Transcript</name>
+    </customLabels>
+    <customLabels>
+        <label>Texto de Tipo</label>
+        <name>Type_Text</name>
+    </customLabels>
+    <customLabels>
+        <label>Cancelar Inscrição</label>
+        <name>Unenroll</name>
+    </customLabels>
+    <customLabels>
+        <label>Erro inesperado</label>
+        <name>Unexpected_error</name>
+    </customLabels>
+    <customLabels>
+        <label>Desmarcar usuários</label>
+        <name>Unselect_users</name>
+    </customLabels>
+    <customLabels>
+        <label>Processo de atualização concluído.</label>
+        <name>Updating_process_has_been_completed</name>
+    </customLabels>
+    <customLabels>
+        <label>A atualização do processo foi iniciada.</label>
+        <name>Updating_process_has_been_started</name>
+    </customLabels>
+    <customLabels>
+        <label>Processo de atualização em andamento.</label>
+        <name>Updating_process_is_in_progress</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregar</label>
+        <name>Upload</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregar Conteúdo</label>
+        <name>Upload_Content</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregar Detalhes</label>
+        <name>Upload_Details</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregar Arquivo</label>
+        <name>Upload_File</name>
+    </customLabels>
+    <customLabels>
+        <label>Tipos de Arquivos Aceitos:</label>
+        <name>Upload_Fully_Supported_File_Types</name>
+    </customLabels>
+    <customLabels>
+        <label>Instruções:</label>
+        <name>Upload_Instructions</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregar Módulos</label>
+        <name>Upload_Modules</name>
+    </customLabels>
+    <customLabels>
+        <label>A maioria dos outros tipos de arquivos é suportada, mas não é transferida. Tipos de arquivos potencialmente perigosos não são permitidos, incluindo .EXE, .COM, .BAT e .VBxxx</label>
+        <name>Upload_Most_Other_File_Types</name>
+    </customLabels>
+    <customLabels>
+        <label>Nota:</label>
+        <name>Upload_Note</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecione um novo pacote a ser carregado como a nova versão. Observe que este pacote deve ser do mesmo padrão (SCORM 1.2, SCORM 2004 ou AICC) do original.</label>
+        <name>Upload_Note_continue</name>
+    </customLabels>
+    <customLabels>
+        <label>Tipos de Arquivos Aceitos Parcialmente:</label>
+        <name>Upload_Partially_Supported_File_Types</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecione o pacote a ser carregado. Não atualize a página ao carregar.</label>
+        <name>Upload_Please_Select_Package</name>
+    </customLabels>
+    <customLabels>
+        <label>SCORM 1.2, SCORM 2004, AICC, MP4, Docs Office e PDFs</label>
+        <name>Upload_SCORM</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecionar Arquivo</label>
+        <name>Upload_Select_File</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregando...</label>
+        <name>Upload_msg</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregamentos</label>
+        <name>Uploads</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuário</label>
+        <name>User</name>
+    </customLabels>
+    <customLabels>
+        <label>Atribuições do Usuário</label>
+        <name>User_Assignments</name>
+    </customLabels>
+    <customLabels>
+        <label>Pasta de Modelos do Usuário</label>
+        <name>User_Template_Folder</name>
+    </customLabels>
+    <customLabels>
+        <label>Funções de usuário alteradas com êxito.</label>
+        <name>User_s_rights_were_changed</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários</label>
+        <name>Users</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários Criados: valor está em branco.</label>
+        <name>Users_Created_value_is_empty</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários Criados: valor deve ser entre 1 e 50</label>
+        <name>Users_Created_value_must_be_between_1_and_50</name>
+    </customLabels>
+    <customLabels>
+        <label>Usuários não encontrados</label>
+        <name>Users_not_found</name>
+    </customLabels>
+    <customLabels>
+        <label>Valor do idioma selecionado já existe</label>
+        <name>Value_for_selected_language_already_exists</name>
+    </customLabels>
+    <customLabels>
+        <label>Lembre-se de que você deve testar completamente o seu objeto de aprendizado antes de fazer a publicação.  A etapa de verificação tem por objetivo ajudar a garantir que o objeto tenha o desempenho esperado e indique os status como concluído, aprovado ou reprovado.  Ele também ajuda a evitar muitos problemas downstream com os usuários finais dos objetos de aprendizado após a atribuição.
+
+Ao clicar em Verificar Curso, você como editor indica que testou o objeto de aprendizado e concorda que está funcionando adequadamente.
+
+Após clicar em Verificar, é possível publicar o curso.</label>
+        <name>Verified</name>
+    </customLabels>
+    <customLabels>
+        <label>Verificar Módulo</label>
+        <name>Verify_Module</name>
+    </customLabels>
+    <customLabels>
+        <label>Verificar Quiz</label>
+        <name>Verify_Quiz</name>
+    </customLabels>
+    <customLabels>
+        <label>Aviso</label>
+        <name>Warning</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem autorização para acessar este conteúdo. Se achar que recebeu esta mensagem por engano, entre em contato com o administrador do seu sistema</label>
+        <name>You_are_not_authorized_to_access_this_content</name>
+    </customLabels>
+    <customLabels>
+        <label>Você pode carregar apenas menos de 10.000 registros.</label>
+        <name>You_can_upload_only_less_than_10000_records</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível excluir uma Licença Comprada.</label>
+        <name>You_cannot_delete_a_Purchased_License</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível excluir uma Licença de Usuário consumida.</label>
+        <name>You_cannot_delete_a_consumed_User_License</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível excluir uma Licença de Conteúdo aprovada.</label>
+        <name>You_cannot_delete_an_approved_Content_License</name>
+    </customLabels>
+    <customLabels>
+        <label>Não é possível modificar o Usuário de uma Licença usada.</label>
+        <name>You_cannot_modify_the_User_on_a_used_License</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem uma licença para lançar este curso.</label>
+        <name>You_do_not_have_a_license</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem privilégios suficientes para carregar um Conteúdo.</label>
+        <name>You_do_not_have_sufficient_privileges_to_upload</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem o nível de acesso necessário para executar a operação solicitada. Contate o proprietário do registro ou o seu administrador, caso precise de acesso.</label>
+        <name>You_do_not_have_the_level_of_access</name>
+    </customLabels>
+    <customLabels>
+        <label>É preciso concluir os seguintes Objetos de Aprendizado</label>
+        <name>You_must_complete_following_Learning_Objects</name>
+    </customLabels>
+    <customLabels>
+        <label>É preciso selecionar pelo menos um Usuário para registrar</label>
+        <name>You_must_select_at_least_a_User_to_register</name>
+    </customLabels>
+    <customLabels>
+        <label>Você deve excluir todas as Atribuições antes de excluir</label>
+        <name>You_should_delete_all_Assignments_before_deleting_a</name>
+    </customLabels>
+    <customLabels>
+        <label>Você deve excluir todas as Atribuições deste Curso antes de excluí-lo</label>
+        <name>You_should_delete_all_Assignments_for_this_Course_before_deleting_it</name>
+    </customLabels>
+    <customLabels>
+        <label>Você deve excluir todas as Atribuições deste Currículo antes de excluí-lo</label>
+        <name>You_should_delete_all_Assignments_for_this_Curriculum_before_deleting_it</name>
+    </customLabels>
+    <customLabels>
+        <label>Você deve excluir todas as Atribuições deste Caminho de Aprendizado antes de excluí-lo</label>
+        <name>You_should_delete_all_Assignments_for_this_Learning_Path_before_deleting_it</name>
+    </customLabels>
+    <customLabels>
+        <label>Você deve excluir todas as Atribuições deste Módulo antes de excluí-lo</label>
+        <name>You_should_delete_all_Assignments_for_this_module_before_deleting_it</name>
+    </customLabels>
+    <customLabels>
+        <label>Sua organização foi registrada com êxito com CyberU.</label>
+        <name>Your_organization_was_successfully_registered_with_CyberU</name>
+    </customLabels>
+    <customLabels>
+        <label>Clique na nova licença na seção de licença a seguir.</label>
+        <name>click_new_lic</name>
+    </customLabels>
+    <customLabels>
+        <label>Licenças Disponíveis consumidas pelos usuários do Consumidor LMS. Para publicar este curso novamente é preciso criar uma nova licença.</label>
+        <name>consumed_lic</name>
+    </customLabels>
+    <customLabels>
+        <label>aqui</label>
+        <name>here</name>
+    </customLabels>
+    <customLabels>
+        <label>reconhecendo a conclusão com êxito do</label>
+        <name>in_recognition_of_the_successful_completion_of</name>
+    </customLabels>
+    <customLabels>
+        <label>O tamanho do arquivo СSV excede o limite permitido de 20k para usuários</label>
+        <name>limit_size_csv</name>
+    </customLabels>
+    <customLabels>
+        <label>Carregando...</label>
+        <name>loading_label</name>
+    </customLabels>
+    <customLabels>
+        <label>Não há nenhum item de Curso. É preciso criar Itens do Curso para prosseguir.</label>
+        <name>no_Course_Items</name>
+    </customLabels>
+    <customLabels>
+        <label>de</label>
+        <name>of</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecione uma licença e um ou mais estagiários</label>
+        <name>select_a_license</name>
+    </customLabels>
+    <customLabels>
+        <label>Selecione um ou mais estagiários ou Curso já atribuído aos estagiários selecionados. Escolha novos estagiários e atribua-os.</label>
+        <name>select_one_or_more_trainees_or_Course_has_already_been_assigned</name>
+    </customLabels>
+    <customLabels>
+        <label>significa a próxima sessão que exige a sua presença</label>
+        <name>signifies_the_next_session_requiring_your_attendence</name>
+    </customLabels>
+    <customLabels>
+        <label>Conteúdo compartilhado com {0} usuários/grupos</label>
+        <name>social_learning_sharing_successful</name>
+    </customLabels>
+    <customLabels>
+        <label>Conteúdo não compartilhado</label>
+        <name>social_learning_sharing_unsuccessful</name>
+    </customLabels>
+    <customLabels>
+        <label>Você não tem privilégios suficientes para executar a Pesquisa.</label>
+        <name>sufficient_privileges</name>
+    </customLabels>
+    <customLabels>
+        <label>O sistema encontrou o seguinte erro ao atualizar as informações de API</label>
+        <name>system_error_API</name>
+    </customLabels>
+    <customLabels>
+        <label>Atualize a página após testar o objeto de aprendizado para atualizar o status.</label>
+        <name>testCourse</name>
+    </customLabels>
+    <customLabels>
+        <label>para voltar para a página anterior.</label>
+        <name>to_return_to_the_previous_page</name>
+    </customLabels>
+    <customLabels>
+        <label>Parâmetro tudl faltando.</label>
+        <name>tuId_parameter_missing</name>
+    </customLabels>
+    <customTabs>
+        <label>Registro de Depuração</label>
+        <name>Debug_Log</name>
+    </customTabs>
+    <customTabs>
+        <label>Troca de Aprendizado</label>
+        <name>LMS_Catalog_Search</name>
+    </customTabs>
+    <customTabs>
+        <label>Configurações de Aprendizado</label>
+        <name>LMS_Consumer_Settings</name>
+    </customTabs>
+    <customTabs>
+        <label>Minha Equipe</label>
+        <name>My_Team</name>
+    </customTabs>
+    <customTabs>
+        <label>Meu Treinamento</label>
+        <name>My_Training</name>
+    </customTabs>
+    <customTabs>
+        <label>Carregamentos</label>
+        <name>Upload_Content</name>
+    </customTabs>
+</Translations>

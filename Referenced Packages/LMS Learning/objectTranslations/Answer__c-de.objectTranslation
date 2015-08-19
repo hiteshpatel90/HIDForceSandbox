@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Answer --></value>
+    </caseValues>
+    <fields>
+        <label>Antwort</label>
+        <name>Answer__c</name>
+    </fields>
+    <fields>
+        <label>Richtig</label>
+        <name>Correct_incorrect__c</name>
+    </fields>
+    <fields>
+        <label>Freier Text</label>
+        <name>Free_Text__c</name>
+    </fields>
+    <fields>
+        <label>Reihenfolge</label>
+        <name>Order__c</name>
+    </fields>
+    <fields>
+        <label>Frage</label>
+        <name>Question__c</name>
+        <relationshipLabel>Antworten</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <layouts>
+        <layout>Answer Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Answer Name --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>Das Feld kann keinen negativen Wert haben</errorMessage>
+        <name>Negative_Order_Value</name>
+    </validationRules>
+</CustomObjectTranslation>

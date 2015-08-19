@@ -1,0 +1,1056 @@
+<!-- <apex:page standardController="Price_Authorization_Form__c" extensions="AddPriceAuthorization">
+ <a name="skiplink">
+   <img src="/s.gif" height="1" width="1" alt="Content Starts Here" class="skiplink skipLinkTargetInner zen-skipLinkTarget" title="Content Starts Here"/>
+   </a>
+   <div class="bPageTitle">
+   <div class="ptBody">
+       <div class="content">
+          <img src="/s.gif" alt="Price Authorization Form" class="pageTitleIcon" title="Price Authorization Form"/>
+             <h1 class="pageType">Price Authorization Form Edit<span class="titleSeparatingColon">:</span>
+             </h1>
+             <h2 class="pageDescription"> New Price Authorization Form</h2>
+             <div class="blank">&nbsp;</div></div><div class="links">
+             <a href="javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=co_edit.htm&section=CustomObjects&language=en_US&release=182.13.36&instance=CS1%27, %27Help%27, 1024, 768, %27width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no%27, false, false);" title="Help for this Page (New Window)"><span class="helpLink">Help for this Page</span>
+             <img src="/s.gif" alt="" class="helpIcon"/></a></div></div>
+             <div class="ptBreadcrumb">
+             </div>
+           </div>
+  <apex:form >
+  <apex:pagemessages ></apex:pagemessages>
+    <apex:pageBlock title="Price Authorization Form Edit" id="thePageBlock" mode="edit">
+       <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!savePriceAuthorization}"/>
+                <apex:commandButton value="Save & New" action="{!saveAndNewPriceAuthorization}"/>
+                <apex:commandButton value="Cancel" action="{!cancelPriceAuthorization}" immediate="true"/>
+                
+       </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Information" columns="2"> -->
+              <!--   <apex:inputField value="{!priceAuthorization.New_HID_Customer__c}" rendered="true" required="true"/> 
+                 <apex:pageBlockSectionItem />
+                 <apex:pageBlockSectionItem > <apex:outputText >Owner</apex:outputText>{!$User.FirstName} {!$User.LastName}</apex:pageBlockSectionItem>
+                  <apex:pageBlockSectionItem />                
+                 <apex:inputField value="{!priceAuthorization.ERP_Update__c}"/>
+                 <apex:pageBlockSectionItem />
+                 <apex:inputField value="{!priceAuthorization.ERP_Update_Date__c}"/>     
+        </apex:pageBlockSection>
+                 
+        <apex:pageBlockSection title="Customer Details" columns="2">
+                   <apex:inputField value="{!priceAuthorization.Account__c}" rendered="true" required="true"/>
+                   <apex:inputField value="{!priceAuthorization.Key_Contact__c}" rendered="true" required="true"/>
+                   <apex:pageBlockSectionItem />
+                   <apex:inputTextarea value="{!priceAuthorization.Comments__c}" rendered="true"  cols="35"/>
+        </apex:pageBlockSection>
+              
+         <apex:pageBlockSection title="PACS Products Pricing Information" columns="2">
+                  <apex:repeat value="{!$ObjectType.Price_Authorization_Form__c.FieldSets.PAF_PACS_Products_Pricing_Information}" var="f">  
+                      <apex:inputField value="{!priceAuthorization[f]}"/>
+                  </apex:repeat> 
+                  
+                  <apex:selectList value="{!priceAuthorization.AC__c}" size="1">
+                      <apex:selectOptions value="{!selectOptionsAC}"></apex:selectOptions>
+                  </apex:selectList>
+                  
+                  <apex:selectList value="{!priceAuthorization.FA_Prof_Printers__c}" size="1">
+                      <apex:selectOptions value="{!selectOptionsFA}"></apex:selectOptions>
+                  </apex:selectList>
+                  
+                  <apex:selectList value="{!priceAuthorization.FB_Entry_Level_Printers__c}" size="1">
+                      <apex:selectOptions value="{!selectOpitonsFB}"></apex:selectOptions>
+                  </apex:selectList>
+                   
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="ID Assurance Products Pricing Information" columns="2">
+                    <apex:repeat value="{!$ObjectType.Price_Authorization_Form__c.FieldSets.PAF_ID_Assurance_Products_Pricing_Inform}" var="IDAssurance">  
+                      <apex:inputField value="{!priceAuthorization[IDAssurance]}"/>
+                  </apex:repeat> 
+        </apex:pageBlockSection>
+        
+         <apex:pageBlockSection title="Managed Services Products Pricing Information" columns="2">
+                    <apex:repeat value="{!$ObjectType.Price_Authorization_Form__c.FieldSets.PAF_Managed_Services}" var="Managed_Services">  
+                      <apex:inputField value="{!priceAuthorization[Managed_Services]}"/>
+                  </apex:repeat>           
+        </apex:pageBlockSection>
+                    
+         <apex:pageBlockSection title="NAS Products Pricing Information" columns="2">
+                    <apex:repeat value="{!$ObjectType.Price_Authorization_Form__c.FieldSets.PAF_NAS_Products_Pricing_Information}" var="NAS_Products">  
+                      <apex:inputField value="{!priceAuthorization[NAS_Products]}"/>
+                  </apex:repeat>
+        </apex:pageBlockSection>
+                    
+         <apex:pageBlockSection title="Embedded Products Pricing Information" columns="2">
+                   <apex:repeat value="{!$ObjectType.Price_Authorization_Form__c.FieldSets.PAF_Embedded_Products_Pricing_Informatio}" var="EMBD_Products">  
+                      <apex:inputField value="{!priceAuthorization[EMBD_Products]}"/>
+                  </apex:repeat>           
+        </apex:pageBlockSection>
+        <apex:pageBlockSection title="Fargo Products Pricing Information" columns="2">
+                  <apex:repeat value="{!$ObjectType.Price_Authorization_Form__c.FieldSets.PAF_Fargo_Products}" var="Fargo_Products">  
+                      <apex:inputField value="{!priceAuthorization[Fargo_Products]}"/>
+                  </apex:repeat>  
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Request Details" columns="2">
+            <apex:inputField value="{!priceAuthorization.Pricing_Effective_Date__c}" rendered="true" required="true"/>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Approval Information" columns="2">   -->
+            
+       <!--     <apex:inputField value="{!Price_Authorization_Form__c.Submit_for_Approval__c}" rendered="true"/>
+            <apex:inputField value="{!Price_Authorization_Form__c.L1_Approval__c}" rendered="true"/>
+            <apex:inputField value="{!Price_Authorization_Form__c.E21_Approval__c}" rendered="true"/>
+            <apex:inputField value="{!priceAuthorization.Status__c}" rendered="true"/>        
+        </apex:pageBlockSection>  
+       </apex:pageBlock>     
+  </apex:form>     
+</apex:page>  -->
+
+
+<apex:page standardController="Price_Authorization_Form__c" extensions="AddPriceAuthorization">
+<head>
+<style type="text/css">           
+    select:focus{width:auto !important;}        
+    </style>  
+</head>
+ <a name="skiplink">
+   <img src="/s.gif" height="1" width="1" alt="Content Starts Here" class="skiplink skipLinkTargetInner zen-skipLinkTarget" title="Content Starts Here"/>
+   </a>
+   <div class="bPageTitle">
+   <div class="ptBody">
+       <div class="content">
+          <img src="/s.gif" alt="Price Authorization Form" class="pageTitleIcon" title="Price Authorization Form"/>
+             <h1 class="pageType">Price Authorization Form Edit<span class="titleSeparatingColon">:</span>
+             </h1>
+             <h2 class="pageDescription"> New Price Authorization Form</h2>
+             <div class="blank">&nbsp;</div></div><div class="links">
+             <a href="javascript:openPopupFocusEscapePounds(%27https://help.salesforce.com/apex/htdoor?loc=help&target=co_edit.htm&section=CustomObjects&language=en_US&release=182.13.36&instance=CS1%27, %27Help%27, 1024, 768, %27width=1024,height=768,resizable=yes,toolbar=yes,status=yes,scrollbars=yes,menubar=yes,directories=no,location=yes,dependant=no%27, false, false);" title="Help for this Page (New Window)"><span class="helpLink">Help for this Page</span>
+             <img src="/s.gif" alt="" class="helpIcon"/></a></div></div>
+             <div class="ptBreadcrumb">
+             </div>
+           </div>
+
+  <apex:form >
+      <apex:pageMessages ></apex:pageMessages>
+    <apex:pageBlock title="Price Authorization Form Edit" id="thePageBlock" mode="edit">
+       <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!savePriceAuthorization}"/>
+                <apex:commandButton value="Save & New" action="{!saveAndNewPriceAuthorization}"/>
+                <apex:commandButton value="Cancel" action="{!cancelPriceAuthorization}" immediate="true"/>
+                
+       </apex:pageBlockButtons>
+        <apex:pageBlockSection title="Information" columns="2">
+        <apex:pageBlockSectionItem />
+                 <apex:pageBlockSectionItem > <apex:outputText >Owner</apex:outputText>{!$User.FirstName} {!$User.LastName}</apex:pageBlockSectionItem>
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Customer Details" columns="2">
+            <apex:pageBlockSectionItem >
+                Account
+                <apex:actionRegion >
+                    <apex:inputField value="{!priceAuthorization.Account__c}" rendered="true" required="true" onchange="acprDetails();" />
+                    <apex:actionFunction action="{!getAccountProfileDetails}"  name="acprDetails" reRender="PartnerProgramStatusId,PartnerProgramStatusModId,accProTable, PACS, IdAssure, NASProduct, EMBED, FARGO,PartnerProgramStatus,otherPricing"/>
+                </apex:actionRegion>
+            </apex:pageBlockSectionItem>
+            
+            <apex:inputField value="{!priceAuthorization.Key_Contact__c}" rendered="true" required="true"/>
+          <!--  <apex:pageBlockSectionItem /> -->
+            <apex:inputField value="{!priceAuthorization.Assessment__c}" rendered="true"/>
+            <apex:inputTextarea value="{!priceAuthorization.Comments__c}" rendered="true"  cols="35"/>
+            <apex:pageBlockSectionItem > <apex:outputLabel value="Partner Program Status"></apex:outputLabel><apex:outputPanel id="PartnerProgramStatusId">{!PartnerProgramStatus}</apex:outputPanel></apex:pageBlockSectionItem>
+            <apex:pageblockSectionItem > <apex:outputLabel value="Partner Program Status Modifier "></apex:outputLabel><apex:outputPanel id="PartnerProgramStatusModId">{!PartnerProgramStatusModifier}</apex:outputPanel></apex:pageblockSectionItem>
+        </apex:pageBlockSection>        
+                
+        <apex:pageBlockSection title="Account Profile Details" columns="1" id="accProTable">
+           <apex:pageBlockTable value="{!acProfile}" var="acp">
+               <apex:column value="{!acp.Business_Segment__c}"/>
+               <apex:column value="{!acp.Partner_Type__c}"/>
+               <apex:column value="{!acp.Tier__c}"/>
+               <apex:column value="{!acp.Sales_Manager__c}"/>
+           </apex:pageBlockTable>
+        </apex:pageBlockSection>
+
+      
+       
+        <apex:pageBlockSection title="PACS Products Pricing Information" columns="2" id="PACS">
+            
+          <!--  <apex:selectList value="{!priceAuthorization.iR__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIR}"></apex:selectOptions>
+            </apex:selectList>  -->
+            
+         <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iR__c.inlineHelpText}">iR: iCLASS Readers <label style="color: blue"> {!IF(account.iR__c==null,' ',Left(account.iR__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIR();" onmouseout="LabelleaveIR();"> {!tierValueIR}</label> <apex:selectList value="{!priceAuthorization.iR__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIR}"></apex:selectOptions>
+               <div id = "labelTextIR" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+                        
+         <!--   <apex:selectList value="{!priceAuthorization.WR__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsWR}"></apex:selectOptions>
+            </apex:selectList>    -->
+            
+          <!--  <apex:selectList value="{!priceAuthorization.MS__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsMS}"></apex:selectOptions>
+            </apex:selectList>-->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.MS__c.inlineHelpText}" >MS: Magnetic Stripe <label style="color: blue"> {!IF(account.MS__c==null,' ',Left(account.MS__c,5))}</label> <label style="color: red" onmouseover="LabelHoverMS();" onmouseout="LabelleaveMS();">{!tierValueMS}</label> <apex:selectList value="{!priceAuthorization.MS__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsMS}"></apex:selectOptions>
+               <div id = "labelTextMS" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+            
+            
+         <!--   <apex:selectList value="{!priceAuthorization.iC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIC}"></apex:selectOptions>
+            </apex:selectList>  -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iC__c.inlineHelpText}" >iC: iCLASS Credentials <label style="color: blue"> {!IF(account.iC__c==null,' ',Left(account.iC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIC();" onmouseout="LabelleaveIC();">{!tierValueIC}</label> <apex:selectList value="{!priceAuthorization.iC__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIC}"></apex:selectOptions>
+               <div id = "labelTextIC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+            
+            
+        <!--    <apex:selectList value="{!priceAuthorization.WC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsWC}"></apex:selectOptions>
+            </apex:selectList>    -->
+            
+          <!--  <apex:selectList value="{!priceAuthorization.SL__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsSL}"></apex:selectOptions>
+            </apex:selectList>  -->
+        <!--<apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.SL__c.inlineHelpText}" >SL: Proxima/MultiProx <label style="color: blue"> {!IF(account.SL__c==null,' ',Left(account.SL__c,5))}</label> <label style="color: red" onmouseover="LabelHoverSL();" onmouseout="LabelleaveSL();"> {!tierValueSL}</label> <apex:selectList value="{!priceAuthorization.SL__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsSL}"></apex:selectOptions>
+               <div id = "labelTextSL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>-->
+            
+           <!-- <apex:selectList value="{!priceAuthorization.iD__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsID}"></apex:selectOptions>
+            </apex:selectList>-->
+        <apex:pageBlockSectionItem >
+         </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iD__c.inlineHelpText}" >iD: iCLASS Clamshell <label style="color: blue"> {!IF(account.iD__c==null,' ',Left(account.iD__c,5))}</label>  <label style="color: red" onmouseover="LabelHoverID();" onmouseout="LabelleaveID();"> {!tierValueID}</label> <apex:selectList value="{!priceAuthorization.iD__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsID}"></apex:selectOptions>
+               <div id = "labelTextID" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+            
+        <!--     <apex:selectList value="{!priceAuthorization.VS__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsVS}"></apex:selectOptions>
+            </apex:selectList>            -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VS__c.inlineHelpText}" >VS: Edge Solo <label style="color: blue"> {!IF(account.VS__c==null,' ',Left(account.VS__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVS();" onmouseout="LabelleaveVS();">{!tierValueVS}</label> <apex:selectList value="{!priceAuthorization.VS__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsVS}"></apex:selectOptions>
+               <div id = "labelTextVS" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iM_HID_Mobile_Access__c.inlineHelpText}" >iM: HID Mobile Access <label style="color: blue">{!IF(account.IM_HID_Mobile_Access__c==null,' ',Left(account.iM_HID_Mobile_Access__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIM();" onmouseout="LabelleaveIM();"> {!tierValueIM}</label> <apex:selectList value="{!priceAuthorization.iM_HID_Mobile_Access__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIM}"></apex:selectOptions>
+               <div id = "labelTextIM" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+        </apex:pageBlockSectionItem>
+       
+            
+        <!--    <apex:selectList value="{!priceAuthorization.iP__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIP}"></apex:selectOptions>
+            </apex:selectList>  -->            
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iP__c.inlineHelpText}" >iP: Credential Programmers <label style="color: blue">{!IF(account.iP__c==null,' ',Left(account.iP__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIP();" onmouseout="LabelleaveIP();"> {!tierValueIP}</label> <apex:selectList value="{!priceAuthorization.iP__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIP}"></apex:selectOptions>
+               <div id = "labelTextIP" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+        
+         <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LV__c.inlineHelpText}" >LV: Indala Readers <label style="color: blue"> {!IF(account.LV__c==null,' ',Left(account.LV__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLV();" onmouseout="LabelleaveLV();"> {!tierValueLV}</label> <apex:selectList value="{!priceAuthorization.LV__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsLV}"></apex:selectOptions>
+               <div id = "labelTextLV" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+
+        
+        <!--      <apex:selectList value="{!priceAuthorization.LV__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsLV}"></apex:selectOptions>
+            </apex:selectList>  -->    
+        
+        
+        <!--    <apex:selectList value="{!priceAuthorization.MC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsMC}"></apex:selectOptions>
+            </apex:selectList>  -->         
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.MC__c.inlineHelpText}" >MC: FlexSmart  <label style="color: blue">{!IF(account.MC__c==null,' ',Left(account.MC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverMC();" onmouseout="LabelleaveMC();"> {!tierValueMC}</label> <apex:selectList value="{!priceAuthorization.MC__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsMC}"></apex:selectOptions>
+               <div id = "labelTextMC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.LW_Indala_Credentials__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsLW}"></apex:selectOptions>
+            </apex:selectList>      -->         
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LW_Indala_Credentials__c.inlineHelpText}" >LW: Indala Credentials <label style="color: blue"> {!IF(account.LW_Indala_Credenitals__c==null,' ',Left(account.LW_Indala_Credenitals__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLW();" onmouseout="LabelleaveLW();"> {!tierValueLW}</label> <apex:selectList value="{!priceAuthorization.LW_Indala_Credentials__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsLW}"></apex:selectOptions>
+               <div id = "labelTextLW" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+                        
+        <!--   <apex:selectList value="{!priceAuthorization.MD__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsMD}"></apex:selectOptions>
+            </apex:selectList>  -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.MD__c.inlineHelpText}" >MD: MIFARE/DESFire <label style="color: blue">{!IF(account.MD__c==null,' ',Left(account.MD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverMD();" onmouseout="LabelleaveMD();"> {!tierValueMD}</label> <apex:selectList value="{!priceAuthorization.MD__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsMD}"></apex:selectOptions>
+               <div id = "labelTextMD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.IB__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIB}"></apex:selectOptions>
+            </apex:selectList>  -->
+        <!--<apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.IB__c.inlineHelpText}" >IB: idBank Product <label style="color: blue">{!IF(account.IB__c==null,' ',Left(account.IB__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIB();" onmouseout="LabelleaveIB();"> {!tierValueIB}</label> <apex:selectList value="{!priceAuthorization.IB__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIB}"></apex:selectOptions>
+           <div id = "labelTextIB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>-->          
+            
+        <!--    <apex:selectList value="{!priceAuthorization.ME__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsME}"></apex:selectOptions>
+            </apex:selectList>  -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.ME__c.inlineHelpText}" >ME: SmartID Readers <label style="color: blue"> {!IF(account.ME__c==null,' ',Left(account.ME__c,5))}</label> <label style="color: red" onmouseover="LabelHoverME();" onmouseout="LabelleaveME();"> {!tierValueME}</label> <apex:selectList value="{!priceAuthorization.ME__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsME}"></apex:selectOptions>
+               <div id = "labelTextME" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--     <apex:selectList value="{!priceAuthorization.PI__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsPI}"></apex:selectOptions>
+            </apex:selectList>           -->
+        <!--<apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.PI__c.inlineHelpText}" >PI: plusID Products <label style="color: blue"> {!IF(account.PI__c==null,' ',Left(account.PI__c,5))}</label> <label style="color: red" onmouseover="LabelHoverPI();" onmouseout="LabelleavePI();">{!tierValuePI}</label> <apex:selectList value="{!priceAuthorization.PI__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsPI}"></apex:selectOptions>
+           <div id = "labelTextPI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>-->
+            
+        <!--    <apex:selectList value="{!priceAuthorization.MF__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsMF}"></apex:selectOptions>
+            </apex:selectList>  -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.MF__c.inlineHelpText}" >MF: SmartID Keypad <label style="color: blue"> {!IF(account.MF__c==null,' ',Left(account.MF__c,5))}</label> <label style="color: red" onmouseover="LabelHoverMF();" onmouseout="LabelleaveMF();"> {!tierValueMF}</label> <apex:selectList value="{!priceAuthorization.MF__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsMF}"></apex:selectOptions>
+               <div id = "labelTextMF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+            
+         <!--    <apex:selectList value="{!priceAuthorization.iE_pivCLASS_Modules_Software__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIEClass}"></apex:selectOptions>
+            </apex:selectList>  -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iE_pivCLASS_Modules_Software__c.inlineHelpText}" >iE: pivCLASS Modules-Software <label style="color: blue"> {!IF(account.iE_pivCLASS_Modules_Software__c==null,' ',Left(account.iE_pivCLASS_Modules_Software__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIE();" onmouseout="LabelleaveIE();"> {!tierValueiE}</label> <apex:selectList value="{!priceAuthorization.iE_pivCLASS_Modules_Software__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIEClass}"></apex:selectOptions>
+               <div id = "labelTextIE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>            
+            
+        <!--    <apex:selectList value="{!priceAuthorization.RA__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsRA}"></apex:selectOptions>
+            </apex:selectList>              -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RA__c.inlineHelpText}" >RA: Prox Readers <label style="color: blue"> {!IF(account.RA__c==null,' ',Left(account.RA__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRA();" onmouseout="LabelleaveRA();">{!tierValueRA}</label> <apex:selectList value="{!priceAuthorization.RA__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsRA}"></apex:selectOptions>
+               <div id = "labelTextRA" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+             
+        <!--    <apex:selectList value="{!priceAuthorization.iJ_pivCLASS_Modules_Software__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIJ}"></apex:selectOptions>
+            </apex:selectList>            -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iJ_pivCLASS_Modules_Software__c.inlineHelpText}" >iJ: pivCLASS Modules-Software <label style="color: blue">{!IF(account.iJ_pivCLASS_Modules_Software__c==null,' ',Left(account.iJ_pivCLASS_Modules_Software__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIJ();" onmouseout="LabelleaveIJ();"> {!tierValueIJ}</label> <apex:selectList value="{!priceAuthorization.iJ_pivCLASS_Modules_Software__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIJ}"></apex:selectOptions>
+               <div id = "labelTextIJ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+        <!--    <apex:selectList value="{!priceAuthorization.RB__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsRB}"></apex:selectOptions>
+            </apex:selectList>      --> 
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RB__c.inlineHelpText}" >RB: Prox Readers <label style="color: blue">{!IF(account.RB__c==null,' ',Left(account.RB__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRB();" onmouseout="LabelleaveRB();"> {!tierValueRB}</label> <apex:selectList value="{!priceAuthorization.RB__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsRB}"></apex:selectOptions>
+               <div id = "labelTextRB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+                        
+        <!--   <apex:selectList value="{!priceAuthorization.iF_pivCLASS_Kits__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIF}"></apex:selectOptions>
+            </apex:selectList>      -->
+       
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iH_pivCLASS_Bundles__c.inlineHelpText}" >iH: pivCLASS Bundles <label style="color: blue">{!IF(account.iH_pivCLASS_Bundles__c==null,' ',Left(account.iH_pivCLASS_Bundles__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIH();" onmouseout="LabelleaveIH();"> {!tierValueIH}</label> <apex:selectList value="{!priceAuthorization.iH_pivCLASS_Bundles__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIH}"></apex:selectOptions>
+               <div id = "labelTextIH" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>            
+            
+        <!--    <apex:selectList value="{!priceAuthorization.RC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsRC}"></apex:selectOptions>
+            </apex:selectList>  -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RC__c.inlineHelpText}" >RC: Prox Readers <label style="color: blue"> {!IF(account.RC__c==null,' ',Left(account.RC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRC();" onmouseout="LabelleaveRC();">{!tierValueRC}</label> <apex:selectList value="{!priceAuthorization.RC__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsRC}"></apex:selectOptions>
+               <div id = "labelTextRC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+        <!--   <apex:selectList value="{!priceAuthorization.iH_pivCLASS_Bundles__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIH}"></apex:selectOptions>
+            </apex:selectList>  -->
+         <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iK_pivCLASS_Mobile_Handheld_Readers__c.inlineHelpText}" >iK: pivCLASS Mobile Handheld Readers <label style="color: blue"> {!IF(account.iK_pivCLASS_Mobile_Handheld_Readers__c==null,' ',Left(account.iK_pivCLASS_Mobile_Handheld_Readers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIK();" onmouseout="LabelleaveIK();"> {!tierValueiK}</label> <apex:selectList value="{!priceAuthorization.iK_pivCLASS_Mobile_Handheld_Readers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIK}"></apex:selectOptions>
+               <div id = "labelTextIK" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+         <!--   <apex:selectList value="{!priceAuthorization.RD__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsRD}"></apex:selectOptions>
+            </apex:selectList>      -->
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RD__c.inlineHelpText}" >RD: ProxPoint Readers <label style="color: blue"> {!IF(account.RD__c==null,' ',Left(account.RD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRD();" onmouseout="LabelleaveRD();">{!tierValueRD}</label> <apex:selectList value="{!priceAuthorization.RD__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsRD}"></apex:selectOptions>
+               <div id = "labelTextRD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>                  
+        
+        
+               <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iF_pivCLASS_Kits__c.inlineHelpText}" >iF: pivCLASS Kits <label style="color: blue"> {!IF(account.iF_pivCLASS_Kits__c==null,' ',Left(account.iF_pivCLASS_Kits__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIF();" onmouseout="LabelleaveIF();"> {!tierValueIF}</label> <apex:selectList value="{!priceAuthorization.iF_pivCLASS_Kits__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIF}"></apex:selectOptions>
+               <div id = "labelTextIF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>          
+            <!--<apex:selectList value="{!priceAuthorization.iG_pivCLASS_Readers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIG}"></apex:selectOptions>
+            </apex:selectList> Removed Price Code DO NOT ADD THIS-->
+            
+        <!--    <apex:selectList value="{!priceAuthorization.EZ_EasyLobby__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEZ}"></apex:selectOptions>
+            </apex:selectList>            -->
+       
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.RE__c.inlineHelpText}" >RE: EntryProx Readers <label style="color: blue"> {!IF(account.RE__c==null,' ',Left(account.RE__c,5))}</label> <label style="color: red" onmouseover="LabelHoverRE();" onmouseout="LabelleaveRE();">{!tierValueRE}</label> <apex:selectList value="{!priceAuthorization.RE__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsRE}"></apex:selectOptions>
+               <div id = "labelTextRE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.RE__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsRE}"></apex:selectOptions>
+            </apex:selectList>  -->
+         <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EZ_EasyLobby__c.inlineHelpText}" >EZ: EasyLobby <label style="color: blue">{!IF(account.EZ_EasyLobby__c==null,' ',account.EZ_EasyLobby__c)}</label> <label style="color: red" onmouseover="LabelHoverEZ();" onmouseout="LabelleaveEZ();"> {!tierValueEZ}</label> <apex:selectList value="{!priceAuthorization.EZ_EasyLobby__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEZ}"></apex:selectOptions>
+               <div id = "labelTextEZ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.AC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsAC}"></apex:selectOptions>
+            </apex:selectList>                   -->
+        
+        
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.PC__c.inlineHelpText}" >PC: Prox Credentials <label style="color: blue"> {!IF(account.PC__c==null,' ',Left(account.PC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverPC();" onmouseout="LabelleavePC();"> {!tierValuePC}</label> <apex:selectList value="{!priceAuthorization.PC__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsPC}"></apex:selectOptions>
+               <div id = "labelTextPC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>    
+        <!--    <apex:selectList value="{!priceAuthorization.PC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsPC}"></apex:selectOptions>
+            </apex:selectList>          -->
+                          
+        </apex:pageBlockSection>
+
+<apex:pageBlockSection title="ID Assurance Products Pricing Information" columns="2" Id="IdAssure">
+            
+           <!-- <apex:selectList value="{!priceAuthorization.OL__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsOL}"></apex:selectOptions>                     
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.OL__c.inlineHelpText}" >OL: OMNIKEY Std.  <label style="color: blue"> {!IF(account.OL__c==null,' ',Left(account.OL__c,5))}</label> <label style="color: red" onmouseover="LabelHoverOL();" onmouseout="LabelleaveOL();">{!tierValueOL}</label> <apex:selectList value="{!priceAuthorization.OL__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsOL}"></apex:selectOptions>
+               <div id = "labelTextOL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+                        
+        <!--    <apex:selectList value="{!priceAuthorization.LC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsLC}"></apex:selectOptions>                   
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LC__c.inlineHelpText}" >LC: Crescendo <label style="color: blue"> {!IF(account.LC__c==null,' ',Left(account.LC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLC();" onmouseout="LabelleaveLC();"> {!tierValueLC}</label> <apex:selectList value="{!priceAuthorization.LC__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsLC}"></apex:selectOptions>
+               <div id = "labelTextLC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.LR__c}" size="1" style="width:100px">
+                       <apex:selectOptions value="{!selectOptionsLR}"></apex:selectOptions>                  
+            </apex:selectList>      -->
+         <!--   <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LR__c.inlineHelpText}" >LR: Omnikey (HOTD) <label style="color: blue"> {!IF(account.LR__c==null,' ',Left(account.LR__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLR();" onmouseout="LabelleaveLR();"> {!tierValueLR}</label> <apex:selectList value="{!priceAuthorization.LR__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsLR}"></apex:selectOptions>
+               <div id = "labelTextLR" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>-->
+            <apex:pageBlockSectionItem >
+            
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.EB_Embeddable_Credentials__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEBEMBD}"></apex:selectOptions>                 
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EB_Embeddable_Credentials__c.inlineHelpText}" >EB: Embed. Credentials <label style="color: blue"> {!IF(account.EB_Embeddable_Credentials__c==null,' ',Left(account.EB_Embeddable_Credentials__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEB();" onmouseout="LabelleaveEB();"> {!tierValueEB}</label> <apex:selectList value="{!priceAuthorization.EB_Embeddable_Credentials__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEBEMBD}"></apex:selectOptions>
+               <div id = "labelTextEB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AA__c.inlineHelpText}" >AA: IA Software  <label style="color: blue"> {!IF(account.AA__c==null,' ',Left(account.AA__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAA();" onmouseout="LabelleaveAA();">{!tierValueAA}</label> <apex:selectList value="{!priceAuthorization.AA__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAA}"></apex:selectOptions>
+               <div id = "labelTextAA" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AF__c.inlineHelpText}" >AF: IA Training <label style="color: blue"> {!IF(account.AF__c==null,' ',Left(account.AF__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAF();" onmouseout="LabelleaveAF();">{!tierValueAF}</label> <apex:selectList value="{!priceAuthorization.AF__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAF}"></apex:selectOptions>
+               <div id = "labelTextAF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AD__c.inlineHelpText}" >AD: IA Software-Restricted<label style="color: blue"> {!IF(account.AD__c==null,' ',Left(account.AD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAD();" onmouseout="LabelleaveAD();">{!tierValueAD}</label> <apex:selectList value="{!priceAuthorization.AD__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAD}"></apex:selectOptions>
+               <div id = "labelTextAD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AB__c.inlineHelpText}" >AB: IA Appliances &amp; Auth. Devices <label style="color: blue"> {!IF(account.AB__c==null,' ',Left(account.AB__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAB();" onmouseout="LabelleaveAB();">{!tierValueAB}</label> <apex:selectList value="{!priceAuthorization.AB__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAB}"></apex:selectOptions>
+               <div id = "labelTextAB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+           <!-- <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AL__c.inlineHelpText}" >AL: PS Implementation Services - Appliance<label style="color: blue"> {!IF(account.AL__c==null,' ',Left(account.AL__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAL();" onmouseout="LabelleaveAL();">{!tierValueAL}</label> <apex:selectList value="{!priceAuthorization.AL__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAL}"></apex:selectOptions>
+               <div id = "labelTextAL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem> -->
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AK__c.inlineHelpText}" >AK: IA Software-Valid CMS &amp; CMS App. <label style="color: blue"> {!IF(account.AK__c==null,' ',Left(account.AK__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAK();" onmouseout="LabelleaveAK();">{!tierValueAK}</label> <apex:selectList value="{!priceAuthorization.AK__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAK}"></apex:selectOptions>
+               <div id = "labelTextAK" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AG__c.inlineHelpText}" >AG: IA Appl. &amp; Auth. Devices-Restricted<label style="color: blue"> {!IF(account.AG__c==null,' ',Left(account.AG__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAG();" onmouseout="LabelleaveAG();">{!tierValueAG}</label> <apex:selectList value="{!priceAuthorization.AG__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAG}"></apex:selectOptions>
+               <div id = "labelTextAG" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AM__c.inlineHelpText}" >AM: IA Software-Valid VA Cert. <label style="color: blue"> {!IF(account.AM__c==null,' ',Left(account.AM__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAM();" onmouseout="LabelleaveAM();">{!tierValueAM}</label> <apex:selectList value="{!priceAuthorization.AM__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAM}"></apex:selectOptions>
+               <div id = "labelTextAM" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AE__c.inlineHelpText}" >AE: IA Maintenance &amp; Support<label style="color: blue"> {!IF(account.AE__c==null,' ',Left(account.AE__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAE();" onmouseout="LabelleaveAE();">{!tierValueAE}</label> <apex:selectList value="{!priceAuthorization.AE__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAE}"></apex:selectOptions> 
+               <div id = "labelTextAE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AH__c.inlineHelpText}" >AH: IA Special Class Product<label style="color: blue"> {!IF(account.AH__c==null,' ',Left(account.AH__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAH();" onmouseout="LabelleaveAH();">{!tierValueAH}</label> <apex:selectList value="{!priceAuthorization.AH__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAH}"></apex:selectOptions> 
+               <div id = "labelTextAH" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AI__c.inlineHelpText}" >AI: IA Maint. &amp; Support -Restricted <label style="color: blue"> {!IF(account.AI__c==null,' ',Left(account.AI__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAI();" onmouseout="LabelleaveAI();">{!tierValueAI}</label> <apex:selectList value="{!priceAuthorization.AI__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAI}"></apex:selectOptions> 
+               <div id = "labelTextAI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AZ__c.inlineHelpText}" >AZ: IA Professional Services<label style="color: blue"> {!IF(account.AZ__c==null,' ',Left(account.AZ__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAZ();" onmouseout="LabelleaveAZ();">{!tierValueAZ}</label> <apex:selectList value="{!priceAuthorization.AZ__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAZ}"></apex:selectOptions> 
+               <div id = "labelTextAZ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AL__c.inlineHelpText}" >AL: IA M&amp;S-Valid CMS &amp; CMS App Cert.<label style="color: blue"> {!IF(account.AL__c==null,' ',Left(account.AL__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAL();" onmouseout="LabelleaveAL();">{!tierValueAL}</label> <apex:selectList value="{!priceAuthorization.AL__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAL}"></apex:selectOptions> 
+               <div id = "labelTextAL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AJ__c.inlineHelpText}" >AJ: IA Professional Services-Restricted <label style="color: blue"> {!IF(account.AJ__c==null,' ',Left(account.AJ__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAJ();" onmouseout="LabelleaveAJ();">{!tierValueAJ}</label> <apex:selectList value="{!priceAuthorization.AJ__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAJ}"></apex:selectOptions> 
+               <div id = "labelTextAJ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AN__c.inlineHelpText}" >AN: IA M&amp;S-Valid VA Cert. <label style="color: blue"> {!IF(account.AN__c==null,' ',Left(account.AN__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAN();" onmouseout="LabelleaveAN();">{!tierValueAN}</label> <apex:selectList value="{!priceAuthorization.AN__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAN}"></apex:selectOptions> 
+               <div id = "labelTextAN" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div></apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            
+        </apex:pageBlockSection>
+        
+         <apex:pageBlockSection title="Managed Services Products Pricing Information" columns="2">
+        <!--    <apex:selectList value="{!priceAuthorization.IoD__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIOD}"></apex:selectOptions>
+            </apex:selectList>                  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.IoD__c.inlineHelpText}" >IY: Credential Services <label style="color: blue"> {!IF(account.IoD__c==null,' ',Left(account.IoD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIoD();" onmouseout="LabelleaveIoD();"> {!tierValueIoD}</label> <apex:selectList value="{!priceAuthorization.IoD__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIoD}"></apex:selectOptions>
+               <div id = "labelTextIoD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+            
+        </apex:pageBlockSection>
+        
+         <apex:pageBlockSection title="NAS Products Pricing Information" columns="2" id="NASProduct">
+            
+        <!--    <apex:selectList value="{!priceAuthorization.VX__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsVX}"></apex:selectOptions>
+            </apex:selectList>      -->
+       <!--     <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VX__c.inlineHelpText}" >VX: VertX CS <label style="color: blue"> {!IF(account.VX__c==null,' ',Left(account.VX__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVX();" onmouseout="LabelleaveVX();"> {!tierValueVX}</label> <apex:selectList value="{!priceAuthorization.VX__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsVX}"></apex:selectOptions>
+               <div id = "labelTextVX" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>    -->
+                        
+         <!--   <apex:selectList value="{!priceAuthorization.VC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsVC}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VC__c.inlineHelpText}" >VC: VertX Controller <label style="color: blue"> {!IF(account.VC__c==null,' ',Left(account.VC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVC();" onmouseout="LabelleaveVC();">{!tierValueVC}</label> <apex:selectList value="{!priceAuthorization.VC__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsVC}"></apex:selectOptions>
+               <div id = "labelTextVC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.VI__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsVI}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VI__c.inlineHelpText}" >VI: VertX Interface <label style="color: blue"> {!IF(account.VI__c==null,' ',Left(account.VI__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVI();" onmouseout="LabelleaveVI();">{!tierValueVI}</label> <apex:selectList value="{!priceAuthorization.VI__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsVI}"></apex:selectOptions>
+               <div id = "labelTextVI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+                        
+        <!--    <apex:selectList value="{!priceAuthorization.VE__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsVEC}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VE__c.inlineHelpText}" >VE: Edge Host <label style="color: blue"> {!IF(account.VE__c==null,' ',Left(account.VE__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVE();" onmouseout="LabelleaveVE();">{!tierValueVE}</label> <apex:selectList value="{!priceAuthorization.VE__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsVEC}"></apex:selectOptions>
+               <div id = "labelTextVE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.VD__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsVD}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.VD__c.inlineHelpText}" >VD: VertX/EDGE EVO Dev. Kit <label style="color: blue"> {!IF(account.VD__c==null,' ',Left(account.VD__c,5))}</label> <label style="color: red" onmouseover="LabelHoverVD();" onmouseout="LabelleaveVD();"> {!tierValueVD}</label> <apex:selectList value="{!priceAuthorization.VD__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsVD}"></apex:selectOptions>
+               <div id = "labelTextVD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+                   
+        </apex:pageBlockSection>
+        
+         <apex:pageBlockSection title="Embedded Products Pricing Information" columns="2" id="EMBED">
+        
+        <!--    <apex:selectList value="{!priceAuthorization.EC__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEC}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EC__c.inlineHelpText}" >EC: Embed. Credentials <label style="color: blue">{!IF(account.EC__c==null,' ',Left(account.EC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEC();" onmouseout="LabelleaveEC();"> {!tierValueEC}</label> <apex:selectList value="{!priceAuthorization.EC__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEC}"></apex:selectOptions>
+               <div id = "labelTextEC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>            
+        
+        <!--    <apex:selectList value="{!priceAuthorization.EJ_SIO_Processor__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEJ}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EJ_SIO_Processor__c.inlineHelpText}" >EJ: iCLASS SE Processor <label style="color: blue"> {!IF(account.EJ_SIO_Processor__c==null,' ',Left(account.EJ_SIO_Processor__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEJ();" onmouseout="LabelleaveEJ();">{!tierValueEJ}</label> <apex:selectList value="{!priceAuthorization.EJ_SIO_Processor__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEJ}"></apex:selectOptions>
+               <div id = "labelTextEJ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.iO__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsIOC}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.iO__c.inlineHelpText}" >iO: iCLASS OEM <label style="color: blue"> {!IF(account.iO__c==null,' ',Left(account.iO__c,5))}</label> <label style="color: red" onmouseover="LabelHoverIO();" onmouseout="LabelleaveIO();"> {!tierValueiO}</label> <apex:selectList value="{!priceAuthorization.iO__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsIOC}"></apex:selectOptions>
+               <div id = "labelTextIO" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+                        
+        <!--    <apex:selectList value="{!priceAuthorization.ED_veriCLASS_Readers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEDVeri}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.ED_veriCLASS_Readers__c.inlineHelpText}" >ED: veriCLASS Readers <label style="color: blue"> {!IF(account.ED_veriCLASS_Readers__c==null,' ',Left(account.ED_veriCLASS_Readers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverED();" onmouseout="LabelleaveED();"> {!tierValueED}</label> <apex:selectList value="{!priceAuthorization.ED_veriCLASS_Readers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEDVeri}"></apex:selectOptions>
+               <div id = "labelTextED" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.EP__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEP}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EP__c.inlineHelpText}" >EP: Embed. Prox <label style="color: blue"> {!IF(account.EP__c==null,' ',Left(account.EP__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEP();" onmouseout="LabelleaveEP();"> {!tierValueEP}</label> <apex:selectList value="{!priceAuthorization.EP__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEP}"></apex:selectOptions>
+               <div id = "labelTextEP" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+                        
+        <!--    <apex:selectList value="{!priceAuthorization.EE_OMNIKEY_Reader_Board__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEE}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EE_OMNIKEY_Reader_Board__c.inlineHelpText}" >EE: OMNIKEY Reader Board <label style="color: blue"> {!IF(account.EE_OMNIKEY_Reader_Board__c==null,' ',Left(account.EE_OMNIKEY_Reader_Board__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEE();" onmouseout="LabelleaveEE();"> {!tierValueEE}</label> <apex:selectList value="{!priceAuthorization.EE_OMNIKEY_Reader_Board__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEE}"></apex:selectOptions>
+               <div id = "labelTextEE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.LO__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsLOC}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.LO__c.inlineHelpText}" >LO: Indala OEM  <label style="color: blue"> {!IF(account.LO__c==null,' ',Left(account.LO__c,5))}</label> <label style="color: red" onmouseover="LabelHoverLO();" onmouseout="LabelleaveLO();">{!tierValueLO}</label> <apex:selectList value="{!priceAuthorization.LO__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsLOC}"></apex:selectOptions>
+               <div id = "labelTextLO" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+                        
+        <!--    <apex:selectList value="{!priceAuthorization.EF_OMNIKEY_Chipsets__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEFO}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EI_Developer_Services_Plus__c.inlineHelpText}" >EI: Omnikey Embedded Reader Modules <label style="color: blue"> {!IF(account.EI_Developer_Services_Plus__c==null,' ',Left(account.EI_Developer_Services_Plus__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEI();" onmouseout="LabelleaveEI();"> {!tierValueEI}</label> <apex:selectList value="{!priceAuthorization.EI_Developer_Services_Plus__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEI}"></apex:selectOptions>
+               <div id = "labelTextEI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+                                  
+            
+        <!--    <apex:selectList value="{!priceAuthorization.EL_Embedded_Accessories__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsELEM}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EL_Embedded_Accessories__c.inlineHelpText}" >EL: Embed. Accessories <label style="color: blue"> {!IF(account.EL_Embedded_Accessories__c==null,' ',Left(account.EL_Embedded_Accessories__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEL();" onmouseout="LabelleaveEL();">{!tierValueEL}</label> <apex:selectList value="{!priceAuthorization.EL_Embedded_Accessories__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsELEM}"></apex:selectOptions>
+               <div id = "labelTextEL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem> 
+                        
+        <!--    <apex:selectList value="{!priceAuthorization.EG_SmartID_Reader_Boards__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEGSMART}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EF_OMNIKEY_Chipsets__c.inlineHelpText}" >EF: OMNIKEY Chipsets <label style="color: blue"> {!IF(account.EF_OMNIKEY_Chipsets__c==null,' ',Left(account.EF_OMNIKEY_Chipsets__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEF();" onmouseout="LabelleaveEF();"> {!tierValueEF}</label> <apex:selectList value="{!priceAuthorization.EF_OMNIKEY_Chipsets__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEFO}"></apex:selectOptions>
+               <div id = "labelTextEF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>  
+            
+            
+        <!--    <apex:selectList value="{!priceAuthorization.EK_iCLASS_SE_Reader_Modules__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEK}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EK_iCLASS_SE_Reader_Modules__c.inlineHelpText}" >EK: iCLASS SE Reader Modules <label style="color: blue"> {!IF(account.EK_iCLASS_SE_Reader_Modules__c==null,' ',Left(account.EK_iCLASS_SE_Reader_Modules__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEK();" onmouseout="LabelleaveEK();">{!tierValueEK}</label> <apex:selectList value="{!priceAuthorization.EK_iCLASS_SE_Reader_Modules__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEK}"></apex:selectOptions>
+               <div id = "labelTextEK" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>            
+            
+         <!--   <apex:selectList value="{!priceAuthorization.EH_identiCLASS_Readers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEHCLASS}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EG_SmartID_Reader_Boards__c.inlineHelpText}" >EG: SmartID Reader Boards <label style="color: blue"> {!IF(account.EG_SmartID_Reader_Boards__c==null,' ',Left(account.EG_SmartID_Reader_Boards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEG();" onmouseout="LabelleaveEG();"> {!tierValueEG}</label> <apex:selectList value="{!priceAuthorization.EG_SmartID_Reader_Boards__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEGSMART}"></apex:selectOptions>
+               <div id = "labelTextEG" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+                        
+            
+        <!--    <apex:selectList value="{!priceAuthorization.EA_ISO_Reader_Boards__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEAISO}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EA_ISO_Reader_Boards__c.inlineHelpText}" >EA: ISO Reader Boards  <label style="color: blue">{!IF(account.EA_ISO_Reader_Boards__c==null,' ',Left(account.EH_identiCLASS_Readers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEA();" onmouseout="LabelleaveEA();">{!tierValueEA}</label> <apex:selectList value="{!priceAuthorization.EA_ISO_Reader_Boards__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEAISO}"></apex:selectOptions>
+               <div id = "labelTextEA" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.EI_Developer_Services_Plus__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsEIDEV}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <!--<apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EI_Developer_Services_Plus__c.inlineHelpText}" >EI: Dev. Services Plus <label style="color: blue"> {!IF(account.EI_Developer_Services_Plus__c==null,' ',Left(account.EI_Developer_Services_Plus__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEI();" onmouseout="LabelleaveEI();">{!tierValueEI}</label> <apex:selectList value="{!priceAuthorization.EI_Developer_Services_Plus__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEIDEV}"></apex:selectOptions>
+               <div id = "labelTextEI" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>--> 
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.EH_identiCLASS_Readers__c.inlineHelpText}" >EH: identiCLASS Readers  <label style="color: blue"> {!IF(account.EH_identiCLASS_Readers__c==null,' ',Left(account.EH_identiCLASS_Readers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverEH();" onmouseout="LabelleaveEH();">{!tierValueEH}</label> <apex:selectList value="{!priceAuthorization.EH_identiCLASS_Readers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsEHCLASS}"></apex:selectOptions>
+               <div id = "labelTextEH" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>                            
+        </apex:pageBlockSection>
+        
+        <apex:pageBlockSection title="Secure Issuance Products Pricing" columns="2" id="FARGO">
+        <!--    <apex:selectList value="{!priceAuthorization.FA_Prof_Printers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFAPROP}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FA_Prof_Printers__c.inlineHelpText}" >FA: Prof. Printers <label style="color: blue"> {!IF(account.FA_Prof_Printers__c==null,' ',Left(account.FA_Prof_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFA();" onmouseout="LabelleaveFA();"> {!tierValueFA}</label> <apex:selectList value="{!priceAuthorization.FA_Prof_Printers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFAPROP}"></apex:selectOptions>
+               <div id = "labelTextFA" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FM_SDK_S_W_Support__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFM}"></apex:selectOptions>
+            </apex:selectList>            -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FM_SDK_S_W_Support__c.inlineHelpText}" >FM: SDK &amp; S/W Support <label style="color: blue"> {!IF(account.FM_SDK_S_W_Support__c==null,' ',Left(account.FM_SDK_S_W_Support__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFM();" onmouseout="LabelleaveFM();"> {!tierValueFM}</label> <apex:selectList value="{!priceAuthorization.FM_SDK_S_W_Support__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFM}"></apex:selectOptions>
+               <div id = "labelTextFM" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FB_Entry_Level_Printers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFB}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FB_Entry_Level_Printers__c.inlineHelpText}" >FB: Std. Ser. Printers <label style="color: blue">{!IF(account.FB_Entry_Level_Printers__c==null,' ',Left(account.FB_Entry_Level_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFB();" onmouseout="LabelleaveFB();">{!tierValueFB}</label> <apex:selectList value="{!priceAuthorization.FB_Entry_Level_Printers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFB}"></apex:selectOptions>
+               <div id = "labelTextFB" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+         <!--   <apex:selectList value="{!priceAuthorization.FN_Extended_Warranties__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFN}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FN_Extended_Warranties__c.inlineHelpText}" >FN: Extended Warranties <label style="color: blue"> {!IF(account.FB_Entry_Level_Printers__c==null,' ',Left(account.FN_Extended_Warranties__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFN();" onmouseout="LabelleaveFN();">{!tierValueFN}</label> <apex:selectList value="{!priceAuthorization.FN_Extended_Warranties__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFN}"></apex:selectOptions>
+               <div id = "labelTextFN" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+         <!--   <apex:selectList value="{!priceAuthorization.FZ_Standard_Series_DTC1250e_Printers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFZ}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FZ_Standard_Series_DTC1250e_Printers__c.inlineHelpText}" >FZ: Std. Ser. DTC1250e Printers <label style="color: blue"> {!IF(account.FZ_Standard_Series_DTC1250e_Printers__c==null,' ',Left(account.FZ_Standard_Series_DTC1250e_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFZ();" onmouseout="LabelleaveFZ();"> {!tierValueFZ}</label> <apex:selectList value="{!priceAuthorization.FZ_Standard_Series_DTC1250e_Printers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFZ}"></apex:selectOptions>
+               <div id = "labelTextFZ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FO_Cameras_Camera_S_W__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFO}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FO_Cameras_Camera_S_W__c.inlineHelpText}" >FO: Cameras &amp; Cam. S/W <label style="color: blue"> {!IF(account.FO_Cameras_Camera_S_W__c==null,' ',Left(account.FO_Cameras_Camera_S_W__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFO();" onmouseout="LabelleaveFO();"> {!tierValueFO}</label> <apex:selectList value="{!priceAuthorization.FO_Cameras_Camera_S_W__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFO}"></apex:selectOptions>
+               <div id = "labelTextFO" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+         <!--     <apex:selectList value="{!priceAuthorization.FX_Standard_Series_C50_Printers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFX}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FX_Standard_Series_C50_Printers__c.inlineHelpText}" >FX: Std. Ser. C50 Printers <label style="color: blue"> {!IF(account.FX_Standard_Series_C50_Printers__c==null,' ',Left(account.FX_Standard_Series_C50_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFX();" onmouseout="LabelleaveFX();">{!tierValueFX}</label> <apex:selectList value="{!priceAuthorization.FX_Standard_Series_C50_Printers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFX}"></apex:selectOptions>
+               <div id = "labelTextFX" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--     <apex:selectList value="{!priceAuthorization.FP_Photo_ID_Accessories__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFPID}"></apex:selectOptions>
+            </apex:selectList>    -->
+          <!--  <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FP_Photo_ID_Accessories__c.inlineHelpText}" >FP: Photo ID Accessories <label style="color: blue"> {!IF(account.FP_Photo_ID_Accessories__c==null,' ',Left(account.FP_Photo_ID_Accessories__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFP();" onmouseout="LabelleaveFP();"> {!tierValueFP}</label> <apex:selectList value="{!priceAuthorization.FP_Photo_ID_Accessories__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFPID}"></apex:selectOptions>
+               <div id = "labelTextFP" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem> -->
+            <apex:pageblocksectionitem >
+            </apex:pageblocksectionitem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FC_Print_Heads__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFC}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FC_Print_Heads__c.inlineHelpText}" >FC: Print Heads <label style="color: blue"> {!IF(account.FC_Print_Heads__c==null,' ',Left(account.FC_Print_Heads__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFC();" onmouseout="LabelleaveFC();"> {!tierValueFC}</label> <apex:selectList value="{!priceAuthorization.FC_Print_Heads__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFC}"></apex:selectOptions>
+               <div id = "labelTextFC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+           
+        <!--   <apex:selectList value="{!priceAuthorization.FQ_Spare_Parts_Packages__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFQ}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FQ_Spare_Parts_Packages__c.inlineHelpText}" >FQ: Spare Parts Packages <label style="color: blue"> {!IF(account.FQ_Spare_Parts_Packages__c==null,' ',Left(account.FQ_Spare_Parts_Packages__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFQ();" onmouseout="LabelleaveFQ();"> {!tierValueFQ}</label> <apex:selectList value="{!priceAuthorization.FQ_Spare_Parts_Packages__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFQ}"></apex:selectOptions>
+               <div id = "labelTextFQ" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+                      
+         <!--   <apex:selectList value="{!priceAuthorization.FD_Ribbons_Clear_Film__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFDR}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FD_Ribbons_Clear_Film__c.inlineHelpText}" >FD: Ribbons &amp; Clear Film <label style="color: blue"> {!IF(account.FD_Ribbons_Clear_Film__c==null,' ',Left(account.FD_Ribbons_Clear_Film__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFD();" onmouseout="LabelleaveFD();"> {!tierValueFD}</label> <apex:selectList value="{!priceAuthorization.FD_Ribbons_Clear_Film__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFDR}"></apex:selectOptions>
+               <div id = "labelTextFD" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FR_Spare_Parts_Kits__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFR}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FR_Spare_Parts_Kits__c.inlineHelpText}" >FR: Spare Parts &amp; Kits <label style="color: blue">  {!IF(account.FR_Spare_Parts_Kits__c==null,' ',Left(account.FR_Spare_Parts_Kits__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFR();" onmouseout="LabelleaveFR();">{!tierValueFR}</label> <apex:selectList value="{!priceAuthorization.FR_Spare_Parts_Kits__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFR}"></apex:selectOptions>
+               <div id = "labelTextFR" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FE_Entry_Level_Ribbons__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFEENTRY}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FE_Entry_Level_Ribbons__c.inlineHelpText}" >FE: Std. Ser. Ribbons <label style="color: blue"> {!IF(account.FE_Entry_Level_Ribbons__c==null,' ',Left(account.FE_Entry_Level_Ribbons__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFE();" onmouseout="LabelleaveFE();">{!tierValueFE}</label> <apex:selectList value="{!priceAuthorization.FE_Entry_Level_Ribbons__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFEENTRY}"></apex:selectOptions>
+               <div id = "labelTextFE" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+         <!--    <apex:selectList value="{!priceAuthorization.FS_Rewriteable_Cards__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFS}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FS_Rewriteable_Cards__c.inlineHelpText}" >FS: Rewriteable Cards <label style="color: blue"> {!IF(account.FS_Rewriteable_Cards__c==null,' ',Left(account.FS_Rewriteable_Cards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFS();" onmouseout="LabelleaveFS();">{!tierValueFS}</label> <apex:selectList value="{!priceAuthorization.FS_Rewriteable_Cards__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFS}"></apex:selectOptions>
+               <div id = "labelTextFS" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FY_Standard_C50_Regional_Ribbons_Only__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFY}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FY_Standard_C50_Regional_Ribbons_Only__c.inlineHelpText}" >FY: Std. C50 Regional Ribbons<label style="color: blue"> {!IF(account.FY_Standard_C50_Regional_Ribbons_Only__c==null,' ',Left(account.FY_Standard_C50_Regional_Ribbons_Only__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFY();" onmouseout="LabelleaveFY();"> {!tierValueFY}</label> <apex:selectList value="{!priceAuthorization.FY_Standard_C50_Regional_Ribbons_Only__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFY}"></apex:selectOptions>
+               <div id = "labelTextFY" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+         <!--     <apex:selectList value="{!priceAuthorization.FT_HDP8500_Printers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFT}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FT_HDP8500_Printers__c.inlineHelpText}" >FT: Ind. Ser. Printers <label style="color: blue"> {!IF(account.FT_HDP8500_Printers__c==null,' ',Left(account.FT_HDP8500_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFT();" onmouseout="LabelleaveFT();">{!tierValueFT}</label> <apex:selectList value="{!priceAuthorization.FT_HDP8500_Printers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFT}"></apex:selectOptions>
+               <div id = "labelTextFT" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FF_Holo_Film_Overlams__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFF}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FF_Holo_Film_Overlams__c.inlineHelpText}" >FF: Holo. Film &amp; Overlams <label style="color: blue"> {!IF(account.FF_Holo_Film_Overlams__c==null,' ',Left(account.FF_Holo_Film_Overlams__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFF();" onmouseout="LabelleaveFF();">{!tierValueFF}</label> <apex:selectList value="{!priceAuthorization.FF_Holo_Film_Overlams__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFF}"></apex:selectOptions>
+               <div id = "labelTextFF" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+
+        <!--    <apex:selectList value="{!priceAuthorization.FU_Industrial_Series_Ribbons_HDP_Film__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFU}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FU_Industrial_Series_Ribbons_HDP_Film__c.inlineHelpText}" >FU: Ind. Ser. Ribbons &amp; HDP Film <label style="color: blue"> {!IF(account.FU_Industrial_Series_Ribbons_HDP_Film__c==null,' ',Left(account.FU_Industrial_Series_Ribbons_HDP_Film__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFU();" onmouseout="LabelleaveFU();">{!tierValueFU}</label> <apex:selectList value="{!priceAuthorization.FU_Industrial_Series_Ribbons_HDP_Film__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFU}"></apex:selectOptions>
+               <div id = "labelTextFU" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FG_Veri_Holo_OVD_Cards__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFGVERI}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FG_Veri_Holo_OVD_Cards__c.inlineHelpText}" >FG: Veri/Holo, &amp; OVD Cards &amp; Custom Lam<label style="color: blue"> {!IF(account.FG_Veri_Holo_OVD_Cards__c==null,' ',Left(account.FG_Veri_Holo_OVD_Cards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFG();" onmouseout="LabelleaveFG();">{!tierValueFG}</label> <apex:selectList value="{!priceAuthorization.FG_Veri_Holo_OVD_Cards__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFGVERI}"></apex:selectOptions>
+               <div id = "labelTextFG" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--   <apex:selectList value="{!priceAuthorization.FV_Laser_Engravers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFV}"></apex:selectOptions>
+            </apex:selectList>  -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FV_Laser_Engravers__c.inlineHelpText}" >FV: Laser Engravers <label style="color: blue"> {!IF(account.FV_Laser_Engravers__c==null,' ',Left(account.FV_Laser_Engravers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFV();" onmouseout="LabelleaveFV();">{!tierValueFV}</label> <apex:selectList value="{!priceAuthorization.FV_Laser_Engravers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFV}"></apex:selectOptions>
+               <div id = "labelTextFV" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FH_UltraCards__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFHULTRA}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FH_UltraCards__c.inlineHelpText}" >FH: UltraCards <label style="color: blue"> {!IF(account.FH_UltraCards__c==null,' ',Left(account.FH_UltraCards__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFH();" onmouseout="LabelleaveFH();"> {!tierValueFH}</label> <apex:selectList value="{!priceAuthorization.FH_UltraCards__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFHULTRA}"></apex:selectOptions>
+               <div id = "labelTextFH" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FW_Financial_Series_Ribbons_HDP_Film__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFMFIN}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FW_Financial_Series_Ribbons_HDP_Film__c.inlineHelpText}" >FW: Fin. Ser. Ribbons &amp; HDP Film <label style="color: blue"> {!IF(account.FW_Financial_Series_Ribbons_HDP_Film__c==null,' ',Left(account.FW_Financial_Series_Ribbons_HDP_Film__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFW();" onmouseout="LabelleaveFW();"> {!tierValueFW}</label> <apex:selectList value="{!priceAuthorization.FW_Financial_Series_Ribbons_HDP_Film__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFMFIN}"></apex:selectOptions>
+               <div id = "labelTextFW" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            
+        <!--    <apex:selectList value="{!priceAuthorization.FK_HDPii_Printers__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFKHD}"></apex:selectOptions>
+            </apex:selectList>      --->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FK_HDPii_Printers__c.inlineHelpText}" >FK: HDPii Printers <label style="color: blue"> {!IF(account.FK_HDPii_Printers__c==null,' ',Left(account.FK_HDPii_Printers__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFK();" onmouseout="LabelleaveFK();"> {!tierValueFK}</label> <apex:selectList value="{!priceAuthorization.FK_HDPii_Printers__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFKHD}"></apex:selectOptions>
+               <div id = "labelTextFK" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem ></apex:pageBlockSectionItem> 
+        
+        <!--    <apex:selectList value="{!priceAuthorization.FL_Asure_ID_Software__c}" size="1" style="width:100px">
+                      <apex:selectOptions value="{!selectOptionsFL}"></apex:selectOptions>
+            </apex:selectList>      -->
+            <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.FL_Asure_ID_Software__c.inlineHelpText}" >FL: Asure ID Software <label style="color: blue"> {!IF(account.FL_Asure_ID_Software__c==null,' ',Left(account.FL_Asure_ID_Software__c,5))}</label> <label style="color: red" onmouseover="LabelHoverFL();" onmouseout="LabelleaveFL();">{!tierValueFL}</label> <apex:selectList value="{!priceAuthorization.FL_Asure_ID_Software__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsFL}"></apex:selectOptions>
+               <div id = "labelTextFL" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+            </apex:pageBlockSectionItem>
+            <apex:pageBlockSectionItem ></apex:pageBlockSectionItem>
+                        
+        </apex:pageBlockSection>
+   
+           <apex:pageBlockSection title="Other Products Pricing Information" columns="2" Id="otherPricing">
+           <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.PS_Professional_Services__c.inlineHelpText}" >PS: Professional Services <label style="color: blue"> {!IF(account.PS_Professional_Services__c==null,' ',Left(account.PS_Professional_Services__c,5))}</label> <label style="color: red" onmouseover="LabelHoverPS();" onmouseout="LabelleavePS();"> {!tierValuePS}</label> <apex:selectList value="{!priceAuthorization.PS_Professional_Services__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsPS}"></apex:selectOptions>
+               <div id = "labelTextPS" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.AC__c.inlineHelpText}" >AC: Accessories <label style="color: blue"> {!IF(account.AC__c==null,' ',Left(account.AC__c,5))}</label> <label style="color: red" onmouseover="LabelHoverAC();" onmouseout="LabelleaveAC();"> {!tierValueAC}</label> <apex:selectList value="{!priceAuthorization.AC__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsAC}"></apex:selectOptions>
+               <div id = "labelTextAC" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+        <apex:pageBlockSectionItem HelpText="{!$ObjectType.Price_Authorization_Form__c.fields.CP_Custom_Special_Products_w_o_Discount__c.inlineHelpText}" >CP: Custom/Special Products w/o Discount<label style="color: blue"> {!IF(account.CP_Custom_Special_Products_w_o_Discount__c==null,' ',Left(account.CP_Custom_Special_Products_w_o_Discount__c,5))}</label> <label style="color: red" onmouseover="LabelHoverCP();" onmouseout="LabelleaveCP();"> {!tierValueCP}</label> <apex:selectList value="{!priceAuthorization.CP_Custom_Special_Products_w_o_Discount__c}" size="1" style="width:100px"><apex:selectOptions value="{!selectOptionsCP}"></apex:selectOptions>
+               <div id = "labelTextCP" style="background-color:yellow;border:1px solid brown;display:none;padding:2px;"> Price Code, In Program, Restricted &amp; HID Connect   </div>  </apex:selectList>
+        </apex:pageBlockSectionItem>
+        
+            
+               
+           <apex:inputField value="{!priceAuthorization.Other__c}" rendered="true"/>
+            
+       </apex:pageBlockSection>
+         
+        <apex:pageBlockSection title="Request Details" columns="2">
+            <apex:inputField value="{!priceAuthorization.Pricing_Effective_Date__c}" rendered="true" required="true"/>
+        </apex:pageBlockSection>
+
+        
+        <apex:pageBlockSection title="Approval Information" columns="2">
+              <apex:inputField value="{!priceAuthorization.Status__c}" rendered="true"/>
+                 <apex:inputField value="{!priceAuthorization.ERP_Update__c}"/>
+                 <apex:pageBlockSectionItem />
+                 <apex:inputField value="{!priceAuthorization.ERP_Update_Date__c}"/>             
+        </apex:pageBlockSection> 
+        
+                
+       </apex:pageBlock>     
+  </apex:form> 
+
+     
+    <script>
+       function LabelHoverIR() {document.getElementById('labelTextIR').style.display = 'inline'; }
+  function LabelleaveIR() {document.getElementById('labelTextIR').style.display  = 'none'; }
+  function LabelHoverMS() {document.getElementById('labelTextMS').style.display = 'inline'; }
+  function LabelleaveMS() {document.getElementById('labelTextMS').style.display  = 'none'; }
+  function LabelHoverIC() {document.getElementById('labelTextIC').style.display = 'inline'; }
+  function LabelleaveIC() {document.getElementById('labelTextIC').style.display  = 'none'; }
+  function LabelHoverSL() {document.getElementById('labelTextSL').style.display = 'inline'; }
+  function LabelleaveSL() {document.getElementById('labelTextSL').style.display  = 'none'; }
+  function LabelHoverID() {document.getElementById('labelTextID').style.display = 'inline'; }
+  function LabelleaveID() {document.getElementById('labelTextID').style.display  = 'none'; }
+  function LabelHoverVS() {document.getElementById('labelTextVS').style.display = 'inline'; }
+  function LabelleaveVS() {document.getElementById('labelTextVS').style.display  = 'none'; }
+  function LabelHoverVX() {document.getElementById('labelTextVX').style.display = 'inline'; }
+  function LabelleaveVX() {document.getElementById('labelTextVX').style.display  = 'none'; }
+  function LabelHoverVE() {document.getElementById('labelTextVE').style.display = 'inline'; }
+  function LabelleaveVE() {document.getElementById('labelTextVE').style.display  = 'none'; }
+  function LabelHoverIP() {document.getElementById('labelTextIP').style.display = 'inline'; }
+  function LabelleaveIP() {document.getElementById('labelTextIP').style.display  = 'none'; }
+  function LabelHoverLV() {document.getElementById('labelTextLV').style.display = 'inline'; }
+  function LabelleaveLV() {document.getElementById('labelTextLV').style.display  = 'none'; }
+  function LabelHoverMC() {document.getElementById('labelTextMC').style.display = 'inline'; }
+  function LabelleaveMC() {document.getElementById('labelTextMC').style.display  = 'none'; }
+  function LabelHoverLW() {document.getElementById('labelTextLW').style.display = 'inline'; }
+  function LabelleaveLW() {document.getElementById('labelTextLW').style.display  = 'none'; }
+  function LabelHoverMD() {document.getElementById('labelTextMD').style.display = 'inline'; }
+  function LabelleaveMD() {document.getElementById('labelTextMD').style.display  = 'none'; }
+  function LabelHoverIB() {document.getElementById('labelTextIB').style.display = 'inline'; }
+  function LabelleaveIB() {document.getElementById('labelTextIB').style.display  = 'none'; }
+  function LabelHoverME() {document.getElementById('labelTextME').style.display = 'inline'; }
+  function LabelleaveME() {document.getElementById('labelTextME').style.display  = 'none'; }
+  function LabelHoverPI() {document.getElementById('labelTextPI').style.display = 'inline'; }
+  function LabelleavePI() {document.getElementById('labelTextPI').style.display  = 'none'; }
+  function LabelHoverMF() {document.getElementById('labelTextMF').style.display = 'inline'; }
+  function LabelleaveMF() {document.getElementById('labelTextMF').style.display  = 'none'; }
+  function LabelHoverIE() {document.getElementById('labelTextIE').style.display = 'inline'; }
+  function LabelleaveIE() {document.getElementById('labelTextIE').style.display  = 'none'; }
+  function LabelHoverRA() {document.getElementById('labelTextRA').style.display = 'inline'; }
+  function LabelleaveRA() {document.getElementById('labelTextRA').style.display  = 'none'; }
+  function LabelHoverIJ() {document.getElementById('labelTextIJ').style.display = 'inline'; }
+  function LabelleaveIJ() {document.getElementById('labelTextIJ').style.display  = 'none'; }
+  function LabelHoverRB() {document.getElementById('labelTextRB').style.display = 'inline'; }
+  function LabelleaveRB() {document.getElementById('labelTextRB').style.display  = 'none'; }
+  function LabelHoverIK() {document.getElementById('labelTextIK').style.display = 'inline'; }
+  function LabelleaveIK() {document.getElementById('labelTextIK').style.display  = 'none'; }  
+  function LabelHoverIF() {document.getElementById('labelTextIF').style.display = 'inline'; }
+  function LabelleaveIF() {document.getElementById('labelTextIF').style.display  = 'none'; }
+  function LabelHoverRC() {document.getElementById('labelTextRC').style.display = 'inline'; }
+  function LabelleaveRC() {document.getElementById('labelTextRC').style.display  = 'none'; }
+  function LabelHoverIH() {document.getElementById('labelTextIH').style.display = 'inline'; }
+  function LabelleaveIH() {document.getElementById('labelTextIH').style.display  = 'none'; }
+  function LabelHoverRD() {document.getElementById('labelTextRD').style.display = 'inline'; }
+  function LabelleaveRD() {document.getElementById('labelTextRD').style.display  = 'none'; }
+  function LabelHoverEZ() {document.getElementById('labelTextEZ').style.display = 'inline'; }
+  function LabelleaveEZ() {document.getElementById('labelTextEZ').style.display  = 'none'; }
+  function LabelHoverRE() {document.getElementById('labelTextRE').style.display = 'inline'; }
+  function LabelleaveRE() {document.getElementById('labelTextRE').style.display  = 'none'; }
+  function LabelHoverAC() {document.getElementById('labelTextAC').style.display = 'inline'; }
+  function LabelleaveAC() {document.getElementById('labelTextAC').style.display  = 'none'; }
+  function LabelHoverPC() {document.getElementById('labelTextPC').style.display = 'inline'; }
+  function LabelleavePC() {document.getElementById('labelTextPC').style.display  = 'none'; }
+  function LabelHoverOL() {document.getElementById('labelTextOL').style.display = 'inline'; }
+  function LabelleaveOL() {document.getElementById('labelTextOL').style.display  = 'none'; }
+  function LabelHoverLC() {document.getElementById('labelTextLC').style.display = 'inline'; }
+  function LabelleaveLC() {document.getElementById('labelTextLC').style.display  = 'none'; }
+  function LabelHoverLR() {document.getElementById('labelTextLR').style.display = 'inline'; }
+  function LabelleaveLR() {document.getElementById('labelTextLR').style.display  = 'none'; }
+  function LabelHoverEB() {document.getElementById('labelTextEB').style.display = 'inline'; }
+  function LabelleaveEB() {document.getElementById('labelTextEB').style.display  = 'none'; }
+  function LabelHoverIoD() {document.getElementById('labelTextIoD').style.display = 'inline'; }
+  function LabelleaveIoD() {document.getElementById('labelTextIoD').style.display  = 'none'; }
+  function LabelHoverVC() {document.getElementById('labelTextVC').style.display = 'inline'; }
+  function LabelleaveVC() {document.getElementById('labelTextVC').style.display  = 'none'; }
+  function LabelHoverVI() {document.getElementById('labelTextVI').style.display = 'inline'; }
+  function LabelleaveVI() {document.getElementById('labelTextVI').style.display  = 'none'; }
+  function LabelHoverVD() {document.getElementById('labelTextVD').style.display = 'inline'; }
+  function LabelleaveVD() {document.getElementById('labelTextVD').style.display  = 'none'; }
+  function LabelHoverEC() {document.getElementById('labelTextEC').style.display = 'inline'; }
+  function LabelleaveEC() {document.getElementById('labelTextEC').style.display  = 'none'; }
+  function LabelHoverEJ() {document.getElementById('labelTextEJ').style.display = 'inline'; }
+  function LabelleaveEJ() {document.getElementById('labelTextEJ').style.display  = 'none'; }
+  function LabelHoverIO() {document.getElementById('labelTextIO').style.display = 'inline'; }
+  function LabelleaveIO() {document.getElementById('labelTextIO').style.display  = 'none'; }
+  function LabelHoverED() {document.getElementById('labelTextED').style.display = 'inline'; }
+  function LabelleaveED() {document.getElementById('labelTextED').style.display  = 'none'; }
+  function LabelHoverEP() {document.getElementById('labelTextEP').style.display = 'inline'; }
+  function LabelleaveEP() {document.getElementById('labelTextEP').style.display  = 'none'; }
+  function LabelHoverEE() {document.getElementById('labelTextEE').style.display = 'inline'; }
+  function LabelleaveEE() {document.getElementById('labelTextEE').style.display  = 'none'; }
+  function LabelHoverLO() {document.getElementById('labelTextLO').style.display = 'inline'; }
+  function LabelleaveLO() {document.getElementById('labelTextLO').style.display  = 'none'; }
+  function LabelHoverEF() {document.getElementById('labelTextEF').style.display = 'inline'; }
+  function LabelleaveEF() {document.getElementById('labelTextEF').style.display  = 'none'; }
+  function LabelHoverEL() {document.getElementById('labelTextEL').style.display = 'inline'; }
+  function LabelleaveEL() {document.getElementById('labelTextEL').style.display  = 'none'; }
+  function LabelHoverEG() {document.getElementById('labelTextEG').style.display = 'inline'; }
+  function LabelleaveEG() {document.getElementById('labelTextEG').style.display  = 'none'; }
+  function LabelHoverEK() {document.getElementById('labelTextEK').style.display = 'inline'; }
+  function LabelleaveEK() {document.getElementById('labelTextEK').style.display  = 'none'; }
+  function LabelHoverEH() {document.getElementById('labelTextEH').style.display = 'inline'; }
+  function LabelleaveEH() {document.getElementById('labelTextEH').style.display  = 'none'; }
+  function LabelHoverEA() {document.getElementById('labelTextEA').style.display = 'inline'; }
+  function LabelleaveEA() {document.getElementById('labelTextEA').style.display  = 'none'; }
+  function LabelHoverEI() {document.getElementById('labelTextEI').style.display = 'inline'; }
+  function LabelleaveEI() {document.getElementById('labelTextEI').style.display  = 'none'; }  
+  function LabelHoverFA() {document.getElementById('labelTextFA').style.display = 'inline'; }
+  function LabelleaveFA() {document.getElementById('labelTextFA').style.display  = 'none'; }
+  function LabelHoverFL() {document.getElementById('labelTextFL').style.display = 'inline'; }
+  function LabelleaveFL() {document.getElementById('labelTextFL').style.display  = 'none'; }  
+  function LabelHoverFB() {document.getElementById('labelTextFB').style.display = 'inline'; }
+  function LabelleaveFB() {document.getElementById('labelTextFB').style.display  = 'none'; }
+  function LabelHoverFM() {document.getElementById('labelTextFM').style.display = 'inline'; }
+  function LabelleaveFM() {document.getElementById('labelTextFM').style.display  = 'none'; }
+  function LabelHoverFZ() {document.getElementById('labelTextFZ').style.display = 'inline'; }
+  function LabelleaveFZ() {document.getElementById('labelTextFZ').style.display  = 'none'; }
+  function LabelHoverFN() {document.getElementById('labelTextFN').style.display = 'inline'; }
+  function LabelleaveFN() {document.getElementById('labelTextFN').style.display  = 'none'; }
+  function LabelHoverFQ() {document.getElementById('labelTextFQ').style.display = 'inline'; }
+  function LabelleaveFQ() {document.getElementById('labelTextFQ').style.display  = 'none'; }
+  function LabelHoverFX() {document.getElementById('labelTextFX').style.display = 'inline'; }
+  function LabelleaveFX() {document.getElementById('labelTextFX').style.display  = 'none'; }
+  function LabelHoverFO() {document.getElementById('labelTextFO').style.display = 'inline'; }
+  function LabelleaveFO() {document.getElementById('labelTextFO').style.display  = 'none'; }
+  function LabelHoverFC() {document.getElementById('labelTextFC').style.display = 'inline'; }
+  function LabelleaveFC() {document.getElementById('labelTextFC').style.display  = 'none'; }
+  function LabelHoverFP() {document.getElementById('labelTextFP').style.display = 'inline'; }
+  function LabelleaveFP() {document.getElementById('labelTextFP').style.display  = 'none'; }  
+  function LabelHoverFD() {document.getElementById('labelTextFD').style.display = 'inline'; }
+  function LabelleaveFD() {document.getElementById('labelTextFD').style.display  = 'none'; }  
+  function LabelHoverFE() {document.getElementById('labelTextFE').style.display = 'inline'; }
+  function LabelleaveFE() {document.getElementById('labelTextFE').style.display  = 'none'; }
+  function LabelHoverFR() {document.getElementById('labelTextFR').style.display = 'inline'; }
+  function LabelleaveFR() {document.getElementById('labelTextFR').style.display  = 'none'; }
+  function LabelHoverFY() {document.getElementById('labelTextFY').style.display = 'inline'; }
+  function LabelleaveFY() {document.getElementById('labelTextFY').style.display  = 'none'; }
+  function LabelHoverFS() {document.getElementById('labelTextFS').style.display = 'inline'; }
+  function LabelleaveFS() {document.getElementById('labelTextFS').style.display  = 'none'; }
+  function LabelHoverFF() {document.getElementById('labelTextFF').style.display = 'inline'; }
+  function LabelleaveFF() {document.getElementById('labelTextFF').style.display  = 'none'; }
+  function LabelHoverFT() {document.getElementById('labelTextFT').style.display = 'inline'; }
+  function LabelleaveFT() {document.getElementById('labelTextFT').style.display  = 'none'; }
+  function LabelHoverFG() {document.getElementById('labelTextFG').style.display = 'inline'; }
+  function LabelleaveFG() {document.getElementById('labelTextFG').style.display  = 'none'; }
+  function LabelHoverFU() {document.getElementById('labelTextFU').style.display = 'inline'; }
+  function LabelleaveFU() {document.getElementById('labelTextFU').style.display  = 'none'; }
+  function LabelHoverFH() {document.getElementById('labelTextFH').style.display = 'inline'; }
+  function LabelleaveFH() {document.getElementById('labelTextFH').style.display  = 'none'; }
+  function LabelHoverFV() {document.getElementById('labelTextFV').style.display = 'inline'; }
+  function LabelleaveFV() {document.getElementById('labelTextFV').style.display  = 'none'; }
+  function LabelHoverFK() {document.getElementById('labelTextFK').style.display = 'inline'; }
+  function LabelleaveFK() {document.getElementById('labelTextFK').style.display  = 'none'; }
+  function LabelHoverFW() {document.getElementById('labelTextFW').style.display = 'inline'; }
+  function LabelleaveFW() {document.getElementById('labelTextFW').style.display  = 'none'; }
+  function LabelHoverPS() {document.getElementById('labelTextPS').style.display = 'inline'; }
+  function LabelleavePS() {document.getElementById('labelTextPS').style.display  = 'none'; }
+  function LabelHoverAA() {document.getElementById('labelTextAA').style.display = 'inline'; }
+  function LabelleaveAA() {document.getElementById('labelTextAA').style.display  = 'none'; }
+  
+    function LabelHoverAD() {document.getElementById('labelTextAD').style.display = 'inline'; }
+    function LabelleaveAD() {document.getElementById('labelTextAD').style.display  = 'none'; }
+    function LabelHoverAG() {document.getElementById('labelTextAG').style.display = 'inline'; }
+    function LabelleaveAG() {document.getElementById('labelTextAG').style.display  = 'none'; }
+    function LabelHoverAI() {document.getElementById('labelTextAI').style.display = 'inline'; }
+    function LabelleaveAI() {document.getElementById('labelTextAI').style.display  = 'none'; }
+    function LabelHoverAJ() {document.getElementById('labelTextAJ').style.display = 'inline'; }
+    function LabelleaveAJ() {document.getElementById('labelTextAJ').style.display  = 'none'; }
+  
+  function LabelHoverAF() {document.getElementById('labelTextAF').style.display = 'inline'; }
+  function LabelleaveAF() {document.getElementById('labelTextAF').style.display  = 'none'; }
+  function LabelHoverAB() {document.getElementById('labelTextAB').style.display = 'inline'; }
+  function LabelleaveAB() {document.getElementById('labelTextAB').style.display  = 'none'; }
+  function LabelHoverAL() {document.getElementById('labelTextAL').style.display = 'inline'; }
+  function LabelleaveAL() {document.getElementById('labelTextAL').style.display  = 'none'; }
+  function LabelHoverAZ() {document.getElementById('labelTextAZ').style.display = 'inline'; }
+  function LabelleaveAZ() {document.getElementById('labelTextAZ').style.display  = 'none'; }
+  function LabelHoverAE() {document.getElementById('labelTextAE').style.display = 'inline'; }
+  function LabelleaveAE() {document.getElementById('labelTextAE').style.display  = 'none'; }
+  function LabelHoverIM() {document.getElementById('labelTextIM').style.display = 'inline'; }
+  function LabelleaveIM() {document.getElementById('labelTextIM').style.display  = 'none'; }
+  function LabelHoverCP() {document.getElementById('labelTextCP').style.display = 'inline'; }
+  function LabelleaveCP() {document.getElementById('labelTextCP').style.display  = 'none'; }
+  
+  <!-- ADDED @ Hitesh Patel - Jade Global 2015/07/13 -->
+  function LabelHoverAK() {document.getElementById('labelTextAK').style.display = 'inline'; }
+  function LabelleaveAK() {document.getElementById('labelTextAK').style.display  = 'none'; }
+  
+  function LabelHoverAM() {document.getElementById('labelTextAM').style.display = 'inline'; }
+  function LabelleaveAM() {document.getElementById('labelTextAM').style.display  = 'none'; }
+  
+  function LabelHoverAN() {document.getElementById('labelTextAN').style.display = 'inline'; }
+  function LabelleaveAN() {document.getElementById('labelTextAN').style.display  = 'none'; }
+  </script>    
+</apex:page>

@@ -1,0 +1,157 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <customSettingsType>Hierarchy</customSettingsType>
+    <customSettingsVisibility>Public</customSettingsVisibility>
+    <description>Org wide settings for AXOM&apos;s products</description>
+    <enableFeeds>false</enableFeeds>
+    <fields>
+        <fullName>AlternativesObjectAPIName__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Object API Name for Custom Object to store the Alternatives in the Client Org.</description>
+        <externalId>false</externalId>
+        <label>Alternatives Object Name</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DashboardName__c</fullName>
+        <defaultValue>RIGHT($Organization.Name, 50)</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Name showed on top right corner of Axiom&apos;s dashboard</description>
+        <externalId>false</externalId>
+        <label>Dashboard Name</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DevelopmentMode__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <description>System setting that used only for development and performance purposes</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System setting that used only for development and performance purposes. Please do not change default value</inlineHelpText>
+        <label>Development Mode</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LMSConnector__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Package Prefix of Learning Management System Connector Package</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Package Prefix of Learning Management System Connector Package (if exists)</inlineHelpText>
+        <label>LMS Connector</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RoleCC__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Custom alias for CC Evaluator Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Custom alias for CC Evaluator Role</inlineHelpText>
+        <label>Role CC Alias</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RoleCE__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Custom alias for CE Evaluator Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Custom alias for CE Evaluator Role</inlineHelpText>
+        <label>Role CE Alias</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RoleFE__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Custom alias for FE Evaluator Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Custom alias for FE Evaluator Role</inlineHelpText>
+        <label>Role FE Alias</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RolePT__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Custom alias for PT Evaluator Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Custom alias for PT Evaluator Role</inlineHelpText>
+        <label>Role PT Alias</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RolePU__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Custom alias for PE Evaluator Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Custom alias for PE Evaluator Role</inlineHelpText>
+        <label>Role PE Alias</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>RoleSE__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Custom alias for SE Evaluator Role</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Custom alias for SE Evaluator Role</inlineHelpText>
+        <label>Role SE Alias</label>
+        <length>50</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Threshold_For_Red__c</fullName>
+        <deprecated>false</deprecated>
+        <description>To store the percentage Threshold for Yellow To Red in the Charts or Sales Rep Performance Etc.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>To store the percentage Threshold for Yellow To Red in the Charts or Sales Rep Performance Etc.</inlineHelpText>
+        <label>Threshold For Red</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Percent</type>
+    </fields>
+    <fields>
+        <fullName>UseOpportunityQuantity__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Use Opportunity Quantity?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <label>Org Settings</label>
+</CustomObject>

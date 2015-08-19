@@ -1,0 +1,54 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quiz Statistic --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Quiz Statistic --></value>
+    </caseValues>
+    <fields>
+        <label>Risposta</label>
+        <name>Answer__c</name>
+    </fields>
+    <fields>
+        <label>Assegnazione</label>
+        <name>Assignment__c</name>
+        <relationshipLabel>Statistiche del quiz</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Studente</label>
+        <name>Learner__c</name>
+    </fields>
+    <fields>
+        <label>Risposta lunga</label>
+        <name>Long_Answer__c</name>
+    </fields>
+    <fields>
+        <label>Domanda</label>
+        <name>Question__c</name>
+        <relationshipLabel>Statistiche del quiz</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Quiz</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Statistiche del quiz</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Risposta temporanea</label>
+        <name>Temporary_Answer__c</name>
+    </fields>
+    <fields>
+        <label>Riepilogo formativo</label>
+        <name>Transcript__c</name>
+        <relationshipLabel>Statistiche del quiz</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Tipo</label>
+        <name>Type__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <nameFieldLabel><!-- Quiz Statistic --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+</CustomObjectTranslation>

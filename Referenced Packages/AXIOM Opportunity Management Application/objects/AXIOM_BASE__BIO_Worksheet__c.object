@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <validationRules>
+        <fullName>validate_contact_accountId</fullName>
+        <active>true</active>
+        <errorConditionFormula>OR(ISBLANK(AXIOM_BASE__Contact__r.AccountId),  ISNULL(AXIOM_BASE__Contact__r.AccountId))</errorConditionFormula>
+        <errorDisplayField>AXIOM_BASE__Contact__c</errorDisplayField>
+        <errorMessage>Current contact is not part of an account.</errorMessage>
+    </validationRules>
+</CustomObject>

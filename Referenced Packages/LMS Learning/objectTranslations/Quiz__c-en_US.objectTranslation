@@ -1,0 +1,158 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value>Quiz</value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value>Quizzes</value>
+    </caseValues>
+    <fields>
+        <label><!-- Description --></label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- You can specify a time unit after a time value &apos;X&apos;, such as Xd, Xh or Xm, to represent days (d), hours (h) and minutes (m), respectively.
+If you do not specify a time unit, minute will be assumed. --></help>
+        <label><!-- Duration --></label>
+        <name>DurationTime__c</name>
+    </fields>
+    <fields>
+        <label><!-- Duration (min) --></label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label>Enable certificate</label>
+        <name>Enable_Certificate__c</name>
+    </fields>
+    <fields>
+        <label><!-- Language --></label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>da</masterLabel>
+            <translation><!-- da --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>de</masterLabel>
+            <translation><!-- de --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>en_US</masterLabel>
+            <translation><!-- en_US --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>es</masterLabel>
+            <translation><!-- es --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fi</masterLabel>
+            <translation><!-- fi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fr</masterLabel>
+            <translation><!-- fr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>it</masterLabel>
+            <translation><!-- it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ja</masterLabel>
+            <translation><!-- ja --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ko</masterLabel>
+            <translation><!-- ko --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>nl_NL</masterLabel>
+            <translation><!-- nl_NL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>pt_BR</masterLabel>
+            <translation><!-- pt_BR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ru</masterLabel>
+            <translation><!-- ru --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>sv</masterLabel>
+            <translation><!-- sv --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>th</masterLabel>
+            <translation><!-- th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_CN</masterLabel>
+            <translation><!-- zh_CN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_TW</masterLabel>
+            <translation><!-- zh_TW --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label><!-- Maintain user&apos;s answers --></label>
+        <name>Maintain_correct_answers__c</name>
+    </fields>
+    <fields>
+        <label><!-- Max Attempts --></label>
+        <name>Max_Attempts__c</name>
+    </fields>
+    <fields>
+        <label><!-- Passing Score --></label>
+        <name>Passing_Score__c</name>
+    </fields>
+    <fields>
+        <label>Randomisation</label>
+        <name>Randomization__c</name>
+    </fields>
+    <fields>
+        <label>Show score</label>
+        <name>Show_Score__c</name>
+    </fields>
+    <fields>
+        <label><!-- Training Unit --></label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel><!-- Quizzes --></relationshipLabel>
+    </fields>
+    <fields>
+        <label><!-- Allow user to review answers --></label>
+        <name>review_answers__c</name>
+    </fields>
+    <fields>
+        <label><!-- Allow failed users to progress --></label>
+        <name>show_100_if_fail__c</name>
+    </fields>
+    <layouts>
+        <layout>Quiz Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Test and Verify Your Quiz --></label>
+            <section>Test and Verify Your Quiz</section>
+        </sections>
+    </layouts>
+    <startsWith>Consonant</startsWith>
+    <validationRules>
+        <errorMessage><!-- NOT VALID DURATION --></errorMessage>
+        <name>Not_Valid_Duration_Value</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Passing score must be between 0 and 100%.</errorMessage>
+        <name>Validate_Passing_Score</name>
+    </validationRules>
+    <webLinks>
+        <label><!-- Add_to_My_Training --></label>
+        <name>Add_to_My_Training</name>
+    </webLinks>
+    <webLinks>
+        <label>Assign quiz</label>
+        <name>Assign_Quiz</name>
+    </webLinks>
+</CustomObjectTranslation>

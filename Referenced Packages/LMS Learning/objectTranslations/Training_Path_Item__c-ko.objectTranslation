@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Course Item --></value>
+    </caseValues>
+    <fields>
+        <label>놀리다</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>코스 항목</relationshipLabel>
+    </fields>
+    <fields>
+        <label>순서</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>교육 컨텐츠</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>교육 컨텐츠</relationshipLabel>
+    </fields>
+    <fields>
+        <label>교육 경로</label>
+        <name>Training_Path__c</name>
+        <relationshipLabel>교육 경로</relationshipLabel>
+    </fields>
+    <fields>
+        <label>보기</label>
+        <name>View__c</name>
+    </fields>
+    <layouts>
+        <layout>Training Path Item Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Item Number --></nameFieldLabel>
+    <recordTypes>
+        <label>모듈</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>놀리다</label>
+        <name>Quiz</name>
+    </recordTypes>
+    <webLinks>
+        <label>코스 에 추가</label>
+        <name>AddToCourse</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Add_Module_to_Course --></label>
+        <name>Add_Module_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Add_Quiz_to_Course --></label>
+        <name>Add_Quiz_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Add_Quize_to_Course --></label>
+        <name>Add_Quize_to_Course</name>
+    </webLinks>
+    <webLinks>
+        <label><!-- Edit_Sequence --></label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Debug Log --></value>
+    </caseValues>
+    <fields>
+        <label>행동</label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label><!-- ActivityTime --></label>
+        <name>ActivityTime__c</name>
+    </fields>
+    <fields>
+        <label>도메인</label>
+        <name>Domain__c</name>
+    </fields>
+    <fields>
+        <label>레벨</label>
+        <name>Level__c</name>
+        <picklistValues>
+            <masterLabel>Error</masterLabel>
+            <translation><!-- Error --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Info</masterLabel>
+            <translation><!-- Info --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Warning</masterLabel>
+            <translation><!-- Warning --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>주의</label>
+        <name>Note__c</name>
+    </fields>
+    <fields>
+        <label>받는 사람</label>
+        <name>Recipient__c</name>
+    </fields>
+    <nameFieldLabel><!-- DebugLog Name --></nameFieldLabel>
+</CustomObjectTranslation>

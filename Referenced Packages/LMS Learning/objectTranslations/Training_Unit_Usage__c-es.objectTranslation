@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Training Unit Usage --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Training Unit Usage --></value>
+    </caseValues>
+    <fields>
+        <label>Dirección de correo electrónico</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label>Alumno</label>
+        <name>Learner__c</name>
+        <relationshipLabel>Usos de la unidad de formación</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Fecha de registro</label>
+        <name>Registration_Date__c</name>
+    </fields>
+    <fields>
+        <label>Estado</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Título de la formación</label>
+        <name>Training_Title__c</name>
+    </fields>
+    <fields>
+        <label>Coste de la unidad de formación</label>
+        <name>Training_Unit_Cost__c</name>
+    </fields>
+    <fields>
+        <label>Unidad de formación</label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel>Usos de la unidad de formación</relationshipLabel>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Training Unit Usage Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Training Unit Usage Name --></nameFieldLabel>
+</CustomObjectTranslation>

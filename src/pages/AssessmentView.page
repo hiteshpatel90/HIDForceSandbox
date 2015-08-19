@@ -1,0 +1,507 @@
+<apex:page standardController="Assessment__c" extensions="assessmentEditController,assessmentApprovalController" tabStyle="Assessment__c">
+    <script type="text/javascript">
+    function confirmDelete() {
+          return confirm('Are you sure you want to delete?');
+    }
+    </script>
+    <c:assessmentHeader assessmentName="{!objAssessment.Name}" mode="View"/>
+    <apex:form id="frmScoring">
+        <apex:pageMessages />
+        <apex:pageBlock title="Assessment" mode="detail">
+            <apex:pageBlockButtons location="top">
+                <apex:commandButton value="Go to Approval" onclick="goToApprovalHistory();return false;"/>
+                <script>
+                    function goToApprovalHistory(){
+                        var approvalSectionName = document.getElementsByName('{!$Component.frmApproval}');
+                        approvalSectionName[0].scrollIntoView();
+                    }
+                </script>
+                <apex:commandButton action="{!edit}" value="Edit" rendered="{!bolEdit}"/>
+                <apex:commandButton action="{!customDelete}" value="Delete" rendered="{!bolCustomDelete}" onClick="if(!confirmDelete()) return false;"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection title="Account Information" columns="2">
+                <apex:outputField value="{!objAssessment.Account__c}" rendered="{!bolAccount}"/>
+                <apex:outputField value="{!objAssessment.Account_Cluster__c}" rendered="{!IF(bolAccount,false,true)}"/>
+                <apex:outputField value="{!objAssessment.Business_Segment__c}"/>
+                <apex:outputField value="{!objAssessment.Market_Size__c}"/>
+                <apex:outputField value="{!objAssessment.Partner_Type__c}"/>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region" for="lblRegion"/>
+                    <apex:outputText value="{!strRegion}" id="lblRegion"/>
+                </apex:pageBlockSectionItem>
+                <apex:outputField value="{!objAssessment.Approval_Status__c}"/>
+                <apex:outputField value="{!Assessment__c.Partner_Tier_Notification_Contact__c}"/>
+                <apex:outputField value="{!objAssessment.Approval_Date__c}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="System Information" columns="2">
+                <apex:outputField value="{!Assessment__c.CreatedById}"/>
+                <apex:outputField value="{!Assessment__c.LastModifiedById}"/>
+                <apex:outputField value="{!Assessment__c.CreatedDate}"/>
+                <apex:outputField value="{!Assessment__c.LastModifiedDate}"/>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Assessment Criteria" columns="1" collapsible="false"/>
+            <table id="scGrid">
+                <tr>
+                    <th/>
+                    <th colspan="2">Current Values</th>
+                    <th colspan="2">Approved Values</th>
+                </tr>
+                <tr>
+                    <th/>
+                    <th class="scValue">Value</th>
+                    <th class="scScore">Assessment</th>
+                    <th class="scValue">Value</th>
+                    <th class="scScore">Assessment</th>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Spend (Previous 12 Months)</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel">SI Spend USD</td>
+                    <td><apex:outputField value="{!objAssessment.SI_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.SI_Spend_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Spend_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel">IA Spend USD</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.IA_Spend_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Spend_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel">PACS Spend USD</td>
+                    <td><apex:outputField value="{!objAssessment.PACS_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.PACS_Spend_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.PACS_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.PACS_Spend_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Product Mix (Previous 12 Months)</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel">SI Software Spend USD</td>
+                    <td><apex:outputField value="{!objAssessment.SI_Software_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.SI_Software_Spend_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Software_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Software_Spend_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel">SI Hardware Spend USD</td>
+                    <td><apex:outputField value="{!objAssessment.SI_Hardware_Spend__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.SI_Hardware_Spend__c}"/></td>
+                    <td/>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel">SI Hardware Spend as % of SI Spend</td>
+                    <td><apex:outputField value="{!objAssessment.SI_Hardware_Spend_as_Percent_of_SI_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.SI_Hardware_Spend_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Hardware_Spend_as_Percent_of_SI_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Hardware_Spend_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel">IA Rev from Strong Authentication</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Revenue_from_Strong_Authentication__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_Strong_Authentication__c}"/></td>
+                    <td/>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel">IA Rev from Strong Authentication as % of IA Spend</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Revenue_from_Strong_Auth_Perc__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.IA_Rev_from_Strong_Authentication_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_Strong_Auth_Perc__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Rev_from_Strong_Authentication_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolIADistributorIntegrator,'table-row','none')}">
+                    <td class="tdLabel">IA Rev from Software + Hardware</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Revenue_from_Software_Hardware__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_Software_Hardware__c}"/></td>
+                    <td/>
+                </tr>
+                <tr style="display:{!IF(bolIADistributorIntegrator,'table-row','none')}">
+                    <td class="tdLabel">IA Rev from Software + Hardware as % of IA Spend</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Revenue_from_SW_HW_Percent__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.IA_Revenue_from_Software_Hardware_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_SW_HW_Percent__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Revenue_from_Software_Hardware_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel">iCLASS Spend</td>
+                    <td><apex:outputField value="{!objAssessment.iCLASS_Spend__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.iCLASS_Spend__c}"/></td>
+                    <td/>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel">iCLASS Spend as % of PACS Spend</td>
+                    <td><apex:outputField value="{!objAssessment.iCLASS_Spend_as_Percent_of_PACS_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.iCLASS_Spend_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.iCLASS_Spend_as_Percent_of_PACS_Spend__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.iCLASS_Spend_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolSIDistributor,'table-row','none')};">
+                    <td class="tdLabel">Stocks All SKUs Within Certified Product Lines</td>
+                    <td><apex:outputField value="{!objAssessment.Stocks_All_SKUs_Certified_Product_Lines__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Stocks_All_SKUs_Cert_Prod_Lines_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Stocks_All_SKUs_Certified_Product_Lines__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Stocks_All_SKUs_Cert_Prod_Lines_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolOEM,'table-row','none')}">
+                    <td class="tdLabel"># of HID Solutions Integrated Using HID APIs</td>
+                    <td><apex:outputField value="{!objAssessment.HID_Solutions_Integrated_Using_HID_API__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.HID_Solutions_Integr_U_HID_API_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Solutions_Integrated_Using_HID_API__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Solutions_Integr_U_HID_API_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Technical Expertise</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel"># of SI Products for which Certifications are Held</td>
+                    <td><apex:outputField value="{!objAssessment.SI_Product_Certifications__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.SI_Product_Certifications_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Product_Certifications__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Product_Certifications_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolSI,'table-row','none')}">
+                    <td class="tdLabel"># of Employees Who Hold 1 or More SI Certification</td>
+                    <td><apex:outputField value="{!objAssessment.SI_Certified_Employees__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.SI_Certified_Employees_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Certified_Employees__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.SI_Certified_Employees_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel"># of IA Products for which Certifications are Held</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Product_Certifications__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.IA_Product_Certifications_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Product_Certifications__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Product_Certifications_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolIA,'table-row','none')}">
+                    <td class="tdLabel"># of Employees Who Hold 1 or More IA Certification</td>
+                    <td><apex:outputField value="{!objAssessment.IA_Certified_Employees__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.IA_Certified_Employees_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Certified_Employees__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.IA_Certified_Employees_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel"># of HID Academy courses completed</td>
+                    <td><apex:outputField value="{!objAssessment.HID_Academy_Courses_Completed__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.HID_Academy_Courses_Completed_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Academy_Courses_Completed__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Academy_Courses_Completed_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolPACS,'table-row','none')}">
+                    <td class="tdLabel"># of Employees Who hold pivCLASS Certification [Estimate]</td>
+                    <td><apex:outputField value="{!objAssessment.Employees_w_pivCLASS_Certification__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Employees_w_pivCLASS_Cert_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Employees_w_pivCLASS_Certification__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Employees_w_pivCLASS_Cert_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg" style="display:{!IF(bolDistributorOEM,'table-row','none')}">
+                    <th class="taRight">Inventory</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolDistributorOEM,'table-row','none')}">
+                    <td class="tdLabel">Days of Inventory on Hand</td>
+                    <td><apex:outputField value="{!objAssessment.Days_of_Inventory_on_Hand__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Days_of_Inventory_on_Hand_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Days_of_Inventory_on_Hand__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Days_of_Inventory_on_Hand_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Brand Promotion</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">HID Logo &amp; Link on Website Homepage</td>
+                    <td><apex:outputField value="{!objAssessment.HID_Logo_and_Link_on_Homepage__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.HID_Logo_and_Link_on_Homepage_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Logo_and_Link_on_Homepage__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Logo_and_Link_on_Homepage_Asmt__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">HID Brand Featured in Marketing Promotions</td>
+                    <td><apex:outputField value="{!objAssessment.HID_Brand_Featured_in_Promotions__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.HID_Brand_Featured_in_Promotions_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Brand_Featured_in_Promotions__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Brand_Featured_in_Promotions_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolOEM,'table-row','none')}">
+                    <td class="tdLabel"># of HID Products Included in OEM Specification Document</td>
+                    <td><apex:outputField value="{!objAssessment.HID_Products_Included_in_OEM_Spec_Doc__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.HID_Prod_Inc_in_OEM_Spec_Doc_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Products_Included_in_OEM_Spec_Doc__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Prod_Inc_in_OEM_Spec_Doc_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolSIPACSOEM,'table-row','none')}">
+                    <td class="tdLabel">HID Products Included in Standard OEM Price Book</td>
+                    <td><apex:outputField value="{!objAssessment.HID_Products_in_Standard_OEM_Price_Book__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.HID_Products_in_St_OEM_Price_Book_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Products_in_Standard_OEM_Price_Book__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.HID_Products_in_St_OEM_Price_Book_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Customer Service</th>
+                    <th colspan="4"/> 
+                </tr>
+                <tr>
+                    <td class="tdLabel">Customer Service Quality</td>
+                    <td><apex:outputField value="{!objAssessment.Customer_Service_Quality__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Customer_Service_Quality_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Customer_Service_Quality__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Customer_Service_Quality_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg" style="display:{!IF(bolSIPACSIntegrator,'table-row','none')}">
+                    <th class="taRight">Sales Effectiveness</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolSIPACSIntegrator,'table-row','none')}">
+                    <td class="tdLabel">Sales Effectiveness</td>
+                    <td><apex:outputField value="{!objAssessment.Sales_Effectiveness__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Sales_Effectiveness_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Sales_Effectiveness__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Sales_Effectiveness_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg" style="display:{!IF(bolIADistributorIntegrator,'table-row','none')}">
+                    <th class="taRight">Sales Effectiveness</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr style="display:{!IF(bolIADistributorIntegrator,'table-row','none')}">
+                    <td class="tdLabel"># of New IA Customers Brought On By Partner</td>
+                    <td><apex:outputField value="{!objAssessment.New_IA_Customers_Brought_on_by_Partner__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.New_IA_Cust_Brought_on_by_Partner_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.New_IA_Customers_Brought_on_by_Partner__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.New_IA_Cust_Brought_on_by_Partner_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Plan &amp; Coordinate</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Monthly POS Report Provided to HID</td>
+                    <td><apex:outputField value="{!objAssessment.Monthly_POS_Report_Provided_to_HID__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Monthly_POS_Report_Provided_to_HID_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Monthly_POS_Report_Provided_to_HID__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Monthly_POS_Report_Provided_to_HID_Asmt__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Business Plan Provided to HID</td>
+                    <td><apex:outputField value="{!objAssessment.Business_Plan_Provided_to_HID__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Business_Plan_Provided_to_HID_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Business_Plan_Provided_to_HID__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Business_Plan_Provided_to_HID_Asmt__c}"/></td>
+                </tr>
+                <tr style="display:{!IF(bolJointIntegratorTraining,'table-row','none')}">
+                    <td class="tdLabel">Joint Integrator Training Conducted with HID</td>
+                    <td><apex:outputField value="{!objAssessment.Joint_Integrator_Training__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Joint_Integrator_Training_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Joint_Integrator_Training__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Joint_Integrator_Training_Asmt__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Average Monthly Sales Forecast Accuracy +/- 20 %</td>
+                    <td><apex:outputField value="{!objAssessment.Monthly_Forecast_Accuracy__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Monthly_Forecast_Accuracy_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Monthly_Forecast_Accuracy__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Monthly_Forecast_Accuracy_Asmt__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">EDI Implemented with HID</td>
+                    <td><apex:outputField value="{!objAssessment.EDI_Implemented_with_HID__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.EDI_Implemented_with_HID_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.EDI_Implemented_with_HID__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.EDI_Implemented_with_HID_Asmt__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Blanket Ordering Frequently Used</td>
+                    <td><apex:outputField value="{!objAssessment.Blanket_Ordering_Frequently_Used__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Blanket_Ordering_Frequently_Used_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Blanket_Ordering_Frequently_Used__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Blanket_Ordering_Frequently_Used_Asmt__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Bulk Ordering Frequently Used</td>
+                    <td><apex:outputField value="{!objAssessment.Bulk_Ordering_Frequently_Used__c}"/></td>
+                    <td><apex:outputField value="{!objAssessment.Bulk_Ordering_Frequently_Used_Asmt__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Bulk_Ordering_Frequently_Used__c}"/></td>
+                    <td><apex:outputField value="{!objAssessmentApproved.Bulk_Ordering_Frequently_Used_Asmt__c}"/></td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Total Assessment, Tiers and Effective Dates</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Total Assessment</td>
+                    <td colspan="2"><apex:outputField value="{!objAssessment.Total_Asmt__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.Total_Asmt__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Recommended Tier</td>
+                    <td colspan="2"><apex:outputField value="{!objAssessment.Recommended_Tier__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.Recommended_Tier__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Requested Tier</td>
+                    <td colspan="2"><apex:outputText value="{!objAssessment.Requested_Tier__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.Requested_Tier__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Effective Date for Benefits</td>
+                    <td colspan="2"><apex:outputField value="{!objAssessment.Effective_Date_for_Benefits__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.Effective_Date_for_Benefits__c}"/></td>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Requested Effective Date for Pricing</td>
+                    <td colspan="2"><apex:outputField value="{!objAssessment.Requested_Effective_Date_for_Pricing__c}"/></td>
+                    <td colspan="2"><apex:outputField value="{!objAssessmentApproved.Requested_Effective_Date_for_Pricing__c}"/></td>
+                </tr>
+                <tr class="trBg">
+                    <th class="taRight">Comments</th>
+                    <th colspan="4"/>
+                </tr>
+                <tr>
+                    <td class="tdLabel">Please Provide Comments</td>
+                    <td colspan="2" class="taLeft"><apex:outputText value="{!objAssessment.Comments__c}"/></td>
+                    <td colspan="2" class="taLeft"><apex:outputField value="{!objAssessmentApproved.Comments__c}"/></td>
+                </tr>
+            </table>
+            <apex:pageBlockButtons location="bottom">
+                <apex:commandButton action="{!edit}" value="Edit" rendered="{!bolEdit}"/>
+                <apex:commandButton action="{!customDelete}" value="Delete" rendered="{!bolCustomDelete}"/>
+            </apex:pageBlockButtons>
+        </apex:pageBlock>
+    </apex:form>
+    <apex:form id="frmApproval">
+        <apex:pageBlock title="Approval History">
+            <table width="100%">
+                <tr>
+                    <td align="center" style="font-weight:bold">
+                        <apex:commandLink action="{!submitForApproval}" rendered="{!Assessment__c.Approval_Status__c != 'Approved' && Assessment__c.Approval_Status__c !='Awaiting Approval'}"  target="_parent">
+                        <apex:image value="{!$Resource.SubmitForApprovalButton}"> </apex:image>
+                        </apex:commandLink>
+                    </td>
+                </tr>
+            </table>  
+            <apex:variable value="{!Assessment__c}" var="asmt"/>
+            <table border="1" width="100%" cellspacing="0">
+                <tr>
+                    <th text-align="center">L1 Approval Status</th>
+                    <th>E21 Approval Status</th>
+                    <th>L2 Approval Status</th>
+                    <th>E21VP Approval Status</th>
+                    <th>Program Management Approver</th>
+                </tr>
+                <tr>
+                    <td>{!asmt.L1_Approver__r.Name}</td>
+                    <td>{!asmt.E21_Approver__r.Name}</td>
+                    <td>{!asmt.L2_Approver__r.Name}</td>
+                    <td>{!asmt.E21VP_Approver__r.Name}</td>
+                    <td>{!asmt.Program_Management_Approver__r.Name}</td>
+                </tr>
+                <tr>
+                    <td id="L1td" bgcolor="white">{!asmt.L1_Approval__c}</td>
+                    <td id="E21td" bgcolor="white">{!asmt.E21_Approval__c}</td>
+                    <td id="L2td" bgcolor="white">{!asmt.L2_Approval__c}</td>
+                    <td id="E21VPtd" bgcolor="white">{!asmt.E21VP_Approval__c}</td>
+                    <td id="ProgManagApprovtd" bgcolor="white">{!if(asmt.Is_Program_Management_Approval_Needed__c == true,asmt.Program_Management_Approval__c,'Not Required')}</td>
+                </tr>   
+            </table>
+            <script>
+                var L1 = "{!asmt.L1_Approval__c}";
+                var L1td = document.getElementById("L1td");
+                var getL1 = L1td.getAttribute("bgcolor");
+        
+                if (L1=="Approved"){
+                    L1td.setAttribute("bgcolor","#a1f78d");
+                }else if (L1 == "Rejected"){
+                    L1td.setAttribute("bgcolor","#fb8a8c");
+                }else if (L1 == "Awaiting Approval"){
+                    L1td.setAttribute("bgcolor","#ffd74b");
+                }
+         
+                var E21 = "{!asmt.E21_Approval__c}";
+                var E21td = document.getElementById("E21td");
+                var getE21 = E21td.getAttribute("bgcolor");
+        
+                if (E21=="Approved"){
+                    E21td.setAttribute("bgcolor","#a1f78d");
+                }else if (E21 == "Rejected"){
+                    E21td.setAttribute("bgcolor","#fb8a8c");
+                }else if (E21 == "Awaiting Approval"){
+                    E21td.setAttribute("bgcolor","#ffd74b");
+                }
+                
+                var L2 = "{!asmt.L2_Approval__c}";
+                var L2td = document.getElementById("L2td");
+                var getL2 = L2td.getAttribute("bgcolor");
+        
+                if (L2=="Approved"){
+                    L2td.setAttribute("bgcolor","#a1f78d");
+                }else if (L2 == "Rejected"){
+                    L2td.setAttribute("bgcolor","#fb8a8c");
+                }else if (L2 == "Awaiting Approval"){
+                    L2td.setAttribute("bgcolor","#ffd74b");
+                }
+         
+                var E21VP = "{!asmt.E21VP_Approval__c}";
+                var E21VPtd = document.getElementById("E21VPtd");
+                var getE21VP = E21VPtd.getAttribute("bgcolor");
+        
+                if (E21VP=="Approved"){
+                    E21VPtd.setAttribute("bgcolor","#a1f78d");
+                }else if (E21VP == "Rejected"){
+                    E21VPtd.setAttribute("bgcolor","#fb8a8c");
+                }else if (E21VP == "Awaiting Approval"){
+                    E21VPtd.setAttribute("bgcolor","#ffd74b");
+                }
+                
+                var projManagement = "{!asmt.Program_Management_Approval__c}";
+                var projManagementtd = document.getElementById("ProgManagApprovtd");                
+                var getprojManagement = projManagementtd.getAttribute("bgcolor");
+                
+                if(projManagement =="Approved"){
+                    projManagementtd.setAttribute("bgcolor","#a1f78d");}
+                else if (projManagement == "Rejected"){
+                    projManagementtd.setAttribute("bgcolor","#fb8a8c");}
+                else if (projManagement == "Awaiting Approval"){
+                    projManagementtd.setAttribute("bgcolor","#ffd74b");
+                }
+      
+                
+            </script>
+            <br></br> 
+            <apex:variable value="{!WorkItem}" var="wi"/> 
+            <apex:outputPanel rendered="{!wi != null}">
+                <table width="100%">
+                    <tr>
+                        <td align="center" style="font-weight:bold">
+                            <apex:commandButton value="Approve/Reject" onclick="goToApproveOrRejectPage();return false;" rendered="{!($Profile.Name == 'System Administrator') || ($User.Id == piw.ActorId) || bolDelegatedUser}"/>
+                            <apex:commandButton value="Recall Approval Request" action="{!recallApprovalRequest}" rendered="{!($Profile.Name == 'System Administrator') || ($Profile.Name == 'HID Business Administrator') || ($User.Id == piw.ActorId) || bolDelegatedUser}"/>
+                        </td>
+                    </tr>
+                </table>                   
+                <script>
+                    function goToApproveOrRejectPage(){
+                        window.top.location = "https://{!serverURL}/p/process/ProcessInstanceWorkitemWizardStageManager?id={!piw.id}";
+                    }
+                </script>
+            </apex:outputPanel>  
+            <apex:pageBlockTable value="{!ApprovalHistory}" var="history">
+                <apex:column headerValue="Overall Status" value="{!history.processInstance.Status}"/>
+                <apex:column >
+                    <apex:pageBlockTable value="{!history.approvalHistoryList}" var="apprHistory">
+                        <apex:column headerValue="Date" value="{!apprHistory.CreatedDate}" style="width:20%"/>  
+                        <apex:column headerValue="Status" value="{!apprHistory.StepStatus}"/>
+                        <apex:column headerValue="Assigned To" value="{!apprHistory.OriginalActorId}"/>  
+                        <apex:column headerValue="Actual Approver" value="{!apprHistory.ActorId}"/>
+                        <apex:column value="{!apprHistory.Comments}"/>
+                    </apex:pageBlockTable>
+                </apex:column>
+            </apex:pageBlockTable>  
+        </apex:pageBlock>
+    </apex:form>
+</apex:page>

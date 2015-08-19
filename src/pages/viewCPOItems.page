@@ -1,0 +1,374 @@
+<!-- Page to display existing standard and custom product on Opportunity. -->
+<!-- Author: JadeGlobal Date: 2/10/2015                                    -->
+
+<apex:page id="myPage" standardController="Opportunity" extensions="addCPOItemsExtension" sidebar="false" showHeader="false">
+    <style>
+    body .pbBody table.list tr.headerRow td, body .pbBody table.list tr.headerRow th
+    {
+        white-space: normal;
+    }
+
+    </style>
+    <style>
+        /* This is for the full screen DIV */
+        .popupBackground {
+              /* Background color */
+        background-color:black;
+        opacity: 0.20;
+        filter: alpha(opacity = 20);
+    
+        /* Dimensions */
+        width: 100%;
+        height: 160%;
+        top: 0;
+        left: 0;
+        z-index: 998;
+        position: absolute;
+        
+        /* Mouse */
+        cursor:wait;
+        }
+     
+        /* This is for the message DIV */
+        .PopupPanel {
+            /* Background color */
+            border: solid 2px blue;
+            background-color: white;
+     
+            /* Dimensions */
+            left: 50%;
+            width: 200px;
+            margin-left: -100px;
+            top: 50%;
+            height: 50px;
+            margin-top: -25px;
+            z-index: 999;
+            position: fixed;
+            
+            /* Mouse */
+            cursor:pointer;
+        }
+    </style>
+    <script>
+
+        function switchMenu(recordIndex, objHeader, obj,obj1,obj2) {
+            var elements = document.getElementsByName(obj);
+            for(var i=0; i<elements.length; i++) {   
+                var el = elements[i];                          
+                if ( el.style.display != 'none' ) {
+                    el.style.display = 'none';
+                }
+                else {
+                    el.style.display = '';
+                }
+            }
+            var e2 = document.getElementById(obj1);                                              
+            if ( e2.style.display != 'none' ) {               
+                e2.style.display = 'none';
+            }
+            else {
+                e2.style.display = '';
+                
+            }
+            
+            
+            var e3 = document.getElementById(obj2);                                       
+            if ( e2.style.display != 'none' ) {
+                e3.style.display = 'none';
+            }
+            else {
+                e3.style.display = '';
+            }
+            
+            var isdisplay = '';    
+            var e4 = document.getElementById(objHeader);                                     
+            if ( e4.style.display != 'none' ) {
+                e4.style.display = 'none';
+                isdisplay = 'none';
+            }
+            else {
+                e4.style.display = '';
+            }
+            
+            displayRowVariableFun(recordIndex, isdisplay);
+            
+        }
+    </script>
+    <apex:actionStatus id="statusSaveTrip" stopText="">
+        <apex:facet name="start">
+            <div>
+                <div class="popupBackground" />
+                <div class="PopupPanel">
+                    <table border="0" width="100%" height="100%">
+                        <tr>
+                            <td align="center"><b>Please Wait</b></td>
+                        </tr>
+                        <tr>
+                            <td align="center"><img src="{!$Resource.ProgressBar}"/></td>
+                        </tr>
+                    </table>
+                </div>
+            </div>
+        </apex:facet>
+    </apex:actionStatus>  
+    <apex:form id="pgForm">
+        <apex:inputHidden value="{!opportunity.Pricebook2Id}"/>
+        <apex:inputHidden value="{!opportunity.Business_Segment__c}"/>
+        <apex:actionFunction action="{!displayRowVariable}" reRender="opMain" status="statusSaveTrip" name="displayRowVariableFun">
+            <apex:param value="recordIndex" name="cpoRecordIdIndex"/>
+            <apex:param value="isdisplay" name="displayVal"/>
+        </apex:actionFunction>
+        <apex:pageMessages ></apex:pageMessages>
+        <apex:pageBlock id="pgBlock" title="CPO Standard Products">
+        <apex:outputPanel id="opMain">
+            <div style=" overflow:auto; padding: 20px; font-family:Helvetica, sans-serif; font-size:10pt; line-height: 1.5em; " >
+                <apex:outputPanel rendered="{!If(lstCPOStandardProductWrapper.size > 0, false, true)}">
+                    <apex:outputLabel value="No Product has been added."></apex:outputLabel>
+                </apex:outputPanel>
+                <apex:outputPanel rendered="{!If(lstCPOStandardProductWrapper.size > 0, true, false)}">
+                    
+                    <table class="list">
+                        <tr style="background-color:#c1add6;">
+                            <th class="headerRow" style="background-color:white;">  
+                            </th>   
+                            <th class="headerRow">
+                                <apex:outputLabel value="Product"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Product Description"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Total&nbsp;Volume"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Total&nbsp;Revenue"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Y1Q1 Price"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Y1Q1 Volume"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Y1Q1&nbsp;Revenue"></apex:outputLabel>
+                            </th>                            
+                            <th class="headerRow">
+                                <apex:outputLabel value="Y1Q2 Price"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Y1Q2 Volume"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Y1Q2&nbsp;Revenue"></apex:outputLabel>
+                            </th>                            
+                            <th class="headerRow">
+                                <apex:outputLabel value="Y1Q3 Price"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Y1Q3 Volume"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Y1Q3&nbsp;Revenue"></apex:outputLabel>
+                            </th>                            
+                            <th class="headerRow">
+                                <apex:outputLabel value="Y1Q4 Price"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Y1Q4 Volume"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Y1Q4&nbsp;Revenue"></apex:outputLabel>
+                            </th>                            
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Year1&nbsp;Volume"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Year1&nbsp;Revenue"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Year2&nbsp;Price"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Year2 Volume"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Year2&nbsp;Revenue"></apex:outputLabel>
+                            </th>                            
+                            <th class="headerRow">
+                                <apex:outputLabel value="Year3 Price"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Year3 Volume"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel escape="false" value="Year3&nbsp;Revenue"></apex:outputLabel>
+                            </th>
+                        </tr>
+                    <apex:variable value="{!0}" var="rowNum"/>
+                    <apex:repeat id="rptSCPO" value="{!lstCPOStandardProductWrapper}" var="itemSCPO">                         
+                        <tr class="dataRow">
+                            <td class="dataCell">                                
+                                <apex:variable var="rowNum" value="{!rowNum+1}"/>
+                                <apex:outputpanel id="plusimage" style="display:{!IF(itemSCPO.isDisplayRow == false,'','none;')}">
+                                    <apex:image url="{!URLFOR($Resource.CPOResources, '/CPOResources/Plus_Image.gif')}" onclick="switchMenu('{!rowNum}', 'inlinetablesecHeader{!rowNum}' , 'inlinetablesec{!rowNum}','{!$Component.minusimage}','{!$Component.plusimage}')" title="Expand - Custom Products"/>     
+                                    
+                                </apex:outputpanel>
+                                <apex:outputpanel id="minusimage" style="display:{!IF(itemSCPO.isDisplayRow == false,'none;','')}">
+                                    <apex:image url="{!URLFOR($Resource.CPOResources, '/CPOResources/Minus_image.gif')}" onclick="switchMenu('{!rowNum}', 'inlinetablesecHeader{!rowNum}', 'inlinetablesec{!rowNum}','{!$Component.plusimage}','{!$Component.minusimage}')" title="Collapse - Custom Products"/>      
+                                    
+                                </apex:outputpanel>
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Product__c}"/>
+
+                            </td>
+                            <td class="dataCell">
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Description__c}"/>
+                            </td>
+                            <td class="dataCell">
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Total_Volume__c}" />
+                            </td>
+                            <td class="dataCell">
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Total_Revenue__c}" />
+                            </td>
+                            <td class="dataCell">                            
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q1_Price__c}" />
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q1_Volume__c}" />                                                          
+                            </td>
+                            <td class="dataCell">
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q1_Revenue__c}" />
+                            </td>                            
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q2_Price__c}" />                             
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q2_Volume__c}" />                             
+                            </td>
+                            <td class="dataCell">
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q2_Revenue__c}" />                                
+                            </td>                            
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q3_Price__c}" />                                
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q3_Volume__c}" />                                    
+                            </td>
+                            <td class="dataCell">
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q3_Revenue__c}" />                                
+                            </td>                            
+                            <td class="dataCell">                                 
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q4_Price__c}" />                              
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q4_Volume__c}" />                                
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Y1Q4_Revenue__c}" />                               
+                            </td>                            
+                            <td class="dataCell">                            
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Year1_Volume__c}" />                                
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Year1_Revenue__c}" />                                 
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Year2_Price__c}" />                                
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Year2_Volume__c}" />                                
+                            </td>
+                            <td class="dataCell">                            
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Year2_Revenue__c}"/>                                
+                            </td>                            
+                            <td class="dataCell">                                      
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Year3_Price__c}"/>                           
+                            </td>
+                            <td class="dataCell">                                  
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Year3_Volume__c}"/>                                
+                            </td>
+                            <td class="dataCell">                                
+                                <apex:outputField value="{!itemSCPO.objCPOStandard.Year3_Revenue__c}"/>                                
+                            </td>
+                        </tr>                                                
+                        <tr id="inlinetablesecHeader{!rowNum}" style="background-color:#FFDAB9;display:{!IF(itemSCPO.isDisplayRow == false,'none;','')}">                                
+                            <th style="background-color:white;">
+                                <apex:outputLabel escape="false" value="&nbsp;&nbsp;&nbsp;&nbsp;"></apex:outputLabel>                               
+                            </th>
+                            
+                            <th class="headerRow"> 
+                                <apex:outputLabel value="Customization Item"></apex:outputLabel>
+                            </th> 
+                            <th class="headerRow" colspan="5"> 
+                                <apex:outputLabel value="Description"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="NRE Estimate"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Effort (Days)"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow" style="display:{!If(isBOMCostVisible == true, 'block;', 'none;')}"> 
+                                <apex:outputLabel value="BOM Cost"></apex:outputLabel>
+                            </th>
+                            
+                            <th class="headerRow" style="display:{!If(isBOMCostReadOnly == true, 'block;', 'none;')}">
+                                <apex:outputLabel value="BOM Cost"></apex:outputLabel>
+                            </th>
+                            <th class="headerRow">
+                                <apex:outputLabel value="Est Days to Implement"></apex:outputLabel>
+                            </th>
+                                                            
+                        </tr>
+                        <apex:variable value="{!0}" var="rowNumCust"/>                         
+                        <apex:repeat value="{!itemSCPO.objCPOStandard.CPO_Customization_Items__r}" var="itemCustomCPO">
+                            <tr class="dataRow" name="inlinetablesec{!rowNum}" style="display:{!IF(itemSCPO.isDisplayRow == false,'none;','')}">
+                                <td class="dataCell">
+                                    <apex:outputLabel escape="false" value="&nbsp;&nbsp;&nbsp;&nbsp;"></apex:outputLabel>
+                                    <apex:image value="/img/tree/node.gif" rendered="{!if(itemSCPO.objCPOStandard.CPO_Customization_Items__r.size != rowNumCust + 1, true, false)}" alt="node" styleclass="node" title="node"/>
+                                    <apex:image value="/img/tree/nodeEnd.gif" rendered="{!if(itemSCPO.objCPOStandard.CPO_Customization_Items__r.size != rowNumCust + 1, false, true)}" alt="node" styleclass="node" title="node"/>
+                                </td>
+                                <td class="dataCell">                                        
+                                    <apex:outputField value="{!itemCustomCPO.Customization_Item__c}" />
+                                </td>
+                                <td class="dataCell" colspan="5"> 
+                                    <apex:outputField value="{!itemCustomCPO.Description__c}" />                                     
+                                </td>
+                                <td class="dataCell">
+                                    <apex:outputField value="{!itemCustomCPO.NRE_Estimate__c}" /> 
+                                </td>
+                                <td class="dataCell">
+                                    <apex:outputField value="{!itemCustomCPO.Effort_Days__c}" /> 
+                                </td>
+                                <td class="dataCell" style="visibility:{!If(isBOMCostVisible == true, 'visible;', 'hidden;')}"> 
+                                    <apex:outputField style="width:90px;" value="{!itemCustomCPO.BOM_Cost__c}"/>                                   
+                                </td>
+                                
+                                <td class="dataCell" style="display:{!If(isBOMCostReadOnly== true, 'block;', 'none;')}">
+                                    <apex:outputField style="width:90px;" value="{!itemCustomCPO.BOM_Cost__c}"/>
+                                                                   
+                                </td>   
+                                    
+                                <td class="dataCell">
+                                    <apex:outputField value="{!itemCustomCPO.Est_Days_to_Implement__c}" />
+                                </td>
+                                
+                            </tr>                                
+                        </apex:repeat>                                                
+                    </apex:repeat> 
+                    </table>
+                </apex:outputPanel>
+            </div>
+            </apex:outputPanel>
+        </apex:pageBlock>
+        <apex:inputField value="{!Opportunity.Name}" rendered="false"/>
+        <apex:inputhidden id="hdnElement"/>
+        <apex:actionFunction action="{!callonPageLoad}" name="callonPageLoadFun"/>
+    </apex:form>
+    <script>
+        if('{!isPageLoadFirst}' == 'true'){
+            callonPageLoadFun();
+        }
+    </script>
+</apex:page>

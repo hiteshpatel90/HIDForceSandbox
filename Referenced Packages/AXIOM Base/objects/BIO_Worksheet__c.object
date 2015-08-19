@@ -1,0 +1,526 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Actual_Score__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(ISNULL(Influence_Score__c), 0, Influence_Score__c)  * IF(ISNULL(Quality_Score__c), 0, Quality_Score__c)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Actual Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Alternatives__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Alternatives</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Available_Score__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(ISNULL(Influence_Score__c), 0, Influence_Score__c) * 6</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Available Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact_Name__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>Contact__r.FirstName + &apos; &apos; + Contact__r.LastName</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Contact Name</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Contact__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Contact</label>
+        <referenceTo>Contact</referenceTo>
+        <relationshipLabel>BIO Worksheets</relationshipLabel>
+        <relationshipName>BIO_Worksheet</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Favored_Alternative__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Favored Alternative</label>
+        <length>255</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>HasHILQ__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(AND(Influence_Score__c &gt; 3, Quality_Score__c &lt; 3), 1, 0)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>HasHILQ</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Influence_Score__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>VALUE(LEFT(TEXT(Influence__c), 1))</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Influence Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Influence__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Influence</label>
+        <picklist>
+            <picklistValues>
+                <fullName>6 – Decision Maker</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5 – Very Strong</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4 – Strong</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3 – Moderate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2 – Little</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1 – Very Little</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>0 – None</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>IsCoachChampion__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(
+     INCLUDES(Roles__c, &quot;CC&quot;),
+     1,
+     0
+   )</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>z NOT Used</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>IsResister__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <formula>IF(BLANKVALUE(Favored_Alternative__c, $Organization.Name) ==  $Organization.Name, 0, 1)</formula>
+        <label>IsResister</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Opportunity__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Opportunity</label>
+        <referenceTo>Opportunity</referenceTo>
+        <relationshipLabel>BIO Worksheets</relationshipLabel>
+        <relationshipName>BIO_Worksheets</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>Quality_Score__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A count of Bio Worksheet quality dependent on criteria. Maximal value is 6. Is counted as a sum of qualities of all related objects of Bio Worksheet (Business Stated, Financial_Criterion, PSC_Criterion) + points for Alternatives (if Alternatives are known then 30 points are added, else + 0; if Favored Alternative is our company then 50 points are added, if it&apos;s not ours then 5 points are subtracted, if unknown 0 points are subtracted) divided for the maximal possible quality (depends on roles and a number of related objects) and multiplied for 6</description>
+        <externalId>false</externalId>
+        <formula>IF( ISBLANK(Roles__c) , 0,(IF( ISBLANK(Alternatives__c) , 0, 30) + IF( ISBLANK( Favored_Alternative__c ), 0 , IF( $Organization.Name ==  Favored_Alternative__c, 50, 5)) +  SYS_BSG_Quality__c +  SYS_Financial_Quality__c +  SYS_PSC_Quality__c)/(130 + 50*( SYS_PSCF_Factor__c + IF(SYS_Company_Count__c = 0, 0, SYS_Company_Count__c - 1) + IF(SYS_Product_Count__c = 0, 0, SYS_Product_Count__c - 1) + IF(SYS_Support_Count__c = 0, 0, SYS_Support_Count__c - 1) + IF(SYS_Financial_Count__c  = 0, 0, SYS_Financial_Count__c - 1)*3) +  50*IF(SYS_BSG_Count__c = 0, 0, SYS_BSG_Count__c - 1)))*6</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Quality Score</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>2</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Quality__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Quality</label>
+        <picklist>
+            <picklistValues>
+                <fullName>6 – Sponsor</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>5 – Advocate</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>4 – Supporter</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>3 – Neutral</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>2 – Resister</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>1 – Adversary</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>0 – Opponent</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Reason_Favored__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Reason Favored</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Relationship_Notes__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Relationship Notes</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Roles__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Roles</label>
+        <picklist>
+            <picklistValues>
+                <fullName>CC</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>CE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>FE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PT</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>SE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>PE</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MultiselectPicklist</type>
+        <visibleLines>6</visibleLines>
+    </fields>
+    <fields>
+        <fullName>SYS_BSG_Count__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>A number of related Business States for Bio Worksheet</description>
+        <externalId>false</externalId>
+        <label>SYS Business States Count</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SYS_BSG_Quality__c</fullName>
+        <defaultValue>0</defaultValue>
+        <deprecated>false</deprecated>
+        <description>A total (summarized) quality for all related Business States</description>
+        <externalId>false</externalId>
+        <label>SYS Business States Quality</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SYS_Company_Count__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A number of related PSC_Criterion that have a PSC_Area = Company for Bio Worksheet</description>
+        <externalId>false</externalId>
+        <label>SYS Company Count</label>
+        <summaryFilterItems>
+            <field>PSC_Criteria__c.PSC_Area__c</field>
+            <operation>equals</operation>
+            <value>Company</value>
+        </summaryFilterItems>
+        <summaryForeignKey>PSC_Criteria__c.BIO_Worksheet__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>SYS_Financial_Count__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A number of related Financial_Criterion for Bio Worksheet</description>
+        <externalId>false</externalId>
+        <label>SYS Financial Count</label>
+        <summaryForeignKey>Financial_Criteria__c.BIO_Worksheet__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>SYS_Financial_Quality__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A total (summarized) quality for all related Financial Criterion</description>
+        <externalId>false</externalId>
+        <label>SYS Financial Quality</label>
+        <summarizedField>Financial_Criteria__c.SYS_Financial_Quality__c</summarizedField>
+        <summaryForeignKey>Financial_Criteria__c.BIO_Worksheet__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>SYS_PSCF_Factor__c</fullName>
+        <deprecated>false</deprecated>
+        <description>Coefficient required to count on Quality Score that is dependant on Roles. The default value is 0. If Bio Worksheet has a PT or PE role, we add 1; If it has a CE roles, we add 1; if it has a SE roles, we add 1; If it has a FE role, we add 3. Maximal value is 6.</description>
+        <externalId>false</externalId>
+        <label>SYS PSCF Factor</label>
+        <precision>1</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SYS_PSC_Quality__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A total (summarized) quality for all related PSC Criterion</description>
+        <externalId>false</externalId>
+        <label>SYS PSC Quality</label>
+        <summarizedField>PSC_Criteria__c.SYS_PSC_Quality__c</summarizedField>
+        <summaryForeignKey>PSC_Criteria__c.BIO_Worksheet__c</summaryForeignKey>
+        <summaryOperation>sum</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>SYS_Product_Count__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A number of related PSC_Criterion that have a PSC_Area = Product for Bio Worksheet</description>
+        <externalId>false</externalId>
+        <label>SYS Product Count</label>
+        <summaryFilterItems>
+            <field>PSC_Criteria__c.PSC_Area__c</field>
+            <operation>equals</operation>
+            <value>Product</value>
+        </summaryFilterItems>
+        <summaryForeignKey>PSC_Criteria__c.BIO_Worksheet__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>SYS_Support_Count__c</fullName>
+        <deprecated>false</deprecated>
+        <description>A number of related PSC_Criterion that have a PSC_Area = Support for Bio Worksheet</description>
+        <externalId>false</externalId>
+        <label>SYS Support Count</label>
+        <summaryFilterItems>
+            <field>PSC_Criteria__c.PSC_Area__c</field>
+            <operation>equals</operation>
+            <value>Support</value>
+        </summaryFilterItems>
+        <summaryForeignKey>PSC_Criteria__c.BIO_Worksheet__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>Strategic_Initiative__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Strategic Initiative</label>
+        <referenceTo>Strategic_Initiative__c</referenceTo>
+        <relationshipLabel>BIO Worksheets</relationshipLabel>
+        <relationshipName>BIO_Worksheets</relationshipName>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <label>BIO Worksheet</label>
+    <nameField>
+        <displayFormat>{000000}</displayFormat>
+        <label>BIO Worksheet ID</label>
+        <trackHistory>false</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>BIO Worksheets</pluralLabel>
+    <searchLayouts/>
+    <sharingModel>ReadWrite</sharingModel>
+</CustomObject>

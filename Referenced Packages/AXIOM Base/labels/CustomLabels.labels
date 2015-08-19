@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomLabels xmlns="http://soap.sforce.com/2006/04/metadata">
+    <labels>
+        <fullName>CW_InsertItemError</fullName>
+        <categories>axiom, coaching wizard</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Coaching Wizard Insert Item Error</shortDescription>
+        <value>You have entered an invalid Key and data is not inserted. Please enter a valid key or leave the field empty</value>
+    </labels>
+    <labels>
+        <fullName>CW_UpdateItemError</fullName>
+        <categories>axiom, coaching wizard</categories>
+        <language>en_US</language>
+        <protected>true</protected>
+        <shortDescription>Coaching Wizard Update Item Error</shortDescription>
+        <value>You have entered an invalid Key and data is not updated!</value>
+    </labels>
+</CustomLabels>

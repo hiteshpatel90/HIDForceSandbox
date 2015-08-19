@@ -1,0 +1,122 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Prerequisite --></value>
+    </caseValues>
+    <fields>
+        <label>Curso</label>
+        <name>Course_Child__c</name>
+        <relationshipLabel>Pré-requisitos (Curso Subordinado)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Curso</label>
+        <name>Course__c</name>
+        <relationshipLabel>Pré-requisitos (Curso)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Currículo</label>
+        <name>Curriculum_Child__c</name>
+        <relationshipLabel>Pré-requisitos (Currículo Subordinado)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Currículo</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>Pré-requisitos (Currículo)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Caminho de Aprendizado</label>
+        <name>Learning_Path_Child__c</name>
+        <relationshipLabel>Pré-requisitos (Caminho de Aprendizado Subordinado)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Caminho de Aprendizado</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>Pré-requisitos (Caminho de Aprendizado)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Módulo</label>
+        <name>Module_Child__c</name>
+        <relationshipLabel>Pré-requisitos (Módulo Subordinado)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Módulo</label>
+        <name>Module__c</name>
+        <relationshipLabel>Pré-requisitos (Módulo)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Teste</label>
+        <name>Quiz_Child__c</name>
+        <relationshipLabel>Pré-requisitos (Quiz Subordinado)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Teste</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Pré-requisitos (Quiz)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Título</label>
+        <name>Title__c</name>
+    </fields>
+    <gender><!-- Feminine --></gender>
+    <layouts>
+        <layout>Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Curriculum</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Quiz</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Prerequisites Name --></nameFieldLabel>
+    <recordTypes>
+        <label>Curso</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Currículo</label>
+        <name>Curriculum</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Caminho de Aprendizado</label>
+        <name>Learning_Path</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Módulo</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>Teste</label>
+        <name>Quiz</name>
+    </recordTypes>
+</CustomObjectTranslation>

@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Curriculum Item --></value>
+    </caseValues>
+    <fields>
+        <label>コース</label>
+        <name>Course__c</name>
+        <relationshipLabel>カリキュラム項目</relationshipLabel>
+    </fields>
+    <fields>
+        <label>カリキュラム</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>カリキュラム項目</relationshipLabel>
+    </fields>
+    <fields>
+        <label>学習管理パス</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>カリキュラム項目</relationshipLabel>
+    </fields>
+    <fields>
+        <label>モジュール</label>
+        <name>Module__c</name>
+        <relationshipLabel>カリキュラム項目</relationshipLabel>
+    </fields>
+    <fields>
+        <label>クイズ</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>カリキュラム項目</relationshipLabel>
+    </fields>
+    <fields>
+        <label>順序番号</label>
+        <name>Sequence__c</name>
+    </fields>
+    <fields>
+        <label>タイトル</label>
+        <name>Title__c</name>
+    </fields>
+    <layouts>
+        <layout>Add Course</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Add Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Name --></nameFieldLabel>
+    <recordTypes>
+        <label>コース</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>学習管理パス</label>
+        <name>Learning_Path2</name>
+    </recordTypes>
+    <recordTypes>
+        <label>モジュール</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>クイズ</label>
+        <name>Quiz</name>
+    </recordTypes>
+    <webLinks>
+        <label>コースをカリキュラムに追加</label>
+        <name>AddCourseToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>学習パスをカリキュラムに追加</label>
+        <name>AddLPToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>モジュールをカリキュラムに追加</label>
+        <name>AddModuleToCurriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>クイズをカリキュラムに追加</label>
+        <name>Add_Quiz_to_Curriculum</name>
+    </webLinks>
+    <webLinks>
+        <label>順序番号の編集</label>
+        <name>Edit_Sequence</name>
+    </webLinks>
+</CustomObjectTranslation>

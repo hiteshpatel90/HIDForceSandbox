@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Training Unit Usage --></value>
+    </caseValues>
+    <fields>
+        <label>E メール アドレス</label>
+        <name>Email__c</name>
+    </fields>
+    <fields>
+        <label>学習者</label>
+        <name>Learner__c</name>
+        <relationshipLabel>研修単位利用量</relationshipLabel>
+    </fields>
+    <fields>
+        <label>登録日</label>
+        <name>Registration_Date__c</name>
+    </fields>
+    <fields>
+        <label>ステータス</label>
+        <name>Status__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>研修タイトル</label>
+        <name>Training_Title__c</name>
+    </fields>
+    <fields>
+        <label>研修単位コスト</label>
+        <name>Training_Unit_Cost__c</name>
+    </fields>
+    <fields>
+        <label>研修単位</label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel>研修単位利用量</relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Training Unit Usage Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Training Unit Usage Name --></nameFieldLabel>
+</CustomObjectTranslation>

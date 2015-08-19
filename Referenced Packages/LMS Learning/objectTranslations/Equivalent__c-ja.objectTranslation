@@ -1,0 +1,199 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Equivalency --></value>
+    </caseValues>
+    <fields>
+        <label>コース</label>
+        <name>Course__c</name>
+        <relationshipLabel>同等項目 (コース)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>カリキュラム</label>
+        <name>Curriculum__c</name>
+        <relationshipLabel>同等項目 (カリキュラム)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>同等のコース</label>
+        <name>Equivalent_Course__c</name>
+        <relationshipLabel>同等項目 (同等のコース)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>同等のカリキュラム</label>
+        <name>Equivalent_Curriculum__c</name>
+        <relationshipLabel>同等項目 (同等のカリキュラム)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>同等の学習パス</label>
+        <name>Equivalent_Learning_Path__c</name>
+        <relationshipLabel>同等項目 (同等の学習パス)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>同等のデフォルト モジュール</label>
+        <name>Equivalent_Module_Default__c</name>
+        <relationshipLabel>同等項目 (同等のデフォルト モジュール)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>同等のモジュール</label>
+        <name>Equivalent_Module__c</name>
+        <relationshipLabel>同等項目 (同等のモジュール)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>同等のクイズ</label>
+        <name>Equivalent_Quiz__c</name>
+        <relationshipLabel>同等項目 (同等のクイズ)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>同等のタイトル</label>
+        <name>Equivalent_Title__c</name>
+    </fields>
+    <fields>
+        <label>学習管理パス</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>同等項目 (学習パス)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>デフォルトのモジュール</label>
+        <name>Module_Default__c</name>
+        <relationshipLabel>同等項目 (デフォルトのモジュール)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>モジュール</label>
+        <name>Module__c</name>
+        <relationshipLabel>同等項目 (モジュール)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>クイズ</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>同等項目 (クイズ)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>同等項目</label>
+        <name>Related_Equivalency__c</name>
+        <relationshipLabel>同等項目</relationshipLabel>
+    </fields>
+    <layouts>
+        <layout>Course</layout>
+        <sections>
+            <label><!-- Course --></label>
+            <section>Course</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Curriculum</layout>
+        <sections>
+            <label><!-- Curriculum --></label>
+            <section>Curriculum</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Equivalent Layout</layout>
+        <sections>
+            <label><!-- Course --></label>
+            <section>Course</section>
+        </sections>
+        <sections>
+            <label><!-- Curriculum --></label>
+            <section>Curriculum</section>
+        </sections>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Learning Path --></label>
+            <section>Learning Path</section>
+        </sections>
+        <sections>
+            <label><!-- Module --></label>
+            <section>Module</section>
+        </sections>
+        <sections>
+            <label><!-- Quiz --></label>
+            <section>Quiz</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Learning Path</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+        <sections>
+            <label><!-- Learning Path --></label>
+            <section>Learning Path</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Module</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+        <sections>
+            <label><!-- Module --></label>
+            <section>Module</section>
+        </sections>
+    </layouts>
+    <layouts>
+        <layout>Quiz</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Equivalents --></label>
+            <section>Equivalents</section>
+        </sections>
+        <sections>
+            <label><!-- Quiz --></label>
+            <section>Quiz</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- equivalent Name --></nameFieldLabel>
+    <recordTypes>
+        <label>コース</label>
+        <name>Course</name>
+    </recordTypes>
+    <recordTypes>
+        <label>カリキュラム</label>
+        <name>Curriculum</name>
+    </recordTypes>
+    <recordTypes>
+        <label>学習管理パス</label>
+        <name>Learning_Path</name>
+    </recordTypes>
+    <recordTypes>
+        <label>モジュール</label>
+        <name>Module</name>
+    </recordTypes>
+    <recordTypes>
+        <label>クイズ</label>
+        <name>Quiz</name>
+    </recordTypes>
+</CustomObjectTranslation>

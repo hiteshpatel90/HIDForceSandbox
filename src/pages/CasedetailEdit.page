@@ -1,0 +1,2359 @@
+<apex:page id="myPage" standardController="Case" extensions="extCasedetailEdit" tabStyle="Case">
+    <apex:form id="frm">
+      
+        <apex:pageMessages ></apex:pageMessages>
+        <script>       
+            function setChannelPartAcc(pklst,pklstid,txtaccName){ 
+                           
+                if(pklst.value == 'Direct'){
+                    document.getElementById(pklstid).removeAttribute("disabled");
+                    document.getElementById(pklstid+'_lkwgt').style.visibility = "visible";
+                    //document.getElementById(pklstid).value = document.getElementById(txtaccName).innerHTML;
+                       
+                    callsetAccountName(pklst.value);                    
+                }else if(pklst.value == 'Channel Partner'){
+                    document.getElementById(pklstid).value = "";
+                    //document.getElementById(pklstid).setAttribute("required");
+                    document.getElementById(pklstid).removeAttribute("disabled");
+                    document.getElementById(pklstid+'_lkwgt').style.visibility = "visible";
+                }else if(pklst.value == 'Unknown'){
+                    document.getElementById(pklstid).value = "";
+                    document.getElementById(pklstid).disabled = "true";
+                    //document.getElementById(pklstid+'_lkwgt').href = "#";
+                     document.getElementById(pklstid+'_lkwgt').style.visibility = "hidden";
+                    return false;
+                }              
+            }
+            function setChannelPartAccload(pklst,pklstid,txtaccName){ 
+                if(pklst != null){           
+                    if(pklst.value == 'Direct'){
+                        document.getElementById(pklstid).removeAttribute("disabled");                   
+                        document.getElementById(pklstid+'_lkwgt').style.visibility = "visible";
+                        //document.getElementById(pklstid).value = document.getElementById(txtaccName).innerHTML;
+                       
+                    }else if(pklst.value == 'Channel Partner'){             
+                        document.getElementById(pklstid).removeAttribute("disabled");
+                        document.getElementById(pklstid+'_lkwgt').style.visibility = "visible";
+                    }else if(pklst.value == 'Unknown'){
+                        document.getElementById(pklstid).value = "";
+                        document.getElementById(pklstid).disabled = "true";
+                        //document.getElementById(pklstid+'_lkwgt').href = "#";
+                         document.getElementById(pklstid+'_lkwgt').style.visibility = "hidden";
+                        return false;
+                    }      
+                }        
+            }
+            <!--  pivCLASS  -->
+            function validateChannelPartnerpivClass(){                             
+                var pklst = document.getElementById('{!$Component.pbMainpivClass:pbsFirst:pbitemPurchasepath:selPurchasePath}');
+                if(pklst.value == 'Channel Partner' && '{!isCustService}' == 'false'){                   
+                    var cpavalue = document.getElementById('{!$Component.pbMainpivClass:pbsFirst:pbsItemCPA:txtCPA}').value;
+                    if(cpavalue == null || cpavalue == ''){
+                        alert("Please select Channel Partner account");                    
+                        return false;                     
+                    }else{                       
+                        return true;
+                    }
+                }else{                    
+                    return true;
+                }                
+            }
+            <!--  Printer/Asure ID/EasyLobby -->
+            function validateChannelPartnerprinter(){                             
+                var pklst = document.getElementById('{!$Component.pbMainprinter:pbsFirst:pbitemPurchasepath:selPurchasePath}');
+                if(pklst.value == 'Channel Partner' && '{!isCustService}' == 'false'){                   
+                    var cpavalue = document.getElementById('{!$Component.pbMainprinter:pbsFirst:pbsItemCPA:txtCPA}').value;
+                    if(cpavalue == null || cpavalue == ''){
+                        alert("Please select Channel Partner account");                    
+                        return false;                     
+                    }else{                       
+                        return true;
+                    }
+                }else{                    
+                    return true;
+                }                
+            }
+            <!--  Readers/Cards/Network Products/HID  -->
+            function validateChannelPartnerreader(){                             
+                var pklst = document.getElementById('{!$Component.pbMainreader:pbsFirst:pbitemPurchasepath:selPurchasePath}');
+                if(pklst.value == 'Channel Partner' && '{!isCustService}' == 'false'){                   
+                    var cpavalue = document.getElementById('{!$Component.pbMainreader:pbsFirst:pbsItemCPA:txtCPA}').value;
+                    if(cpavalue == null || cpavalue == ''){
+                        alert("Please select Channel Partner account");                    
+                        return false;                     
+                    }else{                       
+                        return true;
+                    }
+                }else{                    
+                    return true;
+                }                
+            }
+            
+            function setAccountName(){
+                if(pklstcpa != null){
+                    callsetAccountName(pklstcpa.value);
+                }else{
+                    callsetAccountName('');
+                }                     
+            }
+            
+            function showProblemCodeFunc(drdVal){
+                if(drdVal.value != ''){
+                    var drdValue = drdVal.value;
+                    callshowProblemCode(drdValue);
+                }
+            }                                          
+        </script>
+        <apex:actionFunction reRender="pbsResInfo" immediate="true" action="{!showProblemCode}" name="callshowProblemCode">
+            <apex:param value="drdValue" name="drdValue"/>
+        </apex:actionFunction>
+        <apex:sectionHeader rendered="{!isCaseEdit}" title="Case Edit" subtitle="{!objCase.CaseNumber}"/>
+        <apex:sectionHeader rendered="{!isCaseNew}" title="New Case" subtitle="{!objCase.CaseNumber}"/>
+        <!--  Customer Service  -->
+        <apex:pageBlock id="pbMain" title="Case Edit" rendered="{!isCustService}">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveCase}" onclick="return validateChannelPartner();"/>
+                 <apex:commandButton value="Save & Close" action="{!saveAndCloseCase}" onclick="return validateChannelPartner();"/>
+                <apex:commandButton value="Cancel" immediate="true" action="{!cancelCase}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbsFirst" title="Case Information" >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Case Owner"></apex:outputLabel>
+                    <apex:outputField value="{!objCase.ownerid}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Status"/>
+                    <apex:inputField required="true" value="{!objCase.status}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Record Type"/>
+                    <apex:outputField value="{!objCase.RecordTypeId}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Reason_Re_opened__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Reason Re-opened"/>                    
+                    <apex:inputField value="{!objCase.Reason_Re_opened__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isCaseNew}">
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCaseNew}">                   
+                    <apex:outputLabel value="Case Number"/>
+                    <apex:outputField value="{!objCase.CaseNumber}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Priority.inlineHelpText}" rendered="{!!ispivCLASS}">                   
+                    <apex:outputLabel value="Priority" />
+                    <apex:inputField value="{!objCase.Priority}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contact Name"/>
+                        <apex:ActionRegion >
+                            <apex:actionFunction name="callsetAccountName" rerender="opAccName, opchPartnerAcc" action="{!setAccountName}">
+                                <apex:param value="" name="purcPath"/>
+                            </apex:actionFunction>
+                            <apex:inputField required="true" onChange="setAccountName();" value="{!objCase.ContactId}"/>
+                        </apex:ActionRegion>
+                </apex:pageBlockSectionItem>                            
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Origin" />
+                    <apex:inputField required="true" value="{!objCase.Origin}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemaccName" >                   
+                    <apex:outputLabel value="Account Name"/>
+                    <apex:outputPanel id="opAccName">                       
+                        <apex:outputLabel id="txtAccName" value="{!strAccName}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Time_Spent__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Time Spent" />
+                    <apex:inputField required="{!If(isLaserCardRecType || isPAERecType  == true,false,true)}" rendered="true" value="{!objCase.Time_Spent__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Is this an Order Issue"/>
+                    <apex:inputField required="true" id="selPurchasePath" value="{!objCase.Order_Issue__c}" />                        
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Case_Language__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Case Language" />
+                    <apex:inputField required="true" value="{!objCase.Case_Language__c}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Reason for Contact" />
+                    <apex:inputField required="true" value="{!objCase.Reason_for_Contact__c}"/>             
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbitemPurchasepath">                   
+                    <apex:outputLabel value="Purchase Path"/>
+                    <apex:inputField required="true" id="selPurchasePath" value="{!objCase.Purchase_Path__c}" onchange="return setChannelPartAcc(this,'{!$Component.pbsItemCPA.txtCPA}','{!$Component.pbsItemaccName:txtAccName}');"/>                        
+                </apex:pageBlockSectionItem>    
+                <apex:pageBlockSectionItem >  
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem id="pbsItemCPA">                   
+                    <apex:outputLabel value="Channel Partner account"/>
+                    <apex:outputPanel id="opchPartnerAcc">
+                        <div id="dvchannelPartner">
+                            <apex:inputField id="txtCPA" value="{!objCase.Channel_Partner_account__c}"/>
+                        </div>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem> 
+            </apex:pageBlockSection>    
+            <apex:pageBlockSection title="Additional Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Product Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Product"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Product__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Contract Information" rendered="{!ispivCLASS}">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Serial_License_No_Lookup__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Serial/License No. Lookup"/>
+                    <apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contract"/>
+                    <apex:inputField value="{!objCase.Contract__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    
+                    <!--<apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>-->
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Case Routing" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}" HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="{!If(ispivCLASS == true,false,true)}" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Firmware"/>
+                    <apex:inputField value="{!objCase.Firmware__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Driver"/>
+                    <apex:inputField value="{!objCase.Driver__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product"/>
+                    <apex:inputField required="true" value="{!objCase.Product__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Software"/>
+                    <apex:inputField value="{!objCase.Software__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="OS"/>                    
+                    <apex:inputField value="{!objCase.OS__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS}">                   
+                    <apex:outputLabel value="OS Language"/>
+                    <apex:inputField value="{!objCase.OS_Language__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType}">                   
+                    <apex:outputLabel value="Configuration Card Part #"/>
+                    <apex:inputField value="{!objCase.Configuration_Card_Part__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS}" >                   
+                    <apex:outputLabel value="Allow Remote Support"/>                    
+                    <apex:inputField value="{!objCase.Allow_Remote_Support__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" > 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Beta"/>                    
+                    <apex:inputField value="{!objCase.Beta__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" > 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Ribbon Type"/>                    
+                    <apex:inputField value="{!objCase.Ribbon_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" > 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Card Type"/>                    
+                    <apex:inputField value="{!objCase.Card_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" > 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Lamination Type"/>                    
+                    <apex:inputField value="{!objCase.Lamination_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" > 
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Card Count"/>                    
+                    <apex:inputField value="{!objCase.Card_Count__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Description: Identify the MAC address, ICE, Corp. 1000, Format, &/or Serial No." id="Desc">
+                <apex:pageBlockSectionItem id="DescriptionSection">                   
+                    <apex:outputLabel value="Subject"/>                    
+                    <apex:inputField id="subject" required="{!isCustService}" style="width:500px;" value="{!objCase.Subject}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Description"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCase.Description}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Internal Comments"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCaseComment.CommentBody}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Resolution Information1" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS }">                   
+                    <apex:outputLabel value="Category"/>                    
+                    <apex:inputField required="true" value="{!objCase.Category__c}"/>
+                </apex:pageBlockSectionItem>     
+                <!--<apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Problem Code"/>   
+                    
+                    <apex:inputField required="true" value="{!objCase.Problem_Code_NewList__c}"/>
+                </apex:pageBlockSectionItem>-->
+                    
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Shipping Information" rendered="{!!isCustService && !ispivCLASS }">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Use_Contact_Address_for_Shipping__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Use Contact Address for Shipping" />                    
+                    <apex:inputField value="{!objCase.Use_Contact_Address_for_Shipping__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType}">                   
+                    <apex:outputLabel value="Shipping From HID Region"/>                    
+                    <apex:inputField value="{!objCase.Shipping_From_HID_Region__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Attention"/>                    
+                    <apex:inputField value="{!objCase.Attention__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Via"/>                    
+                    <apex:inputField value="{!objCase.Via__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Address"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Address__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Account #"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Account__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!isRCNHRecType}" title="Product to Ship Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 1" />                    
+                    <apex:inputField value="{!objCase.Product_Description_1__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 1"/>                    
+                    <apex:inputField value="{!objCase.Quantity_1__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 2" />                    
+                    <apex:inputField value="{!objCase.Product_Description_2__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 2"/>                    
+                    <apex:inputField value="{!objCase.Quantity_2__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 3" />                    
+                    <apex:inputField value="{!objCase.Product_Description_3__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 3"/>                    
+                    <apex:inputField value="{!objCase.Quantity_3__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 4" />                    
+                    <apex:inputField value="{!objCase.Product_Description_4__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 4"/>       
+                    <apex:inputField value="{!objCase.Quantity_4__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 5" />                    
+                    <apex:inputField value="{!objCase.Product_Description_5__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 5"/>                    
+                    <apex:inputField value="{!objCase.Quantity_5__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 6" />                    
+                    <apex:inputField value="{!objCase.Product_Description_6__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 6"/>                    
+                    <apex:inputField value="{!objCase.Quantity_6__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="RMA Information" rendered="{!!ispivCLASS}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Request"/>                    
+                    <apex:inputField value="{!objCase.RMA_Case__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Date (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_In__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="Oracle RMA Creation Date"/>                    
+                    <apex:inputField value="{!objCase.Oracle_RMA_Creation_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="RMA SF Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_SF_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_In__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="Advanced Replacement Created Date"/>                    
+                    <apex:inputField value="{!objCase.Advanced_Replacement_Created_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="Oracle Disposition Date"/>                    
+                    <apex:inputField value="{!objCase.Oracle_Disposition_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="RMA Received Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Received_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type_Out__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="RMA Tested Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Tested_Date__c}"/>
+                </apex:pageBlockSectionItem>    
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_Out__c}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Technician"/>                    
+                    <apex:inputField value="{!objCase.RMA_Technician__c}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="Replacement Shipped Date"/>                    
+                    <apex:inputField value="{!objCase.Replacement_Shipped_Date__c}"/>
+                </apex:pageBlockSectionItem>   
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Expiration Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Expiration_Date__c}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">
+                    <apex:outputLabel value="RMA Date (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_Out__c}"/>
+                </apex:pageBlockSectionItem>    
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="System Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System"/>
+                    <apex:outputPanel >
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System__c}"/>                  
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System ID"/>
+                    <apex:outputPanel >    
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System_ID__c}"/>                               
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System_ID__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Checked for Spam"/>                    
+                    <apex:inputField value="{!objCase.Checked_for_Spam__c}"/>
+                </apex:pageBlockSectionItem>            
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <!--  LaserCard  -->
+        <apex:pageBlock id="pbMainLaser" title="Case Edit" rendered="{!isLaserCardRecType}">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveCase}" onclick="return validateChannelPartner();"/>
+                 <apex:commandButton value="Save & Close" action="{!saveAndCloseCase}" onclick="return validateChannelPartner();"/>
+                <apex:commandButton value="Cancel" immediate="true" action="{!cancelCase}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbsFirst" title="Case Information" >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Parent Case"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.ParentID}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Status"/>
+                    <apex:inputField required="true" value="{!objCase.status}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Case Owner"></apex:outputLabel>
+                    <apex:outputField value="{!objCase.ownerid}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Reason_Re_opened__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Reason Re-opened"/>                    
+                    <apex:inputField value="{!objCase.Reason_Re_opened__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Record Type"/>
+                    <apex:outputField value="{!objCase.RecordTypeId}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCustService}">                   
+                    <apex:outputLabel value="Test Track Pro Item Number"/>
+                    <apex:inputField value="{!objCase.Test_Track_Pro_Item_Number__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCaseNew}">                   
+                    <apex:outputLabel value="Case Number"/>
+                    <apex:outputField value="{!objCase.CaseNumber}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!isCaseNew}">
+                </apex:pageBlockSectionItem> 
+                 <apex:pageBlockSectionItem rendered="{!!ispivCLASS}">                   
+                    <apex:outputLabel value="Case Origin" />
+                    <apex:inputField required="true" value="{!objCase.Origin}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemaccName" >                   
+                    <apex:outputLabel value="Account Name"/>
+                    <apex:outputPanel id="opAccNameLaser">                       
+                        <apex:outputLabel id="txtAccName" value="{!strAccName}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Priority.inlineHelpText}" rendered="{!!ispivCLASS}">                   
+                    <apex:outputLabel value="Priority" />
+                    <apex:inputField value="{!objCase.Priority}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contact Name"/>
+                        <apex:ActionRegion >
+                            <apex:actionFunction name="callsetAccountName" rerender="opAccNameLaser" action="{!setAccountName}">
+                                <apex:param value="" name="purcPath"/>
+                            </apex:actionFunction>
+                            <apex:inputField required="true" onChange="setAccountName();" value="{!objCase.ContactId}"/>
+                        </apex:ActionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCustService}"  HelpText="{!$ObjectType.Case.fields.Time_Spent__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Time Spent" />
+                    <apex:inputField required="{!If(isLaserCardRecType || isPAERecType  == true,false,true)}" rendered="true" value="{!objCase.Time_Spent__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!isCustService}" >                   
+                    <apex:outputLabel value="Is this an Order Issue"/>
+                    <apex:inputField required="true" id="selPurchasePath" value="{!objCase.Order_Issue__c}" />                        
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}" HelpText="{!$ObjectType.Case.fields.Serial_License_No_Lookup__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Serial/License No. Lookup"/>
+                    <apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}" HelpText="{!$ObjectType.Case.fields.Repair_Time__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Repair Time"/>
+                    <apex:inputField value="{!objCase.Repair_Time__c}"/>
+                </apex:pageBlockSectionItem>
+                           
+                <apex:pageBlockSectionItem rendered="{!isCustService}" >                   
+                    <apex:outputLabel value="Reason for Contact" />
+                    <apex:inputField required="true" value="{!objCase.Reason_for_Contact__c}"/>             
+                </apex:pageBlockSectionItem>
+                                
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isRCNHRecType || ispivCLASS}" HelpText="{!$ObjectType.Case.fields.Support_Level__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Support Level" />
+                    <apex:inputField required="true" value="{!objCase.Support_Level__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Priority.inlineHelpText}" rendered="{!ispivCLASS}">                   
+                    <apex:outputLabel value="Priority" />
+                    <apex:inputField value="{!objCase.Priority}"/>
+                </apex:pageBlockSectionItem>
+               
+                <apex:pageBlockSectionItem >
+               
+                </apex:pageBlockSectionItem>
+    
+                
+               
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType || ispivCLASS}" HelpText="{!$ObjectType.Case.fields.Loaner_Requested__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Loaner Requested?"/>
+                    <apex:inputField value="{!objCase.Loaner_Requested__c}"/>
+                </apex:pageBlockSectionItem>               
+               <apex:pageBlockSectionItem >
+               
+                </apex:pageBlockSectionItem>
+    
+                 <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}" HelpText="{!$ObjectType.Case.fields.IsVisibleInSelfService.inlineHelpText}">                   
+                    <apex:outputLabel value="Visible in Self-Service Portal"/>
+                    <apex:inputField value="{!objCase.IsVisibleInSelfService}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+               
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Case_Language__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Case Language" />
+                    <apex:inputField required="true" value="{!objCase.Case_Language__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>    
+            <apex:pageBlockSection title="Additional Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Product Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Product"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Product__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Contract Information" rendered="{!ispivCLASS}">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Serial_License_No_Lookup__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Serial/License No. Lookup"/>
+                    <apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contract"/>
+                    <apex:inputField value="{!objCase.Contract__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    
+                    <!--<apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>-->
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Case Routing" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}" HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Firmware"/>
+                    <apex:inputField value="{!objCase.Firmware__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="{!If(ispivCLASS == true,false,true)}" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+               
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Driver"/>
+                    <apex:inputField value="{!objCase.Driver__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product"/>
+                    <apex:inputField required="true" value="{!objCase.Product__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Software"/>
+                    <apex:inputField value="{!objCase.Software__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="OS"/>                    
+                    <apex:inputField value="{!objCase.OS__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Description: Identify the MAC address, ICE, Corp. 1000, Format, &/or Serial No." id="Desc">
+                <apex:pageBlockSectionItem id="DescriptionSection">                   
+                    <apex:outputLabel value="Subject"/>                    
+                    <apex:inputField id="subject" required="{!isCustService}" style="width:500px;" value="{!objCase.Subject}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Description"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCase.Description}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Internal Comments"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCaseComment.CommentBody}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection columns="1" title="Resolution Information5" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS }">                   
+                    <apex:outputLabel value="Category"/>                    
+                    <apex:inputField required="true" value="{!objCase.Category__c}"/>
+                </apex:pageBlockSectionItem>     
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Problem Code"/>   
+                    
+                    <apex:inputField required="true" value="{!objCase.Problem_Code_NewList__c}"/>
+                </apex:pageBlockSectionItem>
+                         
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Shipping Information" rendered="{!!isCustService && !ispivCLASS }">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Use_Contact_Address_for_Shipping__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Use Contact Address for Shipping" />                    
+                    <apex:inputField value="{!objCase.Use_Contact_Address_for_Shipping__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Via"/>                    
+                    <apex:inputField value="{!objCase.Via__c}"/>
+                </apex:pageBlockSectionItem> 
+                 <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Attention"/>                    
+                    <apex:inputField value="{!objCase.Attention__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Account #"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Account__c}"/>
+                </apex:pageBlockSectionItem>    
+                           
+               
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Address"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Address__c}"/>
+                </apex:pageBlockSectionItem>                 
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!isRCNHRecType}" title="Product to Ship Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 1" />                    
+                    <apex:inputField value="{!objCase.Product_Description_1__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 1"/>                    
+                    <apex:inputField value="{!objCase.Quantity_1__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 2" />                    
+                    <apex:inputField value="{!objCase.Product_Description_2__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 2"/>                    
+                    <apex:inputField value="{!objCase.Quantity_2__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 3" />                    
+                    <apex:inputField value="{!objCase.Product_Description_3__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 3"/>                    
+                    <apex:inputField value="{!objCase.Quantity_3__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 4" />                    
+                    <apex:inputField value="{!objCase.Product_Description_4__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 4"/>       
+                    <apex:inputField value="{!objCase.Quantity_4__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 5" />                    
+                    <apex:inputField value="{!objCase.Product_Description_5__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 5"/>                    
+                    <apex:inputField value="{!objCase.Quantity_5__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 6" />                    
+                    <apex:inputField value="{!objCase.Product_Description_6__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 6"/>                    
+                    <apex:inputField value="{!objCase.Quantity_6__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="RMA Information" rendered="{!!ispivCLASS}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Request"/>                    
+                    <apex:inputField value="{!objCase.RMA_Case__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Technician"/>                    
+                    <apex:inputField value="{!objCase.RMA_Technician__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type_Out__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_In__c}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_Out__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Date (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_In__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">
+                    <apex:outputLabel value="RMA Date (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_Out__c}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Expiration Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Expiration_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                      
+                  
+            </apex:pageBlockSection>
+           
+            <apex:pageBlockSection title="System Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System"/>
+                    <apex:outputPanel >
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System__c}"/>                  
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System ID"/>
+                    <apex:outputPanel >    
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System_ID__c}"/>                               
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System_ID__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Checked for Spam"/>                    
+                    <apex:inputField value="{!objCase.Checked_for_Spam__c}"/>
+                </apex:pageBlockSectionItem>            
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <!------   pivCLASS Record Type  -->
+        <apex:pageBlock id="pbMainpivClass" title="Case Edit" rendered="{!ispivCLASS}">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveCase}" onclick="return validateChannelPartnerpivClass();"/>
+                 <apex:commandButton value="Save & Close" action="{!saveAndCloseCase}" onclick="return validateChannelPartnerpivClass();"/>
+                <apex:commandButton value="Cancel" immediate="true" action="{!cancelCase}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbsFirst" title="Case Information" >
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Case Owner"></apex:outputLabel>
+                    <apex:outputField value="{!objCase.ownerid}"/>                   
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Status"/>
+                    <apex:inputField required="true" value="{!objCase.status}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Record Type"/>
+                    <apex:outputField value="{!objCase.RecordTypeId}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Reason_Re_opened__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Reason Re-opened"/>                    
+                    <apex:inputField value="{!objCase.Reason_Re_opened__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCaseNew}">                   
+                    <apex:outputLabel value="Case Number"/>
+                    <apex:outputField value="{!objCase.CaseNumber}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!isCaseNew}">
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!!isCustService}">                   
+                    <apex:outputLabel value="Test Track Pro Item Number"/>
+                    <apex:inputField value="{!objCase.Test_Track_Pro_Item_Number__c}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Parent Case"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.ParentID}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Type"/>
+                    <apex:inputField value="{!objCase.Type}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contact Name"/>
+                        <apex:ActionRegion >
+                            <apex:actionFunction name="callsetAccountName" rerender="opAccNamepivClass, opchPartnerAccpivClass" action="{!setAccountName}">
+                                <apex:param value="" name="purcPath"/>
+                            </apex:actionFunction>
+                            <apex:inputField required="true" onChange="setAccountName();" value="{!objCase.ContactId}"/>
+                        </apex:ActionRegion>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Origin" />
+                    <apex:inputField required="true" value="{!objCase.Origin}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemaccName" >                   
+                    <apex:outputLabel value="Account Name"/>
+                    <apex:outputPanel id="opAccNamepivClass">                       
+                        <apex:outputLabel id="txtAccName" value="{!strAccName}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Priority.inlineHelpText}">                   
+                    <apex:outputLabel value="Priority" />
+                    <apex:inputField value="{!objCase.Priority}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Unique Company Name"/>
+                    <apex:inputField value="{!objCase.Unique_Company_Name__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Support_Level__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Support Level" />
+                    <apex:inputField required="true" value="{!objCase.Support_Level__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                
+                <apex:pageBlockSectionItem id="pbitemPurchasepath">                   
+                    <apex:outputLabel value="Purchase Path"/>
+                    <apex:inputField required="true" id="selPurchasePath" value="{!objCase.Purchase_Path__c}" onchange="return setChannelPartAcc(this,'{!$Component.pbsItemCPA.txtCPA}','{!$Component.pbsItemaccName:txtAccName}');"/>                        
+                </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Time_Spent__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Time Spent" />
+                    <apex:inputField required="{!If(isLaserCardRecType || isPAERecType  == true,false,true)}" rendered="true" value="{!objCase.Time_Spent__c}"/>
+                </apex:pageBlockSectionItem> 
+            
+                <apex:pageBlockSectionItem id="pbsItemCPA">                   
+                    <apex:outputLabel value="Channel Partner account"/>
+                    <apex:outputPanel id="opchPartnerAccpivClass">
+                        <div id="dvchannelPartner">
+                            <apex:inputField id="txtCPA" value="{!objCase.Channel_Partner_account__c}"/>
+                        </div>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem> 
+              
+                            
+               
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Case_Language__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Case Language" />
+                    <apex:inputField required="true" value="{!objCase.Case_Language__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>    
+            <apex:pageBlockSection title="Additional Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Product Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Product"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Product__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Contract Information" rendered="{!ispivCLASS}">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Serial_License_No_Lookup__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Serial/License No. Lookup"/>
+                    <apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contract"/>
+                    <apex:inputField value="{!objCase.Contract__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    
+                    <!--<apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>-->
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Case Routing" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="{!If(ispivCLASS == true,false,true)}" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Firmware"/>
+                    <apex:inputField value="{!objCase.Firmware__c}"/>
+                </apex:pageBlockSectionItem> 
+               <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product"/>
+                    <apex:inputField required="true" value="{!objCase.Product__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="OS"/>                    
+                    <apex:inputField value="{!objCase.OS__c}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="OS Language"/>
+                    <apex:inputField value="{!objCase.OS_Language__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Configuration Card Part #"/>
+                    <apex:inputField value="{!objCase.Configuration_Card_Part__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Allow Remote Support"/>                    
+                    <apex:inputField value="{!objCase.Allow_Remote_Support__c}"/>
+                </apex:pageBlockSectionItem>
+                
+               
+               
+                
+                
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Description: Identify the MAC address, ICE, Corp. 1000, Format, &/or Serial No." id="Desc">
+                <apex:pageBlockSectionItem id="DescriptionSection">                   
+                    <apex:outputLabel value="Subject"/>                    
+                    <apex:inputField id="subject" required="{!isCustService}" style="width:500px;" value="{!objCase.Subject}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Description"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCase.Description}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Internal Comments"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCaseComment.CommentBody}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Resolution Information2" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS }">                   
+                    <apex:outputLabel value="Category"/>                    
+                    <apex:inputField required="true" value="{!objCase.Category__c}"/>
+                </apex:pageBlockSectionItem>     
+                <!--<apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Problem Code"/>   
+                    
+                    <apex:inputField required="true" value="{!objCase.Problem_Code_NewList__c}"/>
+                </apex:pageBlockSectionItem>-->
+                         
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Shipping Information" rendered="{!!isCustService && !ispivCLASS }">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Use_Contact_Address_for_Shipping__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Use Contact Address for Shipping" />                    
+                    <apex:inputField value="{!objCase.Use_Contact_Address_for_Shipping__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Via"/>                    
+                    <apex:inputField value="{!objCase.Via__c}"/>
+                </apex:pageBlockSectionItem> 
+                 <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Attention"/>                    
+                    <apex:inputField value="{!objCase.Attention__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Account #"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Account__c}"/>
+                </apex:pageBlockSectionItem>    
+                           
+               
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Address"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Address__c}"/>
+                </apex:pageBlockSectionItem>                 
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!isRCNHRecType}" title="Product to Ship Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 1" />                    
+                    <apex:inputField value="{!objCase.Product_Description_1__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 1"/>                    
+                    <apex:inputField value="{!objCase.Quantity_1__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 2" />                    
+                    <apex:inputField value="{!objCase.Product_Description_2__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 2"/>                    
+                    <apex:inputField value="{!objCase.Quantity_2__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 3" />                    
+                    <apex:inputField value="{!objCase.Product_Description_3__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 3"/>                    
+                    <apex:inputField value="{!objCase.Quantity_3__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 4" />                    
+                    <apex:inputField value="{!objCase.Product_Description_4__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 4"/>       
+                    <apex:inputField value="{!objCase.Quantity_4__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 5" />                    
+                    <apex:inputField value="{!objCase.Product_Description_5__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 5"/>                    
+                    <apex:inputField value="{!objCase.Quantity_5__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 6" />                    
+                    <apex:inputField value="{!objCase.Product_Description_6__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 6"/>                    
+                    <apex:inputField value="{!objCase.Quantity_6__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="RMA Information" rendered="{!!ispivCLASS}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Request"/>                    
+                    <apex:inputField value="{!objCase.RMA_Case__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Technician"/>                    
+                    <apex:inputField value="{!objCase.RMA_Technician__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type_Out__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_In__c}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_Out__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Date (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_In__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">
+                    <apex:outputLabel value="RMA Date (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_Out__c}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Expiration Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Expiration_Date__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>            
+            <apex:pageBlockSection title="System Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System"/>
+                    <apex:outputPanel >
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System__c}"/>                  
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System ID"/>
+                    <apex:outputPanel >    
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System_ID__c}"/>                               
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System_ID__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Checked for Spam"/>                    
+                    <apex:inputField value="{!objCase.Checked_for_Spam__c}"/>
+                </apex:pageBlockSectionItem>            
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <!--  Printer/Asure ID/EasyLobby -->
+        <apex:pageBlock id="pbMainprinter" title="Case Edit" rendered="{!isPAERecType}">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveCase}" onclick="return validateChannelPartnerprinter();"/>
+                 <apex:commandButton value="Save & Close" action="{!saveAndCloseCase}" onclick="return validateChannelPartnerprinter();"/>
+                <apex:commandButton value="Cancel" immediate="true" action="{!cancelCase}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbsFirst" title="Case Information">
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Parent Case"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.ParentID}"/>                   
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Status"/>
+                    <apex:inputField required="true" value="{!objCase.status}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Case Owner"></apex:outputLabel>
+                    <apex:outputField value="{!objCase.ownerid}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Reason_Re_opened__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Reason Re-opened"/>                    
+                    <apex:inputField value="{!objCase.Reason_Re_opened__c}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Record Type"/>
+                    <apex:outputField value="{!objCase.RecordTypeId}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCustService}">                   
+                    <apex:outputLabel value="Test Track Pro Item Number"/>
+                    <apex:inputField value="{!objCase.Test_Track_Pro_Item_Number__c}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem rendered="{!!isCaseNew}">                   
+                    <apex:outputLabel value="Case Number"/>
+                    <apex:outputField value="{!objCase.CaseNumber}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!isCaseNew}">
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Origin" />
+                    <apex:inputField required="true" value="{!objCase.Origin}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemaccName" >                   
+                    <apex:outputLabel value="Account Name"/>
+                    <apex:outputPanel id="opAccNameprinter">                       
+                        <apex:outputLabel id="txtAccName" value="{!strAccName}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Priority.inlineHelpText}">                   
+                    <apex:outputLabel value="Priority" />
+                    <apex:inputField value="{!objCase.Priority}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contact Name"/>
+                        <apex:ActionRegion >
+                            <apex:actionFunction name="callsetAccountName" rerender="opAccNameprinter, opchPartnerAccprinter" action="{!setAccountName}">
+                                <apex:param value="" name="purcPath"/>
+                            </apex:actionFunction>
+                            <apex:inputField required="true" onChange="setAccountName();" value="{!objCase.ContactId}"/>
+                        </apex:ActionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isRCNHRecType || ispivCLASS}" HelpText="{!$ObjectType.Case.fields.Support_Level__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Support Level" />
+                    <apex:inputField required="true" value="{!objCase.Support_Level__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}" HelpText="{!$ObjectType.Case.fields.Serial_License_No_Lookup__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Serial/License No. Lookup"/>
+                    <apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem rendered="{!!isCustService}"  HelpText="{!$ObjectType.Case.fields.Time_Spent__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Time Spent" />
+                    <apex:inputField required="{!If(isLaserCardRecType || isPAERecType  == true,false,true)}" rendered="true" value="{!objCase.Time_Spent__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem id="pbitemPurchasepath">                   
+                    <apex:outputLabel value="Purchase Path"/>
+                    <apex:inputField required="true" id="selPurchasePath" value="{!objCase.Purchase_Path__c}" onchange="return setChannelPartAcc(this,'{!$Component.pbsItemCPA.txtCPA}','{!$Component.pbsItemaccName:txtAccName}');"/>                        
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}" HelpText="{!$ObjectType.Case.fields.Repair_Time__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Repair Time"/>
+                    <apex:inputField value="{!objCase.Repair_Time__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemCPA">                   
+                    <apex:outputLabel value="Channel Partner account"/>
+                    <apex:outputPanel id="opchPartnerAccprinter">
+                        <div id="dvchannelPartner">
+                            <apex:inputField id="txtCPA" value="{!objCase.Channel_Partner_account__c}"/>
+                        </div>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType || ispivCLASS}" HelpText="{!$ObjectType.Case.fields.Loaner_Requested__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Loaner Requested?"/>
+                    <apex:inputField value="{!objCase.Loaner_Requested__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}" HelpText="{!$ObjectType.Case.fields.IsVisibleInSelfService.inlineHelpText}">                   
+                    <apex:outputLabel value="Visible in Self-Service Portal"/>
+                    <apex:inputField value="{!objCase.IsVisibleInSelfService}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Case_Language__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Case Language" />
+                    <apex:inputField required="true" value="{!objCase.Case_Language__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>    
+            <apex:pageBlockSection title="Additional Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Product Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Product"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Product__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Contract Information" rendered="{!ispivCLASS}">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Serial_License_No_Lookup__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Serial/License No. Lookup"/>
+                    <apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contract"/>
+                    <apex:inputField value="{!objCase.Contract__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    
+                    <!--<apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>-->
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbsCaseRouting" title="Case Routing">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Firmware"/>
+                    <apex:inputField value="{!objCase.Firmware__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="{!If(ispivCLASS == true,false,true)}" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Driver"/>
+                    <apex:inputField value="{!objCase.Driver__c}"/>
+                </apex:pageBlockSectionItem>
+               <apex:pageBlockSectionItem id="pbsItemProduct">                   
+                    <apex:outputLabel value="Product"/>
+                    <apex:inputField id="txtItemProduct" required="true" onchange="showProblemCodeFunc(this);" value="{!objCase.Product__c}">
+                        
+                    </apex:inputField>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Software"/>
+                    <apex:inputField value="{!objCase.Software__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="OS"/>                    
+                    <apex:inputField value="{!objCase.OS__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Beta"/>                    
+                    <apex:inputField value="{!objCase.Beta__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Ribbon Type"/>                    
+                    <apex:inputField value="{!objCase.Ribbon_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Card Type"/>                    
+                    <apex:inputField value="{!objCase.Card_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Lamination Type"/>                    
+                    <apex:inputField value="{!objCase.Lamination_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType}" >                   
+                    <apex:outputLabel value="Card Count"/>                    
+                    <apex:inputField value="{!objCase.Card_Count__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Description: Identify the MAC address, ICE, Corp. 1000, Format, &/or Serial No." id="Desc">
+                <apex:pageBlockSectionItem id="DescriptionSection">                   
+                    <apex:outputLabel value="Subject"/>                    
+                    <apex:inputField id="subject" required="{!isCustService}" style="width:500px;" value="{!objCase.Subject}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Description"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCase.Description}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Internal Comments"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCaseComment.CommentBody}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection id="pbsResInfo" columns="1" title="Resolution Information3" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS }">                   
+                    <apex:outputLabel value="Category"/>                    
+                    <apex:inputField required="true" value="{!objCase.Category__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemAsureId" rendered="{!isProductAsure && (isPAERecType || isLaserCardRecType)}">                   
+                    <apex:outputLabel value="Asure ID Problem Code"/>                    
+                    <apex:inputField id="selMulAsureID" required="true" value="{!objCase.Asure_ID_Problem_Code__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="pbsItemEasyLobby" rendered="{!isProductEasyLobby && (isPAERecType || isLaserCardRecType)}">                   
+                    <apex:outputLabel value="EasyLobby Problem Code"/>   
+                    
+                    <apex:inputField id="selMulEasyLobby" required="true" value="{!objCase.EasyLobby_Problem_Code__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemPrinter" rendered="{!isProductPrinters && (isPAERecType || isLaserCardRecType)}">                   
+                    <apex:outputLabel value="Printer Problem Code"/>   
+                    
+                    <apex:inputField id="selMulPrinter" required="true" value="{!objCase.Printer_Problem_Code__c}"/>
+                </apex:pageBlockSectionItem>      
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Shipping Information" rendered="{!!isCustService && !ispivCLASS }">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Use_Contact_Address_for_Shipping__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Use Contact Address for Shipping" />                    
+                    <apex:inputField value="{!objCase.Use_Contact_Address_for_Shipping__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Via"/>                    
+                    <apex:inputField value="{!objCase.Via__c}"/>
+                </apex:pageBlockSectionItem> 
+                 <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Attention"/>                    
+                    <apex:inputField value="{!objCase.Attention__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Account #"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Account__c}"/>
+                </apex:pageBlockSectionItem>               
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Address"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Address__c}"/>
+                </apex:pageBlockSectionItem>                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!isRCNHRecType}" title="Product to Ship Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 1" />                    
+                    <apex:inputField value="{!objCase.Product_Description_1__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 1"/>                    
+                    <apex:inputField value="{!objCase.Quantity_1__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 2" />                    
+                    <apex:inputField value="{!objCase.Product_Description_2__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 2"/>                    
+                    <apex:inputField value="{!objCase.Quantity_2__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 3" />                    
+                    <apex:inputField value="{!objCase.Product_Description_3__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 3"/>                    
+                    <apex:inputField value="{!objCase.Quantity_3__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 4" />                    
+                    <apex:inputField value="{!objCase.Product_Description_4__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 4"/>       
+                    <apex:inputField value="{!objCase.Quantity_4__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 5" />                    
+                    <apex:inputField value="{!objCase.Product_Description_5__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 5"/>                    
+                    <apex:inputField value="{!objCase.Quantity_5__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 6" />                    
+                    <apex:inputField value="{!objCase.Product_Description_6__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 6"/>                    
+                    <apex:inputField value="{!objCase.Quantity_6__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="RMA Information" rendered="{!!ispivCLASS}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Request"/>                    
+                    <apex:inputField value="{!objCase.RMA_Case__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Technician"/>                    
+                    <apex:inputField value="{!objCase.RMA_Technician__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type_Out__c}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_In__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_Out__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Date (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_In__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">
+                    <apex:outputLabel value="RMA Date (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_Out__c}"/>
+                </apex:pageBlockSectionItem>    
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Expiration Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Expiration_Date__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            
+            <apex:pageBlockSection title="System Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System"/>
+                    <apex:outputPanel >
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System__c}"/>                  
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System ID"/>
+                    <apex:outputPanel >    
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System_ID__c}"/>                               
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System_ID__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Checked for Spam"/>                    
+                    <apex:inputField value="{!objCase.Checked_for_Spam__c}"/>
+                </apex:pageBlockSectionItem>            
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        <!--  Readers/Cards/Network Products/HID  -->
+        <apex:pageBlock id="pbMainreader" title="Case Edit" rendered="{!isRCNHRecType}">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveCase}" onclick="return validateChannelPartnerreader();"/>
+                 <apex:commandButton value="Save & Close" action="{!saveAndCloseCase}" onclick="return validateChannelPartnerreader();"/>
+                <apex:commandButton value="Cancel" immediate="true" action="{!cancelCase}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbsFirst" title="Case Information">
+                                 
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Case Owner"></apex:outputLabel>
+                    <apex:outputField value="{!objCase.ownerid}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Status"/>
+                    <apex:inputField required="true" value="{!objCase.status}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Record Type"/>
+                    <apex:outputField value="{!objCase.RecordTypeId}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Reason_Re_opened__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Reason Re-opened"/>                    
+                    <apex:inputField value="{!objCase.Reason_Re_opened__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!!isCaseNew}">                   
+                    <apex:outputLabel value="Case Number"/>
+                    <apex:outputField value="{!objCase.CaseNumber}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!isCaseNew}">
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCustService}">                   
+                    <apex:outputLabel value="Test Track Pro Item Number"/>
+                    <apex:inputField value="{!objCase.Test_Track_Pro_Item_Number__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!!isCustService || isRCNHRecType}">                   
+                    <apex:outputLabel value="Parent Case"/>
+                    <apex:inputField value="{!objCase.ParentId}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Origin" />
+                    <apex:inputField required="true" value="{!objCase.Origin}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contact Name"/>
+                        <apex:ActionRegion >
+                            <apex:actionFunction name="callsetAccountName" rerender="opAccNamereader, opchPartnerAccreader" action="{!setAccountName}">
+                                <apex:param value="" name="purcPath"/>
+                            </apex:actionFunction>
+                            <apex:inputField required="true" onChange="setAccountName();" value="{!objCase.ContactId}"/>
+                        </apex:ActionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Priority.inlineHelpText}">                   
+                    <apex:outputLabel value="Priority" />
+                    <apex:inputField value="{!objCase.Priority}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemaccName" >                   
+                    <apex:outputLabel value="Account Name"/>
+                    <apex:outputPanel id="opAccNamereader">                       
+                        <apex:outputLabel id="txtAccName" value="{!strAccName}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isRCNHRecType || ispivCLASS}" HelpText="{!$ObjectType.Case.fields.Support_Level__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Support Level" />
+                    <apex:inputField required="true" value="{!objCase.Support_Level__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isPAERecType || isRCNHRecType || ispivCLASS}">                   
+                    <apex:outputLabel value="Unique Company Name"/>
+                    <apex:inputField value="{!objCase.Unique_Company_Name__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCustService}"  HelpText="{!$ObjectType.Case.fields.Time_Spent__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Time Spent" />
+                    <apex:inputField required="{!If(isLaserCardRecType || isPAERecType  == true,false,true)}" rendered="true" value="{!objCase.Time_Spent__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem id="pbitemPurchasepath">                   
+                    <apex:outputLabel value="Purchase Path"/>
+                    <apex:inputField required="true" id="selPurchasePath" value="{!objCase.Purchase_Path__c}" onchange="return setChannelPartAcc(this,'{!$Component.pbsItemCPA.txtCPA}','{!$Component.pbsItemaccName:txtAccName}');"/>                        
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Case_Language__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Case Language" />
+                    <apex:inputField required="true" value="{!objCase.Case_Language__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemCPA">                   
+                    <apex:outputLabel value="Channel Partner account"/>
+                    <apex:outputPanel id="opchPartnerAccreader">
+                        <div id="dvchannelPartner">
+                            <apex:inputField id="txtCPA" value="{!objCase.Channel_Partner_account__c}"/>
+                        </div>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                
+            </apex:pageBlockSection>    
+            <apex:pageBlockSection title="Additional Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Product Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Product"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Product__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Contract Information" rendered="{!ispivCLASS}">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Serial_License_No_Lookup__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Serial/License No. Lookup"/>
+                    <apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contract"/>
+                    <apex:inputField value="{!objCase.Contract__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    
+                    <!--<apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>-->
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Case Routing" rendered="{!!isCustService}">
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="{!If(ispivCLASS == true,false,true)}" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Firmware"/>
+                    <apex:inputField value="{!objCase.Firmware__c}"/>
+                </apex:pageBlockSectionItem>               
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product"/>
+                    <apex:inputField required="true" value="{!objCase.Product__c}"/>
+                </apex:pageBlockSectionItem>               
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="OS"/>                    
+                    <apex:inputField value="{!objCase.OS__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS}">                   
+                    <apex:outputLabel value="OS Language"/>
+                    <apex:inputField value="{!objCase.OS_Language__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType}">                   
+                    <apex:outputLabel value="Configuration Card Part #"/>
+                    <apex:inputField value="{!objCase.Configuration_Card_Part__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS}" >                   
+                    <apex:outputLabel value="Allow Remote Support"/>                    
+                    <apex:inputField value="{!objCase.Allow_Remote_Support__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                
+              
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Description: Identify the MAC address, ICE, Corp. 1000, Format, &/or Serial No." id="Desc">
+                <apex:pageBlockSectionItem id="DescriptionSection">                   
+                    <apex:outputLabel value="Subject"/>                    
+                    <apex:inputField id="subject" required="{!isCustService}" style="width:500px;" value="{!objCase.Subject}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Description"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCase.Description}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Internal Comments"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCaseComment.CommentBody}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Resolution Information" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS }">                   
+                    <apex:outputLabel value="Category"/>                    
+                    <apex:inputField required="true" value="{!objCase.Category__c}"/>
+                </apex:pageBlockSectionItem>     
+                <!--<apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Problem Code"/>   
+                    
+                    <apex:inputField required="true" value="{!objCase.Problem_Code_NewList__c}"/>
+                </apex:pageBlockSectionItem>-->
+                       
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Shipping Information">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Use_Contact_Address_for_Shipping__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Use Contact Address for Shipping" />                    
+                    <apex:inputField value="{!objCase.Use_Contact_Address_for_Shipping__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping From HID Region"/>                    
+                    <apex:inputField value="{!objCase.Shipping_From_HID_Region__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Attention"/>                    
+                    <apex:inputField value="{!objCase.Attention__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Via"/>                    
+                    <apex:inputField value="{!objCase.Via__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Address"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Address__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Account #"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Account__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!isRCNHRecType}" title="Product to Ship Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 1" />                    
+                    <apex:inputField value="{!objCase.Product_Description_1__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 1"/>                    
+                    <apex:inputField value="{!objCase.Quantity_1__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 2" />                    
+                    <apex:inputField value="{!objCase.Product_Description_2__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 2"/>                    
+                    <apex:inputField value="{!objCase.Quantity_2__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 3" />                    
+                    <apex:inputField value="{!objCase.Product_Description_3__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 3"/>                    
+                    <apex:inputField value="{!objCase.Quantity_3__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 4" />                    
+                    <apex:inputField value="{!objCase.Product_Description_4__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 4"/>       
+                    <apex:inputField value="{!objCase.Quantity_4__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 5" />                    
+                    <apex:inputField value="{!objCase.Product_Description_5__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 5"/>                    
+                    <apex:inputField value="{!objCase.Quantity_5__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 6" />                    
+                    <apex:inputField value="{!objCase.Product_Description_6__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 6"/>                    
+                    <apex:inputField value="{!objCase.Quantity_6__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="RMA Information" rendered="{!!ispivCLASS}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Request"/>                    
+                    <apex:inputField value="{!objCase.RMA_Case__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type__c}"/>
+                </apex:pageBlockSectionItem>               
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Date (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_In__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="Oracle RMA Creation Date"/>                    
+                    <apex:inputField value="{!objCase.Oracle_RMA_Creation_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="RMA SF Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_SF_Date__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_In__c}"/>
+                </apex:pageBlockSectionItem>               
+                
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="Advanced Replacement Created Date"/>                    
+                    <apex:inputField value="{!objCase.Advanced_Replacement_Created_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="Oracle Disposition Date"/>                    
+                    <apex:inputField value="{!objCase.Oracle_Disposition_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="RMA Received Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Received_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type_Out__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="RMA Tested Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Tested_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_Out__c}"/>
+                </apex:pageBlockSectionItem> 
+               
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Technician"/>                    
+                    <apex:inputField value="{!objCase.RMA_Technician__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || isCustService}">
+                    <apex:outputLabel value="Replacement Shipped Date"/>                    
+                    <apex:inputField value="{!objCase.Replacement_Shipped_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Expiration Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Expiration_Date__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection rendered="{!isRCNHRecType}" title="Web Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Web Email"/>                    
+                    <apex:inputField value="{!objCase.SuppliedEmail}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Web Company"/>                    
+                    <apex:inputField value="{!objCase.SuppliedCompany}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Web Name"/>                    
+                    <apex:inputField value="{!objCase.SuppliedName}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Web Phone"/>                    
+                    <apex:inputField value="{!objCase.SuppliedPhone}"/>
+                </apex:pageBlockSectionItem>            
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="System Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System"/>
+                    <apex:outputPanel >
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System__c}"/>                  
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System ID"/>
+                    <apex:outputPanel >    
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System_ID__c}"/>                               
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System_ID__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Checked for Spam"/>                    
+                    <apex:inputField value="{!objCase.Checked_for_Spam__c}"/>
+                </apex:pageBlockSectionItem>            
+            </apex:pageBlockSection>
+        </apex:pageBlock>
+        
+        <!--  ActivID  -->
+        <apex:pageBlock id="pbisActivID" title="Case Edit" rendered="{!isActivIDRecType}">
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveCase}" onclick="return validateChannelPartnerreader();"/>
+                 <apex:commandButton value="Save & Close" action="{!saveAndCloseCase}" onclick="return validateChannelPartnerreader();"/>
+                <apex:commandButton value="Cancel" immediate="true" action="{!cancelCase}"/>
+            </apex:pageBlockButtons>
+            <apex:pageBlockSection id="pbsFirst" title="Case Information">
+                                 
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Case Owner"></apex:outputLabel>
+                    <apex:outputField value="{!objCase.ownerid}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Status"/>
+                    <apex:inputField required="true" value="{!objCase.status}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Record Type"/>
+                    <apex:outputField value="{!objCase.RecordTypeId}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Reason_Re_opened__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Reason Re-opened"/>                    
+                    <apex:inputField value="{!objCase.Reason_Re_opened__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!!isCaseNew}">                   
+                    <apex:outputLabel value="Case Number"/>
+                    <apex:outputField value="{!objCase.CaseNumber}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!isCaseNew}">
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!!isCustService}">                   
+                    <apex:outputLabel value="Test Track Pro Item Number"/>
+                    <apex:inputField value="{!objCase.Test_Track_Pro_Item_Number__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem rendered="{!!isCustService || isRCNHRecType}">                   
+                    <apex:outputLabel value="Parent Case"/>
+                    <apex:inputField value="{!objCase.ParentId}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Case Origin" />
+                    <apex:inputField required="true" value="{!objCase.Origin}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contact Name"/>
+                        <apex:ActionRegion >
+                            <apex:actionFunction name="callsetAccountName" rerender="opAccNameActivID, opchPartnerAccActivID" action="{!setAccountName}">
+                                <apex:param value="" name="purcPath"/>
+                            </apex:actionFunction>
+                            <apex:inputField required="true" onChange="setAccountName();" value="{!objCase.ContactId}"/>
+                        </apex:ActionRegion>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Priority.inlineHelpText}">                   
+                    <apex:outputLabel value="Priority" />
+                    <apex:inputField value="{!objCase.Priority}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemaccName" >                   
+                    <apex:outputLabel value="Account Name"/>
+                    <apex:outputPanel id="opAccNameActivID">                       
+                        <apex:outputLabel id="txtAccName" value="{!strAccName}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Support_Level__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Support Level" />
+                    <apex:inputField required="true" value="{!objCase.Support_Level__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Unique Company Name"/>
+                    <apex:inputField value="{!objCase.Unique_Company_Name__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Time_Spent__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Time Spent" />
+                    <apex:inputField required="{!If(isLaserCardRecType || isPAERecType  == true,false,true)}" rendered="true" value="{!objCase.Time_Spent__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem id="pbitemPurchasepath">                   
+                    <apex:outputLabel value="Purchase Path"/>
+                    <apex:inputField required="true" id="selPurchasePath" value="{!objCase.Purchase_Path__c}" onchange="return setChannelPartAcc(this,'{!$Component.pbsItemCPA.txtCPA}','{!$Component.pbsItemaccName:txtAccName}');"/>                        
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Case_Language__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Case Language" />
+                    <apex:inputField required="true" value="{!objCase.Case_Language__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemCPA">                   
+                    <apex:outputLabel value="Channel Partner account"/>
+                    <apex:outputPanel id="opchPartnerAccActivID">
+                        <div id="dvchannelPartner">
+                            <apex:inputField id="txtCPA" value="{!objCase.Channel_Partner_account__c}"/>
+                        </div>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                
+            </apex:pageBlockSection>    
+            <apex:pageBlockSection title="Additional Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection> 
+            <apex:pageBlockSection title="Product Information" rendered="{!isCustService}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Product"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Product__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Contract Information" rendered="{!ispivCLASS}">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Serial_License_No_Lookup__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Serial/License No. Lookup"/>
+                    <apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Contract"/>
+                    <apex:inputField value="{!objCase.Contract__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Printer_Serial_Number_or_Asure_ID__c.inlineHelpText}">                   
+                    <apex:outputLabel value="License Key/Serial Number"/>
+                    
+                    <!--<apex:inputField value="{!objCase.Serial_License_No_Lookup__c}"/>-->
+                    <apex:inputField value="{!objCase.Printer_Serial_Number_or_Asure_ID__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Case Routing" rendered="{!!isCustService}">
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Region"></apex:outputLabel>
+                    <apex:inputField required="{!If(ispivCLASS == true,false,true)}" value="{!objCase.Region__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    
+                </apex:pageBlockSectionItem>               
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product"/>
+                    <apex:inputField required="true" value="{!objCase.Product__c}"/>
+                </apex:pageBlockSectionItem>               
+                <apex:pageBlockSectionItem >                   
+                    
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Model"></apex:outputLabel>
+                    <apex:inputField required="true" value="{!objCase.Model__c}"/>                   
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS}">                   
+                    <apex:outputLabel value="OS Language"/>
+                    <apex:inputField value="{!objCase.OS_Language__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType}">                   
+                    <apex:outputLabel value="Configuration Card Part #"/>
+                    <apex:inputField value="{!objCase.Configuration_Card_Part__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem rendered="{!isRCNHRecType || ispivCLASS}" >                   
+                    <apex:outputLabel value="Allow Remote Support"/>                    
+                    <apex:inputField value="{!objCase.Allow_Remote_Support__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                
+              
+                
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Description: Identify the MAC address, ICE, Corp. 1000, Format, &/or Serial No." id="Desc">
+                <apex:pageBlockSectionItem id="DescriptionSection">                   
+                    <apex:outputLabel value="Subject"/>                    
+                    <apex:inputField id="subject" required="{!isCustService}" style="width:500px;" value="{!objCase.Subject}"/>
+                </apex:pageBlockSectionItem>                
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Description"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCase.Description}"/>
+                </apex:pageBlockSectionItem>
+                 <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Internal Comments"/>                    
+                    <apex:inputField style="width:450px;height:100px;" value="{!objCaseComment.CommentBody}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Resolution Information" rendered="{!!isCustService}">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Category"/>                    
+                    <apex:inputField required="true" value="{!objCase.Category__c}"/>
+                </apex:pageBlockSectionItem>     
+                <!--<apex:pageBlockSectionItem rendered="{!isPAERecType || isLaserCardRecType}">                   
+                    <apex:outputLabel value="Problem Code"/>   
+                    
+                    <apex:inputField required="true" value="{!objCase.Problem_Code_NewList__c}"/>
+                </apex:pageBlockSectionItem>-->
+                       
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Shipping Information">
+                <apex:pageBlockSectionItem HelpText="{!$ObjectType.Case.fields.Use_Contact_Address_for_Shipping__c.inlineHelpText}">                   
+                    <apex:outputLabel value="Use Contact Address for Shipping" />                    
+                    <apex:inputField value="{!objCase.Use_Contact_Address_for_Shipping__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping From HID Region"/>                    
+                    <apex:inputField value="{!objCase.Shipping_From_HID_Region__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Attention"/>                    
+                    <apex:inputField value="{!objCase.Attention__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Via"/>                    
+                    <apex:inputField value="{!objCase.Via__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Address"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Address__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Shipping Account #"/>                    
+                    <apex:inputField value="{!objCase.Shipping_Account__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Product to Ship Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 1" />                    
+                    <apex:inputField value="{!objCase.Product_Description_1__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 1"/>                    
+                    <apex:inputField value="{!objCase.Quantity_1__c}"/>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 2" />                    
+                    <apex:inputField value="{!objCase.Product_Description_2__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 2"/>                    
+                    <apex:inputField value="{!objCase.Quantity_2__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 3" />                    
+                    <apex:inputField value="{!objCase.Product_Description_3__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 3"/>                    
+                    <apex:inputField value="{!objCase.Quantity_3__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 4" />                    
+                    <apex:inputField value="{!objCase.Product_Description_4__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 4"/>       
+                    <apex:inputField value="{!objCase.Quantity_4__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 5" />                    
+                    <apex:inputField value="{!objCase.Product_Description_5__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 5"/>                    
+                    <apex:inputField value="{!objCase.Quantity_5__c}"/>
+                </apex:pageBlockSectionItem><apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Product Description 6" />                    
+                    <apex:inputField value="{!objCase.Product_Description_6__c}"/>
+                </apex:pageBlockSectionItem>      
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Quantity 6"/>                    
+                    <apex:inputField value="{!objCase.Quantity_6__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="RMA Information" rendered="{!!ispivCLASS}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Request"/>                    
+                    <apex:inputField value="{!objCase.RMA_Case__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type__c}"/>
+                </apex:pageBlockSectionItem>               
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Date (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Date_In__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Oracle RMA Creation Date"/>                    
+                    <apex:inputField value="{!objCase.Oracle_RMA_Creation_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA SF Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_SF_Date__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (In)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_In__c}"/>
+                </apex:pageBlockSectionItem>               
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Advanced Replacement Created Date"/>                    
+                    <apex:inputField value="{!objCase.Advanced_Replacement_Created_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Oracle Disposition Date"/>                    
+                    <apex:inputField value="{!objCase.Oracle_Disposition_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Received Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Received_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Type (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Type_Out__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Tested Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Tested_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Number (Out)"/>                    
+                    <apex:inputField value="{!objCase.RMA_Number_Out__c}"/>
+                </apex:pageBlockSectionItem> 
+               
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Technician"/>                    
+                    <apex:inputField value="{!objCase.RMA_Technician__c}"/>
+                </apex:pageBlockSectionItem> 
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Replacement Shipped Date"/>                    
+                    <apex:inputField value="{!objCase.Replacement_Shipped_Date__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="RMA Expiration Date"/>                    
+                    <apex:inputField value="{!objCase.RMA_Expiration_Date__c}"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Web Information">
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Web Email"/>                    
+                    <apex:inputField value="{!objCase.SuppliedEmail}"/>
+                </apex:pageBlockSectionItem>                 
+                <!--<apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Web Company"/>                    
+                    <apex:inputField value="{!objCase.SuppliedCompany}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Web Name"/>                    
+                    <apex:inputField value="{!objCase.SuppliedName}"/>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Web Phone"/>                    
+                    <apex:inputField value="{!objCase.SuppliedPhone}"/>
+                </apex:pageBlockSectionItem> -->           
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="System Information">
+                <!--<apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System"/>
+                    <apex:outputPanel >
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System__c}"/>                  
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>                 
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Source System ID"/>
+                    <apex:outputPanel >    
+                        <apex:outputfield rendered="{!!($Profile.Name=='System Administrator')}" value="{!objCase.Source_System_ID__c}"/>                               
+                        <apex:inputField rendered="{!$Profile.Name=='System Administrator'}" value="{!objCase.Source_System_ID__c}"/>
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>  
+                <apex:pageBlockSectionItem >                   
+                </apex:pageBlockSectionItem>  -->
+                <apex:pageBlockSectionItem >                   
+                    <apex:outputLabel value="Checked for Spam"/>                    
+                    <apex:inputField value="{!objCase.Checked_for_Spam__c}"/>
+                </apex:pageBlockSectionItem>            
+            </apex:pageBlockSection>
+        </apex:pageBlock>                           
+        
+        <script>
+            <!--  Customer Service  -->
+            var pklstcpa = document.getElementById('{!$Component.pbMain:pbsFirst:pbitemPurchasepath:selPurchasePath}');
+            setChannelPartAccload(pklstcpa,'{!$Component.pbMain:pbsFirst:pbsItemCPA:txtCPA}','{!$Component.pbMain:pbsFirst:pbsItemaccName:txtAccName}');
+            
+            <!--  LaserCard  -->
+            var pklstcpaLaser = document.getElementById('{!$Component.pbMainLaser:pbsFirst:pbitemPurchasepath:selPurchasePath}');
+            setChannelPartAccload(pklstcpaLaser,'{!$Component.pbMainLaser:pbsFirst:pbsItemCPA:txtCPA}','{!$Component.pbMainLaser:pbsFirst:pbsItemaccName:txtAccName}');
+            
+            <!--  pivCLASS  -->
+            var pklstcpapivClass = document.getElementById('{!$Component.pbMainpivClass:pbsFirst:pbitemPurchasepath:selPurchasePath}');
+            setChannelPartAccload(pklstcpapivClass,'{!$Component.pbMainpivClass:pbsFirst:pbsItemCPA:txtCPA}','{!$Component.pbMainLaser:pbsFirst:pbsItemaccName:txtAccName}');
+            
+            <!--  Printer/Asure ID/EasyLobby  -->
+            var pklstcpaprinter = document.getElementById('{!$Component.pbMainprinter:pbsFirst:pbitemPurchasepath:selPurchasePath}');
+            setChannelPartAccload(pklstcpaprinter,'{!$Component.pbMainprinter:pbsFirst:pbsItemCPA:txtCPA}','{!$Component.pbMainLaser:pbsFirst:pbsItemaccName:txtAccName}');
+    
+            <!--  Readers/Cards/Network Products/HID  -->
+            var pklstcpareader = document.getElementById('{!$Component.pbMainreader:pbsFirst:pbitemPurchasepath:selPurchasePath}');
+            setChannelPartAccload(pklstcpareader,'{!$Component.pbMainreader:pbsFirst:pbsItemCPA:txtCPA}','{!$Component.pbMainLaser:pbsFirst:pbsItemaccName:txtAccName}');
+            
+            
+            if('{!isPAERecType}' == 'true'){
+                var pklstProduct = document.getElementById('{!$Component.pbMainprinter:pbsCaseRouting:pbsItemProduct:txtItemProduct}');
+                if(pklstProduct != null){
+                   
+                    if(pklstProduct.value != ''){
+                        if(pklstProduct.value == 'Printers'){
+                            //alert(document.getElementById('opItemAsureId'));
+                            document.getElementById('opItemAsureId').style.display = "none";
+                        }
+                    }
+                }
+            }
+            
+        </script>
+    </apex:form>
+</apex:page>

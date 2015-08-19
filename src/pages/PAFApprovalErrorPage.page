@@ -1,0 +1,21 @@
+<apex:page standardController="Price_Authorization_Form__c" extensions="ApprovalHistoryController" showHeader="true" sidebar="true">
+   <script>
+     var url = location.href;
+     var match = url.match(/inline=1/);
+    if (match != null) { 
+        var newUrl = url.replace(/inline=1/, '');
+        window.top.location=newUrl;
+    }
+</script>
+    <table>
+        <tr>
+            <td><apex:image url="{!$Resource.ErrorImage}" width="50" height="50"/></td>
+                <td> <p>    
+                 <font color = "red"> <h1>No entry in the approval hierarchy found. Please contact your local Business Administrator or submit an IT helpdesk ticket.</h1></font></p>
+                 <br></br> <br></br>
+                 <h1>If new Role Hierarchy is defined, then please update PAF record and re-Submit For Approval.</h1><br> </br><br></br>                 
+            </td>
+        </tr>
+    </table>    
+    <apex:outputLink value="https://{!serverURL}/{!$CurrentPage.parameters.pafId}">Go Back</apex:outputLink>    
+</apex:page>

@@ -1,0 +1,27 @@
+<apex:page controller="AttachmentUploadController" sidebar="false" showHeader="false" id="fileUploadPage">
+  <apex:form enctype="multipart/form-data" id="fileUpload">
+    <apex:pageMessages />
+    <apex:pageBlock title="{!mLabel.uploadLabel}" id="attachmentHolder">
+      
+      <apex:pageBlockSection columns="1" id="block1" rendered="{!NOT(isSuccess)}">
+ 
+        <apex:pageBlockSectionItem >
+          <apex:outputLabel value="{!mLabel.fileSelectLabel}" for="file"/>
+          <apex:inputFile value="{!attachment.body}" filename="{!attachment.name}" id="file"/>
+        </apex:pageBlockSectionItem>
+        <apex:pageBlockSectionItem >
+          <apex:commandButton action="{!upload}" value="{!mLabel.attachFileLabel}" id="theButton"/>
+       	  <apex:outputText value="{!mLabel.maxFileLabel}" />
+        </apex:pageBlockSectionItem>
+ 
+      </apex:pageBlockSection>
+       <apex:pageBlockSection columns="1" id="block2" >
+ 
+        <apex:pageBlockSectionItem rendered="{!isSuccess}">
+         	{!mLabel.uploadSuccessLabel}
+         </apex:pageBlockSectionItem>  
+      </apex:pageBlockSection>
+      
+    </apex:pageBlock>
+  </apex:form>
+</apex:page>

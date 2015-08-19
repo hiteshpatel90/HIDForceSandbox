@@ -1,0 +1,11 @@
+<apex:component id="assessmentHeader">
+    <apex:attribute name="assessmentName" description="assessmentName" type="string" required="true"/>
+    <apex:attribute name="mode" description="mode" type="string" required="true"/>
+    <apex:stylesheet value="{!$Resource.assessment}"/>
+    <div class="content">
+        <img class="pageTitleIcon" title="Account" alt="Account" src="/s.gif"/>
+            <h1 class="pageType"><apex:outputText value="{!mode}"/> Assessment<span class="titleSeparatingColon">:</span></h1>
+            <h2 class="pageDescription"><apex:outputText value="{!assessmentName}"/></h2>
+        <div class="blank"/>
+    </div>
+</apex:component>

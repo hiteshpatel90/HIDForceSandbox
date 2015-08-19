@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>false</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Nominative</caseType>
+        <plural>true</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>false</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Accusative</caseType>
+        <plural>true</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>false</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Genitive</caseType>
+        <plural>true</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>false</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <caseValues>
+        <caseType>Dative</caseType>
+        <plural>true</plural>
+        <value><!-- Assignments Results --></value>
+    </caseValues>
+    <fields>
+        <label>Abgeschlossene Zuweisungen</label>
+        <name>Completed_Assignments__c</name>
+    </fields>
+    <fields>
+        <label>Zuweisungen in Bearbeitung</label>
+        <name>In_Progress_Assignments__c</name>
+    </fields>
+    <fields>
+        <label>Nicht gestartete Zuweisungen</label>
+        <name>Not_Started_Assignments__c</name>
+    </fields>
+    <fields>
+        <label>Uberfallige Zuweisungen</label>
+        <name>Past_Due_Assignments__c</name>
+    </fields>
+    <fields>
+        <label>Schulungsnachweis</label>
+        <name>Transcript__c</name>
+        <relationshipLabel>Zuweisungsergebnisse</relationshipLabel>
+    </fields>
+    <gender><!-- Neuter --></gender>
+    <nameFieldLabel><!-- Assignments results Name --></nameFieldLabel>
+</CustomObjectTranslation>

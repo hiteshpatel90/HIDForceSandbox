@@ -1,0 +1,260 @@
+<apex:page id="pg" standardController="Order" extensions="extCustomerPurchaseOrderForm">
+    <apex:form id="frm">
+        <style>
+            .dateFormat{
+                display:none;
+            }
+        </style>
+        
+        <apex:sectionHeader title="Create Order"/>
+        
+        <script>
+            var newWin=null;
+            function openLookupPopup(name, id){
+                if(document.getElementById('{!$Component.pbCPO:pbSselQuote:pbSselQuote:selSalesQuote}').value == ''){
+                    alert('Please select Sales Quote');
+                }else{
+                    var SelQuoteVal = "";
+                    var SelQuote = document.getElementById('{!$Component.pbCPO:pbSselQuote:pbSselQuote:selSalesQuote}');
+                    var x = 0;                    
+                    for (x=0;x<=SelQuote.length;x++){                        
+                        if(SelQuote[x] != undefined){
+                            if (SelQuote[x].selected){
+                                if(SelQuoteVal == ""){
+                                    SelQuoteVal = SelQuote[x].value;
+                                }else{
+                                    SelQuoteVal = SelQuoteVal + "," + SelQuote[x].value;
+                                }
+                            }
+                        }
+                    }                    
+                    if(document.getElementById(name) != null){
+                        var inputValue = document.getElementById(name).value;
+                        var url="/apex/LookupPage?namefield=" + name + "&idfield=" + id + "&namevalue=" + inputValue  + "&selQuotevalue=" + SelQuoteVal;
+                        newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+                        if (window.focus){
+                            newWin.focus();
+                        }
+                    }
+                }           
+                return false;
+            }
+            function closeLookupPopup(){
+                if (null!=newWin){
+                    newWin.close();
+                }  
+            }
+            function goTonextpageFunc(){
+                var rads = document.getElementsByName('selGroup');
+                var grPOIndex = "";
+                var isSelected = false;
+                for (var i=0; i < rads.length; i++){
+                    if (rads[i].checked){
+                        grPOIndex = i;
+                        isSelected = true;
+                    }
+                }              
+                if(isSelected == true){
+                    callgoTonextpage(grPOIndex);
+                    return false;
+                }else{
+                    alert('Please select Customer Purchase Order.');
+                    return false;
+                }
+            }
+            
+            function openLookupPopupshipTo(name, id){
+              
+                
+                if(ShippingAccount == ''){
+                    alert('Please select Ship to Account');
+                }else{                                       
+                    if(document.getElementById(name) != null){
+                        var BillToAddressVal = "";
+                        var ShippingAccount = '{!Order.Shipping_Account__c}';
+                        BillToAddressVal = '{!order.Bill_To_Addresses__c}';
+                        var inputValue = document.getElementById(name).value;
+                        var url="/apex/ShiptoAddressOLILookup?namefield=" + name + "&idfield=" + id + "&namevalue=" + inputValue  + "&selShipacc=" + ShippingAccount + "&billtoAdd=" + BillToAddressVal;
+                        newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+                        if (window.focus){
+                            newWin.focus();
+                        }
+                    }
+                }           
+                return false;
+            }
+            function goTopreviewpage(){
+                window.parent.location.href = "/apex/OrderFormPreview";
+                return false;
+            }
+        </script>
+   
+        
+        <apex:actionFunction action="{!goTonextpage}" name="callgoTonextpage" reRender="frm">
+            <apex:param value="grPOIndex" name="grPOIndex"/>
+        </apex:actionFunction>
+        <apex:pageBlock id="pbCPO" title="Create Customer Purchase Order">
+            <apex:pageMessages ></apex:pageMessages>
+           <apex:pageBlockButtons location="top" >
+                <apex:commandButton value="Save" action="{!saveOrder}"/>
+                <apex:commandButton value="Previous" action="{!goTopreviouspage}"/>
+                <apex:actionRegion >
+                    <apex:commandLink styleClass="btn" style="text-decoration:none;padding:4px;" value="Preview" target="_new" action="{!goTopreviewpage}"/>
+                    
+                </apex:actionRegion>
+                <!--<apex:commandButton value="Cancel"/>-->
+            </apex:pageBlockButtons>    
+
+            <apex:pageBlockSection id="pbSselQuote">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Customer PO"></apex:outputLabel>
+                    <apex:inputfield value="{!Order.PoNumber}"/>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="pbSselQuoteacc">
+                    <apex:outputLabel value="End User Account Name"></apex:outputLabel>                    
+                   <apex:outputLink value="/{!objAccount.id}">{!objAccount.Name}</apex:outputLink>                    
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                   <apex:outputLabel value="Bill to Account"></apex:outputLabel>                    
+                   <apex:inputField value="{!Order.Bill_to_Account__c}"/>                    
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    
+                </apex:pageBlockSectionItem>
+                
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Sales Quote"></apex:outputLabel>
+                    <apex:inputField value="{!objBigMachinesQuoteProduct.BigMachines__Quote__c}"> 
+                        <apex:actionSupport action="{!SalesQuoteaccandoppset}" event="onchange"/>                        
+                    </apex:inputfield>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="pbSselQuote">
+                    <apex:outputLabel value="Related Sales Quote"></apex:outputLabel>                    
+                    <apex:selectList id="selSalesQuote" size="3" value="{!strselQuote}" multiselect="true">                        
+                         <apex:selectOptions value="{!SalesQuote}"/>
+                         <apex:actionsupport event="onchange" action="{!fillPartDetail}" reRender="opDetail"/>
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="pbSselQuoteopp">
+                    <apex:outputLabel value="Opportunity Name"></apex:outputLabel>                    
+                    <apex:selectList id="selSalesQuoteopp" size="3" value="{!strselQuoteOpp}" multiselect="true">                        
+                         <apex:selectOptions value="{!SalesQuoteOpportunity}"/>
+                        
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbsItemshiptoAddress">
+                    <apex:outputLabel value="Make Order Match Quote"></apex:outputLabel>
+                    <apex:outputPanel id="optxtshiptoAddress">                        
+                        <apex:inputCheckbox disabled="{!isMakeorderdisable}" id="chkMakeordermatch" value="{!Order.Make_Order_Match_Quote__c}">
+                            <apex:actionSupport event="onchange" action="{!fillPOQuantity}" reRender="opDetail"/>
+                        </apex:inputCheckbox>                   
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+        </apex:pageblock>
+  
+            <!--<apex:pageblockButtons dir="RTL">
+                <apex:commandButton value="Next" onclick="return goTonextpageFunc();" />
+            </apex:pageblockButtons>-->
+        <apex:outputPanel id="opDetail">
+            <apex:pageBlock id="pnDetail" title="Part Detail" >
+    
+                <apex:pageBlockButtons location="bottom" >
+                    <apex:commandButton value="Save" action="{!saveOrder}"/>
+                    <apex:commandButton value="Previous" action="{!goTopreviouspage}"/>
+                    <apex:actionRegion >
+                        <apex:commandLink styleClass="btn" style="text-decoration:none;padding:4px;" value="Preview" target="_blank" action="{!goTopreviewpage}"/>
+                    </apex:actionRegion>
+                </apex:pageBlockButtons>            
+                <apex:pageBlockTable id="pbTblcpoLI" value="{!lstwrapCustomerPurchaseOrderLI}" var="wcpo">
+                    <apex:variable value="{!0}" var="c"/>
+                    <apex:column width="10" headerValue="Add to order">
+                        
+                        <apex:inputcheckbox disabled="true" id="selCPOLIdes" value="{!wcpo.isCPOLIselected}" rendered="{!Order.Make_Order_Match_Quote__c}"/>
+                            
+                            <!--<apex:actionRegion immediate="true" renderRegionOnly="false">   -->
+                                <apex:inputcheckbox id="selCPOLI" value="{!wcpo.isCPOLIselected}" rendered="{!!Order.Make_Order_Match_Quote__c}">                            
+                                    <apex:actionSupport event="onchange" action="{!EditselectedRow}" reRender="pbTblcpoLI"> 
+                                    <apex:param value="{!c}" name="rowid"/>
+                                </apex:actionSupport>                              
+                            </apex:inputcheckbox>
+                            <!--</apex:actionRegion> -->                        
+                        <apex:variable value="{!c+1}" var="c"/>
+                    </apex:column>
+                    <apex:column width="2" headerValue="General">
+                        <apex:actionRegion >
+                        <apex:inputcheckbox rendered="{!wcpo.isPartSelect}" id="selCPOLIGeneral" value="{!wcpo.isGeneralSQsel}">
+                            <apex:actionSupport event="onchange" reRender="oppartSelect"> 
+                                
+                            </apex:actionSupport>
+                        </apex:inputcheckbox>
+                        </apex:actionRegion>
+                    </apex:column>
+                    <apex:column width="2" headerValue="Sort order">
+                        <apex:inputField style="width:42px;" value="{!wcpo.objCustPurchaseOLI.Line_Number__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Part #">     
+                        <apex:outputPanel id="oppartSelect" rendered="{!wcpo.isPartSelect}">
+                            <apex:outputPanel rendered="{!!wcpo.isGeneralSQsel}">
+                                <apex:inputHidden value="{!wcpo.strOrderProdId}" id="targetId" />
+                                <apex:inputText onchange="" size="20" value="{!wcpo.strPartNumber}" id="targetName"  />
+                                <img title="Quote Product Lookup (New Window)" style="cursor:pointer;" src="/s.gif" onclick="openLookupPopup('{!$Component.targetName}', '{!$Component.targetId}'); return false" class="lookupIcon" onmouseout="this.className='lookupIcon';" alt="Product Name Lookup (New Window)" onmouseover="this.className='lookupIconOn';"/>                    
+                            </apex:outputPanel>
+                            <apex:outputPanel rendered="{!wcpo.isGeneralSQsel}">
+                                <apex:inputField value="{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Product__c}"/>
+                            </apex:outputPanel>
+                        </apex:outputPanel>
+                        <apex:outputLink rendered="{!!wcpo.isPartSelect}" value="/{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Product__c}">{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Product__r.Name}</apex:outputLink>
+                        
+                    </apex:column>
+                    <apex:column width="2" headerValue="Approved Quantity">
+                        <apex:outputField style="width:42px;" value="{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Quantity__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Sales Price">
+                        <apex:outputField value="{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Sales_Price__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="BigMachine Quote">                    
+                        <apex:outputLink value="/{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Quote__c}">{!wcpo.objCustPurchaseOLI.Quote_Product__r.BigMachines__Quote__r.Name}</apex:outputLink>
+                    </apex:column>
+                    <!--<apex:column width="2" headerValue="Oracle Order Qty">
+                        <apex:outputText style="width:42px;" value="{!wcpo.objCustPurchaseOLI.Oracle_Order_Qty__c}"/>
+                    </apex:column>-->
+                    
+                    <apex:column headerValue="PO Quantity" width="10">   
+                       
+                        
+                        <apex:outputField rendered="{!!wcpo.isQLIEditmode && !wcpo.isPOQuantityEdit}" value="{!wcpo.objCustPurchaseOLI.Quantity}"/>
+                        <apex:inputField rendered="{!wcpo.isQLIEditmode || wcpo.isPOQuantityEdit}" value="{!wcpo.objCustPurchaseOLI.Quantity}"/>
+                                
+                    </apex:column>       
+                       
+                    <apex:column headerValue="Ship to Addresses" >   
+                        <apex:outputField rendered="{!!wcpo.isQLIEditmode && !wcpo.isShiptoEdit}" value="{!wcpo.objCustPurchaseOLI.Ship_to_Addresses__c}"/> 
+                        <!--<apex:inputField rendered="{!wcpo.isQLIEditmode || wcpo.isShiptoEdit}" value="{!wcpo.objCustPurchaseOLI.Ship_to_Addresses__c}"/>-->
+                        <apex:outputPanel rendered="{!wcpo.isQLIEditmode || wcpo.isShiptoEdit}">
+                            <apex:inputHidden value="{!wcpo.objCustPurchaseOLI.Ship_to_Addresses__c}" id="shipTotargetId" />
+                            <apex:inputText onchange="" size="20" value="{!wcpo.strShipToAddress}" id="shipTotargetName"  /><img title="Ship-To Addresses Lookup (New Window)" style="cursor:pointer;" src="/s.gif" onclick="openLookupPopupshipTo('{!$Component.shipTotargetName}', '{!$Component.shipTotargetId}'); return false" class="lookupIcon" onmouseout="this.className='lookupIcon';" alt="Ship-To Addresses Lookup (New Window)" onmouseover="this.className='lookupIconOn';"/>
+                            
+                        </apex:outputPanel>
+                    </apex:column>
+                    <apex:column headerValue="Request Date" >    
+                        <apex:outputField rendered="{!!wcpo.isQLIEditmode && !wcpo.isReqDateEdit}" value="{!wcpo.objCustPurchaseOLI.Request_Date__c}"/>
+                        <apex:inputField rendered="{!wcpo.isQLIEditmode || wcpo.isReqDateEdit}" value="{!wcpo.objCustPurchaseOLI.Request_Date__c}"/>
+                        
+                    </apex:column>                      
+                            
+                </apex:pageBlockTable>
+                <br />
+                <apex:actionRegion >
+                <apex:commandLink value="Add Row" rendered="{!!Order.Make_Order_Match_Quote__c}" action="{!addNewRowLI}" reRender="pbTblcpoLI, txtBilltoAddress, chkMakeordermatch"/>
+                </apex:actionRegion>
+            </apex:pageBlock>
+            </apex:outputPanel>
+    </apex:form>   
+</apex:page>

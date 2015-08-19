@@ -1,0 +1,27 @@
+<apex:page controller="techSupportSurveyController" title="{!$Label.SurveyTitle}" showHeader="false" language="{!strLanguage}">
+	<apex:stylesheet value="{!$Resource.TechSupportSurveyStyle}"/>
+	<div id="outer">
+		<c:techSupportSurveyHeader />
+		<apex:form >
+			<apex:inputHidden value="{!strCaseId}"/>
+			<apex:pageBlock >
+				<apex:outputPanel layout="block" styleClass="pagenr">
+					<apex:outputText value="Page {!intCurrentPage}/3"/>
+				</apex:outputPanel>
+				<apex:pageBlockSection title="* {!$Label.SurveyAllowCommentsBeingUsed}" columns="1" collapsible="false">
+					<apex:selectRadio value="{!strPublicComments}" label=" " layout="pageDirection" styleClass="vamiddle">
+						<apex:selectOptions value="{!twoValues}"/>
+					</apex:selectRadio>
+					<apex:inputText value="{!strName}" label="{!$Label.SurveyNameOrAnonymous}"/>
+				</apex:pageBlockSection>
+				<apex:pageBlockSection title="{!$Label.SurveyAdditionalComments}" columns="1" collapsible="false">
+					<apex:inputTextarea value="{!strAdditionalComments}" label=" " cols="80" rows="8"/>
+				</apex:pageBlockSection>
+				<apex:pageBlockButtons location="bottom">
+					<apex:commandButton action="{!page2}" value="{!$Label.SurveyBack}"/>
+					<apex:commandButton action="{!submit}" value="{!$Label.site.submit}"/>
+				</apex:pageBlockButtons>
+			</apex:pageBlock>
+		</apex:form>
+	</div>
+</apex:page>

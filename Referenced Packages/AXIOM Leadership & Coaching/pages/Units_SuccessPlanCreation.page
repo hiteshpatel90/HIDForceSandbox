@@ -1,0 +1,961 @@
+<apex:page standardController="AXIOM_LC__Success_Plan__c" extensions="AXIOM_LC.Units_SuccessPlanCreation" id="page" docType="html-5.0">
+	<apex:outputPanel layout="none" rendered="{!isIE}">
+	<script type="text/javascript">
+		window.XMLSerializer = function(){};
+		window.XMLSerializer.prototype.serializeToString=function(oNode){return oNode.xml;}
+	</script>
+	</apex:outputPanel>
+
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/css/ui-lightness/jquery-ui-1.10.3.custom.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_css_component, 'lc_css_base.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component, './css/axiom-coaching.css')}" />
+	<apex:stylesheet value="{!URLFOR($Resource.AXIOM_BASE__chosenCSS, 'chosen.css')}" />
+
+	<style media="screen" type="text/css">
+		input[type="text"] {
+			border: medium none;
+			padding-top: 0;
+			text-align: left;
+			background: inherit;
+		}
+	</style>
+
+	<apex:form id="pageForm">
+		<apex:outputPanel layout="block" id="page-header" styleClass="page-header">
+			<div class="page-heading left">
+				<span style="display:none;">{!UserAgent}</span>
+				New Success Plan: <b id="SP_NAME">{!SuccessPlanName}</b><br/>
+			</div>
+			<apex:outputPanel styleClass="btn-container right" layout="block">
+				<apex:commandLink styleClass="button left" action="{!cancel}" value="Cancel" id="cancelButton" />
+				<apex:outputPanel >
+					<input type="button" class="button primary left" style="text-decoration: none; margin-right: 10px" value="Save" onclick="javascript:saveSP();" id="saveButton" />
+				</apex:outputPanel>
+			</apex:outputPanel>
+
+			<div id="confirmPopup" style="display: none;">
+				<div style="padding: 25px; text-align: left; margin-bottom: 10px;" id="confirmMsg">CONFIRM MESSAGE</div>
+			</div>
+
+			<div class="clear"></div>
+		</apex:outputPanel>
+
+		<div class="page-content">
+			<apex:outputPanel layout="block" styleClass="new-edit-info" id="editInfo">
+				<apex:actionFunction name="save" action="{!save}"></apex:actionFunction>
+				<div>
+					<label>Seller</label>
+					<div id="sellersInput" class="chzn-drop" style="position: relative; z-index: 0; height: 24px;">
+						<apex:selectList value="{!SelectedUser}" id="sellers" styleClass="chzn-select" style="width: 150px;"  html-data-placeholder="Choose a seller..." multiselect="false" size="1">
+							<apex:actionSupport event="onchange" action="{!refreshSellerOnPage}" rerender="newSPtable,editInfo,page-header, updateErrorScript" oncomplete="afterRefreshActions();" />
+							<apex:selectOptions value="{!Sellers}"/>
+						</apex:selectList>
+					</div>
+				</div>
+				<br />
+
+				<apex:outputPanel layout="block" id="sellerInfo">
+					<div>
+						<label>Role</label>
+						<br />
+						<apex:outputPanel id="roleOutput">
+							<apex:outputText value="{!SellerRole}" />
+							<br />
+						</apex:outputPanel>
+					</div>
+					<br />
+					<div>
+						<label>Coach</label>
+						<br />
+						<apex:outputPanel id="Coach">
+							<apex:outputText value="{!SellerCoach}" />
+							<br />
+						</apex:outputPanel>
+					</div>
+				</apex:outputPanel>
+
+				<div class="columns two">
+					<apex:panelGrid columns="1" id="datesTable">
+						<apex:outputText value="Start Date" style="font-weight: bold" />
+						<input type="text" value="{!SuccessPlanC.StartDateFormatted}" id="startDate" onchange="generatePlanName();" />
+						<apex:inputText value="{!SuccessPlanC.StartDateHidden}" id="startDate_hidden" styleClass="hidden"></apex:inputText>
+						<br />
+						<apex:outputText value="End Date" style="font-weight: bold" />
+						<input type="text" value="{!SuccessPlanC.EndDateFormatted}" id="endDate" onchange="generatePlanName();" />
+						<apex:inputText value="{!SuccessPlanC.EndDateHidden}" id="endDate_hidden" styleClass="hidden" ></apex:inputText>
+					</apex:panelGrid>
+				</div>
+				<div>
+					<br />
+					<apex:outputPanel id="annualSalesPast">
+						<input type="hidden" value="{!LastYearAnnualSales}" id="lastYearSales" />
+					</apex:outputPanel>
+				</div>
+			</apex:outputPanel>
+
+			<div class="new-edit-graph blank-placeholder">
+				<div id="chart_div_div" style="width: 325px; height: 420px;"></div>
+			</div>
+
+			<!-- START TABLE -->
+			<div class="table-new-edit">
+				<apex:outputPanel id="newSPtable">
+					<table class="table table-striped">
+						<thead>
+							<tr>
+								<th>Item</th>
+								<th>Plan</th>
+								<th>Historic</th>
+								<th>Peer Average</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr>
+								<td>Annualized Units Objective</td>
+								<td>
+									<apex:inputText value="{!SuccessPlanC.Amount}" required="false" id="annualSales" onblur="addZeros(this);" onclick="removeZeros(this);" onchange="calculate(this);" />
+									<!-- <apex:inputField value="{!SuccessPlan.Annual_Units__c}" required="false" id="annualSales" onblur="addZeros(this);" onclick="removeZeros(this);" onchange="calculate(this);" /> -->
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.Annual_Units_Objective}" id="annualSalesHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.Annual_Units_Objective}" id="annualSalesPeerAvg" />
+								</td>
+							</tr>
+							<tr>
+								<td>Plan Type</td>
+								<td>
+									<apex:selectList id="plantypes" multiselect="false" size="1" styleClass="chzn-select" html-data-placeholder="--None--" value="{!SelectedPlanType}">
+										<apex:actionSupport event="onchange"  action="{!refreshPlanTypeOnPage}" rerender="newSPtable,editInfo,page-header, updateErrorScript" oncomplete="afterRefreshActions();"/>
+										<apex:selectOptions value="{!PlanTypes}"/>
+									</apex:selectList>
+								</td>
+								<td>
+									<apex:outputText value="{!SelectedPlanType}"/>
+									</td>
+								<td>
+									<apex:outputText value="{!SelectedPlanType}"/>
+								</td>
+							</tr>
+							<tr>
+								<td>Review Frequency</td>
+								<td>
+									<apex:selectList value="{!SelectedPeriod}" id="periods" styleClass="chzn-select" style="width:90px"  html-data-placeholder="--None--" multiselect="false" size="1">
+										<apex:actionSupport event="onchange"  action="{!refreshPeriodOnPage}" rerender="newSPtable,editInfo,page-header, updateErrorScript" oncomplete="afterRefreshActions();"/>
+										<apex:selectOptions value="{!Periods}"/>
+									</apex:selectList>
+								</td>
+								<td>
+									<apex:outputText value="" id="periodHist" />
+								</td>
+								<td>
+									<apex:outputText value="" id="periodPeer" />
+								</td>
+							</tr>
+							<tr>
+								<td>Periods</td>
+								<td>
+									<apex:inputField value="{!SuccessPlan.AXIOM_LC__Number_of_Periods__c}" id="numberOfPeriods" onchange="calculate();" />
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.Number_of_Periods}" id="numberOfPeriodsHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.Number_of_Periods}" />
+								</td>
+							</tr>
+							<tr>
+								<td>Units per Period</td>
+								<td>
+									<apex:outputField value="{!SuccessPlan.AXIOM_LC__Units_Per_Period__c}" id="amountPerPeriod">
+										<apex:inlineEditSupport event="onClick" />
+									</apex:outputField>
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.Units_Per_Period}" id="amountPerPeriodHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.Units_Per_Period}" />
+								</td>
+							</tr>
+							<tr>
+								<td>Avg. Num Of Units</td>
+								<td>
+									<apex:inputText value="{!SuccessPlanC.AverageValue}" required="true" id="avgValue" onblur="addZeros(this);" onclick="removeZeros(this);" onchange="calculate();" />
+									<!-- <apex:inputField value="{!SuccessPlan.Avg_Num_Of_Units__c}" required="true" id="avgValue" onblur="addZeros(this);" onclick="removeZeros(this);" onchange="calculate();" /> -->
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.Avg_Num_Of_Units}" id="avgValueHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.Avg_Num_Of_Units}" />
+								</td>
+							</tr>
+							<tr>
+								<td>Closes per Period</td>
+								<td>
+									<apex:inputField value="{!SuccessPlan.AXIOM_LC__Number_of_Sales_Per_Period__c}" id="closesPerPeriod" onchange="calculate();" />
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.Closes_Per_Period}" id="closesPerPeriodHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.Closes_Per_Period}" />
+								</td>
+							</tr>
+							<tr>
+								<td>Closing Ratio</td>
+								<td>
+									<apex:inputText value="{!SuccessPlanC.ClosingRatio}" required="false" onkeyup="validatePercents(this);"  onblur="addZeros(this);" onclick="removeZeros(this);" id="closingRatio" onchange="calculate();" />
+									<!-- <apex:inputField value="{!SuccessPlan.Closing_Ratio__c}" required="false" onkeyup="validatePercents(this);"  onblur="addZeros(this);" onclick="removeZeros(this);" id="closingRatio" onchange="calculate();" /> -->
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.Closing_Ratio}" id="closingRatioHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.Closing_Ratio}" />
+								</td>
+							</tr>
+							<tr>
+								<td>Proposals per Period</td>
+								<td>
+									<apex:inputField value="{!SuccessPlan.AXIOM_LC__New_Proposals_per_Period__c}" id="proposalsPerPeriod" onchange="calculate();" />
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.New_Proposals_per_Period}" id="proposalsPerPeriodHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.New_Proposals_per_Period}" />
+								</td>
+							</tr>
+							<tr>
+								<td>Proposal Ratio</td>
+								<td>
+									<apex:inputText value="{!SuccessPlanC.ProposalRatio}" required="false" id="proposalRatio" onkeyup="validatePercents(this);"  onblur="addZeros(this);" onclick="removeZeros(this);" onchange="calculate();" />
+									<!-- <apex:inputField value="{!SuccessPlan.Proposal_Ratio__c}" required="false" id="proposalRatio" onkeyup="validatePercents(this);"  onblur="addZeros(this);" onclick="removeZeros(this);" onchange="calculate();" /> -->
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.Proposal_Ratio}" id="proposalRatioHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.Proposal_Ratio}" />
+								</td>
+							</tr>
+							<tr>
+								<td>New Opportunities per Period</td>
+								<td>
+									<apex:inputField value="{!SuccessPlan.AXIOM_LC__New_Opportunities_per_Period__c}" id="newOppPerPeriod" onchange="calculate();" />
+								</td>
+								<td>
+									<apex:outputText value="{!HistoricWrapper.New_Opportunities_per_Period}" id="newOppPerPeriodHist" />
+								</td>
+								<td>
+									<apex:outputText value="{!AverageWrapper.New_Opportunities_per_Period}" />
+								</td>
+							</tr>
+						</tbody>
+					</table>
+				</apex:outputPanel>
+			</div>
+			<div class="clear"></div>
+		</div>
+	</apex:form>
+
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/js/jquery-1.9.1.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component_templates, 'jquery/js/jquery-ui-1.10.3.custom.min.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_BASE__underscoreJS)}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component, 'lc_boot_chosen.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_LC__lc_boot_component, 'js/custom.js')}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_BASE__accounting)}" />
+	<apex:includeScript value="{!URLFOR($Resource.AXIOM_BASE__FusionChart, '/Charts/FusionCharts.js')}"/>
+
+	<script type="text/javascript">
+		function validatePercents(t) {
+			if (t && removecomma(t.value) >= 0 && removecomma(t.value) <= 100) {
+				$(t).next('.errorMsg').hide();
+			} else if( t && (removecomma(t.value) <= 0 ||  removecomma(t.value) >= 100)) {
+				$(t).next('.errorMsg').show();
+			}
+		}
+		var locales = {
+			"sq":           ",", // Albanian
+			"sq_AL":        ",", // Albanian (Albania)
+			"ar":           ".", // Arabic
+			"ar_BH":        ".", // Arabic (Bahrain)
+			"ar_EG":        ".", // Arabic (Egypt)
+			"ar_JO":        ".", // Arabic (Jordan)
+			"ar_KW":        ".", // Arabic (Kuwait)
+			"ar_LB":        ".", // Arabic (Lebanon)
+			"ar_QA":        ".", // Arabic (Qatar)
+			"ar_SA":        ".", // Arabic (Saudi Arabia)
+			"ar_AE":        ".", // Arabic (United Arab Emirates)
+			"hy":           ",", // Armenian
+			"hy_AM":        ",", // Armenian (Armenia)
+			"az_AZ":        ",", // Azerbaijani (Azerbaijan)
+			"eu":           ",", // Basque
+			"eu_ES":        ",", // Basque (Spain)
+			"be_BY":        ",", // Belarusian (Belarus)
+			"bn_BD":        ".", // Bengali (Bangladesh)
+			"bs":           ",", // Bosnian
+			"bs_BA":        ",", // Bosnian (Bosnia and Herzegovina)
+			"bg":           ",", // Bulgarian
+			"bg_BG":        ",", // Bulgarian (Bulgaria)
+			"ca":           ",", // Catalan
+			"ca_ES_EURO":   ",", // Catalan (Spain,Euro)
+			"ca_ES":        ",", // Catalan (Spain)
+			"zh":           ".", // Chinese
+			"zh_CN_PINYIN": ".", // Chinese (China, Pinyin Ordering)
+			"zh_CN_STROKE": ".", // Chinese (China, Stroke Ordering)
+			"zh_CN":        ".", // Chinese (China)
+			"zh_HK_STROKE": ".", // Chinese (Hong Kong SAR China, Stroke Ordering)
+			"zh_HK":        ".", // Chinese (Hong Kong SAR China)
+			"zh_MO":        ".", // Chinese (Macau SAR China)
+			"zh_SG":        ".", // Chinese (Singapore)
+			"zh_TW_STROKE": ".", // Chinese (Taiwan, Stroke Ordering)
+			"zh_TW":        ".", // Chinese (Taiwan)
+			"hr":           ",", // Croatian
+			"hr_HR":        ",", // Croatian (Croatia)
+			"cs":           ",", // Czech
+			"cs_CZ":        ",", // Czech (Czech Republic)
+			"da":           ",", // Danish
+			"da_DK":        ",", // Danish (Denmark)
+			"nl":           ",", // Dutch
+			"nl_BE":        ",", // Dutch (Belgium)
+			"nl_NL":        ",", // Dutch (Netherlands)
+			"nl_SR":        ",", // Dutch (Suriname)
+			"en_AU":        ".", // English (Australia)
+			"en_BB":        ".", // English (Barbados)
+			"en_BM":        ".", // English (Bermuda)
+			"en_CA":        ".", // English (Canada)
+			"en_GH":        ".", // English (Ghana)
+			"en_IN":        ".", // English (India)
+			"en_ID":        ".", // English (Indonesia)
+			"en_IE_EURO":   ".", // English (Ireland,Euro)
+			"en_IE":        ".", // English (Ireland)
+			"en_MY":        ".", // English (Malaysia)
+			"en_NZ":        ".", // English (New Zealand)
+			"en_NG":        ".", // English (Nigeria)
+			"en_PK":        ".", // English (Pakistan)
+			"en_PH":        ".", // English (Philippines)
+			"en_SG":        ".", // English (Singapore)
+			"en_ZA":        ".", // English (South Africa)
+			"en_GB":        ".", // English (United Kingdom)
+			"en_US":        ".", // English (United States)
+			"et":           ",", // Estonian
+			"et_EE":        ",", // Estonian (Estonia)
+			"fi":           ",", // Finnish
+			"fi_FI_EURO":   ",", // Finnish (Finland,Euro)
+			"fi_FI":        ",", // Finnish (Finland)
+			"fr":           ",", // French
+			"fr_BE":        ",", // French (Belgium)
+			"fr_CA":        ",", // French (Canada)
+			"fr_FR_EURO":   ",", // French (France,Euro)
+			"fr_FR":        ",", // French (France)
+			"fr_LU":        ",", // French (Luxembourg)
+			"fr_MC":        ",", // French (Monaco)
+			"fr_CH":        ".", // French (Switzerland)
+			"ka":           ",", // Georgian
+			"ka_GE":        ",", // Georgian (Georgia)
+			"de":           ",", // German
+			"de_AT_EURO":   ",", // German (Austria,Euro)
+			"de_AT":        ",", // German (Austria)
+			"de_DE_EURO":   ",", // German (Germany,Euro)
+			"de_DE":        ",", // German (Germany)
+			"de_LU_EURO":   ",", // German (Luxembourg,Euro)
+			"de_LU":        ",", // German (Luxembourg)
+			"de_CH":        ".", // German (Switzerland)
+			"el":           ",", // Greek
+			"el_GR":        ",", // Greek (Greece)
+			"iw":           ".", // Hebrew
+			"iw_IL":        ".", // Hebrew (Israel)
+			"hi":           ".", // Hindi
+			"hi_IN":        ".", // Hindi (India)
+			"hu":           ",", // Hungarian
+			"hu_HU":        ",", // Hungarian (Hungary)
+			"is":           ",", // Icelandic
+			"is_IS":        ",", // Icelandic (Iceland)
+			"in":           ",", // Indonesian
+			"in_ID":        ",", // Indonesian (Indonesia)
+			"ga":           ".", // Irish
+			"ga_IE":        ".", // Irish (Ireland)
+			"it":           ",", // Italian
+			"it_IT":        ",", // Italian (Italy)
+			"it_CH":        ".", // Italian (Switzerland)
+			"ja":           ".", // Japanese
+			"ja_JP":        ".", // Japanese (Japan)
+			"kk_KZ":        ",", // Kazakh (Kazakhstan)
+			"km_KH":        ",", // Khmer (Cambodia)
+			"ky_KG":        ".", // Kirghiz (Kyrgyzstan)
+			"ko":           ".", // Korean
+			"ko_KR":        ".", // Korean (South Korea)
+			"lv":           ",", // Latvian
+			"lv_LV":        ",", // Latvian (Latvia)
+			"lt":           ",", // Lithuanian
+			"lt_LT":        ",", // Lithuanian (Lithuania)
+			"lb":           ".", // Luxembourgish
+			"lb_LU":        ".", // Luxembourgish (Luxembourg)
+			"mk":           ",", // Macedonian
+			"mk_MK":        ",", // Macedonian (Macedonia)
+			"ms":           ".", // Malay
+			"ms_BN":        ",", // Malay (Brunei)
+			"ms_MY":        ".", // Malay (Malaysia)
+			"mt":           ".", // Maltese
+			"mt_MT":        ".", // Maltese (Malta)
+			"sh_ME":        ",", // Montenegrin (Montenegro)
+			"no":           ",", // Norwegian
+			"no_NO":        ",", // Norwegian (Norway)
+			"pl":           ",", // Polish
+			"pl_PL":        ",", // Polish (Poland)
+			"pt":           ",", // Portuguese
+			"pt_AO":        ",", // Portuguese (Angola)
+			"pt_BR":        ",", // Portuguese (Brazil)
+			"pt_PT":        ",", // Portuguese (Portugal)
+			"ro":           ",", // Romanian
+			"ro_MD":        ",", // Romanian (Moldova)
+			"ro_RO":        ",", // Romanian (Romania)
+			"rm":           ".", // Romansh
+			"rm_CH":        ".", // Romansh (Switzerland)
+			"ru":           ",", // Russian
+			"ru_RU":        ",", // Russian (Russia)
+			"sr":           ",", // Serbian
+			"sr_BA":        ",", // Serbian (Bosnia and Herzegovina)
+			"sh":           ",", // Serbian (Latin)
+			"sh_BA":        ",", // Serbian (Latin) (Bosnia and Herzegovina)
+			"sh_CS":        ",", // Serbian (Latin) (Serbia and Montenegro)
+			"sr_CS":        ",", // Serbian (Serbia and Montenegro)
+			"sk":           ",", // Slovak
+			"sk_SK":        ",", // Slovak (Slovakia)
+			"sl":           ",", // Slovenian
+			"sl_SI":        ",", // Slovenian (Slovenia)
+			"es":           ",", // Spanish
+			"es_AR":        ",", // Spanish (Argentina)
+			"es_BO":        ",", // Spanish (Bolivia)
+			"es_CL":        ",", // Spanish (Chile)
+			"es_CO":        ",", // Spanish (Colombia)
+			"es_CR":        ".", // Spanish (Costa Rica)
+			"es_DO":        ".", // Spanish (Dominican Republic)
+			"es_EC":        ",", // Spanish (Ecuador)
+			"es_SV":        ".", // Spanish (El Salvador)
+			"es_GT":        ".", // Spanish (Guatemala)
+			"es_HN":        ".", // Spanish (Honduras)
+			"es_MX":        ".", // Spanish (Mexico)
+			"es_PA":        ".", // Spanish (Panama)
+			"es_PY":        ",", // Spanish (Paraguay)
+			"es_PE":        ",", // Spanish (Peru)
+			"es_PR":        ".", // Spanish (Puerto Rico)
+			"es_ES_EURO":   ",", // Spanish (Spain,Euro)
+			"es_ES":        ",", // Spanish (Spain)
+			"es_UY":        ",", // Spanish (Uruguay)
+			"es_VE":        ",", // Spanish (Venezuela)
+			"sv":           ",", // Swedish
+			"sv_SE":        ",", // Swedish (Sweden)
+			"tl":           ".", // Tagalog
+			"tl_PH":        ".", // Tagalog (Philippines)
+			"tg_TJ":        ".", // Tajik (Tajikistan)
+			"th":           ".", // Thai
+			"th_TH":        ".", // Thai (Thailand)
+			"tr":           ",", // Turkish
+			"tr_TR":        ",", // Turkish (Turkey)
+			"uk":           ",", // Ukrainian
+			"uk_UA":        ",", // Ukrainian (Ukraine)
+			"ur":           ".", // Urdu
+			"ur_PK":        ".", // Urdu (Pakistan)
+			"vi":           ",", // Vietnamese
+			"vi_VN":        ",", // Vietnamese (Vietnam)
+			"cy":           ".", // Welsh
+			"cy_GB":        "."  // Welsh (United Kingdom)
+		};
+		function removecomma(param, decimalSepa){
+			if (!decimalSepa) decimalSepa = locales['{!UserLocale}'];
+			param = ''+param;
+			if (decimalSepa == ',') {
+				if(param.indexOf(".")!=-1){
+					if (param.lastIndexOf(".") == (param.length-2)) {
+					param+='00';
+					} else if (param.lastIndexOf(".") == (param.length-3)) {
+						param+='0';
+					}
+				}
+			}
+			if (decimalSepa == '.') {
+				if(param.indexOf(",")!=-1){
+					if (param.lastIndexOf(",") == (param.length-2)) {
+						param+='00';
+					} else if (param.lastIndexOf(",") == (param.length-3)) {
+						param+='0';
+					}
+				}
+			}
+			var comma = (decimalSepa == ',') ? param.replace(/[^0-9\,]+/g,"") : param.replace(/[^0-9\.]+/g,"");
+			comma = comma.replace(decimalSepa, '.');
+			return parseFloat(comma);
+		}
+		var decimalPlaces = 0
+		var separator2 = locales['{!UserLocale}'];
+		var separator1 = separator2 == '.' ? ',' : '.';
+	</script>
+	<script type="text/javascript">
+		function changePlanType() {
+			var sellerInd = document.getElementById("sellersOutput").selectedIndex;
+			if(sellerInd == 0) {
+				$("<div style='text-align:center;'>Please select the seller</div>").dialog();
+			} else {
+				var type = document.getElementById('{!$Component.pageForm.periodType}');
+				updatePageInfo($("#sellersOutput").val(), type.options[type.selectedIndex].value, $('[id$=planType]').val());
+			}
+		}
+		function drawChart() {
+			var lastYear = parseFloat(removecomma($('[id$=annualSalesHist]').text() ? $('[id$=annualSalesHist]').text() : 0));
+			var thisYear = parseFloat(removecomma($('[id$=annualSales]').val() ? $('[id$=annualSales]').val() : 0));
+			var peerAvg = parseFloat(removecomma($('[id$=annualSalesPeerAvg]').text() ? $('[id$=annualSalesPeerAvg]').text() : 0));
+
+			var jsonData = {
+				"chart": {
+					"yaxisname": "",
+					"caption": "Annualized Units Objective",
+					"useroundedges": "0",
+					"bgcolor": "FFFFFF,FFFFFF",
+					"showborder": "0",
+					"showvalues": "0",
+					'showBarShadow': '0',
+					'plotGradientColor': ' '
+				},
+				"data": [
+					{
+						"label": "Historic",
+						"value": lastYear,
+						"color": '0000FF'
+					},
+					{
+						"label": "Plan",
+						"value": thisYear,
+						"color": 'FF0000'
+					},
+					{
+						"label": "Peer Average",
+						"value": peerAvg,
+						"color": '008000'
+					}
+				]
+			};
+			FusionCharts.setCurrentRenderer('javascript');
+
+			if(FusionCharts("chart_div_div_id")){
+				FusionCharts("chart_div_div_id").dispose();
+			}
+
+
+			var chart2 = new FusionCharts( 'FusionCharts/Column2D.swf', "chart_div_div_id", "325", "420" );
+			chart2.showLegend = true;
+			chart2.dataFormat = "json";
+			chart2.setJSONData(jsonData);
+			chart2.render('chart_div_div');
+		}
+	</script>
+	<script type="text/javascript">
+		function validateInputs() {
+			var annualSales = removecomma(document.getElementById("{!$Component.pageForm.annualSales}").value ? document.getElementById("{!$Component.pageForm.annualSales}").value : 0);
+			var periods = removecomma(document.getElementById("{!$Component.pageForm.periods}").selectedIndex ? document.getElementById("{!$Component.pageForm.periods}").selectedIndex : 0);
+			var seller = removecomma(document.getElementById("{!$Component.pageForm.sellers}").selectedIndex ? document.getElementById("{!$Component.pageForm.sellers}").selectedIndex : 0);
+			var avgValue = removecomma(document.getElementById("{!$Component.pageForm.avgValue}").value ? document.getElementById("{!$Component.pageForm.avgValue}").value : 0);
+			var closingRatio = removecomma(document.getElementById("{!$Component.pageForm.closingRatio}").value ? document.getElementById("{!$Component.pageForm.closingRatio}").value : 0);
+			var proposalRatio = removecomma(document.getElementById("{!$Component.pageForm.proposalRatio}").value ? document.getElementById("{!$Component.pageForm.proposalRatio}").value : 0);
+
+			var msg = '';
+			if(!periods || periods == 0) {
+				if(!seller || seller == 0) {
+					msg += 'Please select the seller<br />';
+				}
+				msg += 'Please select the Review Frequency<br />';
+			} else {
+				if(!annualSales || annualSales == 0) msg += 'Annualized Units Objective<br />';
+				if(!avgValue || avgValue == 0) msg += 'Average Value<br />';
+				if(!closingRatio || closingRatio == 0) msg += 'Closing Ratio<br />';
+				if(!proposalRatio || proposalRatio == 0) msg += 'Proposal Ratio<br />';
+			}
+			if (msg) {
+				if (periods && periods != 0) msg = '<strong>Enter or select value for the following fields:</strong> <br />' + msg;
+				$('#confirmPopup').empty().append(msg)
+				.dialog(
+					{
+						title:"Warning!",
+						minWidth:400,
+						buttons: [
+							{
+								text: "OK",
+								click: function() {
+									$(this).dialog("close");
+								}
+							}
+						]
+					}
+				);
+				return false;
+			}
+			return true;
+		}
+		function removeZeros(el){
+			if($(el).val() && parseInt(removecomma($(el).val())) == 0) {
+				$(el).val("");
+			}
+		}
+		function addZeros(el) {
+			if(!$(el).val()) {
+				$(el).val(0);
+			}
+		}
+		function bindJQDatepicker(){
+			$("#startDate").datepicker({
+				dateFormat: 'M dd, yy',
+				showOn: "button",
+				buttonImage: "{!URLFOR($Resource.AXIOM_BASE__images, 'calendar.png')}",
+				buttonImageOnly: true,
+				onSelect: function() {
+					refreshDateranges();
+					var dateText = $.datepicker.formatDate("yy-mm-dd", $(this).datepicker("getDate"));
+					$('input[id$=startDate_hidden]').val(dateText);
+					generatename();
+				}
+			});
+			$("#endDate").datepicker({
+				dateFormat: 'M dd, yy',
+				showOn: "button",
+				buttonImage: "{!URLFOR($Resource.AXIOM_BASE__images, 'calendar.png')}",
+				buttonImageOnly: true,
+				onSelect: function() {
+					refreshDateranges();
+					var dateText = $.datepicker.formatDate("yy-mm-dd", $(this).datepicker("getDate"));
+					$('input[id$=endDate_hidden]').val(dateText);
+					generatename();
+				}
+			});
+			refreshDateranges();
+		}
+
+		function refreshDateranges () {
+			$('#startDate').datepicker('option','maxDate', $("#endDate").datepicker("getDate"));
+			$('#endDate').datepicker('option','minDate', $("#startDate").datepicker("getDate"));
+		}
+	</script>
+	<apex:outputPanel id="updateErrorScript" >
+				<script type="text/javascript">
+			function checkErrors(){
+				var errors = {!Errors};
+				var messages = {!ActiveSpMessages};
+				var msg = '';
+				if(!$.isEmptyObject(errors)) {
+					for (var prop in errors) {
+						if (errors.hasOwnProperty(prop)) {
+							msg += '<p>'+ errors[prop] + '<br /><br /></p>';
+						}
+					}
+					//var saveButton = document.getElementById('saveButton');
+					//saveButton.disabled = true;
+					//saveButton.className = saveButton.className + ' disabled';
+					$('#confirmPopup').empty().append(msg)
+					.dialog(
+						{
+							title:"Warning!",
+							minWidth:400,
+							buttons: [
+								{
+									text: "OK",
+									click: function() {
+										$(this).dialog("close");
+									}
+								}
+							]
+						}
+					);
+					/*
+					saveButton.disabled = false;
+					saveButton.className = 'button primary left';
+					*/
+				}
+			}
+			function checkActiveErrors(){
+				var errors = {!ActiveSPMessages};
+				var msg = '';
+				if(!$.isEmptyObject(errors)) {
+					for (var prop in errors) {
+						if (errors.hasOwnProperty(prop)) {
+							msg += '<p>'+ errors[prop] + '<br /><br /></p>';
+						}
+					}
+					//var saveButton = document.getElementById('saveButton');
+					//saveButton.disabled = true;
+					//saveButton.className = saveButton.className + ' disabled';
+					$('#confirmPopup').empty().append(msg)
+					.dialog(
+						{
+							title:"Warning!",
+							minWidth:400,
+							buttons: [
+								{
+									text: "OK",
+									click: function() {
+										if(validateInputs()) {
+											formatInputs();
+											save();
+										} else {
+											$(this).dialog("close");
+										}
+									}
+								}
+							]
+						}
+					);
+					/*
+					saveButton.disabled = false;
+					saveButton.className = 'button primary left';
+					*/
+					return false;
+				}
+				return true;
+			}
+		</script>
+
+	</apex:outputPanel>
+	<script type="text/javascript">
+		function setFocusOnLoad() {}
+
+		function isNumber (n) {
+			return !isNaN(parseFloat(n)) && isFinite(n);
+		}
+
+		function formatInputs(){
+			var inputs = document.getElementById('page:pageForm:newSPtable').getElementsByTagName('input');
+			for(var inp in inputs) {
+				inputs[inp].value = removecomma(inputs[inp].value ? inputs[inp].value : 0);
+			}
+		}
+
+		function validateSellerPeriodEmpty(t) {
+			var sellerInd = document.getElementById("{!$Component.pageForm.sellers}").selectedIndex;
+			var periodsInd = document.getElementById("{!$Component.pageForm.periods}").selectedIndex;
+			var msg = ''
+			if(sellerInd == 0) {
+				msg += 'Please select the seller<br />';
+				t.selectedIndex = 0;
+			}
+			if(periodsInd == 0) {
+				msg += 'Please select the period<br />';
+				t.selectedIndex = 0;
+			}
+			$('#confirmPopup').empty().append(msg)
+			.dialog(
+				{
+					title:"Warning!",
+					minWidth:400,
+					buttons: [
+						{
+							text: "OK",
+							click: function() {
+								$(this).dialog("close");
+							}
+						}
+					]
+				}
+			);
+		}
+
+		function generatename() {
+			if($(".chzn-single:first").text() && $("[id$=Coach]").text()){
+				var seller = $(".chzn-single:first").text().split(" ");
+				var coach = $("[id$=Coach]").text().split(" ");
+				var isSecondary = $("[id$=isSec_c]").is(':checked') ? 'Secondary':'';
+				$("#SP_NAME").text(seller[1] + ", " + seller[0] + " - " + $("[id$=startDate]").val()
+											+ " - " + $("[id$=endDate]").val() + " - " + coach[1]);// + " - "+ isSecondary);
+				var sDate = $("[id$=startDate]").val();
+
+				if(sDate.split(',').length == 2) {
+					var buf = sDate.split(',')[1];
+					buf = buf.replace(/\s+/g, '');
+					buf = ' '+buf;
+					$("[id$=startDate]").val(sDate.split(',')[0]+','+buf);
+					var sDateYear = sDate.split(',')[1];
+					var sDateDay = sDate.split(',')[0].split(' ')[1];
+					var sDateMonth = sDate.split(',')[0].split(' ')[0];
+					sDateYear = sDateYear.replace(/\s+/g, '');
+					sDateMonth = getMonth(sDateMonth);
+					if(IsNumeric(sDateYear)&&IsNumeric(sDateMonth)&&IsNumeric(sDateDay))
+						$('input[id$=startDate_hidden]').val(sDateYear+'-'+sDateMonth+'-'+sDateDay);
+				}
+
+				var eDate = $("[id$=endDate]").val();
+
+				if(eDate.split(',').length == 2) {
+					var buf = eDate.split(',')[1];
+					buf = buf.replace(/\s+/g, '');
+					buf = ' '+buf;
+					$("[id$=endDate]").val(eDate.split(',')[0]+','+buf);
+					var eDateYear = eDate.split(',')[1];
+					var eDateDay = eDate.split(',')[0].split(' ')[1];
+					var eDateMonth = eDate.split(',')[0].split(' ')[0];
+					eDateYear = eDateYear.replace(/\s+/g, '');
+					eDateMonth = getMonth(eDateMonth);
+					if(IsNumeric(eDateYear)&&IsNumeric(eDateMonth)&&IsNumeric(eDateDay))
+						$('input[id$=endDate_hidden]').val(eDateYear+'-'+eDateMonth+'-'+eDateDay);
+				}
+			}
+		}
+
+		function IsNumeric(input) {
+			return (input - 0) == input && (''+input).replace(/^\s+|\s+$/g, "").length > 0;
+		}
+
+		function getMonth(month) {
+			switch(month) {
+				case 'Jan':
+					return '01';
+					break;
+				case 'Feb':
+					return '02';
+					break;
+				case 'Mar':
+					return '03';
+					break;
+				case 'Apr':
+					return '04';
+					break;
+				case 'May':
+					return '05';
+					break;
+				case 'Jun':
+					return '06';
+					break;
+				case 'Jul':
+					return '07';
+					break;
+				case 'Aug':
+					return '08';
+					break;
+				case 'Sep':
+					return '09';
+					break;
+				case 'Oct':
+					return '10';
+					break;
+				case 'Nov':
+					return '11';
+					break;
+				case 'Dec':
+					return '12';
+					break;
+				default:
+					var d = new Date();
+					var n = d.getMonth() + 1;
+					if (n<10) {
+						n = '0'+n;
+					}
+					return n;
+			}
+		}
+
+		function calculate(event) {
+			var periodType = $('[id$=periodType]').val();
+			var list = document.getElementById("{!$Component.pageForm.periods}");
+			switch(list.selectedIndex) {
+				case 1:
+					$('[id$=numberOfPeriods]').text(52);
+					break;
+				case 2:
+					$('[id$=numberOfPeriods]').text(12);
+					break;
+				case 3:
+					$('[id$=numberOfPeriods]').text(4);
+					break;
+				default:
+					$('[id$=numberOfPeriods]').text('');
+			}
+
+			if ($('[id$=annualSales]').val().indexOf('$') == -1 && $('[id$=annualSales]').val().length){
+				$('[id$=annualSales]').val($('[id$=annualSales]').val());
+			}
+
+			$('[id$=annualSales]').val(accounting.formatNumber(removecomma($('[id$=annualSales]').val() ? $('[id$=annualSales]').val() : 0), decimalPlaces, separator1, separator2));
+			var annualSales = removecomma($('[id$=annualSales]').val() ? $('[id$=annualSales]').val() : 0);
+			var numberOfPeriods = parseInt(removecomma($('[id$=numberOfPeriods]').text() ? $('[id$=numberOfPeriods]').text() : 0));
+
+			if (numberOfPeriods != 0) {
+				//$('[id$=annualSales]').val("$"+annualSales.toFixed(2));
+				$('[id$=amountPerPeriod]').text(accounting.formatNumber((annualSales/numberOfPeriods), decimalPlaces, separator1, separator2));
+			}
+			else {
+				$('[id$=amountPerPeriod]').text('');
+			}
+
+			var amountPerPeriod = removecomma($('[id$=amountPerPeriod]').text() ? $('[id$=amountPerPeriod]').text() : 0);
+
+			var avgValue = removecomma($('[id$=avgValue]').val() ? $('[id$=avgValue]').val() : 0);
+
+			if (isNumber(amountPerPeriod) && isNumber(avgValue)) {
+				$('[id$=avgValue]').val(accounting.formatNumber(avgValue, decimalPlaces, separator1, separator2));
+				_rst = isNaN(amountPerPeriod/avgValue) ? 0 : amountPerPeriod/avgValue;
+
+				$('[id$=closesPerPeriod]').text(isNumber(_rst) ? Math.round(_rst) : 0);
+			}
+			else {
+				$('[id$=closesPerPeriod]').text('');
+			}
+			var closesPerPeriod = removecomma($('[id$=closesPerPeriod]').text() ? $('[id$=closesPerPeriod]').text() : 0);
+			var closingRatio = parseFloat(removecomma($('[id$=closingRatio]').val() ? $('[id$=closingRatio]').val() : 0));
+			if (isNumber(closesPerPeriod) && isNumber(closingRatio)) {
+				var crtval = (closingRatio!=0 && closesPerPeriod!=0) ? Math.round((closesPerPeriod/(closingRatio/100))):0;
+				$('[id$=proposalsPerPeriod]').text(accounting.formatNumber(crtval, decimalPlaces, separator1, separator2));
+				$('[id$=closingRatio]').val(accounting.formatNumber(closingRatio, 2, separator1, separator2)+'%')
+			}
+			else {
+				$('[id$=proposalsPerPeriod]').text('');
+			}
+
+			var proposalsPerPeriod = $('[id$=proposalsPerPeriod]').text();
+			var proposalRatio = parseFloat(removecomma( $('[id$=proposalRatio]').val() ?  $('[id$=proposalRatio]').val() : 0));
+			if (isNumber(proposalsPerPeriod) && isNumber(proposalRatio)) {
+				var crtval = (proposalsPerPeriod!=0 && proposalRatio!=0) ? Math.round((proposalsPerPeriod/(proposalRatio/100))):0
+				$('[id$=newOppPerPeriod]').text(accounting.formatNumber(crtval, decimalPlaces, separator1, separator2));
+				$('[id$=proposalRatio]').val(accounting.formatNumber(proposalRatio, 2, separator1, separator2)+'%');
+			}
+			else {
+				$('[id$=newOppPerPeriod]').text('');
+			}
+			drawChart();
+		}
+
+		function applyChosen() {
+			$(document.getElementById("{!$Component.pageForm.sellers}")).chosen({no_results_text: "Oops, nothing found!", disable_search: false,disable_search_threshold: 10});
+			$(document.getElementById("{!$Component.pageForm.periods}")).chosen({no_results_text: "Oops, nothing found!", disable_search: false,disable_search_threshold: 10});
+			$(document.getElementById("{!$Component.pageForm.plantypes}")).chosen({no_results_text: "Oops, nothing found!", disable_search: false,disable_search_threshold: 10});
+		}
+
+		function afterRefreshActions() {
+			applyChosen();
+			bindJQDatepicker();
+			checkErrors();
+			calculate();
+			drawChart();
+		}
+
+		$(document).ready(function(){
+			afterRefreshActions();
+		});
+
+		function formatInputs(){
+			var inputs = document.getElementById('page:pageForm:newSPtable').getElementsByTagName('input');
+			for(var inp in inputs) {
+				inputs[inp].value = removecomma(inputs[inp].value ? inputs[inp].value : 0);
+			}
+		}
+		function saveSP(event) {
+			if(validateInputs())
+			if(checkActiveErrors()) {
+				formatInputs();
+				save();
+			}
+		}
+		$(document).submit(function() {
+
+		});
+	</script>
+</apex:page>

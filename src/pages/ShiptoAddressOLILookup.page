@@ -1,0 +1,90 @@
+<!-- Created By : Hitesh Patel
+ -- Date Created : 7/21/2014
+ -- Description : This is the custom Lookup on OrderForm VF page to get the addresses of Shipping Account selected from CustomerPurachaseOrderForm Page. 
+ -->
+<apex:page readOnly="true" controller="ShiptoAddressOLILookupController" sidebar="false" showheader="false">
+<script language="javascript">
+   window.onload = new function() 
+   { 
+      // bring popup window to front 
+      window.focus(); 
+      var ele=document.getElementById('{!$Component.form.block.section.query}');
+      if (ele)
+      {
+         ele.focus();
+      }
+   }
+   
+   function fillIn(name, id)
+   {
+      var winMain=window.opener;
+      if (null==winMain)
+      {
+         winMain=window.parent.opener;
+      }
+      var ele=winMain.document.getElementById('{!$CurrentPage.parameters.namefield}');
+      ele.value=name;
+      ele=winMain.document.getElementById('{!$CurrentPage.parameters.idfield}');
+      ele.value=id;
+      CloseWindow();
+   }
+
+   function CloseWindow()
+   {
+      var winMain=window.opener;
+      if (null==winMain)
+      {
+         winMain=window.parent.opener;
+      }
+      winMain.closeLookupPopup();
+   }
+</script>
+
+  <apex:messages />
+  <apex:form id="form" >  
+        
+     <div style="width 100%">
+        <apex:pageBlock title="Lookup" id="block">
+           
+          <apex:pageBlockSection id="section">
+              Enter search text and click Go<br/>
+              <apex:inputText value="{!query}" id="query"/> 
+              <apex:commandButton value="Go" action="{!runQuery}"/>
+          </apex:pageBlockSection>
+        </apex:pageBlock>
+
+        <apex:pageBlock >
+            <apex:pageBlockSection columns="1">
+                <apex:pageBlockTable value="{!lstshipToAddress}" var="sta">
+                    <apex:column headerValue="Name">
+                      <apex:outputLink value="#" onclick="fillIn('{!sta.Name}', '{!sta.id}')">{!sta.Name}</apex:outputLink>       
+                    </apex:column>
+                    <apex:repeat var="f" value="{!$ObjectType.Bill_To_Addresses__c.FieldSets.CustomLookupFieldSet}">
+                        <apex:column headerValue="{!f.label}">
+                            <apex:outputField value="{!sta[f]}" />
+                            <!--<apex:outputField value="{!lstshipToAddress[f]}" />-->
+                        </apex:column>
+                    </apex:repeat>
+                    <!--<apex:column headerValue="Account">
+                        <apex:outputField value="{!sta.Account__c}"/>
+                    </apex:column>
+                    <apex:column headerValue="Address 1">
+                        <apex:outputLabel value="{!sta.Address_1__c}"></apex:outputLabel>                    
+                    </apex:column>
+                    <apex:column headerValue="City">
+                        <apex:outputLabel value="{!sta.City__c}"></apex:outputLabel>                    
+                    </apex:column>
+                    <apex:column headerValue="State/Province">
+                        <apex:outputLabel value="{!sta.State_Province__c}"></apex:outputLabel>                    
+                    </apex:column>
+                    
+                    <apex:column headerValue="Country">
+                        <apex:outputLabel value="{!sta.Country__c}"></apex:outputLabel>                    
+                    </apex:column>-->
+               </apex:pageBlockTable>
+          </apex:pageBlockSection>
+        </apex:pageBlock>
+        <button type="button" onclick="CloseWindow();">Close Window</button>
+     </div>
+   </apex:form>
+</apex:page>

@@ -1,0 +1,4 @@
+<apex:page contentType="text/plain">
+User-Agent: *
+Allow: /
+</apex:page>

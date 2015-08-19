@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Catalog Learning Path --></value>
+    </caseValues>
+    <fields>
+        <label>カタログ</label>
+        <name>Catalog__c</name>
+        <relationshipLabel>カタログ学習管理パス</relationshipLabel>
+    </fields>
+    <fields>
+        <label>学習管理パス</label>
+        <name>Learning_Path__c</name>
+        <relationshipLabel>カタログ学習管理パス</relationshipLabel>
+    </fields>
+    <nameFieldLabel><!-- Catalog Learning Name --></nameFieldLabel>
+</CustomObjectTranslation>

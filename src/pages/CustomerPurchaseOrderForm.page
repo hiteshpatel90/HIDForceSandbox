@@ -1,0 +1,181 @@
+<apex:page id="pg" standardController="Order" extensions="extCustomerPurchaseOrderForm">
+    <apex:form id="frm">
+        <apex:sectionHeader title="Create Order"/>
+        <script>
+            var newWin=null;
+            function openLookupPopup(name, id){
+                if(document.getElementById('{!$Component.pbCPO:pbshipInfo:PBSIBilltoAddress:txtBilltoAddress}').value == ''){
+                    alert('Please select Bill-To Address');
+                }else if(document.getElementById('{!$Component.pbCPO:pbshipInfo:PBSIShiptoAccount:txtShiptoAccount}').value == ''){
+                    alert('Please select Ship-To Account');
+                }else{
+                    var BillToAddressVal = "";
+                    var selShipacc = "";
+                    var BillToAddressVal = document.getElementById('{!$Component.pbCPO:pbshipInfo:PBSIBilltoAddress:txtBilltoAddress}'+'_lkid').value;
+                    var selShipacc = document.getElementById('{!$Component.pbCPO:pbshipInfo:PBSIShiptoAccount:txtShiptoAccount}'+'_lkid').value;
+                    //alert(BillToAddressVal.value);
+                                  
+                    if(document.getElementById(name) != null){
+                        //alert(document.getElementById(name).value); 
+                        var inputValue = document.getElementById(name).value;
+                        var url="/apex/ShipToAddressLookup?namefield=" + name + "&idfield=" + id + "&namevalue=" + inputValue  + "&selShipacc=" + selShipacc + "&billtoAdd=" + BillToAddressVal;
+                        newWin=window.open(url, 'Popup','height=500,width=600,left=100,top=100,resizable=no,scrollbars=yes,toolbar=no,status=no');
+                        if (window.focus){
+                            newWin.focus();
+                        }
+                    }
+                }           
+                return false;
+            }
+            function closeLookupPopup(){
+                if (null!=newWin){
+                    newWin.close();
+                }  
+            }
+            function goTonextpageFunc(){
+                var rads = document.getElementsByName('selGroup');
+                var grPOIndex = "";
+                var isSelected = false;
+                for (var i=0; i < rads.length; i++){
+                    if (rads[i].checked){
+                        grPOIndex = i;
+                        isSelected = true;
+                    }
+                }              
+                if(isSelected == true){
+                    callgoTonextpage(grPOIndex);
+                    return false;
+                }else{
+                    alert('Please select Customer Purchase Order.');
+                    return false;
+                }
+            }
+           
+        </script>
+   
+        
+        <apex:actionFunction action="{!goTonextpage}" name="callgoTonextpage" reRender="frm">
+            <apex:param value="grPOIndex" name="grPOIndex"/>
+        </apex:actionFunction>
+        <apex:pageBlock id="pbCPO" title="Create Customer Purchase Order">
+            <apex:pageMessages id="pgMsg"></apex:pageMessages>
+            <apex:pageBlockButtons >
+                <apex:commandButton value="Save" action="{!saveOrder}"/>
+                <apex:commandButton value="Next" action="{!goTonextpage}"/>
+                <apex:commandButton value="Cancel"  action="{!gotoOrderProtoType}" immediate="true"/>
+            </apex:pageBlockButtons>     
+           
+
+            <apex:pageBlockSection id="pbSselQuote" title="PO Information">
+            
+             <apex:outputField value="{!order.AccountID}" REndered="FALSE"/> 
+             <apex:outputField value="{!order.Make_Order_Match_Quote__c }" REndered="FALSE"/>
+          <!--   <apex:outputField value="{!order.AccountID}" REndered="FALSE"/>
+             <apex:outputField value="{!order.AccountID}" REndered="FALSE"/>
+             <apex:outputField value="{!order.AccountID}" REndered="FALSE"/>-->    
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Sales Quote"></apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:actionRegion >
+                        <apex:inputField value="{!objBigMachinesQuoteProduct.BigMachines__Quote__c}" rendered="{!IF(existingOrderId == NULL , TRUE, FALSE)}"> 
+                            <apex:actionSupport action="{!SalesQuoteaccandoppset}" event="onchange" reRender="pbCPO"/>                        
+                        </apex:inputfield>
+                        </apex:actionRegion>
+                        <apex:outputField value="{!order.Quote__c}" rendered="{!IF(existingOrderId != NULL , TRUE, FALSE)}" / > 
+                    </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="pbSselQuoteacc">
+                    <apex:outputLabel value="End User Account Name"></apex:outputLabel>                    
+                   <apex:outputLink value="/{!objAccount.id}">{!objAccount.Name}</apex:outputLink>   
+                                 
+                </apex:pageBlockSectionItem>
+                <!--<apex:pageBlockSectionItem id="pbSselQuoteopp">
+                   
+                    <apex:outputLabel value="Opportunity Name"></apex:outputLabel>
+                    <apex:outputLink value="/{!objOpp.id}">{!objOpp.Name}</apex:outputLink>
+      
+                </apex:pageBlockSectionItem>-->
+                <!--<apex:pageBlockSectionItem id="pbSselQuoteopp" >
+                    <apex:outputLabel value="Related Opportunity"></apex:outputLabel>                    
+                    <apex:selectList id="selSalesQuoteopp" size="3" value="{!strselQuoteOpp}" multiselect="true" readonly="true" disabled="true">                        
+                         <apex:selectOptions value="{!SalesQuoteOpportunity}"/>                         
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>-->
+               
+                <!--<apex:pageBlockSectionItem id="pbSselQuote">
+                    <apex:outputLabel value="Related Sales Quote"></apex:outputLabel>                    
+                    <apex:selectList id="selSalesQuote" size="3" value="{!strselQuote}" multiselect="true"  readonly="true" disabled="true">                        
+                         <apex:selectOptions value="{!SalesQuote}"/>                         
+                    </apex:selectList>
+                </apex:pageBlockSectionItem>-->
+                  
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Customer PO"></apex:outputLabel>
+                    
+                    <apex:inputfield value="{!Order.PoNumber}" required="true" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                     <apex:outputLabel value="Customer PO Date"></apex:outputLabel>
+                    <apex:inputfield value="{!order.PoDate}"  required="true" />
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+            
+            <apex:pageblockSection id="pbshipInfo" title="Billing / Shipping Information" columns="2">
+            
+                 <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Bill to Account"></apex:outputLabel>                    
+                    <apex:inputField value="{!order.Bill_to_Account__c}"  required="true"/>                    
+                 </apex:pageBlockSectionItem>
+                 
+                 <apex:pageBlockSectionItem id="PBSIShiptoAccount">
+                    <apex:outputLabel value="Ship to Account"></apex:outputLabel>                    
+                    <apex:inputField id="txtShiptoAccount" value="{!order.Shipping_Account__c}"  required="true"/>        
+                 </apex:pageBlockSectionItem>
+                 
+                  <apex:pageBlockSectionItem id="PBSIBilltoAddress">
+                    <apex:outputLabel value="Bill to Address"></apex:outputLabel>
+                    <apex:inputField id="txtBilltoAddress" value="{!order.Bill_To_Addresses__c}"  required="true"/>
+                </apex:pageBlockSectionItem>
+
+                <apex:pageBlockSectionItem id="PBSIShiptoAddress" >
+                    <apex:outputLabel value="Ship to Address"></apex:outputLabel>
+                    <apex:outputPanel >
+                        <apex:inputHidden value="{!order.Ship_To_Addresses__c}" id="targetId"  required="true" />
+                           <apex:outputPanel styleClass="requiredInput" layout="block">
+                             <apex:outputPanel styleClass="requiredBlock" layout="block"/>
+                        <apex:inputText onchange="" size="20" value="{!strselShipToAddress}" id="targetName"   required="true"/>
+                        
+                        <img title="Ship to Addresses Lookup (New Window)" style="cursor:pointer;" src="/s.gif" onclick="openLookupPopup('{!$Component.targetName}', '{!$Component.targetId}'); return false" class="lookupIcon" onmouseout="this.className='lookupIcon';" alt="Ship to Addresses Lookup (New Window)" onmouseover="this.className='lookupIconOn';"/>                    
+                        </apex:outputPanel>
+                    </apex:outputPanel>     
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem id="PBSIShipingAccountText">
+                    <apex:outputLabel value="Shipping Account"></apex:outputLabel>                    
+                    <apex:inputField id="txtShiptoAccount" value="{!order.Shipping_Account_Text__c}" />        
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem id="PBSIShippingMethod">
+                    <apex:outputLabel value="Shipping Method Code"></apex:outputLabel>
+                    <apex:selectList value="{!order.Shipping_Method_Code__c}" size="0">
+                        <apex:selectOptions value="{!ShippingMethods}"/>
+                    </apex:selectList>         
+                    <!--<apex:inputField id="txtShippingmethod" value="{!order.Shipping_Method_Code__c}"  required="true"/>-->
+                </apex:pageBlockSectionItem>
+                 
+                <apex:pageBlockSectionItem >
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel value="Shipping Instructions"></apex:outputLabel>
+                    <apex:inputField id="shippingInstruction" value="{!order.Shipping_Instructions__c}" style="width:300px; height: 300px;"/>
+                </apex:pageBlockSectionItem>
+            </apex:pageblockSection>
+            <!--<apex:pageblockButtons dir="RTL">
+                <apex:commandButton value="Next" onclick="return goTonextpageFunc();" />
+            </apex:pageblockButtons>--> 
+        </apex:pageblock>
+       
+    </apex:form>
+   
+</apex:page>

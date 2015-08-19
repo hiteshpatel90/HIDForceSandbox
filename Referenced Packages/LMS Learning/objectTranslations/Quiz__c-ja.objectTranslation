@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Quiz --></value>
+    </caseValues>
+    <fields>
+        <label>説明</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- You can specify a time unit after a time value &apos;X&apos;, such as Xd, Xh or Xm, to represent days (d), hours (h) and minutes (m), respectively.
+If you do not specify a time unit, minute will be assumed. --></help>
+        <label>期間</label>
+        <name>DurationTime__c</name>
+    </fields>
+    <fields>
+        <label>期間 (分)</label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label>認証を有効化</label>
+        <name>Enable_Certificate__c</name>
+    </fields>
+    <fields>
+        <label>言語</label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>da</masterLabel>
+            <translation><!-- da --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>de</masterLabel>
+            <translation><!-- de --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>en_US</masterLabel>
+            <translation><!-- en_US --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>es</masterLabel>
+            <translation><!-- es --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fi</masterLabel>
+            <translation><!-- fi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fr</masterLabel>
+            <translation><!-- fr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>it</masterLabel>
+            <translation><!-- it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ja</masterLabel>
+            <translation><!-- ja --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ko</masterLabel>
+            <translation><!-- ko --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>nl_NL</masterLabel>
+            <translation><!-- nl_NL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>pt_BR</masterLabel>
+            <translation><!-- pt_BR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ru</masterLabel>
+            <translation><!-- ru --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>sv</masterLabel>
+            <translation><!-- sv --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>th</masterLabel>
+            <translation><!-- th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_CN</masterLabel>
+            <translation><!-- zh_CN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_TW</masterLabel>
+            <translation><!-- zh_TW --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>ユーザーの回答を維持する</label>
+        <name>Maintain_correct_answers__c</name>
+    </fields>
+    <fields>
+        <label>最高試行回数</label>
+        <name>Max_Attempts__c</name>
+    </fields>
+    <fields>
+        <label>合格スコア</label>
+        <name>Passing_Score__c</name>
+    </fields>
+    <fields>
+        <label>ランダム化</label>
+        <name>Randomization__c</name>
+    </fields>
+    <fields>
+        <label>スコアの表示</label>
+        <name>Show_Score__c</name>
+    </fields>
+    <fields>
+        <label>研修単位</label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel>クイズ</relationshipLabel>
+    </fields>
+    <fields>
+        <label>回答のレビューをユーザーに許可する</label>
+        <name>review_answers__c</name>
+    </fields>
+    <fields>
+        <label>不合格のユーザーが進行できるようする</label>
+        <name>show_100_if_fail__c</name>
+    </fields>
+    <layouts>
+        <layout>Quiz Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Test and Verify Your Quiz --></label>
+            <section>Test and Verify Your Quiz</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Title --></nameFieldLabel>
+    <validationRules>
+        <errorMessage>期間が無効です</errorMessage>
+        <name>Not_Valid_Duration_Value</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>合格スコアには、1 ～ 100% までの範囲内の値を指定してください。</errorMessage>
+        <name>Validate_Passing_Score</name>
+    </validationRules>
+    <webLinks>
+        <label>マイ研修に追加</label>
+        <name>Add_to_My_Training</name>
+    </webLinks>
+    <webLinks>
+        <label>クイズを割り当てる</label>
+        <name>Assign_Quiz</name>
+    </webLinks>
+</CustomObjectTranslation>

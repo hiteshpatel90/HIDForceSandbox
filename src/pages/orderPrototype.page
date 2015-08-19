@@ -1,0 +1,19 @@
+<apex:page standardController="Order" extensions="extorderPrototype">
+    <apex:sectionHeader title="Orders"/>
+    <apex:pageBlock title="Orders">
+        <apex:pageBlockTable value="{!lstOrder}" var="ord">
+            <apex:column headerValue="Order Number">
+                <apex:outputLink value="/{!ord.id}">{!ord.OrderNumber}</apex:outputLink>
+            </apex:column>
+            <apex:column headerValue="Status">
+                <apex:outputLabel value="{!ord.Status}"></apex:outputLabel>
+            </apex:column>
+            <apex:column headerValue="Order Start Date">
+                <apex:outputField value="{!ord.EffectiveDate}"></apex:outputField>
+            </apex:column>
+            <apex:column headerValue="Order Amount">
+                <apex:outputField value="{!ord.TotalAmount}"></apex:outputField>
+            </apex:column>
+        </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>

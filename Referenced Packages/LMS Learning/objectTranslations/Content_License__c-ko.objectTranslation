@@ -1,0 +1,96 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- License --></value>
+    </caseValues>
+    <fields>
+        <label>대상</label>
+        <name>Content__c</name>
+        <relationshipLabel>라이센스</relationshipLabel>
+    </fields>
+    <fields>
+        <label>유효 일자</label>
+        <name>Effective_Date__c</name>
+    </fields>
+    <fields>
+        <label>유효 기간</label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label>라이센스 CyberU ID</label>
+        <name>License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>라이센스 설명</label>
+        <name>License_Description__c</name>
+    </fields>
+    <fields>
+        <label>라이센스 기간</label>
+        <name>License_Period__c</name>
+        <picklistValues>
+            <masterLabel>Days</masterLabel>
+            <translation><!-- Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hours</masterLabel>
+            <translation><!-- Hours --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indefinite</masterLabel>
+            <translation><!-- Indefinite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weeks</masterLabel>
+            <translation><!-- Weeks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Years</masterLabel>
+            <translation><!-- Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>라이센스 기간</label>
+        <name>License_Term__c</name>
+    </fields>
+    <fields>
+        <label>객체 링크</label>
+        <name>Object_Link__c</name>
+    </fields>
+    <fields>
+        <label>가격 CyberU ID</label>
+        <name>Sale_Item_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>좌석</label>
+        <name>Seats__c</name>
+    </fields>
+    <fields>
+        <label>지위</label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label>사용된</label>
+        <name>isUsed__c</name>
+    </fields>
+    <layouts>
+        <layout>License Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Description --></label>
+            <section>Description</section>
+        </sections>
+        <sections>
+            <label><!-- Details --></label>
+            <section>Details</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Object License ID --></nameFieldLabel>
+</CustomObjectTranslation>

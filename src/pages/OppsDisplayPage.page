@@ -1,0 +1,118 @@
+<apex:page standardController="Opportunity" extensions="OppsDisplayPageController" showHeader="false" cache="false" expires="0"> 
+    <head>
+    <style type="text/css">
+    body{width:900px!IMPORTANT;margin:auto!IMPORTANT}
+    </style>
+    </head>
+  <h1>Salesforce Partner Portal Opportunities Page</h1>
+  <apex:form >
+   <apex:pagemessages />
+   
+     <apex:pageBlock >
+         <apex:pageBlockButtons >
+             <apex:commandButton action="{!GoBack}" immediate="true" value="Return to List Page"/>
+             <apex:commandButton action="{!saveopp}" value="Save Opportunity" />
+         </apex:pageBlockButtons>
+             <apex:pageBlockSection title="Opportunity Review" columns="2" collapsible="false" id="thisblock" rendered="{!Authenticated}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Partner_Name__c.Label}</apex:outputLabel>
+                    <apex:outputfield value="{!opp.Partner_Name__c}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Name.Label}</apex:outputLabel>
+                    <apex:inputText required="true" value="{!opp.name}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Region__c.Label}</apex:outputLabel>
+                    <apex:inputfield required="true" value="{!opp.Region__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Amount.Label}</apex:outputLabel>
+                    <apex:inputfield value="{!opp.amount}" />
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.StageName.Label}</apex:outputLabel>
+                    <apex:actionregion >
+                    <apex:inputfield required="true" value="{!opp.stagename}">
+                    <apex:actionSupport event="onchange" action="{!changeStageName}" 
+                              rerender="probability" />
+                    </apex:inputfield>
+                    </apex:actionregion>
+                </apex:pageBlockSectionItem>
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Probability.Label}</apex:outputLabel>
+                    <apex:outputfield id="probability" value="{!opp.probability}"/>
+                </apex:pageBlockSectionItem>
+                
+                
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Lost_On_Hold_Reason__c.Label}</apex:outputLabel>
+                    <apex:outputPanel id="lost_on_hold">
+                        <apex:inputfield value="{!opp.Lost_On_Hold_Reason__c}"/>
+                  </apex:outputPanel>
+                </apex:pageBlockSectionItem>
+                <!--
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.closedate.Label}</apex:outputLabel>
+                    <apex:inputText value=" {!opp_data_proxy.fields['closedate']}">
+                    </apex:inputText>
+                </apex:pageBlockSectionItem>
+                -->
+                <!--
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.CurrencyISOCode.Label}</apex:outputLabel>
+                    <apex:inputText required="true" value="{!opp_data_proxy.fields['CurrencyISOCode']}" />
+                    
+                </apex:pageBlockSectionItem>
+                -->
+            </apex:pageBlockSection>
+            <apex:pageBlockSection title="Project Information" columns="2" collapsible="false" rendered="{!Authenticated}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Dominant_Technology__c.Label}</apex:outputLabel>
+                    <apex:inputField value="{!opp.Dominant_Technology__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Vertical_Markets__c.Label}</apex:outputLabel>
+                        <apex:inputfield value="{!opp.Vertical_Markets__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Reference__c.Label}</apex:outputLabel>
+                    <apex:inputField value="{!opp.Reference__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Type.Label}</apex:outputLabel>
+                    <apex:inputfield required="true" value="{!opp.Type}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Opportunity_Type__c.Label}</apex:outputLabel>
+                    <apex:inputfield required="true" value="{!opp.Opportunity_Type__c}"/>
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Multisite__c.Label}</apex:outputLabel>
+                    <apex:inputField value="{!opp.Multisite__c}"/>
+                </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Description Information" columns="2" collapsible="false" rendered="{!Authenticated}">
+                    <apex:pageBlockSectionItem >
+                        <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Description.Label}</apex:outputLabel>
+                        <apex:inputfield value="{!opp.Description}" />
+                    </apex:pageBlockSectionItem>
+                </apex:pageBlockSection>
+                <apex:pageBlockSection title="Additional Information" columns="2" collapsible="false" rendered="{!Authenticated}">
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.LeadSource.Label}</apex:outputLabel>
+                    <apex:outputText value="{!opp.LeadSource}" />
+                </apex:pageBlockSectionItem>
+                <apex:pageBlockSectionItem >
+                    <apex:outputLabel >{!$ObjectType.Opportunity.Fields.Lead_Qualified_Date__c.Label}</apex:outputLabel>
+                     <apex:outputText value="{0, date, EEE, MMMM d, yyyy}">
+                        <apex:param value="{!opp.Lead_Qualified_Date__c}"/>
+                    </apex:outputText>
+                </apex:pageBlockSectionItem>
+            </apex:pageBlockSection>
+      </apex:pageBlock>
+ </apex:form>
+ <site:previewAsAdmin />
+</apex:page>

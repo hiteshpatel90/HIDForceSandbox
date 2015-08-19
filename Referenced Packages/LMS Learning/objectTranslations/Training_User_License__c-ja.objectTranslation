@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Training User License --></value>
+    </caseValues>
+    <fields>
+        <label>コンテンツ ライセンス</label>
+        <name>Content_License__c</name>
+        <relationshipLabel>研修ユーザー ライセンス</relationshipLabel>
+    </fields>
+    <fields>
+        <label>コンテンツ タイトル</label>
+        <name>Content_Title__c</name>
+    </fields>
+    <fields>
+        <label>CyberU ID</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>有効期限</label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label>期限切れ</label>
+        <name>Expiration__c</name>
+    </fields>
+    <fields>
+        <label>ライセンス条件</label>
+        <name>License_Term__c</name>
+    </fields>
+    <fields>
+        <label>購入価格</label>
+        <name>Purchase_Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Indicates if this user license has been purchased or only assigned. --></help>
+        <label>購入済み</label>
+        <name>Purchased__c</name>
+    </fields>
+    <fields>
+        <label>研修生</label>
+        <name>User__c</name>
+        <relationshipLabel>研修ユーザー ライセンス</relationshipLabel>
+    </fields>
+    <fields>
+        <label>使用済み</label>
+        <name>isUsed__c</name>
+    </fields>
+    <layouts>
+        <layout>User License Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- License Details --></label>
+            <section>License Details</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- User License ID --></nameFieldLabel>
+    <webLinks>
+        <label>コースの開始</label>
+        <name>Launch_Course</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Module License --></value>
+    </caseValues>
+    <fields>
+        <label>有効期限</label>
+        <name>Expiration_Date__c</name>
+    </fields>
+    <fields>
+        <label>ライセンス CyberU ID</label>
+        <name>License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>ライセンス期間</label>
+        <name>License_Period__c</name>
+        <picklistValues>
+            <masterLabel>Days</masterLabel>
+            <translation><!-- Days --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Hours</masterLabel>
+            <translation><!-- Hours --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Indefinite</masterLabel>
+            <translation><!-- Indefinite --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Month</masterLabel>
+            <translation><!-- Month --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Weeks</masterLabel>
+            <translation><!-- Weeks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Years</masterLabel>
+            <translation><!-- Years --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>ライセンス条件</label>
+        <name>License_Term__c</name>
+    </fields>
+    <fields>
+        <label>購入日</label>
+        <name>Purchase_Date__c</name>
+    </fields>
+    <fields>
+        <label>購入済みシート</label>
+        <name>Purchased_Seats__c</name>
+    </fields>
+    <fields>
+        <label>購入済み</label>
+        <name>Purchased__c</name>
+    </fields>
+    <fields>
+        <label>残りの席</label>
+        <name>Remaining_Seats__c</name>
+    </fields>
+    <fields>
+        <label>価格 CyberU ID</label>
+        <name>Sale_Item_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>販売価格</label>
+        <name>Sale_Price__c</name>
+    </fields>
+    <fields>
+        <help><!-- Total number of seats included in this license. Leave blank for unlimited. --></help>
+        <label>定員数</label>
+        <name>Seats__c</name>
+    </fields>
+    <fields>
+        <label>ステータス</label>
+        <name>Status__c</name>
+    </fields>
+    <fields>
+        <label>ターゲット ライセンス CyberU ID</label>
+        <name>Target_License_Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>モジュール</label>
+        <name>Training_Content__c</name>
+        <relationshipLabel>モジュール ライセンス</relationshipLabel>
+    </fields>
+    <fields>
+        <label>使用済みシート</label>
+        <name>Used_Seats__c</name>
+    </fields>
+    <layouts>
+        <layout>Content License Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- License Details --></label>
+            <section>License Details</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- License ID --></nameFieldLabel>
+    <webLinks>
+        <label>ライセンスの購入</label>
+        <name>Purchase_Licenses</name>
+    </webLinks>
+</CustomObjectTranslation>

@@ -1,0 +1,6 @@
+<apex:page standardController="Opportunity" recordSetVar="opportunities" tabStyle="Opportunity" sidebar="false">
+	<p>
+		<h1>Please select an Opportunity or create a new one before creating a new quote</h1>
+	</p>
+	<apex:listViews type="Opportunity" />
+</apex:page>

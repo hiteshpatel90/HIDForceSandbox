@@ -1,0 +1,2 @@
+<apex:page standardController="BigMachines__Quote__c" action="{!URLFOR('/apex/Select_Opportunity_First')}">
+</apex:page>

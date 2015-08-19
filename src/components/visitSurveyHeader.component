@@ -1,0 +1,10 @@
+<apex:component id="visitSurveyHeader">
+	<apex:outputPanel layout="block" styleClass="header">
+		<apex:image value="{!$Resource.HIDLogo}" alt="HID Logo" styleClass="vamiddle"/>
+		<h1>{!$Label.VisitSurveyTitle}</h1>
+	</apex:outputPanel>
+	<apex:outputPanel layout="block" styleClass="greeting">
+		<h2>{!$Label.VisitSurveyGreeting}</h2>
+	</apex:outputPanel>
+	<apex:pageMessages />
+</apex:component>

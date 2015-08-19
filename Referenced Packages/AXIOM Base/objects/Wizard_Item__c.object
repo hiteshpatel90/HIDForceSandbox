@@ -1,0 +1,222 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Follow</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <deprecated>false</deprecated>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <enableFeeds>false</enableFeeds>
+    <enableHistory>false</enableHistory>
+    <enableReports>true</enableReports>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>Custom_Asset_Tag__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This is used to store the Asset Tags of Client Specific Custom Content.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is used to store the Asset Tags of Client Specific Custom Content.</inlineHelpText>
+        <label>Custom Asset Tag</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Is_Question__c</fullName>
+        <defaultValue>true</defaultValue>
+        <deprecated>false</deprecated>
+        <description>Keep section where the item will be displayed</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Keep section where the item will be displayed</inlineHelpText>
+        <label>Coaching Question?</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Item_Description__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Item Description</label>
+        <length>32768</length>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>3</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Item_Type__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Item Type</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Improvement Area</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Behavior Gaps</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Root Causes</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Key__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Key</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Launch_Point__c</fullName>
+        <deprecated>false</deprecated>
+        <description>From where the dialog was launched.&quot;Default&quot; is used if the context is not specified, or specified context is not found</description>
+        <externalId>false</externalId>
+        <label>Launch Point</label>
+        <picklist>
+            <picklistValues>
+                <fullName>Opportunities</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Account Plans</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Success Plans</fullName>
+                <default>false</default>
+            </picklistValues>
+            <picklistValues>
+                <fullName>Field Observation</fullName>
+                <default>false</default>
+            </picklistValues>
+            <sorted>false</sorted>
+        </picklist>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+    </fields>
+    <fields>
+        <fullName>Option_Tag__c</fullName>
+        <deprecated>false</deprecated>
+        <description>This is used to store the Tags of related AXIOM Assets.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>This is used to store the Tags of related AXIOM Assets.</inlineHelpText>
+        <label>AXIOM Asset Tag</label>
+        <length>255</length>
+        <required>false</required>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Published__c</fullName>
+        <defaultValue>false</defaultValue>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Published</label>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Sort_Order__c</fullName>
+        <deprecated>false</deprecated>
+        <externalId>false</externalId>
+        <label>Sort Order</label>
+        <precision>4</precision>
+        <required>true</required>
+        <scale>0</scale>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <label>Wizard Item</label>
+    <listViews>
+        <fullName>AllWizardItems</fullName>
+        <columns>NAME</columns>
+        <columns>Item_Type__c</columns>
+        <columns>Option_Tag__c</columns>
+        <columns>Is_Question__c</columns>
+        <columns>Custom_Asset_Tag__c</columns>
+        <columns>Item_Description__c</columns>
+        <columns>Key__c</columns>
+        <columns>Launch_Point__c</columns>
+        <columns>Sort_Order__c</columns>
+        <columns>Published__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <nameField>
+        <displayFormat>WI-{000000}</displayFormat>
+        <label>Wizard Item Name</label>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>Wizard Items</pluralLabel>
+    <searchLayouts>
+        <lookupDialogsAdditionalFields>Item_Description__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>Item_Description__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ReadWrite</sharingModel>
+    <validationRules>
+        <fullName>RootCauseTags</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(ISPICKVAL(Item_Type__c, &apos;Root Causes&apos;),  ISBLANK(Option_Tag__c),  NOT( Is_Question__c ))</errorConditionFormula>
+        <errorDisplayField>Option_Tag__c</errorDisplayField>
+        <errorMessage>AXIOM Asset Tag is required for Root Causes Wizard Item.</errorMessage>
+    </validationRules>
+</CustomObject>

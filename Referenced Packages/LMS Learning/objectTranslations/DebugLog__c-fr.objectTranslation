@@ -1,0 +1,50 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Debug Log --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Debug Log --></value>
+    </caseValues>
+    <fields>
+        <label>Action</label>
+        <name>Action__c</name>
+    </fields>
+    <fields>
+        <label>Durée de l&apos;activité</label>
+        <name>ActivityTime__c</name>
+    </fields>
+    <fields>
+        <label>Domaine</label>
+        <name>Domain__c</name>
+    </fields>
+    <fields>
+        <label>Niveau</label>
+        <name>Level__c</name>
+        <picklistValues>
+            <masterLabel>Error</masterLabel>
+            <translation><!-- Error --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Info</masterLabel>
+            <translation><!-- Info --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Warning</masterLabel>
+            <translation><!-- Warning --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Remarque</label>
+        <name>Note__c</name>
+    </fields>
+    <fields>
+        <label>Destinataire</label>
+        <name>Recipient__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <nameFieldLabel><!-- DebugLog Name --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+</CustomObjectTranslation>

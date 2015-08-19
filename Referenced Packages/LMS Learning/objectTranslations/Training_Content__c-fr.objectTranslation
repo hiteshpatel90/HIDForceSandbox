@@ -1,0 +1,544 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObjectTranslation xmlns="http://soap.sforce.com/2006/04/metadata">
+    <caseValues>
+        <plural>false</plural>
+        <value><!-- Module --></value>
+    </caseValues>
+    <caseValues>
+        <plural>true</plural>
+        <value><!-- Module --></value>
+    </caseValues>
+    <fields>
+        <label>Identifiant CFS</label>
+        <name>CFS_ID__c</name>
+    </fields>
+    <fields>
+        <label>Type de formation</label>
+        <name>ContentCatalog__c</name>
+        <picklistValues>
+            <masterLabel>--Select--</masterLabel>
+            <translation><!-- - - Select- -  --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implementation</masterLabel>
+            <translation><!-- Implementation --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Learning</masterLabel>
+            <translation><!-- Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sale</masterLabel>
+            <translation><!-- Sale --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Identifiant CyberU</label>
+        <name>Cornerstone_ID__c</name>
+    </fields>
+    <fields>
+        <label>Module de langue par défaut</label>
+        <name>Default_Language_Module__c</name>
+        <relationshipLabel>Modules (Module de langue par défaut)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Type de dispense</label>
+        <name>Delivery_Type__c</name>
+        <picklistValues>
+            <masterLabel>Free eLearning</masterLabel>
+            <translation><!-- Free eLearning --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Description</label>
+        <name>Description__c</name>
+    </fields>
+    <fields>
+        <help><!-- You can specify a time unit after a time value &apos;X&apos;, such as  Xd, Xh or Xm, to represent days (d), hours (h) and minutes (m), respectively.
+If you do not specify a time unit, minute will be assumed. --></help>
+        <label>Durée</label>
+        <name>DurationTime__c</name>
+    </fields>
+    <fields>
+        <label>Durée (min.)</label>
+        <name>Duration__c</name>
+    </fields>
+    <fields>
+        <label>Activer le certificat</label>
+        <name>Enable_Certificate__c</name>
+    </fields>
+    <fields>
+        <label>Est publié</label>
+        <name>Is_Published__c</name>
+    </fields>
+    <fields>
+        <label>Fonctions du poste</label>
+        <name>Job_Roles__c</name>
+        <picklistValues>
+            <masterLabel>Administrator</masterLabel>
+            <translation><!-- Administrator --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Channel Manager</masterLabel>
+            <translation><!-- Channel Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Developer</masterLabel>
+            <translation><!-- Developer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>IT Professional</masterLabel>
+            <translation><!-- IT Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implementation Team</masterLabel>
+            <translation><!-- Implementation Team --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Marketing</masterLabel>
+            <translation><!-- Marketing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner</masterLabel>
+            <translation><!-- Partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Manager</masterLabel>
+            <translation><!-- Sales Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Professional</masterLabel>
+            <translation><!-- Sales Professional --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Rep</masterLabel>
+            <translation><!-- Sales Rep --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Support Rep</masterLabel>
+            <translation><!-- Support Rep --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Mots clés</label>
+        <name>Keywords__c</name>
+    </fields>
+    <fields>
+        <label>Langue</label>
+        <name>Language__c</name>
+        <picklistValues>
+            <masterLabel>da</masterLabel>
+            <translation><!-- da --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>de</masterLabel>
+            <translation><!-- de --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>en_US</masterLabel>
+            <translation><!-- en_US --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>es</masterLabel>
+            <translation><!-- es --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fi</masterLabel>
+            <translation><!-- fi --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>fr</masterLabel>
+            <translation><!-- fr --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>it</masterLabel>
+            <translation><!-- it --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ja</masterLabel>
+            <translation><!-- ja --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ko</masterLabel>
+            <translation><!-- ko --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>nl_NL</masterLabel>
+            <translation><!-- nl_NL --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>pt_BR</masterLabel>
+            <translation><!-- pt_BR --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>ru</masterLabel>
+            <translation><!-- ru --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>sv</masterLabel>
+            <translation><!-- sv --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>th</masterLabel>
+            <translation><!-- th --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_CN</masterLabel>
+            <translation><!-- zh_CN --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>zh_TW</masterLabel>
+            <translation><!-- zh_TW --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Type de module</label>
+        <name>Module_Type__c</name>
+        <picklistValues>
+            <masterLabel>Development Plan Task</masterLabel>
+            <translation><!-- Development Plan Task --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Event</masterLabel>
+            <translation><!-- Event --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Module</masterLabel>
+            <translation><!-- Module --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Quiz</masterLabel>
+            <translation><!-- Quiz --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Identifiant de l&apos;objet</label>
+        <name>Object_Id__c</name>
+    </fields>
+    <fields>
+        <label>Type</label>
+        <name>Object_Type__c</name>
+        <picklistValues>
+            <masterLabel>Block</masterLabel>
+            <translation><!-- Block --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Course</masterLabel>
+            <translation><!-- Course --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Parent</label>
+        <name>Parent_Training_Content__c</name>
+        <relationshipLabel>Modules (Parent)</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Pourcentage total</label>
+        <name>Percent_Complete__c</name>
+    </fields>
+    <fields>
+        <label>Fonction primaire</label>
+        <name>Primary_Job_Role__c</name>
+        <picklistValues>
+            <masterLabel>Administrator</masterLabel>
+            <translation><!-- Administrator --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Channel Manager</masterLabel>
+            <translation><!-- Channel Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Developer</masterLabel>
+            <translation><!-- Developer --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Implementation Team</masterLabel>
+            <translation><!-- Implementation Team --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Marketing</masterLabel>
+            <translation><!-- Marketing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Partner</masterLabel>
+            <translation><!-- Partner --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Manager</masterLabel>
+            <translation><!-- Sales Manager --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Sales Rep</masterLabel>
+            <translation><!-- Sales Rep --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Support Rep</masterLabel>
+            <translation><!-- Support Rep --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Produit primaire</label>
+        <name>Primary_Product__c</name>
+        <picklistValues>
+            <masterLabel>CFS Learning</masterLabel>
+            <translation><!-- CFS Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Connect</masterLabel>
+            <translation><!-- Force.com Connect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Offline</masterLabel>
+            <translation><!-- Force.com Offline --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com platform</masterLabel>
+            <translation><!-- Force.com platform --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM CSS</masterLabel>
+            <translation><!-- Salesforce CRM CSS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Content</masterLabel>
+            <translation><!-- Salesforce CRM Content --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Ideas</masterLabel>
+            <translation><!-- Salesforce CRM Ideas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Marketing</masterLabel>
+            <translation><!-- Salesforce CRM Marketing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Mobile</masterLabel>
+            <translation><!-- Salesforce CRM Mobile --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Partner Networks</masterLabel>
+            <translation><!-- Salesforce CRM Partner Networks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM SFA</masterLabel>
+            <translation><!-- Salesforce CRM SFA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM for Google Apps</masterLabel>
+            <translation><!-- Salesforce CRM for Google Apps --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce to Salesforce</masterLabel>
+            <translation><!-- Salesforce to Salesforce --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Produits</label>
+        <name>Products__c</name>
+        <picklistValues>
+            <masterLabel>CFS Learning</masterLabel>
+            <translation><!-- CFS Learning --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Connect</masterLabel>
+            <translation><!-- Force.com Connect --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com Offline</masterLabel>
+            <translation><!-- Force.com Offline --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Force.com platform</masterLabel>
+            <translation><!-- Force.com platform --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM CSS</masterLabel>
+            <translation><!-- Salesforce CRM CSS --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Content</masterLabel>
+            <translation><!-- Salesforce CRM Content --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Ideas</masterLabel>
+            <translation><!-- Salesforce CRM Ideas --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Marketing</masterLabel>
+            <translation><!-- Salesforce CRM Marketing --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Mobile</masterLabel>
+            <translation><!-- Salesforce CRM Mobile --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM Partner Networks</masterLabel>
+            <translation><!-- Salesforce CRM Partner Networks --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM SFA</masterLabel>
+            <translation><!-- Salesforce CRM SFA --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce CRM for Google Apps</masterLabel>
+            <translation><!-- Salesforce CRM for Google Apps --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Salesforce to Salesforce</masterLabel>
+            <translation><!-- Salesforce to Salesforce --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Progression</label>
+        <name>Progress__c</name>
+    </fields>
+    <fields>
+        <label>Identifiant de l&apos;éditeur</label>
+        <name>Publisher_Course_Id__c</name>
+    </fields>
+    <fields>
+        <label>Éditeur</label>
+        <name>Publisher__c</name>
+    </fields>
+    <fields>
+        <label>Quiz</label>
+        <name>Quiz__c</name>
+        <relationshipLabel>Modules</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Note</label>
+        <name>Score__c</name>
+    </fields>
+    <fields>
+        <label>Module de mise à jour de statut</label>
+        <name>StatusUpdate__c</name>
+        <picklistValues>
+            <masterLabel>FAILURE</masterLabel>
+            <translation><!-- FAILURE --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>SUCCESS</masterLabel>
+            <translation><!-- SUCCESS --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Statut</label>
+        <name>Status_Progress__c</name>
+        <picklistValues>
+            <masterLabel>Completed</masterLabel>
+            <translation><!-- Completed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Failed</masterLabel>
+            <translation><!-- Failed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>In Progress</masterLabel>
+            <translation><!-- In Progress --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Passed</masterLabel>
+            <translation><!-- Passed --></translation>
+        </picklistValues>
+        <picklistValues>
+            <masterLabel>Retired</masterLabel>
+            <translation><!-- Retired --></translation>
+        </picklistValues>
+    </fields>
+    <fields>
+        <label>Tester le contenu</label>
+        <name>Test_Course__c</name>
+    </fields>
+    <fields>
+        <label>Titre</label>
+        <name>Title__c</name>
+    </fields>
+    <fields>
+        <label>Lien du module</label>
+        <name>Title_col__c</name>
+    </fields>
+    <fields>
+        <label>Unité de formation</label>
+        <name>Training_Unit__c</name>
+        <relationshipLabel><!-- Modules --></relationshipLabel>
+    </fields>
+    <fields>
+        <label>Charger</label>
+        <name>Upload__c</name>
+        <relationshipLabel>Modules</relationshipLabel>
+    </fields>
+    <fields>
+        <label>Publié</label>
+        <name>Used__c</name>
+    </fields>
+    <fields>
+        <label>Version</label>
+        <name>Version__c</name>
+    </fields>
+    <fields>
+        <label>Vérifié</label>
+        <name>verified__c</name>
+    </fields>
+    <gender><!-- Masculine --></gender>
+    <layouts>
+        <layout>Training Content Layout</layout>
+        <sections>
+            <label><!-- Custom Links --></label>
+            <section>Custom Links</section>
+        </sections>
+        <sections>
+            <label><!-- Details --></label>
+            <section>Details</section>
+        </sections>
+        <sections>
+            <label><!-- Test and Verify Your Training Content --></label>
+            <section>Test and Verify Your Training Content</section>
+        </sections>
+    </layouts>
+    <nameFieldLabel><!-- Module ID --></nameFieldLabel>
+    <startsWith><!-- Consonant --></startsWith>
+    <validationRules>
+        <errorMessage>DURÉE NON VALIDE</errorMessage>
+        <name>Not_Valid_Duration_Value</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Le champ ne peut pas comporter de valeur négative.</errorMessage>
+        <name>Validate_Duration</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Le nombre est trop élevé.</errorMessage>
+        <name>Validate_Duration_max</name>
+    </validationRules>
+    <validationRules>
+        <errorMessage>Le champ ne peut pas rester vide.</errorMessage>
+        <name>Validate_title</name>
+    </validationRules>
+    <webLinks>
+        <label>Ajouter à Ma formation</label>
+        <name>Add_to_My_Training</name>
+    </webLinks>
+    <webLinks>
+        <label>Attribuer un module</label>
+        <name>Assign_Training_Content</name>
+    </webLinks>
+    <webLinks>
+        <label>Public Link</label>
+        <name>Public_Link</name>
+    </webLinks>
+    <webLinks>
+        <label>Publier</label>
+        <name>Publish</name>
+    </webLinks>
+    <webLinks>
+        <label>Enregistrer</label>
+        <name>Save</name>
+    </webLinks>
+    <webLinks>
+        <label>Mettre à jour le module</label>
+        <name>UpdateContent</name>
+    </webLinks>
+    <webLinks>
+        <label>Charger un module</label>
+        <name>Upload_Module</name>
+    </webLinks>
+</CustomObjectTranslation>

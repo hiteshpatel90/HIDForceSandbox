@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+    <enableEnhancedLookup>false</enableEnhancedLookup>
+    <webLinks>
+        <fullName>CustomClone</fullName>
+        <availability>online</availability>
+        <displayType>button</displayType>
+        <linkType>javascript</linkType>
+        <masterLabel>Clone</masterLabel>
+        <openType>onClickJavaScript</openType>
+        <protected>false</protected>
+        <url>$(&apos;.loader-text&apos;).text(&apos;Cloning Strategic Initiative...&apos;);
+$(&apos;.loader&apos;).show();
+$(&apos;.deal&apos;).hide();
+$(&apos;.chatter&apos;).hide();
+$(&apos;.details&apos;).hide();
+Visualforce.remoting.Manager.invokeAction(
+    controller + &apos;.OpportunityClone&apos;,
+    &apos;{!AXIOM_BASE__Strategic_Initiative__c.Id}&apos;,
+    function(result){
+         if(result.indexOf(&apos;ERROR:&apos;) == 0){
+             alert(result);
+             $(&apos;.loader&apos;).hide();
+             $(&apos;.deal&apos;).show();
+             $(&apos;.chatter&apos;).show();
+             $(&apos;.details&apos;).show();
+         } else {         
+         var newId = result;
+         $(&apos;.loader-text&apos;).text(&apos;Cloning Related Objects...&apos;);
+         Visualforce.remoting.Manager.invokeAction(
+               controller + &apos;.BioWorkSheetClone&apos;,
+               &apos;{!AXIOM_BASE__Strategic_Initiative__c.Id}&apos;,
+               result,
+               function(res){  
+               if(res == &apos;SUCCES&apos;){window.location = &quot;/&quot; + newId;}
+                   else {
+                         alert(res); 
+                         $(&apos;.loader&apos;).hide();
+                         $(&apos;.deal&apos;).show();
+                         $(&apos;.chatter&apos;).show();
+                         $(&apos;.details&apos;).show();
+                   }
+               }
+         );
+         }
+    }
+);</url>
+    </webLinks>
+</CustomObject>

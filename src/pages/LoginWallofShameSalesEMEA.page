@@ -1,0 +1,12 @@
+<apex:page controller="retrieveLastLoginGroup">
+        <apex:dataTable value="{!salesemea}" var="s" style="width:100%;text-align:left;">
+            <apex:column style="text-align:left;">
+                <apex:facet name="header">User Name</apex:facet>
+                <apex:outputText value="{!s.firstname} {!s.lastname}"/>
+            </apex:column>
+            <apex:column style="text-align:right;width:120px;">
+                <apex:facet name="header">Last Login</apex:facet>
+                <apex:outputField value="{!s.lastlogindate}"/>
+            </apex:column>
+        </apex:dataTable>
+</apex:page>

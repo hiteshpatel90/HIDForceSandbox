@@ -1,0 +1,16 @@
+<apex:page standardController="Price_Authorization_Form__c" extensions="priceAuthorizationHistoryController">
+    <apex:pageBlock title="Price Authorization Form History">
+            <apex:pageBlockTable value="{!pafHistory}" var="pfHistory">
+                <apex:column headerValue="Date" value="{!pfHistory.CreatedDate}"/>
+                <apex:column headerValue="User" value="{!pfHistory.CreatedById}"/>
+                <apex:column headerValue="Action">
+                    <apex:outputText rendered="{!pfHistory.NewValue<>null}">Changed </apex:outputText> 
+                   <b> <apex:outputField style="font-weight:bold;" value="{!pfHistory.Field}" rendered="{!pfHistory.Field<>null}"/></b>
+                    <apex:outputText rendered="{!pfHistory.NewValue<>null}">  From &nbsp;</apex:outputText>
+                    <apex:outputField value="{!pfHistory.OldValue}" rendered="{!pfHistory.OldValue<>null}"/>
+                    <apex:outputText rendered="{!pfHistory.NewValue<>null}"> to </apex:outputText>
+                    <b><apex:outputField value="{!pfHistory.NewValue}" rendered="{!pfHistory.NewValue<>null}"/></b>
+                </apex:column>
+            </apex:pageBlockTable>
+    </apex:pageBlock>
+</apex:page>
